@@ -2,11 +2,13 @@ import { AppBar as MuiAppBar, Box, Toolbar } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
 import React from "react";
 
+export const BottomDrawerHeight = 260; // If not provided, set to 0
 const DenseToolbarHeight = 48;
 export const LeftDrawerWidth = 0; // If mini-drawer provided, set to 76
 export const RightDrawerWidth = 0; // If not provided, set to 0
 
 interface Props {
+  readonly bottomDrawer?: React.ReactNode;
   readonly children?: React.ReactNode;
   readonly header: React.ReactNode;
   readonly leftDrawer?: React.ReactNode;
@@ -28,7 +30,7 @@ const AppBar = styled((props) => (
 }));
 
 const Content = styled((props) => <main {...props} />)(({ theme }) => ({
-  height: `calc(100% - ${DenseToolbarHeight}px)`,
+  height: `calc(100% - ${BottomDrawerHeight + DenseToolbarHeight}px)`,
   width: `calc(100% - ${LeftDrawerWidth + RightDrawerWidth}px)`,
   [theme.breakpoints.down("md")]: {
     width: `100%`,
@@ -36,6 +38,7 @@ const Content = styled((props) => <main {...props} />)(({ theme }) => ({
 }));
 
 export function Layout({
+  bottomDrawer,
   children,
   header,
   leftDrawer,
@@ -54,6 +57,7 @@ export function Layout({
       </Content>
       {rightDrawer ?? <></>}
       {children ?? <></>}
+      {bottomDrawer ?? <></>}
     </Box>
   );
 }

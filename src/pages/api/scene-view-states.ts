@@ -1,9 +1,7 @@
 import {
-  Failure,
   isFailure,
   renderSceneView,
   SceneViewRelationshipDataTypeEnum,
-  SceneViewState,
 } from "@vertexvis/api-client-node";
 import { createWriteStream } from "fs";
 import type { NextApiRequest, NextApiResponse } from "next";

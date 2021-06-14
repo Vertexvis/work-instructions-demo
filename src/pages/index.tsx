@@ -1,4 +1,5 @@
 import React from "react";
+import { BottomDrawer } from "../components/BottomDrawer";
 
 import { Header } from "../components/Header";
 import { Layout } from "../components/Layout";
@@ -26,19 +27,22 @@ export default function Home(): JSX.Element {
   }
 
   async function createSvs(name: string): Promise<void> {
-    console.log("sceneViewId", name, sceneViewId);
-    // console.log(
-    //   await (
-    //     await fetch(`http://localhost:3000/api/scene-view-states`, {
-    //       method: "POST",
-    //       body: JSON.stringify({ name, sceneViewId }),
-    //     })
-    //   ).json()
-    // );
+    // console.log("sceneViewId", name, sceneViewId);
+    console.log(
+      await (
+        await fetch(`http://localhost:3000/api/scene-view-states`, {
+          method: "POST",
+          body: JSON.stringify({ name, sceneViewId }),
+        })
+      ).json()
+    );
   }
 
   return (
     <Layout
+      bottomDrawer={
+        <BottomDrawer onSelect={(svId: string) => console.log(svId)} />
+      }
       header={<Header onCreateSceneViewState={createSvs} />}
       main={
         viewer.isReady && (
