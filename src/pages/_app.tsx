@@ -17,7 +17,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <CacheProvider value={cache}>
       <Head>
-        <title>Vertex Starter</title>
+        <title>Vertex Work Instructions</title>
         <link rel="icon" href="/favicon-512x512.png" />
         <meta
           name="viewport"

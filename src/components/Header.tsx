@@ -12,7 +12,7 @@ export function Header({ onOpenSceneClick }: Props): JSX.Element {
         Open Scene
       </Button>
       <Link
-        href="https://github.com/Vertexvis/vertex-nextjs-starter"
+        href="https://github.com/Vertexvis/work-instructions-demo"
         rel="noreferrer"
         style={{ alignSelf: "center" }}
         target="_blank"
