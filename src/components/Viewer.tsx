@@ -1,6 +1,7 @@
 /* @jsx jsx */ /** @jsxRuntime classic */ import { jsx } from "@emotion/react";
 import { Button, ButtonGroup } from "@material-ui/core";
 import { vertexvis } from "@vertexvis/frame-streaming-protos";
+import { TapEventDetails } from "@vertexvis/viewer";
 import {
   JSX as ViewerJSX,
   VertexViewer,
@@ -64,7 +65,10 @@ function UnwrappedViewer({
 }
 
 interface OnSelectProps extends HOCViewerProps {
-  readonly onSelect: (hit?: vertexvis.protobuf.stream.IHit) => Promise<void>;
+  readonly onSelect: (
+    detail: TapEventDetails,
+    hit?: vertexvis.protobuf.stream.IHit
+  ) => Promise<void>;
 }
 
 function onTap<P extends ViewerProps>(
@@ -87,7 +91,7 @@ function onTap<P extends ViewerProps>(
                 includeMetadata: true,
               });
               const hit = (res?.hits ?? [])[0];
-              await onSelect(hit);
+              await onSelect(e.detail, hit);
             }
           }
         }}

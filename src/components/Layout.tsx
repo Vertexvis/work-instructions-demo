@@ -4,10 +4,10 @@ import React from "react";
 
 const DenseToolbarHeight = 48;
 export const LeftDrawerWidth = 0; // If mini-drawer provided, set to 76
-export const RightDrawerWidth = 320; // If not provided, set to 0
+export const RightDrawerWidth = 0; // If not provided, set to 0
 
 interface Props {
-  readonly children: React.ReactNode;
+  readonly children?: React.ReactNode;
   readonly header: React.ReactNode;
   readonly leftDrawer?: React.ReactNode;
   readonly main: React.ReactNode;
@@ -53,7 +53,7 @@ export function Layout({
         {main}
       </Content>
       {rightDrawer ?? <></>}
-      {children}
+      {children ?? <></>}
     </Box>
   );
 }
