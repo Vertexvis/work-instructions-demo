@@ -5,10 +5,10 @@ export interface StreamCredentials {
   readonly streamKey: string;
 }
 
-// Vertex Valve
+// Super Car
 export const DefaultCredentials: StreamCredentials = {
   clientId: "08F675C4AACE8C0214362DB5EFD4FACAFA556D463ECA00877CB225157EF58BFA",
-  streamKey: "U9cSWVb7fvS9k-NQcT28uZG6wtm6xmiG0ctU",
+  streamKey: "2M8D6GttDum511RmQBsb3iw6qjj9HTFTC_GJ",
 };
 
 export const Env =
