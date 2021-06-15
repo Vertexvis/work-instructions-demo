@@ -56,7 +56,7 @@ export default async function create(
       verbose: true,
     });
 
-    const out = `${svsRes.data.id}.png`;
+    const out = `./scripts/${svsRes.data.id}-orig.png`;
     renderRes.data.pipe(createWriteStream(out));
     await createFile(renderRes.data, out);
     return res.status(200).json({ message: "OK" });

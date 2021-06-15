@@ -1,29 +1,30 @@
 import {
   Box,
   Drawer as MuiDrawer,
-  ToggleButton,
-  ToggleButtonGroup,
-  Typography,
+  Fab,
+  Step,
+  StepLabel,
+  Stepper,
 } from "@material-ui/core";
 import { getDrawerUtilityClass } from "@material-ui/core/Drawer";
 import { styled } from "@material-ui/core/styles";
-// import dynamic from "next/dynamic";
+import {
+  ChevronLeft,
+  ChevronRight,
+  PlayArrow,
+  Refresh,
+} from "@material-ui/icons";
 import React from "react";
 
-import { SceneViewState,SceneViewStates } from "../lib/scene-items";
+import { SceneViewState, SceneViewStates } from "../lib/scene-items";
 import { BottomDrawerHeight } from "./Layout";
 
 interface Props {
-  readonly onSelect: (sceneViewId: SceneViewState) => void;
+  readonly onSelect: (sceneViewId?: SceneViewState) => void;
+  readonly ready: boolean;
 }
 
-// Temporary until this revert is published, https://github.com/mui-org/material-ui/pull/26310
-// const ChevronLeft = dynamic(() => import("@material-ui/icons/ChevronLeft"), {
-//   ssr: false,
-// });
-// const ChevronRight = dynamic(() => import("@material-ui/icons/ChevronRight"), {
-//   ssr: false,
-// });
+const FabMargin = 5;
 
 const Drawer = styled((props) => (
   <MuiDrawer anchor="bottom" variant="permanent" {...props} />
@@ -33,43 +34,66 @@ const Drawer = styled((props) => (
   };
 });
 
-export function BottomDrawer({ onSelect }: Props): JSX.Element {
-  const [selected, setSelected] = React.useState<SceneViewState | undefined>(undefined);
-  const step = selected && selected.id ? selected.step : 1;
+export function BottomDrawer({ onSelect, ready }: Props): JSX.Element {
+  const stepIds = Object.keys(SceneViewStates);
+  const [activeStep, setActiveStep] = React.useState(-1);
+
+  React.useEffect(() => {
+    onSelect(SceneViewStates[stepIds[activeStep]]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeStep]);
 
   return (
     <Drawer>
-      <Typography align="center" sx={{ my: 1 }}>
-        {`Step ${step} of 3`}
-      </Typography>
       <Box
-        sx={{ alignItems: "center", display: "flex", justifyContent: "center" }}
+        sx={{
+          alignItems: "center",
+          display: "flex",
+          justifyContent: "center",
+        }}
       >
-        {/* <Fab sx={{ ml: 2, mr: "auto" }}>
-          <ChevronLeft />
-        </Fab> */}
-        <ToggleButtonGroup
-          exclusive
-          onChange={(_e: React.MouseEvent, sel: string) => {
-            setSelected(SceneViewStates[sel]);
-            onSelect(SceneViewStates[sel]);
-          }}
-          value={selected}
+        <Fab
+          disabled={!ready || activeStep === -1 || activeStep === 0}
+          sx={{ ml: FabMargin, mr: "auto" }}
+          onClick={() => setActiveStep((prev) => prev - 1)}
         >
-          {Object.keys(SceneViewStates).map((k) => (
-            <ToggleButton key={k} value={k}>
-              <img
-                width={180}
-                key={k}
-                src={`/${k}.png`}
-                alt={SceneViewStates[k].name}
-              />
-            </ToggleButton>
-          ))}
-        </ToggleButtonGroup>
-        {/* <Fab sx={{ ml: "auto", mr: 2 }}>
-          <ChevronRight />
-        </Fab> */}
+          <ChevronLeft />
+        </Fab>
+        <Box sx={{ my: 2, width: "75%" }}>
+          <Stepper activeStep={activeStep}>
+            {Object.keys(SceneViewStates).map((k) => {
+              const stepProps: { completed?: boolean } = {};
+              return (
+                <Step key={k} {...stepProps}>
+                  <StepLabel></StepLabel>
+                  <img
+                    height={150}
+                    key={k}
+                    src={`/${k}.png`}
+                    alt={SceneViewStates[k].name}
+                  />
+                </Step>
+              );
+            })}
+          </Stepper>
+        </Box>
+        {activeStep === stepIds.length - 1 ? (
+          <Fab
+            disabled={!ready}
+            sx={{ ml: "auto", mr: FabMargin }}
+            onClick={() => setActiveStep(-1)}
+          >
+            <Refresh />
+          </Fab>
+        ) : (
+          <Fab
+            disabled={!ready}
+            sx={{ ml: "auto", mr: FabMargin }}
+            onClick={() => setActiveStep((prev) => prev + 1)}
+          >
+            <ChevronRight />
+          </Fab>
+        )}
       </Box>
     </Drawer>
   );

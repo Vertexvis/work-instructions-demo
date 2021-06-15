@@ -32,6 +32,12 @@ function UnwrappedViewer({
   viewer,
   ...props
 }: ViewerProps): JSX.Element {
+  const urn = `urn:vertexvis:stream-key:${credentials.streamKey}`;
+  const src = urn;
+  // const src = sceneViewState?.id
+  //   ? `${urn}?scene-view-state=${sceneViewState.id}`
+  //   : urn;
+
   React.useEffect(() => {
     loadSceneViewState({ id: sceneViewState?.id, viewer: viewer.current });
   }, [sceneViewState, viewer]);
@@ -41,7 +47,7 @@ function UnwrappedViewer({
       css={{ height: "100%", width: "100%" }}
       clientId={credentials.clientId}
       ref={viewer}
-      src={`urn:vertexvis:stream-key:${credentials.streamKey}`}
+      src={src}
       {...props}
     >
       <VertexViewerDomRenderer>
@@ -54,9 +60,8 @@ function UnwrappedViewer({
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
               viewBox="0 0 20 20"
-              fill="red"
+              fill="#60A5FA"
               css={{ width: 144, height: 144 }}
             >
               <path

@@ -9,6 +9,11 @@ const SelectColor = {
   specular: { r: 255, g: 255, b: 255, a: 0 },
 };
 
+const ActivePartColor = {
+  ...SelectColor,
+  ...ColorMaterial.fromHex("F59E0B"),
+};
+
 interface Req {
   readonly viewer: Components.VertexViewer | null;
 }
@@ -73,26 +78,26 @@ const LugNutCam = {
 };
 
 export const SceneViewStates: Record<string, SceneViewState> = {
-  "87ace158-ffec-4d3a-bc9b-d3689798edf2": {
-    id: "87ace158-ffec-4d3a-bc9b-d3689798edf2",
+  "dbf5540f-56e3-4434-95cb-ae51d8725f06": {
+    id: "dbf5540f-56e3-4434-95cb-ae51d8725f06",
     camera: RimCam,
-    name: "Step 1: Rim",
+    name: "Rim",
     step: 1,
   },
-  "a9f3ac57-b706-4ce6-91b6-bbe67c924468": {
-    id: "a9f3ac57-b706-4ce6-91b6-bbe67c924468",
+  "e57ad094-0103-487e-b377-eced7619991e": {
+    id: "e57ad094-0103-487e-b377-eced7619991e",
     camera: RimCam,
-    name: "Step 2: Tire onto rim",
+    name: "Tire onto rim",
     step: 2,
   },
-  "ff1acbb0-8906-436e-83b8-d518bbfc75e9": {
-    id: "ff1acbb0-8906-436e-83b8-d518bbfc75e9",
+  "58b7c10d-49c6-4baa-8b5e-f2f3d738597b": {
+    id: "58b7c10d-49c6-4baa-8b5e-f2f3d738597b",
     camera: LugNutCam,
-    name: "Step 3: Lug nuts into rim",
+    name: "Lug nuts into rim",
     step: 3,
     arrows: [
       {
-        position: { x: -1350, y: 1150, z: 200 },
+        position: { x: -1350, y: 1075, z: 200 },
         rotation: { w: 0.7071, x: 0, y: 0.7071, z: 0 },
       },
     ],
@@ -107,6 +112,17 @@ export async function flyTo({
 
   const scene = await viewer.scene();
   if (scene == null) return;
+
+  const sc = scene.camera();
+  if (
+    JSON.stringify({
+      position: sc.position,
+      lookAt: sc.lookAt,
+      up: sc.up,
+    }) === JSON.stringify(camera)
+  ) {
+    return;
+  }
 
   return scene
     .camera()
@@ -153,7 +169,6 @@ export async function selectByHit({
   }
 }
 
-/*
 import { Matrix4x4, Quaternion, Vector3 as Math3dVector3 } from "math3d";
 
 const suppliedIdToTransform: { [k: string]: number[] } = {
@@ -173,7 +188,7 @@ export async function initialize({ viewer }: Req): Promise<void> {
   await scene
     .camera()
     .flyTo({ camera: LugNutCam })
-    .render({ animation: { milliseconds: 1500 } });
+    .render({ animation: { milliseconds: 500 } });
 
   await scene
     .items((op) => {
@@ -181,33 +196,21 @@ export async function initialize({ viewer }: Req): Promise<void> {
         q.withSuppliedIds([
           "108940", // 12x20 OZ HLT ET 3 SPOKE
           "108950", // michelin sport cup 2 345-30zr20 on rim_(Default)
-          "109640", // wheel nut(Default)
-          "109650", // wheel nut(Default)
-          "109660", // wheel nut(Default)
-          "109670", // wheel nut(Default)
-          "109680", // wheel nut(Default)
-          // Later
-          // "109570", // Z06 inner hub(Default)
-          // "109580", // Z06 disc and outer hub as a part(Default)
-          // "109590", // M10x35 90128A289(90128A289)
-          // "109600", // M10x35 90128A289(90128A289)
-          // "109610", // M10x35 90128A289(90128A289)
-          // "109620", // M10x35 90128A289(90128A289)
-          // "109630", // M10x35 90128A289(90128A289)
-          // "109690", // Howe ball joint ball 917-22320(Default)
-          // "109700", // Howe ball joint ball 917-22320(Default)
-          // "109710", // fender frame(Default)
-          // "109720", // SS Spindle Kyle Mirror(Default)
         ])
       );
       return [
-        op.where((q) => q.all()).hide(),
-        idsQuery.show(),
         ...Object.keys(suppliedIdToTransform).map((k) =>
           op
             .where((q) => q.withSuppliedId(k))
+            .show()
             .transform(suppliedIdToTransform[k])
+            .materialOverride(ActivePartColor)
         ),
+        op.where((q) => q.all()).hide(),
+        idsQuery.show(),
+        // op
+        //   .where((q) => q.withSuppliedId("108940"))
+        //   .materialOverride(ActivePartColor),
       ];
     })
     .execute();
@@ -215,9 +218,8 @@ export async function initialize({ viewer }: Req): Promise<void> {
 
 export function toMatrix(posX: number, posY: number): number[] {
   return Matrix4x4.TRS(
-    new Math3dVector3(posX, posY, -600),
+    new Math3dVector3(posX, posY, -350),
     Quaternion.Euler(-180, 0, -43.58595040792774),
     1
   ).values;
 }
-*/

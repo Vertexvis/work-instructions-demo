@@ -1,5 +1,5 @@
 import { readFileSync } from "fs";
-import { basename, join } from "path";
+import { join } from "path";
 import sharp from "sharp";
 
 const offset = 205;
@@ -14,7 +14,13 @@ async function resize(path) {
       width: metadata.width - offset,
       height: metadata.height - offset,
     })
-    .toFile(join("scripts", `${basename(path)}-upd.png`));
+    .toFile(join("scripts", `${path.replace("-orig", "")}`));
 }
 
-Promise.all(["t1.png", "t2.png", "t3.png"].map((fn) => resize(fn)));
+Promise.all(
+  [
+    "e57ad094-0103-487e-b377-eced7619991e-orig.png",
+    "dbf5540f-56e3-4434-95cb-ae51d8725f06-orig.png",
+    "58b7c10d-49c6-4baa-8b5e-f2f3d738597b-orig.png",
+  ].map((fn) => resize(fn))
+);
