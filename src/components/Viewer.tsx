@@ -6,17 +6,11 @@ import {
   VertexViewer,
   VertexViewerDomElement,
   VertexViewerDomRenderer,
-  VertexViewerToolbar,
-  VertexViewerViewCube,
 } from "@vertexvis/viewer-react";
 import React from "react";
 
 import { StreamCredentials } from "../lib/env";
-import {
-  AnimationDurationMs,
-  loadSceneViewState,
-  SceneViewState,
-} from "../lib/scene-items";
+import { loadSceneViewState, SceneViewState } from "../lib/scene-items";
 
 interface ViewerProps extends ViewerJSX.VertexViewer {
   readonly credentials: StreamCredentials;
@@ -50,12 +44,6 @@ function UnwrappedViewer({
       src={`urn:vertexvis:stream-key:${credentials.streamKey}`}
       {...props}
     >
-      <VertexViewerToolbar placement="top-right">
-        <VertexViewerViewCube
-          animationDuration={AnimationDurationMs}
-          viewer={viewer.current ?? undefined}
-        />
-      </VertexViewerToolbar>
       <VertexViewerDomRenderer>
         {sceneViewState?.arrows?.map((a, i) => (
           <VertexViewerDomElement

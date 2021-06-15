@@ -72,8 +72,6 @@ const LugNutCam = {
   },
 };
 
-export const AnimationDurationMs = 1500;
-
 export const SceneViewStates: Record<string, SceneViewState> = {
   "87ace158-ffec-4d3a-bc9b-d3689798edf2": {
     id: "87ace158-ffec-4d3a-bc9b-d3689798edf2",
