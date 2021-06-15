@@ -10,7 +10,7 @@ import { styled } from "@material-ui/core/styles";
 // import dynamic from "next/dynamic";
 import React from "react";
 
-import { SceneViewStates, SceneViewState } from "../lib/scene-items";
+import { SceneViewState,SceneViewStates } from "../lib/scene-items";
 import { BottomDrawerHeight } from "./Layout";
 
 interface Props {

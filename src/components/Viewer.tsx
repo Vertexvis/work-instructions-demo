@@ -1,5 +1,4 @@
 /* @jsx jsx */ /** @jsxRuntime classic */ import { jsx } from "@emotion/react";
-import { Button, ButtonGroup } from "@material-ui/core";
 import { vertexvis } from "@vertexvis/frame-streaming-protos";
 import { TapEventDetails } from "@vertexvis/viewer";
 import {
@@ -13,7 +12,11 @@ import {
 import React from "react";
 
 import { StreamCredentials } from "../lib/env";
-import { SceneViewState } from "../lib/scene-items";
+import {
+  AnimationDurationMs,
+  loadSceneViewState,
+  SceneViewState,
+} from "../lib/scene-items";
 
 interface ViewerProps extends ViewerJSX.VertexViewer {
   readonly credentials: StreamCredentials;
@@ -35,27 +38,8 @@ function UnwrappedViewer({
   viewer,
   ...props
 }: ViewerProps): JSX.Element {
-  const AnimationDurationMs = 1500;
-
-  async function fitAll(): Promise<void> {
-    (await viewer.current?.scene())
-      ?.camera()
-      .viewAll()
-      .render({ animation: { milliseconds: AnimationDurationMs } });
-  }
-
   React.useEffect(() => {
-    async function loadSceneViewState(): Promise<void> {
-      console.log("loadSceneViewState", viewer.current == null, sceneViewState);
-      if (viewer.current == null || !sceneViewState) return;
-
-      await (
-        await viewer.current.scene()
-      ).applySceneViewState(sceneViewState.id);
-      console.log("Finished loading", sceneViewState.id);
-    }
-
-    loadSceneViewState();
+    loadSceneViewState({ id: sceneViewState?.id, viewer: viewer.current });
   }, [sceneViewState, viewer]);
 
   return (
@@ -71,13 +55,6 @@ function UnwrappedViewer({
           animationDuration={AnimationDurationMs}
           viewer={viewer.current ?? undefined}
         />
-      </VertexViewerToolbar>
-      <VertexViewerToolbar placement="bottom-center">
-        <ButtonGroup sx={{ mb: 2 }} variant="contained">
-          <Button color="inherit" onClick={() => fitAll()}>
-            Fit all
-          </Button>
-        </ButtonGroup>
       </VertexViewerToolbar>
       <VertexViewerDomRenderer>
         {sceneViewState?.arrows?.map((a, i) => (

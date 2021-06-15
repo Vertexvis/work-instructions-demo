@@ -1,24 +1,23 @@
 import React from "react";
 
 import { BottomDrawer } from "../components/BottomDrawer";
-import { Header } from "../components/Header";
 import { Layout } from "../components/Layout";
 import { Viewer } from "../components/Viewer";
 import { Credentials, Env } from "../lib/env";
 import {
   flyTo,
+  SceneViewState,
   selectByHit as handleHit,
 } from "../lib/scene-items";
-import { SceneViewState } from "../lib/scene-items";
 import { useViewer } from "../lib/viewer";
 
 export default function Home(): JSX.Element {
   const viewer = useViewer();
-  const [sceneViewId, setSceneViewId] = React.useState<string | undefined>(
-    undefined
-  );
+  // const [sceneViewId, setSceneViewId] = React.useState<string | undefined>(
+  //   undefined
+  // );
   const [sceneViewState, setSceneViewState] = React.useState<
-  SceneViewState | undefined
+    SceneViewState | undefined
   >(undefined);
 
   async function onSceneReady() {
@@ -29,35 +28,31 @@ export default function Home(): JSX.Element {
     if (scene == null) return;
 
     console.debug("sceneViewId", scene.sceneViewId);
-    setSceneViewId(scene.sceneViewId);
+    // setSceneViewId(scene.sceneViewId);
     // await initialize({ viewer: v });
   }
 
-  async function createSvs(name: string): Promise<void> {
-    console.debug("createSvs", name, sceneViewId);
-    // await (
-    //   await fetch(`http://localhost:3000/api/scene-view-states`, {
-    //     method: "POST",
-    //     body: JSON.stringify({ name, sceneViewId }),
-    //   })
-    // ).json()
-  }
+  // async function createSvs(name: string): Promise<void> {
+  //   await (
+  //     await fetch(`http://localhost:3000/api/scene-view-states`, {
+  //       method: "POST",
+  //       body: JSON.stringify({ name, sceneViewId }),
+  //     })
+  //   ).json();
+  // }
 
   async function onSceneViewStateSelected(svs?: SceneViewState): Promise<void> {
     if (svs) {
-      await flyTo({
-        camera: svs.camera,
-        viewer: viewer.ref.current,
-      });
+      await flyTo({ camera: svs.camera, viewer: viewer.ref.current });
+      // ?.onAnimationCompleted.on(() => setSceneViewState(svs));
     }
-
     setSceneViewState(svs);
   }
 
   return (
     <Layout
       bottomDrawer={<BottomDrawer onSelect={onSceneViewStateSelected} />}
-      header={<Header onCreateSceneViewState={createSvs} />}
+      // header={<Header onCreateSceneViewState={createSvs} />}
       main={
         viewer.isReady && (
           <Viewer
@@ -75,8 +70,7 @@ export default function Home(): JSX.Element {
               },
             }}
             viewer={viewer.ref}
-          >
-          </Viewer>
+          ></Viewer>
         )
       }
     />

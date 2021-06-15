@@ -6,11 +6,11 @@ interface Props {
 }
 
 export function Header({ onCreateSceneViewState }: Props): JSX.Element {
-  // const [name, setName] = React.useState<string>("");
+  const [name, setName] = React.useState<string>("");
 
   return (
     <Box display="flex" justifyContent="space-between" width="100%">
-      {/* <Box display="flex">
+      <Box display="flex">
         <TextField
           id="svs-name"
           label="SVS name"
@@ -29,7 +29,7 @@ export function Header({ onCreateSceneViewState }: Props): JSX.Element {
         >
           Create SVS
         </Button>
-      </Box> */}
+      </Box>
       <Link
         href="https://github.com/Vertexvis/work-instructions-demo"
         rel="noreferrer"

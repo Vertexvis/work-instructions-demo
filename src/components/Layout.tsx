@@ -3,14 +3,14 @@ import { styled } from "@material-ui/core/styles";
 import React from "react";
 
 export const BottomDrawerHeight = 260; // If not provided, set to 0
-const DenseToolbarHeight = 48;
+const DenseToolbarHeight = 0; // If provided, set to 48
 export const LeftDrawerWidth = 0; // If mini-drawer provided, set to 76
 export const RightDrawerWidth = 0; // If not provided, set to 0
 
 interface Props {
   readonly bottomDrawer?: React.ReactNode;
   readonly children?: React.ReactNode;
-  readonly header: React.ReactNode;
+  readonly header?: React.ReactNode;
   readonly leftDrawer?: React.ReactNode;
   readonly main: React.ReactNode;
   readonly rightDrawer?: React.ReactNode;
@@ -47,9 +47,11 @@ export function Layout({
 }: Props): JSX.Element {
   return (
     <Box height="100vh" display="flex">
-      <AppBar>
-        <Toolbar variant="dense">{header}</Toolbar>
-      </AppBar>
+      {header && (
+        <AppBar>
+          <Toolbar variant="dense">{header}</Toolbar>
+        </AppBar>
+      )}
       {leftDrawer ?? <></>}
       <Content>
         <Box minHeight={`${DenseToolbarHeight}px`} />

@@ -1,6 +1,7 @@
 import { vertexvis } from "@vertexvis/frame-streaming-protos";
 import { ColorMaterial, Components, TapEventDetails } from "@vertexvis/viewer";
-import { FrameCamera } from "@vertexvis/viewer/dist/types/types";
+import { CameraRenderResult } from "@vertexvis/viewer/dist/types/lib/scenes/cameraRenderResult";
+import { FrameCamera } from "@vertexvis/viewer/dist/types/lib/types";
 
 const SelectColor = {
   ...ColorMaterial.create(255, 255, 0),
@@ -14,6 +15,10 @@ interface Req {
 
 interface FlyToReq extends Req {
   readonly camera: FrameCamera.FrameCamera;
+}
+
+interface LoadSceneViewStateReq extends Req {
+  readonly id?: string;
 }
 
 interface SelectByHitReq extends Req {
@@ -61,6 +66,8 @@ const LugNutCam = {
   },
 };
 
+export const AnimationDurationMs = 1500;
+
 export const SceneViewStates: Record<string, SceneViewState> = {
   "87ace158-ffec-4d3a-bc9b-d3689798edf2": {
     id: "87ace158-ffec-4d3a-bc9b-d3689798edf2",
@@ -88,16 +95,31 @@ export const SceneViewStates: Record<string, SceneViewState> = {
   },
 };
 
-export async function flyTo({ camera, viewer }: FlyToReq): Promise<void> {
+export async function flyTo({
+  camera,
+  viewer,
+}: FlyToReq): Promise<CameraRenderResult | undefined> {
   if (viewer == null) return;
 
   const scene = await viewer.scene();
   if (scene == null) return;
 
-  await scene
+  return scene
     .camera()
     .flyTo({ camera })
-    .render({ animation: { milliseconds: 1500 } });
+    .render({ animation: { milliseconds: AnimationDurationMs } });
+}
+
+export async function loadSceneViewState({
+  id,
+  viewer,
+}: LoadSceneViewStateReq): Promise<void> {
+  if (viewer == null || !id) return;
+
+  const scene = await viewer.scene();
+  if (scene == null) return;
+
+  await scene.applySceneViewState(id);
 }
 
 export async function selectByHit({
