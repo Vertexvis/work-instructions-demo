@@ -21,6 +21,19 @@ interface SelectByHitReq extends Req {
   readonly hit?: vertexvis.protobuf.stream.IHit;
 }
 
+interface Arrow {
+  position: { x: number; y: number; z: number };
+  rotation: { w: number; x: number; y: number; z: number };
+}
+
+export interface SceneViewState {
+  readonly id: string;
+  readonly camera: FrameCamera.FrameCamera;
+  readonly name: string;
+  readonly step: number;
+  readonly arrows?: Arrow[];
+}
+
 const RimCam = {
   position: {
     x: -1345.920166015625,
@@ -48,24 +61,30 @@ const LugNutCam = {
   },
 };
 
-export const SceneViewStates: Record<
-  string,
-  { camera: FrameCamera.FrameCamera; name: string; step: number }
-> = {
+export const SceneViewStates: Record<string, SceneViewState> = {
   "87ace158-ffec-4d3a-bc9b-d3689798edf2": {
+    id: "87ace158-ffec-4d3a-bc9b-d3689798edf2",
     camera: RimCam,
     name: "Step 1: Rim",
     step: 1,
   },
   "a9f3ac57-b706-4ce6-91b6-bbe67c924468": {
+    id: "a9f3ac57-b706-4ce6-91b6-bbe67c924468",
     camera: RimCam,
     name: "Step 2: Tire onto rim",
     step: 2,
   },
   "ff1acbb0-8906-436e-83b8-d518bbfc75e9": {
+    id: "ff1acbb0-8906-436e-83b8-d518bbfc75e9",
     camera: LugNutCam,
     name: "Step 3: Lug nuts into rim",
     step: 3,
+    arrows: [
+      {
+        position: { x: -1350, y: 1150, z: 200 },
+        rotation: { w: 0.7071, x: 0, y: 0.7071, z: 0 },
+      },
+    ],
   },
 };
 

@@ -7,9 +7,9 @@ import { Viewer } from "../components/Viewer";
 import { Credentials, Env } from "../lib/env";
 import {
   flyTo,
-  SceneViewStates,
   selectByHit as handleHit,
 } from "../lib/scene-items";
+import { SceneViewState } from "../lib/scene-items";
 import { useViewer } from "../lib/viewer";
 
 export default function Home(): JSX.Element {
@@ -17,8 +17,8 @@ export default function Home(): JSX.Element {
   const [sceneViewId, setSceneViewId] = React.useState<string | undefined>(
     undefined
   );
-  const [sceneViewStateId, setSceneViewStateId] = React.useState<
-    string | undefined
+  const [sceneViewState, setSceneViewState] = React.useState<
+  SceneViewState | undefined
   >(undefined);
 
   async function onSceneReady() {
@@ -43,15 +43,15 @@ export default function Home(): JSX.Element {
     // ).json()
   }
 
-  async function onSceneViewStateSelected(svsId?: string): Promise<void> {
-    if (svsId && SceneViewStates[svsId]) {
+  async function onSceneViewStateSelected(svs?: SceneViewState): Promise<void> {
+    if (svs) {
       await flyTo({
-        camera: SceneViewStates[svsId].camera,
+        camera: svs.camera,
         viewer: viewer.ref.current,
       });
     }
 
-    setSceneViewStateId(svsId);
+    setSceneViewState(svs);
   }
 
   return (
@@ -67,7 +67,7 @@ export default function Home(): JSX.Element {
             onSelect={async (detail, hit) => {
               await handleHit({ detail, hit, viewer: viewer.ref.current });
             }}
-            sceneViewStateId={sceneViewStateId}
+            sceneViewState={sceneViewState}
             streamAttributes={{
               experimentalGhosting: {
                 enabled: { value: true },
@@ -75,7 +75,8 @@ export default function Home(): JSX.Element {
               },
             }}
             viewer={viewer.ref}
-          />
+          >
+          </Viewer>
         )
       }
     />

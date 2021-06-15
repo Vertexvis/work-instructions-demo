@@ -10,11 +10,11 @@ import { styled } from "@material-ui/core/styles";
 // import dynamic from "next/dynamic";
 import React from "react";
 
-import { SceneViewStates } from "../lib/scene-items";
+import { SceneViewStates, SceneViewState } from "../lib/scene-items";
 import { BottomDrawerHeight } from "./Layout";
 
 interface Props {
-  readonly onSelect: (sceneViewId: string) => void;
+  readonly onSelect: (sceneViewId: SceneViewState) => void;
 }
 
 // Temporary until this revert is published, https://github.com/mui-org/material-ui/pull/26310
@@ -34,9 +34,8 @@ const Drawer = styled((props) => (
 });
 
 export function BottomDrawer({ onSelect }: Props): JSX.Element {
-  const [selected, setSelected] = React.useState<string | undefined>(undefined);
-  const step =
-    selected && SceneViewStates[selected] ? SceneViewStates[selected].step : 1;
+  const [selected, setSelected] = React.useState<SceneViewState | undefined>(undefined);
+  const step = selected && selected.id ? selected.step : 1;
 
   return (
     <Drawer>
@@ -52,8 +51,8 @@ export function BottomDrawer({ onSelect }: Props): JSX.Element {
         <ToggleButtonGroup
           exclusive
           onChange={(_e: React.MouseEvent, sel: string) => {
-            setSelected(sel);
-            onSelect(sel);
+            setSelected(SceneViewStates[sel]);
+            onSelect(SceneViewStates[sel]);
           }}
           value={selected}
         >
