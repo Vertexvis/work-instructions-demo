@@ -60,9 +60,15 @@ const RimCam = {
 const LugNutCam = {
   ...RimCam,
   position: {
-    x: -2619.583984375,
-    y: 2318.86181640625,
-    z: 199.25672912597656,
+    ...RimCam.position,
+    x: -2516.525146484375,
+    y: 2417.216064453125,
+    // x: -2619.583984375,
+    // y: 2318.86181640625,
+  },
+  lookAt: {
+    ...RimCam.lookAt,
+    y: 1046.1944580078125,
   },
 };
 
@@ -107,7 +113,7 @@ export async function flyTo({
   return scene
     .camera()
     .flyTo({ camera })
-    .render({ animation: { milliseconds: AnimationDurationMs } });
+    .render({ animation: { milliseconds: 500 } });
 }
 
 export async function loadSceneViewState({

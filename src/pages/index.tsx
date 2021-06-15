@@ -43,10 +43,15 @@ export default function Home(): JSX.Element {
 
   async function onSceneViewStateSelected(svs?: SceneViewState): Promise<void> {
     if (svs) {
-      await flyTo({ camera: svs.camera, viewer: viewer.ref.current });
-      // ?.onAnimationCompleted.on(() => setSceneViewState(svs));
+      const res = await flyTo({
+        camera: svs.camera,
+        viewer: viewer.ref.current,
+      });
+      res?.onAnimationCompleted.on(() => {
+        console.log("Animation complete");
+        setSceneViewState(svs);
+      });
     }
-    setSceneViewState(svs);
   }
 
   return (
