@@ -5,7 +5,11 @@ import { Header } from "../components/Header";
 import { Layout } from "../components/Layout";
 import { Viewer } from "../components/Viewer";
 import { Credentials, Env } from "../lib/env";
-import { initialize, selectByHit as handleHit } from "../lib/scene-items";
+import {
+  flyTo,
+  SceneViewStates,
+  selectByHit as handleHit,
+} from "../lib/scene-items";
 import { useViewer } from "../lib/viewer";
 
 export default function Home(): JSX.Element {
@@ -39,15 +43,20 @@ export default function Home(): JSX.Element {
     // ).json()
   }
 
+  async function onSceneViewStateSelected(svsId?: string): Promise<void> {
+    if (svsId && SceneViewStates[svsId]) {
+      await flyTo({
+        camera: SceneViewStates[svsId].camera,
+        viewer: viewer.ref.current,
+      });
+    }
+
+    setSceneViewStateId(svsId);
+  }
+
   return (
     <Layout
-      bottomDrawer={
-        <BottomDrawer
-          onSelect={(svId: string) => {
-            setSceneViewStateId(svId);
-          }}
-        />
-      }
+      bottomDrawer={<BottomDrawer onSelect={onSceneViewStateSelected} />}
       header={<Header onCreateSceneViewState={createSvs} />}
       main={
         viewer.isReady && (

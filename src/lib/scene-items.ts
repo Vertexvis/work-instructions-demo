@@ -1,6 +1,6 @@
 import { vertexvis } from "@vertexvis/frame-streaming-protos";
 import { ColorMaterial, Components, TapEventDetails } from "@vertexvis/viewer";
-import { Matrix4x4, Quaternion, Vector3 as Math3dVector3 } from "math3d";
+import { FrameCamera } from "@vertexvis/viewer/dist/types/types";
 
 const SelectColor = {
   ...ColorMaterial.create(255, 255, 0),
@@ -12,12 +12,16 @@ interface Req {
   readonly viewer: Components.VertexViewer | null;
 }
 
+interface FlyToReq extends Req {
+  readonly camera: FrameCamera.FrameCamera;
+}
+
 interface SelectByHitReq extends Req {
   readonly detail: TapEventDetails;
   readonly hit?: vertexvis.protobuf.stream.IHit;
 }
 
-const rimCam = {
+const RimCam = {
   position: {
     x: -1345.920166015625,
     y: 2363.62158203125,
@@ -35,14 +39,77 @@ const rimCam = {
   },
 };
 
-const lugNutCam = {
-  ...rimCam,
+const LugNutCam = {
+  ...RimCam,
   position: {
     x: -2619.583984375,
     y: 2318.86181640625,
     z: 199.25672912597656,
   },
 };
+
+export const SceneViewStates: Record<
+  string,
+  { camera: FrameCamera.FrameCamera; name: string; step: number }
+> = {
+  "87ace158-ffec-4d3a-bc9b-d3689798edf2": {
+    camera: RimCam,
+    name: "Step 1: Rim",
+    step: 1,
+  },
+  "a9f3ac57-b706-4ce6-91b6-bbe67c924468": {
+    camera: RimCam,
+    name: "Step 2: Tire onto rim",
+    step: 2,
+  },
+  "ff1acbb0-8906-436e-83b8-d518bbfc75e9": {
+    camera: LugNutCam,
+    name: "Step 3: Lug nuts into rim",
+    step: 3,
+  },
+};
+
+export async function flyTo({ camera, viewer }: FlyToReq): Promise<void> {
+  if (viewer == null) return;
+
+  const scene = await viewer.scene();
+  if (scene == null) return;
+
+  await scene
+    .camera()
+    .flyTo({ camera })
+    .render({ animation: { milliseconds: 1500 } });
+}
+
+export async function selectByHit({
+  detail,
+  hit,
+  viewer,
+}: SelectByHitReq): Promise<void> {
+  if (viewer == null) return;
+
+  const scene = await viewer.scene();
+  if (scene == null) return;
+
+  const id = hit?.itemId?.hex;
+  if (id) {
+    await scene
+      .items((op) => {
+        const idQuery = op.where((q) => q.withItemId(id));
+        return [
+          op.where((q) => q.all()).deselect(),
+          // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons#return_value
+          detail.buttons === 2 ? idQuery.hide() : idQuery.select(SelectColor),
+        ];
+      })
+      .execute();
+  } else {
+    await scene.items((op) => op.where((q) => q.all()).deselect()).execute();
+  }
+}
+
+/*
+import { Matrix4x4, Quaternion, Vector3 as Math3dVector3 } from "math3d";
 
 const suppliedIdToTransform: { [k: string]: number[] } = {
   109640: toMatrix(-35.4580993652344, -48.80400085449219),
@@ -60,7 +127,7 @@ export async function initialize({ viewer }: Req): Promise<void> {
 
   await scene
     .camera()
-    .flyTo({ camera: lugNutCam })
+    .flyTo({ camera: LugNutCam })
     .render({ animation: { milliseconds: 1500 } });
 
   await scene
@@ -101,33 +168,6 @@ export async function initialize({ viewer }: Req): Promise<void> {
     .execute();
 }
 
-export async function selectByHit({
-  detail,
-  hit,
-  viewer,
-}: SelectByHitReq): Promise<void> {
-  if (viewer == null) return;
-
-  const scene = await viewer.scene();
-  if (scene == null) return;
-
-  const id = hit?.itemId?.hex;
-  if (id) {
-    await scene
-      .items((op) => {
-        const idQuery = op.where((q) => q.withItemId(id));
-        return [
-          op.where((q) => q.all()).deselect(),
-          // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons#return_value
-          detail.buttons === 2 ? idQuery.hide() : idQuery.select(SelectColor),
-        ];
-      })
-      .execute();
-  } else {
-    await scene.items((op) => op.where((q) => q.all()).deselect()).execute();
-  }
-}
-
 export function toMatrix(posX: number, posY: number): number[] {
   return Matrix4x4.TRS(
     new Math3dVector3(posX, posY, -600),
@@ -135,3 +175,4 @@ export function toMatrix(posX: number, posY: number): number[] {
     1
   ).values;
 }
+*/
