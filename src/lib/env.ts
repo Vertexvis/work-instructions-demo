@@ -15,4 +15,4 @@ export const Credentials: StreamCredentials = {
 };
 
 export const Env =
-  (process.env.NEXT_PUBLIC_VERTEX_ENV as Environment) || "platprod";
+  (process.env.NEXT_PUBLIC_VERTEX_ENV as Environment) || "platdev";

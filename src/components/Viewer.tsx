@@ -5,16 +5,19 @@ import { TapEventDetails } from "@vertexvis/viewer";
 import {
   JSX as ViewerJSX,
   VertexViewer,
+  VertexViewerDomElement,
+  VertexViewerDomRenderer,
   VertexViewerToolbar,
   VertexViewerViewCube,
 } from "@vertexvis/viewer-react";
 import React from "react";
 
 import { StreamCredentials } from "../lib/env";
+import { SceneViewState } from "../lib/scene-items";
 
 interface ViewerProps extends ViewerJSX.VertexViewer {
   readonly credentials: StreamCredentials;
-  readonly sceneViewStateId?: string;
+  readonly sceneViewState?: SceneViewState;
   readonly viewer: React.MutableRefObject<HTMLVertexViewerElement | null>;
 }
 
@@ -28,7 +31,7 @@ export const Viewer = onTap(UnwrappedViewer);
 
 function UnwrappedViewer({
   credentials,
-  sceneViewStateId,
+  sceneViewState,
   viewer,
   ...props
 }: ViewerProps): JSX.Element {
@@ -43,21 +46,17 @@ function UnwrappedViewer({
 
   React.useEffect(() => {
     async function loadSceneViewState(): Promise<void> {
-      console.log(
-        "loadSceneViewState",
-        viewer.current == null,
-        sceneViewStateId
-      );
-      if (viewer.current == null || !sceneViewStateId) return;
+      console.log("loadSceneViewState", viewer.current == null, sceneViewState);
+      if (viewer.current == null || !sceneViewState) return;
 
       await (
         await viewer.current.scene()
-      ).applySceneViewState(sceneViewStateId);
-      console.log("Finished loading", sceneViewStateId);
+      ).applySceneViewState(sceneViewState.id);
+      console.log("Finished loading", sceneViewState.id);
     }
 
     loadSceneViewState();
-  }, [sceneViewStateId, viewer]);
+  }, [sceneViewState, viewer]);
 
   return (
     <VertexViewer
@@ -80,6 +79,30 @@ function UnwrappedViewer({
           </Button>
         </ButtonGroup>
       </VertexViewerToolbar>
+      <VertexViewerDomRenderer>
+        {sceneViewState?.arrows?.map((a, i) => (
+          <VertexViewerDomElement
+            key={i}
+            position={a.position}
+            rotation={a.rotation}
+            billboardOff={true}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="red"
+              css={{ width: 144, height: 144 }}
+            >
+              <path
+                fillRule="evenodd"
+                d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </VertexViewerDomElement>
+        ))}
+      </VertexViewerDomRenderer>
     </VertexViewer>
   );
 }
