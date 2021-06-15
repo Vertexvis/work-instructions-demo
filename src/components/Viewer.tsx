@@ -14,6 +14,7 @@ import { StreamCredentials } from "../lib/env";
 
 interface ViewerProps extends ViewerJSX.VertexViewer {
   readonly credentials: StreamCredentials;
+  readonly sceneViewStateId?: string;
   readonly viewer: React.MutableRefObject<HTMLVertexViewerElement | null>;
 }
 
@@ -27,6 +28,7 @@ export const Viewer = onTap(UnwrappedViewer);
 
 function UnwrappedViewer({
   credentials,
+  sceneViewStateId,
   viewer,
   ...props
 }: ViewerProps): JSX.Element {
@@ -38,6 +40,24 @@ function UnwrappedViewer({
       .viewAll()
       .render({ animation: { milliseconds: AnimationDurationMs } });
   }
+
+  React.useEffect(() => {
+    async function loadSceneViewState(): Promise<void> {
+      console.log(
+        "loadSceneViewState",
+        viewer.current == null,
+        sceneViewStateId
+      );
+      if (viewer.current == null || !sceneViewStateId) return;
+
+      await (
+        await viewer.current.scene()
+      ).applySceneViewState(sceneViewStateId);
+      console.log("Finished loading", sceneViewStateId);
+    }
+
+    loadSceneViewState();
+  }, [sceneViewStateId, viewer]);
 
   return (
     <VertexViewer

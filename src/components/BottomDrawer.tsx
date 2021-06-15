@@ -17,10 +17,10 @@ interface Props {
   readonly onSelect: (sceneViewId: string) => void;
 }
 
+// Temporary until this revert is published, https://github.com/mui-org/material-ui/pull/26310
 const ChevronLeft = dynamic(() => import("@material-ui/icons/ChevronLeft"), {
   ssr: false,
 });
-
 const ChevronRight = dynamic(() => import("@material-ui/icons/ChevronRight"), {
   ssr: false,
 });
@@ -34,14 +34,14 @@ const Drawer = styled((props) => (
 });
 
 export function BottomDrawer({ onSelect }: Props): JSX.Element {
-  const [selected, setSelected] = React.useState<string>(
-    "87ace158-ffec-4d3a-bc9b-d3689798edf2"
-  );
+  const [selected, setSelected] = React.useState<string | undefined>(undefined);
+  const step =
+    selected && sceneViewStates[selected] ? sceneViewStates[selected].step : 1;
 
   return (
     <Drawer>
       <Typography align="center" sx={{ my: 1 }}>
-        {`Step ${sceneViewStates[selected].step} of 3`}
+        {`Step ${step} of 3`}
       </Typography>
       <Box
         sx={{ alignItems: "center", display: "flex", justifyContent: "center" }}
@@ -51,7 +51,10 @@ export function BottomDrawer({ onSelect }: Props): JSX.Element {
         </Fab>
         <ToggleButtonGroup
           exclusive
-          onChange={(_e: React.MouseEvent, sel: string) => setSelected(sel)}
+          onChange={(_e: React.MouseEvent, sel: string) => {
+            setSelected(sel);
+            onSelect(sel);
+          }}
           value={selected}
         >
           {Object.keys(sceneViewStates).map((k) => (
@@ -59,7 +62,7 @@ export function BottomDrawer({ onSelect }: Props): JSX.Element {
               <img
                 width={180}
                 key={k}
-                src={`/${k}.jpg`}
+                src={`/${k}.png`}
                 alt={sceneViewStates[k].name}
               />
             </ToggleButton>

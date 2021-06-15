@@ -21,7 +21,6 @@ export default async function create(
   if (!req.body) return errorRes("Body required.", res);
 
   const b: Body = JSON.parse(req.body);
-  console.log(b);
   if (!b.name || !b.sceneViewId) return errorRes("Invalid body.", res);
 
   try {
@@ -57,7 +56,7 @@ export default async function create(
       verbose: true,
     });
 
-    const out = `${svsRes.data.id}.jpg`;
+    const out = `${svsRes.data.id}.png`;
     renderRes.data.pipe(createWriteStream(out));
     await createFile(renderRes.data, out);
     return res.status(200).json({ message: "OK" });

@@ -1,6 +1,6 @@
 import React from "react";
-import { BottomDrawer } from "../components/BottomDrawer";
 
+import { BottomDrawer } from "../components/BottomDrawer";
 import { Header } from "../components/Header";
 import { Layout } from "../components/Layout";
 import { Viewer } from "../components/Viewer";
@@ -13,6 +13,9 @@ export default function Home(): JSX.Element {
   const [sceneViewId, setSceneViewId] = React.useState<string | undefined>(
     undefined
   );
+  const [sceneViewStateId, setSceneViewStateId] = React.useState<
+    string | undefined
+  >(undefined);
 
   async function onSceneReady() {
     const v = viewer.ref.current;
@@ -21,27 +24,29 @@ export default function Home(): JSX.Element {
     const scene = await v.scene();
     if (scene == null) return;
 
-    console.log("sceneViewId", scene.sceneViewId);
+    console.debug("sceneViewId", scene.sceneViewId);
     setSceneViewId(scene.sceneViewId);
-    await initialize({ viewer: v });
+    // await initialize({ viewer: v });
   }
 
   async function createSvs(name: string): Promise<void> {
-    // console.log("sceneViewId", name, sceneViewId);
-    console.log(
-      await (
-        await fetch(`http://localhost:3000/api/scene-view-states`, {
-          method: "POST",
-          body: JSON.stringify({ name, sceneViewId }),
-        })
-      ).json()
-    );
+    console.debug("createSvs", name, sceneViewId);
+    // await (
+    //   await fetch(`http://localhost:3000/api/scene-view-states`, {
+    //     method: "POST",
+    //     body: JSON.stringify({ name, sceneViewId }),
+    //   })
+    // ).json()
   }
 
   return (
     <Layout
       bottomDrawer={
-        <BottomDrawer onSelect={(svId: string) => console.log(svId)} />
+        <BottomDrawer
+          onSelect={(svId: string) => {
+            setSceneViewStateId(svId);
+          }}
+        />
       }
       header={<Header onCreateSceneViewState={createSvs} />}
       main={
@@ -53,6 +58,7 @@ export default function Home(): JSX.Element {
             onSelect={async (detail, hit) => {
               await handleHit({ detail, hit, viewer: viewer.ref.current });
             }}
+            sceneViewStateId={sceneViewStateId}
             streamAttributes={{
               experimentalGhosting: {
                 enabled: { value: true },
