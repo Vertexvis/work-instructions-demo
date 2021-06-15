@@ -783,9 +783,9 @@
     p-limit "^3.1"
 
 "@vertexvis/frame-streaming-protos@^0.5.5":
-  version "0.5.7"
-  resolved "https://registry.yarnpkg.com/@vertexvis/frame-streaming-protos/-/frame-streaming-protos-0.5.7.tgz#6eeee94747dce7021afa5490c900ae43bd09e525"
-  integrity sha512-FL+n6bYd4ZXbxAepwOo6rC1ekWB4k4hRq1ZFBndEMjhJ70QyVDMeGVFtrzG23v6jAWTGtYpz+g82EOjY7VXBAg==
+  version "0.5.9"
+  resolved "https://registry.yarnpkg.com/@vertexvis/frame-streaming-protos/-/frame-streaming-protos-0.5.9.tgz#d1e3f6dd3ec0b4462105ef0c3dde7b32d5be5f20"
+  integrity sha512-IvvCiteOD8BDw3QP6F0PWykQcCBO0RMexeUzbBQS/hFHlqyKgUfj5nCwmKCIsqo9+QBSnUr+MzVp7EVPLYc/UA==
 
 "@vertexvis/geometry@^0.9.28-canary.7":
   version "0.9.28-canary.7"

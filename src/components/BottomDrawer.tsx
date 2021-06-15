@@ -8,12 +8,7 @@ import {
 } from "@material-ui/core";
 import { getDrawerUtilityClass } from "@material-ui/core/Drawer";
 import { styled } from "@material-ui/core/styles";
-import {
-  ChevronLeft,
-  ChevronRight,
-  PlayArrow,
-  Refresh,
-} from "@material-ui/icons";
+import { ChevronLeft, ChevronRight, Refresh } from "@material-ui/icons";
 import React from "react";
 
 import { SceneViewState, SceneViewStates } from "../lib/scene-items";
