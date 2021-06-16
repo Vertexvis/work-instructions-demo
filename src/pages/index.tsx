@@ -45,7 +45,7 @@ export default function Home(): JSX.Element {
   // }
 
   async function onSceneViewStateSelected(svs?: SceneViewState): Promise<void> {
-    if (!ready || !svs) return;
+    if (!ready || !svs || svs.id === sceneViewState?.id) return;
 
     setReady(false);
     function onComplete() {
