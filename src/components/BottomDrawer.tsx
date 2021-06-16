@@ -23,21 +23,15 @@ interface Props {
 
 const ButtonMargin = 5;
 
-const Drawer = styled((props) => (
-  <MuiDrawer anchor="bottom" variant="permanent" {...props} />
-))(() => {
-  return {
-    [`& .${drawerClasses.paper}`]: { height: BottomDrawerHeight },
-  };
-});
+const Drawer = styled(MuiDrawer)(() => ({
+  [`& .${drawerClasses.paper}`]: { height: BottomDrawerHeight },
+}));
 
-const StepConnector = styled((props) => <MuiStepConnector {...props} />)(() => {
-  return {
-    [`& .${stepConnectorClasses.line}`]: {
-      borderWidth: 0,
-    },
-  };
-});
+const StepConnector = styled(MuiStepConnector)(() => ({
+  [`& .${stepConnectorClasses.line}`]: {
+    borderWidth: 0,
+  },
+}));
 
 export function BottomDrawer({ onSelect, ready }: Props): JSX.Element {
   const stepIds = Object.keys(SceneViewStates);
@@ -111,7 +105,7 @@ export function BottomDrawer({ onSelect, ready }: Props): JSX.Element {
   }
 
   return (
-    <Drawer>
+    <Drawer anchor="bottom" variant="permanent">
       <Box
         sx={{
           alignItems: "center",

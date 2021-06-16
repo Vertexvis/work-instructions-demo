@@ -5,7 +5,7 @@ import React from "react";
 export const BottomDrawerHeight = 270; // If not provided, set to 0
 const DenseToolbarHeight = 0; // If provided, set to 48
 export const LeftDrawerWidth = 0; // If mini-drawer provided, set to 76
-export const RightDrawerWidth = 0; // If not provided, set to 0
+export const RightDrawerWidth = 320; // If not provided, set to 0
 
 interface Props {
   readonly bottomDrawer?: React.ReactNode;
@@ -14,27 +14,54 @@ interface Props {
   readonly leftDrawer?: React.ReactNode;
   readonly main: React.ReactNode;
   readonly rightDrawer?: React.ReactNode;
+  readonly rightDrawerOpen?: boolean;
 }
 
-const AppBar = styled((props) => (
-  <MuiAppBar position="fixed" elevation={1} color="default" {...props} />
-))(({ theme }) => ({
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== "rightDrawerOpen",
+})<{ rightDrawerOpen?: boolean }>(({ theme, rightDrawerOpen }) => ({
   marginLeft: LeftDrawerWidth,
-  marginRight: RightDrawerWidth,
-  width: `calc(100% - ${LeftDrawerWidth + RightDrawerWidth}px)`,
-  zIndex: theme.zIndex.drawer + 1,
+  transition: theme.transitions.create(["margin", "width"], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  width: `100%`,
   [theme.breakpoints.down("md")]: {
     margin: 0,
     width: `100%`,
   },
+  ...(rightDrawerOpen && {
+    width: `calc(100% - ${LeftDrawerWidth + RightDrawerWidth}px)`,
+    marginRight: RightDrawerWidth,
+    transition: theme.transitions.create(["margin", "width"], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
 }));
 
-const Content = styled((props) => <main {...props} />)(({ theme }) => ({
+const Main = styled("main", {
+  shouldForwardProp: (prop) => prop !== "rightDrawerOpen",
+})<{
+  rightDrawerOpen?: boolean;
+}>(({ theme, rightDrawerOpen }) => ({
+  flexGrow: 1,
   height: `calc(100% - ${BottomDrawerHeight + DenseToolbarHeight}px)`,
+  transition: theme.transitions.create("margin", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
   width: `calc(100% - ${LeftDrawerWidth + RightDrawerWidth}px)`,
   [theme.breakpoints.down("md")]: {
     width: `100%`,
   },
+  ...(rightDrawerOpen && {
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    width: `calc(100% - ${LeftDrawerWidth + RightDrawerWidth}px)`,
+  }),
 }));
 
 export function Layout({
@@ -44,19 +71,25 @@ export function Layout({
   leftDrawer,
   main,
   rightDrawer,
+  rightDrawerOpen,
 }: Props): JSX.Element {
   return (
     <Box height="100vh" display="flex">
       {header && (
-        <AppBar>
+        <AppBar
+          color="default"
+          elevation={1}
+          position="fixed"
+          rightDrawerOpen={rightDrawerOpen}
+        >
           <Toolbar variant="dense">{header}</Toolbar>
         </AppBar>
       )}
       {leftDrawer ?? <></>}
-      <Content>
-        <Box minHeight={`${DenseToolbarHeight}px`} />
+      <Main rightDrawerOpen={rightDrawerOpen}>
+        {header && <Box minHeight={`${DenseToolbarHeight}px`} />}
         {main}
-      </Content>
+      </Main>
       {rightDrawer ?? <></>}
       {children ?? <></>}
       {bottomDrawer ?? <></>}

@@ -1,4 +1,10 @@
 /* @jsx jsx */ /** @jsxRuntime classic */ import { jsx } from "@emotion/react";
+import { SpeedDial, SpeedDialAction } from "@material-ui/core";
+import {
+  ReportProblemOutlined,
+  Settings,
+  TextSnippetOutlined,
+} from "@material-ui/icons";
 import { vertexvis } from "@vertexvis/frame-streaming-protos";
 import { TapEventDetails } from "@vertexvis/viewer";
 import {
@@ -6,14 +12,17 @@ import {
   VertexViewer,
   VertexViewerDomElement,
   VertexViewerDomRenderer,
+  VertexViewerToolbar,
 } from "@vertexvis/viewer-react";
 import React from "react";
 
 import { StreamCredentials } from "../lib/env";
 import { loadSceneViewState, SceneViewState } from "../lib/scene-items";
+import { Stations } from "./Stations";
 
 interface ViewerProps extends ViewerJSX.VertexViewer {
   readonly credentials: StreamCredentials;
+  readonly onClick: (button: ToolButtons) => void;
   readonly sceneViewState?: SceneViewState;
   readonly viewer: React.MutableRefObject<HTMLVertexViewerElement | null>;
 }
@@ -26,8 +35,11 @@ type HOCViewerProps = React.RefAttributes<HTMLVertexViewerElement>;
 
 export const Viewer = onTap(UnwrappedViewer);
 
+export type ToolButtons = "settings" | "instructions" | "defect";
+
 function UnwrappedViewer({
   credentials,
+  onClick,
   sceneViewState,
   viewer,
   ...props
@@ -37,6 +49,27 @@ function UnwrappedViewer({
   // const src = sceneViewState?.id
   //   ? `${urn}?scene-view-state=${sceneViewState.id}`
   //   : urn;
+  const actions: {
+    icon: React.ReactNode;
+    name: string;
+    onClick: () => void;
+  }[] = [
+    {
+      icon: <Settings />,
+      name: "Settings",
+      onClick: () => onClick("settings"),
+    },
+    {
+      icon: <TextSnippetOutlined />,
+      name: "Instructions",
+      onClick: () => onClick("instructions"),
+    },
+    {
+      icon: <ReportProblemOutlined />,
+      name: "Log defect",
+      onClick: () => onClick("defect"),
+    },
+  ];
 
   React.useEffect(() => {
     loadSceneViewState({ id: sceneViewState?.id, viewer: viewer.current });
@@ -50,6 +83,27 @@ function UnwrappedViewer({
       src={src}
       {...props}
     >
+      <VertexViewerToolbar placement="top-left">
+        <Stations />
+      </VertexViewerToolbar>
+      <VertexViewerToolbar placement="top-right">
+        <SpeedDial
+          ariaLabel="Toolbar"
+          direction="down"
+          hidden={true}
+          open={true}
+          sx={{ mt: -2 }}
+        >
+          {actions.map((action) => (
+            <SpeedDialAction
+              key={action.name}
+              icon={action.icon}
+              tooltipTitle={action.name}
+              onClick={() => action.onClick()}
+            />
+          ))}
+        </SpeedDial>
+      </VertexViewerToolbar>
       <VertexViewerDomRenderer>
         {sceneViewState?.arrows?.map((a, i) => (
           <VertexViewerDomElement

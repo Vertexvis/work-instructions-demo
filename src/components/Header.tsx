@@ -14,7 +14,6 @@ export function Header({ onCreateSceneViewState }: Props): JSX.Element {
         <TextField
           id="svs-name"
           label="SVS name"
-          margin="dense"
           onChange={(e) => setName(e.target.value)}
           sx={{ mr: 2 }}
           value={name}
