@@ -4,6 +4,7 @@ import {
   ReportProblemOutlined,
   Settings,
   TextSnippetOutlined,
+  ZoomOutMap,
 } from "@material-ui/icons";
 import { vertexvis } from "@vertexvis/frame-streaming-protos";
 import { TapEventDetails } from "@vertexvis/viewer";
@@ -27,6 +28,12 @@ interface ViewerProps extends ViewerJSX.VertexViewer {
   readonly viewer: React.MutableRefObject<HTMLVertexViewerElement | null>;
 }
 
+interface Action {
+  icon: React.ReactNode;
+  name: string;
+  onClick: () => void;
+}
+
 type ViewerComponentType = React.ComponentType<
   ViewerProps & React.RefAttributes<HTMLVertexViewerElement>
 >;
@@ -44,16 +51,13 @@ function UnwrappedViewer({
   viewer,
   ...props
 }: ViewerProps): JSX.Element {
+  const AnimationDurationMs = 1500;
   const urn = `urn:vertexvis:stream-key:${credentials.streamKey}`;
   const src = urn;
   // const src = sceneViewState?.id
   //   ? `${urn}?scene-view-state=${sceneViewState.id}`
   //   : urn;
-  const actions: {
-    icon: React.ReactNode;
-    name: string;
-    onClick: () => void;
-  }[] = [
+  const workInstructionActions: Action[] = [
     {
       icon: <Settings />,
       name: "Settings",
@@ -71,9 +75,24 @@ function UnwrappedViewer({
     },
   ];
 
+  const viewActions: Action[] = [
+    {
+      icon: <ZoomOutMap />,
+      name: "Fit all",
+      onClick: () => fitAll(),
+    },
+  ];
+
   React.useEffect(() => {
     loadSceneViewState({ id: sceneViewState?.id, viewer: viewer.current });
   }, [sceneViewState, viewer]);
+
+  async function fitAll(): Promise<void> {
+    (await viewer.current?.scene())
+      ?.camera()
+      .viewAll()
+      .render({ animation: { milliseconds: AnimationDurationMs } });
+  }
 
   return (
     <VertexViewer
@@ -88,13 +107,30 @@ function UnwrappedViewer({
       </VertexViewerToolbar>
       <VertexViewerToolbar placement="top-right">
         <SpeedDial
-          ariaLabel="Toolbar"
+          ariaLabel="Work instruction toolbar"
           direction="down"
           hidden={true}
           open={true}
           sx={{ mt: -2 }}
         >
-          {actions.map((action) => (
+          {workInstructionActions.map((action) => (
+            <SpeedDialAction
+              key={action.name}
+              icon={action.icon}
+              tooltipTitle={action.name}
+              onClick={() => action.onClick()}
+            />
+          ))}
+        </SpeedDial>
+      </VertexViewerToolbar>
+      <VertexViewerToolbar placement="bottom-right">
+        <SpeedDial
+          ariaLabel="Viewer toolbar"
+          hidden={true}
+          open={true}
+          sx={{ mb: -2 }}
+        >
+          {viewActions.map((action) => (
             <SpeedDialAction
               key={action.name}
               icon={action.icon}

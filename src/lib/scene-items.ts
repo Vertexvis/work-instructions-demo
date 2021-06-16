@@ -14,6 +14,8 @@ const ActivePartColor = {
   ...ColorMaterial.fromHex("F59E0B"),
 };
 
+const AnimationDurationMs = 500;
+
 interface Req {
   readonly viewer: Components.VertexViewer | null;
 }
@@ -127,7 +129,7 @@ export async function flyTo({
   return scene
     .camera()
     .flyTo({ camera })
-    .render({ animation: { milliseconds: 500 } });
+    .render({ animation: { milliseconds: AnimationDurationMs } });
 }
 
 export async function loadSceneViewState({
@@ -188,7 +190,7 @@ export async function initialize({ viewer }: Req): Promise<void> {
   await scene
     .camera()
     .flyTo({ camera: LugNutCam })
-    .render({ animation: { milliseconds: 500 } });
+    .render({ animation: { milliseconds: AnimationDurationMs } });
 
   await scene
     .items((op) => {
