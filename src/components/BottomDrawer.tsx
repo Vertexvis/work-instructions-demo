@@ -95,10 +95,10 @@ export function BottomDrawer({ onSelect, ready }: Props): JSX.Element {
 
   function getRightButton() {
     return activeStep >= stepIds.length - 1 ? (
-      <>
+      <Box sx={{ alignItems: "center", display: "flex" }}>
         <Reset />
         <Done />
-      </>
+      </Box>
     ) : (
       <Next />
     );
