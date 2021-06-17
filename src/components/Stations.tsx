@@ -9,6 +9,7 @@ export function Stations({ sx }: { sx?: SxProps<Theme> }): JSX.Element {
   return (
     <Select
       onChange={(e) => setStation(e.target.value)}
+      size="small"
       sx={sx}
       value={station}
     >

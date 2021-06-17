@@ -29,11 +29,12 @@ export function DefectDialog({ open, onClose, onConfirm }: Props): JSX.Element {
       <DialogContent>
         <Grid container spacing={3} sx={{ mt: 0 }}>
           <Grid item xs={12} sm={8}>
-            <TextField fullWidth label="Title" required />
+            <TextField fullWidth label="Title" required size="small" />
           </Grid>
           <Grid item xs={12} sm={4}>
             <Select
               onChange={(e) => setIssueType(e.target.value)}
+              size="small"
               sx={{ width: "100%" }}
               value={issueType}
             >
@@ -45,11 +46,12 @@ export function DefectDialog({ open, onClose, onConfirm }: Props): JSX.Element {
             <Stations sx={{ width: "100%" }} />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <TextField fullWidth label="Location" />
+            <TextField fullWidth label="Location" size="small" />
           </Grid>
           <Grid item xs={12} sm={4}>
             <Select
               onChange={(e) => setSeverity(e.target.value)}
+              size="small"
               sx={{ width: "100%" }}
               value={severity}
             >
@@ -59,10 +61,16 @@ export function DefectDialog({ open, onClose, onConfirm }: Props): JSX.Element {
             </Select>
           </Grid>
           <Grid item xs={12} sm={12}>
-            <TextField fullWidth label="Part ID" required />
+            <TextField fullWidth label="Part ID" required size="small" />
           </Grid>
           <Grid item xs={12} sm={12}>
-            <TextField fullWidth label="Description" multiline minRows={4} />
+            <TextField
+              fullWidth
+              label="Description"
+              multiline
+              minRows={4}
+              size="small"
+            />
           </Grid>
         </Grid>
       </DialogContent>
