@@ -7,11 +7,16 @@ import { createWriteStream } from "fs";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import { SceneId } from "../../lib/env";
-import { getClient, makeCall } from "../../lib/vertex-api";
+import {
+  createFile,
+  errorRes,
+  getClient,
+  makeCall,
+} from "../../lib/vertex-api";
 
 interface Body {
-  name: string;
-  sceneViewId: string;
+  readonly name: string;
+  readonly sceneViewId: string;
 }
 
 export default async function create(
@@ -61,24 +66,7 @@ export default async function create(
     await createFile(renderRes.data, out);
     return res.status(200).json({ message: "OK" });
   } catch (error) {
+    console.error(error);
     return errorRes("Unknown error.", res);
   }
-}
-
-function errorRes(
-  message: string,
-  res: NextApiResponse<{ message: string }>
-): Promise<void> {
-  return Promise.resolve(res.status(400).json({ message }));
-}
-
-function createFile(
-  stream: NodeJS.ReadableStream,
-  path: string
-): Promise<void> {
-  return new Promise((resolve) => {
-    const ws = createWriteStream(path);
-    stream.pipe(ws);
-    ws.on("finish", resolve);
-  });
 }

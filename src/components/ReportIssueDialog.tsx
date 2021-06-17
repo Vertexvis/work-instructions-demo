@@ -17,14 +17,14 @@ interface Props {
   readonly open: boolean;
   readonly onClose: VoidFunction;
   readonly onConfirm: () => void;
-  readonly partId?: string;
+  readonly partRevisionId?: string;
 }
 
 export function ReportIssueDialog({
   open,
   onClose,
   onConfirm,
-  partId,
+  partRevisionId: partId,
 }: Props): JSX.Element {
   const [issueType, setIssueType] = React.useState(1);
   const [severity, setSeverity] = React.useState(2);
@@ -70,7 +70,7 @@ export function ReportIssueDialog({
             <TextField
               defaultValue={partId}
               fullWidth
-              label="Part ID"
+              label="Part Revision ID"
               required
               size="small"
             />

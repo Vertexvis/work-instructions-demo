@@ -1,8 +1,9 @@
 import { Failure, isFailure, VertexClient } from "@vertexvis/api-client-node";
 import { AxiosResponse } from "axios";
+import { createWriteStream } from "fs";
 import type { NextApiResponse } from "next";
 
-import { Env } from "./env";
+import { Config } from "./env";
 
 export async function makeCallAndReturn<T>(
   res: NextApiResponse<T | Failure>,
@@ -35,9 +36,9 @@ export async function getClient(): Promise<VertexClient> {
 
   Client = await VertexClient.build({
     basePath:
-      Env === "platprod"
+      Config.vertexEnv === "platprod"
         ? "https://platform.vertexvis.com"
-        : `https://platform.${Env}.vertexvis.io`,
+        : `https://platform.${Config.vertexEnv}.vertexvis.io`,
     client: {
       id: process.env.VERTEX_CLIENT_ID ?? "",
       secret: process.env.VERTEX_CLIENT_SECRET ?? "",
@@ -45,4 +46,22 @@ export async function getClient(): Promise<VertexClient> {
   });
 
   return Client;
+}
+
+export function errorRes(
+  message: string,
+  res: NextApiResponse<{ message: string }>
+): Promise<void> {
+  return Promise.resolve(res.status(400).json({ message }));
+}
+
+export function createFile(
+  stream: NodeJS.ReadableStream,
+  path: string
+): Promise<void> {
+  return new Promise((resolve) => {
+    const ws = createWriteStream(path);
+    stream.pipe(ws);
+    ws.on("finish", resolve);
+  });
 }

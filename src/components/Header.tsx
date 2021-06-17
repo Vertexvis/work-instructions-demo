@@ -1,42 +1,40 @@
-import { Box, Button, Link, TextField } from "@material-ui/core";
+import { Box, Button, TextField } from "@material-ui/core";
 import React from "react";
 
 interface Props {
-  onCreateSceneViewState: (name: string) => void;
+  readonly onCreateSceneViewState: (name: string) => void;
+  readonly onRenderPartRevision: () => void;
 }
 
-export function Header({ onCreateSceneViewState }: Props): JSX.Element {
+export function Header({
+  onCreateSceneViewState,
+  onRenderPartRevision,
+}: Props): JSX.Element {
   const [name, setName] = React.useState<string>("");
 
   return (
-    <Box display="flex" justifyContent="space-between" width="100%">
-      <Box display="flex">
-        <TextField
-          id="svs-name"
-          label="SVS name"
-          onChange={(e) => setName(e.target.value)}
-          sx={{ mr: 2 }}
-          value={name}
-        />
-        <Button
-          onClick={() => {
-            if (!name) return;
+    <Box display="flex" width="100%">
+      <TextField
+        id="svs-name"
+        label="Name"
+        onChange={(e) => setName(e.target.value)}
+        size="small"
+        sx={{ mr: 2 }}
+        value={name}
+      />
+      <Button
+        onClick={() => {
+          if (!name) return;
 
-            onCreateSceneViewState(name);
-            setName("");
-          }}
-        >
-          Create SVS
-        </Button>
-      </Box>
-      <Link
-        href="https://github.com/Vertexvis/work-instructions-demo"
-        rel="noreferrer"
-        style={{ alignSelf: "center" }}
-        target="_blank"
+          onCreateSceneViewState(name);
+        }}
+        sx={{ mr: 2 }}
       >
-        View on GitHub
-      </Link>
+        Create Snapshot
+      </Button>
+      <Button onClick={() => onRenderPartRevision()} sx={{ mr: 2 }}>
+        Render Selected Part
+      </Button>
     </Box>
   );
 }

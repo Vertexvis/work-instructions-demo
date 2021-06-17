@@ -1,9 +1,19 @@
+import { Quaternion, Vector3 } from "@vertexvis/geometry";
 import { FrameCamera } from "@vertexvis/viewer/dist/types/lib/types";
-import { Matrix4x4, Quaternion, Vector3 as Math3dVector3 } from "math3d";
+import {
+  Matrix4x4,
+  Quaternion as Math3dQuaternion,
+  Vector3 as Math3dVector3,
+} from "math3d";
 
 interface Arrow {
-  position: { x: number; y: number; z: number };
-  rotation: { w: number; x: number; y: number; z: number };
+  readonly position: Vector3.Vector3;
+  readonly rotation: Quaternion.Quaternion;
+}
+
+interface Part {
+  readonly id: string;
+  readonly quantity: number;
 }
 
 export interface InstructionStep {
@@ -11,11 +21,12 @@ export interface InstructionStep {
   readonly camera: FrameCamera.FrameCamera;
   readonly instructions: React.ReactNode[];
   readonly name: string;
+  readonly parts: Part[];
   readonly sceneViewStateId: string;
   readonly step: number;
 }
 
-export const RimCam = {
+export const RimCam: FrameCamera.FrameCamera = {
   position: {
     x: -1345.920166015625,
     y: 2363.62158203125,
@@ -33,7 +44,7 @@ export const RimCam = {
   },
 };
 
-export const LugNutCam = {
+export const LugNutCam: FrameCamera.FrameCamera = {
   ...RimCam,
   position: {
     ...RimCam.position,
@@ -79,6 +90,7 @@ export const InstructionSteps: Record<string, InstructionStep> = {
       </>,
     ],
     name: "Rim",
+    parts: [{ id: "2e3893ff-3698-423d-a558-9580081f1068", quantity: 1 }],
     sceneViewStateId: "dbf5540f-56e3-4434-95cb-ae51d8725f06",
     step: 1,
   },
@@ -86,6 +98,7 @@ export const InstructionSteps: Record<string, InstructionStep> = {
     camera: RimCam,
     instructions: [],
     name: "Tire onto rim",
+    parts: [{ id: "ebeb9f9e-5f23-4541-86b1-e7318aed3350", quantity: 1 }],
     sceneViewStateId: "e57ad094-0103-487e-b377-eced7619991e",
     step: 2,
   },
@@ -97,8 +110,17 @@ export const InstructionSteps: Record<string, InstructionStep> = {
       },
     ],
     camera: LugNutCam,
-    instructions: [],
+    instructions: [
+      <>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam cursus
+        aliquam odio ut accumsan. Sed vestibulum convallis risus vel mollis.
+        Mauris bibendum leo sed orci imperdiet dapibus non in metus. Vivamus a
+        nisl faucibus, dignissim mauris eget, ultrices quam. Class aptent taciti
+        sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+      </>,
+    ],
     name: "Lug nuts into rim",
+    parts: [{ id: "23fb3b5e-a8e6-4a94-b03d-da84fbcba3fb", quantity: 5 }],
     sceneViewStateId: "58b7c10d-49c6-4baa-8b5e-f2f3d738597b",
     step: 3,
   },
@@ -107,7 +129,7 @@ export const InstructionSteps: Record<string, InstructionStep> = {
 function toMatrix(posX: number, posY: number): number[] {
   return Matrix4x4.TRS(
     new Math3dVector3(posX, posY, -350),
-    Quaternion.Euler(-180, 0, -43.58595040792774),
+    Math3dQuaternion.Euler(-180, 0, -43.58595040792774),
     1
   ).values;
 }

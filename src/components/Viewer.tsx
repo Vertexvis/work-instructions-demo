@@ -1,9 +1,10 @@
 /* @jsx jsx */ /** @jsxRuntime classic */ import { jsx } from "@emotion/react";
-import { SpeedDial, SpeedDialAction } from "@material-ui/core";
+import { Box, Link, SpeedDial, SpeedDialAction } from "@material-ui/core";
 import {
   ReportProblemOutlined,
   Settings,
   TextSnippetOutlined,
+  WidgetsOutlined,
   ZoomOutMap,
 } from "@material-ui/icons";
 import { vertexvis } from "@vertexvis/frame-streaming-protos";
@@ -30,9 +31,9 @@ interface ViewerProps extends ViewerJSX.VertexViewer {
 }
 
 interface Action {
-  icon: React.ReactNode;
-  name: string;
-  onClick: () => void;
+  readonly icon: React.ReactNode;
+  readonly name: string;
+  readonly onClick: () => void;
 }
 
 type ViewerComponentType = React.ComponentType<
@@ -43,7 +44,7 @@ type HOCViewerProps = React.RefAttributes<HTMLVertexViewerElement>;
 
 export const Viewer = onTap(UnwrappedViewer);
 
-export type ToolButtons = "settings" | "instructions" | "issue";
+export type ToolButtons = "settings" | "instructions" | "parts" | "issue";
 
 function UnwrappedViewer({
   credentials,
@@ -53,11 +54,7 @@ function UnwrappedViewer({
   ...props
 }: ViewerProps): JSX.Element {
   const AnimationDurationMs = 1500;
-  const urn = `urn:vertexvis:stream-key:${credentials.streamKey}`;
-  const src = urn;
-  // const src = sceneViewState?.id
-  //   ? `${urn}?scene-view-state=${sceneViewState.id}`
-  //   : urn;
+  const src = `urn:vertexvis:stream-key:${credentials.streamKey}`;
   const instructionActions: Action[] = [
     {
       icon: <Settings />,
@@ -68,6 +65,11 @@ function UnwrappedViewer({
       icon: <TextSnippetOutlined />,
       name: "Instructions",
       onClick: () => onClick("instructions"),
+    },
+    {
+      icon: <WidgetsOutlined />,
+      name: "Parts List",
+      onClick: () => onClick("parts"),
     },
     {
       icon: <ReportProblemOutlined />,
@@ -107,7 +109,18 @@ function UnwrappedViewer({
       {...props}
     >
       <VertexViewerToolbar placement="top-left">
-        <Stations sx={{ ml: 3, mt: 3 }} />
+        <Box sx={{ alignItems: "center", display: "flex", ml: 3, mt: 3 }}>
+          <Stations sx={{ mr: 2 }} />
+          <Link
+            href="https://github.com/Vertexvis/work-instructions-demo"
+            rel="noreferrer"
+            style={{ alignSelf: "center" }}
+            // sx={{ height: "100%", alignSelf: "center" }}
+            target="_blank"
+          >
+            View on GitHub
+          </Link>
+        </Box>
       </VertexViewerToolbar>
       <VertexViewerToolbar placement="top-right">
         <SpeedDial

@@ -3,20 +3,38 @@ import { delay } from "@vertexvis/api-client-node";
 import React from "react";
 
 import { BottomDrawer } from "../components/BottomDrawer";
+import { Header } from "../components/Header";
 import { Layout } from "../components/Layout";
 import { ReportIssueDialog } from "../components/ReportIssueDialog";
 import { Content, RightDrawer } from "../components/RightDrawer";
 import { Viewer } from "../components/Viewer";
-import { Credentials, Env } from "../lib/env";
+import {
+  createSceneViewState,
+  initializeScene,
+  renderPartRevision,
+} from "../lib/authoring";
+import { Config, Configuration, Credentials } from "../lib/env";
 import { flyTo, selectByHit as onSelect } from "../lib/scene-items";
 import { useViewer } from "../lib/viewer";
 import { InstructionStep } from "../lib/work-instructions";
 
-export default function Home(): JSX.Element {
+export const getServerSideProps = (): Record<string, Configuration> => {
+  return {
+    props: {
+      authoring: Config.authoring,
+      vertexEnv: Config.vertexEnv,
+    },
+  };
+};
+
+export default function Home({
+  authoring,
+  vertexEnv,
+}: Configuration): JSX.Element {
   const viewer = useViewer();
-  // const [sceneViewId, setSceneViewId] = React.useState<string | undefined>(
-  //   undefined
-  // );
+  const [sceneViewId, setSceneViewId] = React.useState<string | undefined>(
+    undefined
+  );
   const [ready, setReady] = React.useState(false);
   const [rightDrawerContent, setRightDrawerContent] = React.useState<
     Content | undefined
@@ -24,7 +42,9 @@ export default function Home(): JSX.Element {
   const [ghosted, setGhosted] = React.useState(true);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [snackOpen, setSnackOpen] = React.useState(false);
-  const [selectedId, setSelectedId] = React.useState<string | undefined>();
+  const [selected, setSelected] = React.useState<{ partRevisionId?: string }>(
+    {}
+  );
   const [instructionStep, setInstructionStep] = React.useState<
     InstructionStep | undefined
   >();
@@ -38,18 +58,9 @@ export default function Home(): JSX.Element {
 
     console.debug("sceneViewId", scene.sceneViewId);
     setReady(true);
-    // setSceneViewId(scene.sceneViewId);
-    // await initialize({ viewer: v });
+    setSceneViewId(scene.sceneViewId);
+    if (authoring) await initializeScene({ viewer: v });
   }
-
-  // async function createSvs(name: string): Promise<void> {
-  //   await (
-  //     await fetch(`http://localhost:3000/api/scene-view-states`, {
-  //       method: "POST",
-  //       body: JSON.stringify({ name, sceneViewId }),
-  //     })
-  //   ).json();
-  // }
 
   async function onInstructionStepSelected(
     is?: InstructionStep
@@ -75,14 +86,29 @@ export default function Home(): JSX.Element {
       bottomDrawer={
         <BottomDrawer onSelect={onInstructionStepSelected} ready={ready} />
       }
-      // header={<Header onCreateSceneViewState={createSvs} />}
+      header={
+        authoring && (
+          <Header
+            onCreateSceneViewState={(name) =>
+              createSceneViewState({ name, sceneViewId })
+            }
+            onRenderPartRevision={() =>
+              renderPartRevision({ partRevisionId: selected.partRevisionId })
+            }
+          />
+        )
+      }
       main={
         viewer.isReady && (
           <Viewer
-            configEnv={Env}
+            configEnv={vertexEnv}
             credentials={Credentials}
             onClick={(button) => {
-              if (button === "settings" || button === "instructions") {
+              if (
+                button === "settings" ||
+                button === "instructions" ||
+                button === "parts"
+              ) {
                 setRightDrawerContent(button);
               } else if (button === "issue") {
                 setDialogOpen(true);
@@ -90,9 +116,9 @@ export default function Home(): JSX.Element {
             }}
             onSceneReady={onSceneReady}
             onSelect={async (detail, hit) => {
-              setSelectedId(
-                hit?.itemSuppliedId?.value ?? hit?.itemId?.hex ?? undefined
-              );
+              setSelected({
+                partRevisionId: hit?.partRevisionId?.hex ?? undefined,
+              });
               await onSelect({ detail, hit, viewer: viewer.ref.current });
             }}
             instructionStep={instructionStep}
@@ -123,7 +149,7 @@ export default function Home(): JSX.Element {
             setDialogOpen(false);
           }}
           open={dialogOpen}
-          partId={selectedId}
+          partRevisionId={selected.partRevisionId}
         />
       )}
       <Snackbar

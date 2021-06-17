@@ -3,20 +3,13 @@ import { ColorMaterial, Components, TapEventDetails } from "@vertexvis/viewer";
 import { CameraRenderResult } from "@vertexvis/viewer/dist/types/lib/scenes/cameraRenderResult";
 import { FrameCamera } from "@vertexvis/viewer/dist/types/lib/types";
 
-import { LugNutCam, SuppliedIdToTransform } from "./work-instructions";
-
-const SelectColor = {
+export const SelectColor = {
   ...ColorMaterial.create(255, 255, 0),
   glossiness: 4,
   specular: { r: 255, g: 255, b: 255, a: 0 },
 };
 
-const ActivePartColor = {
-  ...SelectColor,
-  ...ColorMaterial.fromHex("F59E0B"),
-};
-
-const AnimationDurationMs = 500;
+export const AnimationDurationMs = 500;
 
 interface Req {
   readonly viewer: Components.VertexViewer | null;
@@ -98,41 +91,4 @@ export async function selectByHit({
   } else {
     await scene.items((op) => op.where((q) => q.all()).deselect()).execute();
   }
-}
-
-export async function initialize({ viewer }: Req): Promise<void> {
-  if (viewer == null) return;
-
-  const scene = await viewer.scene();
-  if (scene == null) return;
-
-  await scene
-    .camera()
-    .flyTo({ camera: LugNutCam })
-    .render({ animation: { milliseconds: AnimationDurationMs } });
-
-  await scene
-    .items((op) => {
-      const idsQuery = op.where((q) =>
-        q.withSuppliedIds([
-          "108940", // 12x20 OZ HLT ET 3 SPOKE
-          "108950", // michelin sport cup 2 345-30zr20 on rim_(Default)
-        ])
-      );
-      return [
-        ...Object.keys(SuppliedIdToTransform).map((k) =>
-          op
-            .where((q) => q.withSuppliedId(k))
-            .show()
-            .transform(SuppliedIdToTransform[k])
-            .materialOverride(ActivePartColor)
-        ),
-        op.where((q) => q.all()).hide(),
-        idsQuery.show(),
-        // op
-        //   .where((q) => q.withSuppliedId("108940"))
-        //   .materialOverride(ActivePartColor),
-      ];
-    })
-    .execute();
 }

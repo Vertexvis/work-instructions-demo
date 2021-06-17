@@ -19,7 +19,7 @@ import {
   RightDrawerWidth,
 } from "./Layout";
 
-export type Content = "settings" | "instructions";
+export type Content = "settings" | "instructions" | "parts";
 
 interface Props {
   readonly content?: Content;
@@ -68,53 +68,12 @@ export function RightDrawer({
 }: Props): JSX.Element {
   if (content == null) return <></>;
 
-  function Instructions() {
-    function NoContent(): JSX.Element {
-      return instructionStep == null ? (
-        <Typography gutterBottom>No instruction steps active.</Typography>
-      ) : (
-        <Typography gutterBottom>No instructions provided.</Typography>
-      );
-    }
-
-    const stepNum = instructionStep?.step
-      ? `Step ${instructionStep.step} `
-      : "";
-
-    return (
-      <>
-        <Header onClose={onClose} title={`${stepNum}Instructions`} />
-        {instructionStep != null && instructionStep.instructions.length > 0 ? (
-          instructionStep?.instructions.map((t, i) => (
-            <Typography gutterBottom key={i}>
-              {`${i + 1}. `}
-              {t}
-            </Typography>
-          ))
-        ) : (
-          <NoContent />
-        )}
-      </>
-    );
-  }
-
-  function Settings() {
-    return (
-      <>
-        <Header onClose={onClose} title="Settings" />
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Switch
-                defaultChecked
-                onChange={(e) => settings.onGhostToggle(e.target.checked)}
-              />
-            }
-            label="Ghosted geometry"
-          />
-        </FormGroup>
-      </>
-    );
+  function Content() {
+    if (content === "settings")
+      return <Settings onClose={onClose} settings={settings} />;
+    if (content === "instructions")
+      return <Instructions onClose={onClose} step={instructionStep} />;
+    return <Parts onClose={onClose} step={instructionStep} />;
   }
 
   return (
@@ -125,8 +84,117 @@ export function RightDrawer({
       variant="persistent"
     >
       <Box sx={{ p: 1 }}>
-        {content === "settings" ? <Settings /> : <Instructions />}
+        <Content />
       </Box>
     </Drawer>
   );
+}
+
+function Instructions({
+  onClose,
+  step,
+}: {
+  readonly onClose: () => void;
+  readonly step?: InstructionStep;
+}) {
+  function NoContent(): JSX.Element {
+    return step == null ? (
+      <NoStepActive />
+    ) : (
+      <TypographyGutter>No instructions provided.</TypographyGutter>
+    );
+  }
+
+  const stepNum = step?.step ? `Step ${step.step} ` : "";
+  return (
+    <>
+      <Header onClose={onClose} title={`${stepNum}Instructions`} />
+      {step?.instructions != null && step.instructions.length > 0 ? (
+        step?.instructions.map((t, i) => (
+          <TypographyGutter key={i}>
+            {`${i + 1}. `}
+            {t}
+          </TypographyGutter>
+        ))
+      ) : (
+        <NoContent />
+      )}
+    </>
+  );
+}
+
+function Parts({
+  onClose,
+  step,
+}: {
+  readonly onClose: () => void;
+  readonly step?: InstructionStep;
+}) {
+  function NoContent(): JSX.Element {
+    return step == null ? (
+      <NoStepActive />
+    ) : (
+      <TypographyGutter>No parts provided.</TypographyGutter>
+    );
+  }
+
+  const stepNum = step?.step ? `Step ${step.step} ` : "";
+  return (
+    <>
+      <Header onClose={onClose} title={`${stepNum}Parts`} />
+      {step?.parts != null && step.parts.length > 0 ? (
+        step?.parts.map((p, i) => (
+          <Box
+            key={i}
+            sx={{
+              alignItems: "center",
+              display: "flex",
+            }}
+          >
+            <img
+              height={120}
+              src={`/${p.id}.png`}
+              alt={`Part revision ${p.id}`}
+            />
+            <TypographyGutter>{`x ${p.quantity}`}</TypographyGutter>
+          </Box>
+        ))
+      ) : (
+        <NoContent />
+      )}
+    </>
+  );
+}
+
+function Settings({
+  onClose,
+  settings,
+}: {
+  readonly onClose: () => void;
+  readonly settings: { onGhostToggle: (checked: boolean) => void };
+}) {
+  return (
+    <>
+      <Header onClose={onClose} title="Settings" />
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Switch
+              defaultChecked
+              onChange={(e) => settings.onGhostToggle(e.target.checked)}
+            />
+          }
+          label="Ghosted geometry"
+        />
+      </FormGroup>
+    </>
+  );
+}
+
+function TypographyGutter({ children }: { children: React.ReactNode }) {
+  return <Typography gutterBottom>{children}</Typography>;
+}
+
+function NoStepActive() {
+  return <TypographyGutter>No work instruction steps active.</TypographyGutter>;
 }
