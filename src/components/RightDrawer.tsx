@@ -17,11 +17,16 @@ import { BottomDrawerHeight, RightDrawerWidth } from "./Layout";
 
 export type Content = "settings" | "instructions" | "parts";
 
+interface SettingsProps {
+  ghosted: boolean;
+  onGhostToggle: (checked: boolean) => void;
+}
+
 interface Props {
   readonly content?: Content;
   readonly instructionStep?: InstructionStep;
   readonly onClose: () => void;
-  readonly settings: { onGhostToggle: (checked: boolean) => void };
+  readonly settings: SettingsProps;
 }
 
 const Drawer = styled(MuiDrawer)(() => ({
@@ -167,7 +172,7 @@ function Settings({
   settings,
 }: {
   readonly onClose: () => void;
-  readonly settings: { onGhostToggle: (checked: boolean) => void };
+  readonly settings: SettingsProps;
 }) {
   return (
     <>
@@ -176,7 +181,7 @@ function Settings({
         <FormControlLabel
           control={
             <Switch
-              defaultChecked
+              checked={settings.ghosted}
               onChange={(e) => settings.onGhostToggle(e.target.checked)}
             />
           }

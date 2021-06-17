@@ -137,7 +137,7 @@ export default function Home({
           content={rightDrawerContent}
           instructionStep={instructionStep}
           onClose={() => setRightDrawerContent(undefined)}
-          settings={{ onGhostToggle: setGhosted }}
+          settings={{ ghosted, onGhostToggle: setGhosted }}
         />
       }
     >
