@@ -115,7 +115,6 @@ function UnwrappedViewer({
             href="https://github.com/Vertexvis/work-instructions-demo"
             rel="noreferrer"
             style={{ alignSelf: "center" }}
-            // sx={{ height: "100%", alignSelf: "center" }}
             target="_blank"
           >
             View on GitHub

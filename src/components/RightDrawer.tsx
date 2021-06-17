@@ -13,11 +13,7 @@ import { Close } from "@material-ui/icons";
 import React from "react";
 
 import { InstructionStep } from "../lib/work-instructions";
-import {
-  BottomDrawerHeight,
-  DenseToolbarHeight,
-  RightDrawerWidth,
-} from "./Layout";
+import { BottomDrawerHeight, RightDrawerWidth } from "./Layout";
 
 export type Content = "settings" | "instructions" | "parts";
 
@@ -31,34 +27,10 @@ interface Props {
 const Drawer = styled(MuiDrawer)(() => ({
   width: RightDrawerWidth,
   [`& .${drawerClasses.paper}`]: {
-    height: `calc(100% - ${BottomDrawerHeight + DenseToolbarHeight}px)`,
+    height: `calc(100% - ${BottomDrawerHeight}px)`,
     width: RightDrawerWidth,
   },
 }));
-
-function Header({
-  onClose,
-  title,
-}: {
-  readonly onClose: () => void;
-  readonly title: string;
-}) {
-  return (
-    <Box
-      sx={{
-        alignItems: "center",
-        display: "flex",
-        justifyContent: "space-between",
-        mb: 1,
-      }}
-    >
-      <Typography variant="h5">{title}</Typography>
-      <IconButton onClick={onClose}>
-        <Close />
-      </IconButton>
-    </Box>
-  );
-}
 
 export function RightDrawer({
   content,
@@ -87,6 +59,30 @@ export function RightDrawer({
         <Content />
       </Box>
     </Drawer>
+  );
+}
+
+function Header({
+  onClose,
+  title,
+}: {
+  readonly onClose: () => void;
+  readonly title: string;
+}) {
+  return (
+    <Box
+      sx={{
+        alignItems: "center",
+        display: "flex",
+        justifyContent: "space-between",
+        mb: 1,
+      }}
+    >
+      <Typography variant="h5">{title}</Typography>
+      <IconButton onClick={onClose}>
+        <Close />
+      </IconButton>
+    </Box>
   );
 }
 

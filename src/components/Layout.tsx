@@ -3,7 +3,7 @@ import { styled } from "@material-ui/core/styles";
 import React from "react";
 
 export const BottomDrawerHeight = 200; // If not provided, set to 0
-export const DenseToolbarHeight = 48; // If provided, set to 48
+export const DenseToolbarHeight = 48;
 export const LeftDrawerWidth = 0; // If mini-drawer provided, set to 76
 export const RightDrawerWidth = 320; // If not provided, set to 0
 
