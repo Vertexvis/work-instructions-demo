@@ -17,12 +17,14 @@ interface Props {
   readonly open: boolean;
   readonly onClose: VoidFunction;
   readonly onConfirm: () => void;
+  readonly partId?: string;
 }
 
 export function ReportIssueDialog({
   open,
   onClose,
   onConfirm,
+  partId,
 }: Props): JSX.Element {
   const [issueType, setIssueType] = React.useState(1);
   const [severity, setSeverity] = React.useState(2);
@@ -65,7 +67,13 @@ export function ReportIssueDialog({
             </Select>
           </Grid>
           <Grid item xs={12} sm={12}>
-            <TextField fullWidth label="Part ID" required size="small" />
+            <TextField
+              defaultValue={partId}
+              fullWidth
+              label="Part ID"
+              required
+              size="small"
+            />
           </Grid>
           <Grid item xs={12} sm={12}>
             <TextField

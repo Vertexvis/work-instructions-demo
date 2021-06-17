@@ -13,11 +13,11 @@ import { styled } from "@material-ui/core/styles";
 import { Check, ChevronLeft, ChevronRight, Refresh } from "@material-ui/icons";
 import React from "react";
 
-import { SceneViewState, SceneViewStates } from "../lib/scene-items";
+import { InstructionStep, InstructionSteps } from "../lib/work-instructions";
 import { BottomDrawerHeight } from "./Layout";
 
 interface Props {
-  readonly onSelect: (sceneViewId?: SceneViewState) => void;
+  readonly onSelect: (is?: InstructionStep) => void;
   readonly ready: boolean;
 }
 
@@ -34,11 +34,11 @@ const StepConnector = styled(MuiStepConnector)(() => ({
 }));
 
 export function BottomDrawer({ onSelect, ready }: Props): JSX.Element {
-  const stepIds = Object.keys(SceneViewStates);
+  const stepIds = Object.keys(InstructionSteps);
   const [activeStep, setActiveStep] = React.useState(-1);
 
   React.useEffect(() => {
-    onSelect(SceneViewStates[stepIds[activeStep]]);
+    onSelect(InstructionSteps[stepIds[activeStep]]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeStep, ready]);
 
@@ -123,7 +123,7 @@ export function BottomDrawer({ onSelect, ready }: Props): JSX.Element {
           connector={<StepConnector />}
           sx={{ flexGrow: 1 }}
         >
-          {Object.keys(SceneViewStates).map((k) => {
+          {Object.keys(InstructionSteps).map((k) => {
             return (
               <Step key={k}>
                 <StepLabel sx={{ mr: 0 }}></StepLabel>
@@ -132,7 +132,7 @@ export function BottomDrawer({ onSelect, ready }: Props): JSX.Element {
                     height={120}
                     key={k}
                     src={`/${k}.png`}
-                    alt={SceneViewStates[k].name}
+                    alt={InstructionSteps[k].name}
                   />
                 </Box>
               </Step>

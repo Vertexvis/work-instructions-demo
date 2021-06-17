@@ -12,6 +12,7 @@ import { styled } from "@material-ui/core/styles";
 import { Close } from "@material-ui/icons";
 import React from "react";
 
+import { InstructionStep } from "../lib/work-instructions";
 import {
   BottomDrawerHeight,
   DenseToolbarHeight,
@@ -22,6 +23,7 @@ export type Content = "settings" | "instructions";
 
 interface Props {
   readonly content?: Content;
+  readonly instructionStep?: InstructionStep;
   readonly onClose: () => void;
   readonly settings: { onGhostToggle: (checked: boolean) => void };
 }
@@ -58,34 +60,62 @@ function Header({
   );
 }
 
-const instructions = [
-  <>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Utvitae erat ac
-    massa mattis blandit id a mi. Morbi nibh lacus,pellentesque tincidunt
-    malesuada ac, cursus ornare urna. <strong>Suspendisse vel</strong> volutpat
-    sapien, nec porta diam. In imperdiet velmagna sed varius.
-  </>,
-  <>
-    Cras semper volutpat tortor eget euismod. Nam in leo in arcudignissim
-    tempus. Suspendisse maximus euismod metus, tempusconsectetur dolor
-    vestibulum quis. Nulla et lacinia metus. Nam velmauris at est ultricies
-    vestibulum. Proin rhoncus nulla ut elitpretium vehicula.
-  </>,
-  <>
-    Ut orci nunc, <strong>semper et ultricies ut</strong>, iaculis mattis nulla.
-    Donec tincidunt est ac erat efficitur, nec cursus velit pellentesque. Duis
-    hendrerit blandit porta. In faucibus arcuipsum, quis pharetra tortor iaculis
-    at. Vivamus rhoncus mi egetlibero egestas tincidunt. Sed ultrices nulla sit
-    amet tortorrhoncus volutpat.
-  </>,
-];
-
 export function RightDrawer({
   content,
+  instructionStep,
   onClose,
   settings,
 }: Props): JSX.Element {
   if (content == null) return <></>;
+
+  function Instructions() {
+    function NoContent(): JSX.Element {
+      return instructionStep == null ? (
+        <Typography gutterBottom>No instruction steps active.</Typography>
+      ) : (
+        <Typography gutterBottom>No instructions provided.</Typography>
+      );
+    }
+
+    const stepNum = instructionStep?.step
+      ? `Step ${instructionStep.step} `
+      : "";
+
+    return (
+      <>
+        <Header onClose={onClose} title={`${stepNum}Instructions`} />
+        {instructionStep != null && instructionStep.instructions.length > 0 ? (
+          instructionStep?.instructions.map((t, i) => (
+            <Typography gutterBottom key={i}>
+              {`${i + 1}. `}
+              {t}
+            </Typography>
+          ))
+        ) : (
+          <NoContent />
+        )}
+      </>
+    );
+  }
+
+  function Settings() {
+    return (
+      <>
+        <Header onClose={onClose} title="Settings" />
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Switch
+                defaultChecked
+                onChange={(e) => settings.onGhostToggle(e.target.checked)}
+              />
+            }
+            label="Ghosted geometry"
+          />
+        </FormGroup>
+      </>
+    );
+  }
 
   return (
     <Drawer
@@ -95,32 +125,7 @@ export function RightDrawer({
       variant="persistent"
     >
       <Box sx={{ p: 1 }}>
-        {content === "settings" ? (
-          <>
-            <Header onClose={onClose} title="Settings" />
-            <FormGroup>
-              <FormControlLabel
-                control={
-                  <Switch
-                    defaultChecked
-                    onChange={(e) => settings.onGhostToggle(e.target.checked)}
-                  />
-                }
-                label="Ghosted geometry"
-              />
-            </FormGroup>
-          </>
-        ) : (
-          <>
-            <Header onClose={onClose} title="Instructions" />
-            {instructions.map((t, i) => (
-              <Typography gutterBottom key={i}>
-                {`${i + 1}. `}
-                {t}
-              </Typography>
-            ))}
-          </>
-        )}
+        {content === "settings" ? <Settings /> : <Instructions />}
       </Box>
     </Drawer>
   );

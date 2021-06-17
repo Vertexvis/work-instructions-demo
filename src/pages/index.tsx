@@ -8,12 +8,9 @@ import { ReportIssueDialog } from "../components/ReportIssueDialog";
 import { Content, RightDrawer } from "../components/RightDrawer";
 import { Viewer } from "../components/Viewer";
 import { Credentials, Env } from "../lib/env";
-import {
-  flyTo,
-  SceneViewState,
-  selectByHit as onSelect,
-} from "../lib/scene-items";
+import { flyTo, selectByHit as onSelect } from "../lib/scene-items";
 import { useViewer } from "../lib/viewer";
+import { InstructionStep } from "../lib/work-instructions";
 
 export default function Home(): JSX.Element {
   const viewer = useViewer();
@@ -23,13 +20,14 @@ export default function Home(): JSX.Element {
   const [ready, setReady] = React.useState(false);
   const [rightDrawerContent, setRightDrawerContent] = React.useState<
     Content | undefined
-  >(undefined);
+  >();
   const [ghosted, setGhosted] = React.useState(true);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [snackOpen, setSnackOpen] = React.useState(false);
-  const [sceneViewState, setSceneViewState] = React.useState<
-    SceneViewState | undefined
-  >(undefined);
+  const [selectedId, setSelectedId] = React.useState<string | undefined>();
+  const [instructionStep, setInstructionStep] = React.useState<
+    InstructionStep | undefined
+  >();
 
   async function onSceneReady() {
     const v = viewer.ref.current;
@@ -53,25 +51,29 @@ export default function Home(): JSX.Element {
   //   ).json();
   // }
 
-  async function onSceneViewStateSelected(svs?: SceneViewState): Promise<void> {
-    if (!ready || !svs || svs.id === sceneViewState?.id) return;
+  async function onInstructionStepSelected(
+    is?: InstructionStep
+  ): Promise<void> {
+    if (!ready || is?.sceneViewStateId === instructionStep?.sceneViewStateId) {
+      return;
+    }
 
     setReady(false);
     function onComplete() {
       delay(500).then(() => {
-        setSceneViewState(svs);
+        setInstructionStep(is);
         setReady(true);
       });
     }
 
-    const res = await flyTo({ camera: svs.camera, viewer: viewer.ref.current });
+    const res = await flyTo({ camera: is?.camera, viewer: viewer.ref.current });
     res ? res.onAnimationCompleted.on(onComplete) : onComplete();
   }
 
   return (
     <Layout
       bottomDrawer={
-        <BottomDrawer onSelect={onSceneViewStateSelected} ready={ready} />
+        <BottomDrawer onSelect={onInstructionStepSelected} ready={ready} />
       }
       // header={<Header onCreateSceneViewState={createSvs} />}
       main={
@@ -88,9 +90,12 @@ export default function Home(): JSX.Element {
             }}
             onSceneReady={onSceneReady}
             onSelect={async (detail, hit) => {
+              setSelectedId(
+                hit?.itemSuppliedId?.value ?? hit?.itemId?.hex ?? undefined
+              );
               await onSelect({ detail, hit, viewer: viewer.ref.current });
             }}
-            sceneViewState={sceneViewState}
+            instructionStep={instructionStep}
             streamAttributes={{
               experimentalGhosting: {
                 enabled: { value: ghosted },
@@ -104,6 +109,7 @@ export default function Home(): JSX.Element {
       rightDrawer={
         <RightDrawer
           content={rightDrawerContent}
+          instructionStep={instructionStep}
           onClose={() => setRightDrawerContent(undefined)}
           settings={{ onGhostToggle: setGhosted }}
         />
@@ -117,6 +123,7 @@ export default function Home(): JSX.Element {
             setDialogOpen(false);
           }}
           open={dialogOpen}
+          partId={selectedId}
         />
       )}
       <Snackbar

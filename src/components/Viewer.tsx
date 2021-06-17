@@ -18,13 +18,14 @@ import {
 import React from "react";
 
 import { StreamCredentials } from "../lib/env";
-import { loadSceneViewState, SceneViewState } from "../lib/scene-items";
+import { loadSceneViewState } from "../lib/scene-items";
+import { InstructionStep } from "../lib/work-instructions";
 import { Stations } from "./Stations";
 
 interface ViewerProps extends ViewerJSX.VertexViewer {
   readonly credentials: StreamCredentials;
+  readonly instructionStep?: InstructionStep;
   readonly onClick: (button: ToolButtons) => void;
-  readonly sceneViewState?: SceneViewState;
   readonly viewer: React.MutableRefObject<HTMLVertexViewerElement | null>;
 }
 
@@ -47,7 +48,7 @@ export type ToolButtons = "settings" | "instructions" | "issue";
 function UnwrappedViewer({
   credentials,
   onClick,
-  sceneViewState,
+  instructionStep,
   viewer,
   ...props
 }: ViewerProps): JSX.Element {
@@ -57,7 +58,7 @@ function UnwrappedViewer({
   // const src = sceneViewState?.id
   //   ? `${urn}?scene-view-state=${sceneViewState.id}`
   //   : urn;
-  const workInstructionActions: Action[] = [
+  const instructionActions: Action[] = [
     {
       icon: <Settings />,
       name: "Settings",
@@ -84,8 +85,11 @@ function UnwrappedViewer({
   ];
 
   React.useEffect(() => {
-    loadSceneViewState({ id: sceneViewState?.id, viewer: viewer.current });
-  }, [sceneViewState, viewer]);
+    loadSceneViewState({
+      id: instructionStep?.sceneViewStateId,
+      viewer: viewer.current,
+    });
+  }, [instructionStep, viewer]);
 
   async function fitAll(): Promise<void> {
     (await viewer.current?.scene())
@@ -113,7 +117,7 @@ function UnwrappedViewer({
           open={true}
           sx={{ mr: 3 }}
         >
-          {workInstructionActions.map((action) => (
+          {instructionActions.map((action) => (
             <SpeedDialAction
               key={action.name}
               icon={action.icon}
@@ -141,7 +145,7 @@ function UnwrappedViewer({
         </SpeedDial>
       </VertexViewerToolbar>
       <VertexViewerDomRenderer>
-        {sceneViewState?.arrows?.map((a, i) => (
+        {instructionStep?.arrows?.map((a, i) => (
           <VertexViewerDomElement
             key={i}
             position={a.position}
