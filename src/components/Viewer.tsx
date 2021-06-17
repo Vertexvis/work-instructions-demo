@@ -103,7 +103,7 @@ function UnwrappedViewer({
       {...props}
     >
       <VertexViewerToolbar placement="top-left">
-        <Stations />
+        <Stations sx={{ ml: 3, mt: 3 }} />
       </VertexViewerToolbar>
       <VertexViewerToolbar placement="top-right">
         <SpeedDial
@@ -111,7 +111,7 @@ function UnwrappedViewer({
           direction="down"
           hidden={true}
           open={true}
-          sx={{ mt: -2 }}
+          sx={{ mr: 3 }}
         >
           {workInstructionActions.map((action) => (
             <SpeedDialAction
@@ -128,7 +128,7 @@ function UnwrappedViewer({
           ariaLabel="Viewer toolbar"
           hidden={true}
           open={true}
-          sx={{ mb: -2 }}
+          sx={{ mr: 3, mb: 2 }}
         >
           {viewActions.map((action) => (
             <SpeedDialAction

@@ -2,10 +2,15 @@ import {
   Box,
   Drawer as MuiDrawer,
   Fab,
+  LinearProgress,
+  ImageList,
+  ImageListItem,
   Step,
   StepConnector as MuiStepConnector,
+  StepContent,
   StepLabel,
   Stepper,
+  Typography,
 } from "@material-ui/core";
 import { drawerClasses } from "@material-ui/core/Drawer";
 import { stepConnectorClasses } from "@material-ui/core/StepConnector";
@@ -29,7 +34,10 @@ const Drawer = styled(MuiDrawer)(() => ({
 
 const StepConnector = styled(MuiStepConnector)(() => ({
   [`& .${stepConnectorClasses.line}`]: {
-    borderWidth: 0,
+    // marginRight: 0,
+    // marginLeft: 0,
+    // marginTop: -88,
+    // padding: 0,
   },
 }));
 
@@ -110,31 +118,38 @@ export function BottomDrawer({ onSelect, ready }: Props): JSX.Element {
         sx={{
           alignItems: "center",
           display: "flex",
+          mt: 2,
         }}
       >
         <Box sx={{ minWidth: 215 }}>
           <Prev />
         </Box>
-        <Stepper
-          activeStep={activeStep}
-          connector={<StepConnector />}
-          sx={{ flexGrow: 1, mx: 10, my: 2 }}
-        >
-          {Object.keys(SceneViewStates).map((k) => {
-            const stepProps: { completed?: boolean } = {};
-            return (
-              <Step key={k} {...stepProps}>
-                <StepLabel></StepLabel>
-                <img
-                  height={150}
-                  key={k}
-                  src={`/${k}.png`}
-                  alt={SceneViewStates[k].name}
-                />
-              </Step>
-            );
-          })}
-        </Stepper>
+        <Box sx={{ flexGrow: 1 }}>
+          <Box sx={{ display: "flex" }}>
+            <LinearProgress
+              variant="determinate"
+              value={(Math.min(activeStep, 3) / 3) * 100}
+              sx={{ mt: 1, mr: 2, width: "90%" }}
+            />
+            <Typography>{`Step ${Math.min(
+              activeStep + 1,
+              3
+            )} of 3`}</Typography>
+          </Box>
+          <ImageList sx={{ width: "100%" }} cols={3}>
+            {Object.keys(SceneViewStates).map((k) => {
+              return (
+                <Box key={k} sx={{ ml: 5 }}>
+                  <img
+                    height={120}
+                    src={`/${k}.png`}
+                    alt={SceneViewStates[k].name}
+                  />
+                </Box>
+              );
+            })}
+          </ImageList>
+        </Box>
         <Box sx={{ display: "flex", minWidth: 215 }}>{getRightButton()}</Box>
       </Box>
     </Drawer>

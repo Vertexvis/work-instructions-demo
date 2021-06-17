@@ -11,7 +11,7 @@ import { Credentials, Env } from "../lib/env";
 import {
   flyTo,
   SceneViewState,
-  selectByHit as handleHit,
+  selectByHit as onSelect,
 } from "../lib/scene-items";
 import { useViewer } from "../lib/viewer";
 
@@ -88,7 +88,7 @@ export default function Home(): JSX.Element {
             }}
             onSceneReady={onSceneReady}
             onSelect={async (detail, hit) => {
-              await handleHit({ detail, hit, viewer: viewer.ref.current });
+              await onSelect({ detail, hit, viewer: viewer.ref.current });
             }}
             sceneViewState={sceneViewState}
             streamAttributes={{

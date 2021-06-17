@@ -59,9 +59,25 @@ function Header({
 }
 
 const instructions = [
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Utvitae erat ac massa mattis blandit id a mi. Morbi nibh lacus,pellentesque tincidunt malesuada ac, cursus ornare urna.Suspendisse vel volutpat sapien, nec porta diam. In imperdiet velmagna sed varius.",
-  "Cras semper volutpat tortor eget euismod. Nam in leo in arcudignissim tempus. Suspendisse maximus euismod metus, tempusconsectetur dolor vestibulum quis. Nulla et lacinia metus. Nam velmauris at est ultricies vestibulum. Proin rhoncus nulla ut elitpretium vehicula.",
-  "Ut orci nunc, semper et ultricies ut, iaculis mattis nulla. Donec tincidunt est ac erat efficitur, nec cursus velit pellentesque. Duis hendrerit blandit porta. In faucibus arcuipsum, quis pharetra tortor iaculis at. Vivamus rhoncus mi egetlibero egestas tincidunt. Sed ultrices nulla sit amet tortorrhoncus volutpat.",
+  <>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Utvitae erat ac
+    massa mattis blandit id a mi. Morbi nibh lacus,pellentesque tincidunt
+    malesuada ac, cursus ornare urna. <strong>Suspendisse vel</strong> volutpat
+    sapien, nec porta diam. In imperdiet velmagna sed varius.
+  </>,
+  <>
+    Cras semper volutpat tortor eget euismod. Nam in leo in arcudignissim
+    tempus. Suspendisse maximus euismod metus, tempusconsectetur dolor
+    vestibulum quis. Nulla et lacinia metus. Nam velmauris at est ultricies
+    vestibulum. Proin rhoncus nulla ut elitpretium vehicula.
+  </>,
+  <>
+    Ut orci nunc, <strong>semper et ultricies ut</strong>, iaculis mattis nulla.
+    Donec tincidunt est ac erat efficitur, nec cursus velit pellentesque. Duis
+    hendrerit blandit porta. In faucibus arcuipsum, quis pharetra tortor iaculis
+    at. Vivamus rhoncus mi egetlibero egestas tincidunt. Sed ultrices nulla sit
+    amet tortorrhoncus volutpat.
+  </>,
 ];
 
 export function RightDrawer({
@@ -98,7 +114,10 @@ export function RightDrawer({
           <>
             <Header onClose={onClose} title="Instructions" />
             {instructions.map((t, i) => (
-              <Typography gutterBottom key={i}>{`${i + 1}. ${t}`}</Typography>
+              <Typography gutterBottom key={i}>
+                {`${i + 1}. `}
+                {t}
+              </Typography>
             ))}
           </>
         )}

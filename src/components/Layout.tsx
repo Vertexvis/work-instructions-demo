@@ -2,7 +2,7 @@ import { AppBar as MuiAppBar, Box, Toolbar } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
 import React from "react";
 
-export const BottomDrawerHeight = 270; // If not provided, set to 0
+export const BottomDrawerHeight = 220; // If not provided, set to 0
 export const DenseToolbarHeight = 0; // If provided, set to 48
 export const LeftDrawerWidth = 0; // If mini-drawer provided, set to 76
 export const RightDrawerWidth = 320; // If not provided, set to 0
@@ -21,10 +21,6 @@ const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "rightDrawerOpen",
 })<{ rightDrawerOpen?: boolean }>(({ theme, rightDrawerOpen }) => ({
   marginLeft: LeftDrawerWidth,
-  transition: theme.transitions.create(["margin", "width"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
   width: `100%`,
   [theme.breakpoints.down("md")]: {
     margin: 0,
@@ -33,10 +29,6 @@ const AppBar = styled(MuiAppBar, {
   ...(rightDrawerOpen && {
     width: `calc(100% - ${LeftDrawerWidth + RightDrawerWidth}px)`,
     marginRight: RightDrawerWidth,
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
   }),
 }));
 
@@ -47,19 +39,10 @@ const Main = styled("main", {
 }>(({ theme, rightDrawerOpen }) => ({
   flexGrow: 1,
   height: `calc(100% - ${BottomDrawerHeight + DenseToolbarHeight}px)`,
-  transition: theme.transitions.create("margin", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
+  marginTop: `${DenseToolbarHeight}px`,
   width: `calc(100% - ${LeftDrawerWidth + RightDrawerWidth}px)`,
-  [theme.breakpoints.down("md")]: {
-    width: `100%`,
-  },
+  [theme.breakpoints.down("md")]: { width: `100%` },
   ...(rightDrawerOpen && {
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
     width: `calc(100% - ${LeftDrawerWidth + RightDrawerWidth}px)`,
   }),
 }));
@@ -86,10 +69,7 @@ export function Layout({
         </AppBar>
       )}
       {leftDrawer ?? <></>}
-      <Main rightDrawerOpen={rightDrawerOpen}>
-        {header && <Box minHeight={`${DenseToolbarHeight}px`} />}
-        {main}
-      </Main>
+      <Main rightDrawerOpen={rightDrawerOpen}>{main}</Main>
       {rightDrawer ?? <></>}
       {children ?? <></>}
       {bottomDrawer ?? <></>}
