@@ -42,7 +42,7 @@ type HOCViewerProps = React.RefAttributes<HTMLVertexViewerElement>;
 
 export const Viewer = onTap(UnwrappedViewer);
 
-export type ToolButtons = "settings" | "instructions" | "defect";
+export type ToolButtons = "settings" | "instructions" | "issue";
 
 function UnwrappedViewer({
   credentials,
@@ -70,8 +70,8 @@ function UnwrappedViewer({
     },
     {
       icon: <ReportProblemOutlined />,
-      name: "Log defect",
-      onClick: () => onClick("defect"),
+      name: "Report issue",
+      onClick: () => onClick("issue"),
     },
   ];
 

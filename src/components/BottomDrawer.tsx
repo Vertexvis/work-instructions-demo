@@ -2,15 +2,10 @@ import {
   Box,
   Drawer as MuiDrawer,
   Fab,
-  LinearProgress,
-  ImageList,
-  ImageListItem,
   Step,
   StepConnector as MuiStepConnector,
-  StepContent,
   StepLabel,
   Stepper,
-  Typography,
 } from "@material-ui/core";
 import { drawerClasses } from "@material-ui/core/Drawer";
 import { stepConnectorClasses } from "@material-ui/core/StepConnector";
@@ -34,10 +29,7 @@ const Drawer = styled(MuiDrawer)(() => ({
 
 const StepConnector = styled(MuiStepConnector)(() => ({
   [`& .${stepConnectorClasses.line}`]: {
-    // marginRight: 0,
-    // marginLeft: 0,
-    // marginTop: -88,
-    // padding: 0,
+    marginLeft: 20,
   },
 }));
 
@@ -124,32 +116,29 @@ export function BottomDrawer({ onSelect, ready }: Props): JSX.Element {
         <Box sx={{ minWidth: 215 }}>
           <Prev />
         </Box>
-        <Box sx={{ flexGrow: 1 }}>
-          <Box sx={{ display: "flex" }}>
-            <LinearProgress
-              variant="determinate"
-              value={(Math.min(activeStep, 3) / 3) * 100}
-              sx={{ mt: 1, mr: 2, width: "90%" }}
-            />
-            <Typography>{`Step ${Math.min(
-              activeStep + 1,
-              3
-            )} of 3`}</Typography>
-          </Box>
-          <ImageList sx={{ width: "100%" }} cols={3}>
-            {Object.keys(SceneViewStates).map((k) => {
-              return (
-                <Box key={k} sx={{ ml: 5 }}>
+
+        <Stepper
+          activeStep={activeStep}
+          alternativeLabel
+          connector={<StepConnector />}
+          sx={{ flexGrow: 1 }}
+        >
+          {Object.keys(SceneViewStates).map((k) => {
+            return (
+              <Step key={k}>
+                <StepLabel sx={{ mr: 0 }}></StepLabel>
+                <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
                   <img
                     height={120}
+                    key={k}
                     src={`/${k}.png`}
                     alt={SceneViewStates[k].name}
                   />
                 </Box>
-              );
-            })}
-          </ImageList>
-        </Box>
+              </Step>
+            );
+          })}
+        </Stepper>
         <Box sx={{ display: "flex", minWidth: 215 }}>{getRightButton()}</Box>
       </Box>
     </Drawer>

@@ -3,8 +3,8 @@ import { delay } from "@vertexvis/api-client-node";
 import React from "react";
 
 import { BottomDrawer } from "../components/BottomDrawer";
-import { DefectDialog } from "../components/DefectDialog";
 import { Layout } from "../components/Layout";
+import { ReportIssueDialog } from "../components/ReportIssueDialog";
 import { Content, RightDrawer } from "../components/RightDrawer";
 import { Viewer } from "../components/Viewer";
 import { Credentials, Env } from "../lib/env";
@@ -82,7 +82,7 @@ export default function Home(): JSX.Element {
             onClick={(button) => {
               if (button === "settings" || button === "instructions") {
                 setRightDrawerContent(button);
-              } else if (button === "defect") {
+              } else if (button === "issue") {
                 setDialogOpen(true);
               }
             }}
@@ -110,7 +110,7 @@ export default function Home(): JSX.Element {
       }
     >
       {dialogOpen && (
-        <DefectDialog
+        <ReportIssueDialog
           onClose={() => setDialogOpen(false)}
           onConfirm={() => {
             setSnackOpen(true);

@@ -19,7 +19,11 @@ interface Props {
   readonly onConfirm: () => void;
 }
 
-export function DefectDialog({ open, onClose, onConfirm }: Props): JSX.Element {
+export function ReportIssueDialog({
+  open,
+  onClose,
+  onConfirm,
+}: Props): JSX.Element {
   const [issueType, setIssueType] = React.useState(1);
   const [severity, setSeverity] = React.useState(2);
 
