@@ -10,7 +10,7 @@ interface Body {
 
 export default async function create(
   req: NextApiRequest,
-  res: NextApiResponse<{ message: string }>
+  res: NextApiResponse<{ readonly message: string }>
 ): Promise<void> {
   if (!req.body) return errorRes("Body required.", res);
 

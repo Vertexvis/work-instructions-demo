@@ -1,19 +1,9 @@
-import { Failure, isFailure, VertexClient } from "@vertexvis/api-client-node";
+import { Failure, VertexClient } from "@vertexvis/api-client-node";
 import { AxiosResponse } from "axios";
 import { createWriteStream } from "fs";
 import type { NextApiResponse } from "next";
 
 import { Config } from "./env";
-
-export async function makeCallAndReturn<T>(
-  res: NextApiResponse<T | Failure>,
-  apiCall: (client: VertexClient) => Promise<AxiosResponse<T>>
-): Promise<void> {
-  const result = await makeCall(apiCall);
-  return isFailure(result)
-    ? res.status(500).json(result)
-    : res.status(200).json(result);
-}
 
 export async function makeCall<T>(
   apiCall: (client: VertexClient) => Promise<AxiosResponse<T>>

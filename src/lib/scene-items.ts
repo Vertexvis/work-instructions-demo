@@ -3,13 +3,13 @@ import { ColorMaterial, Components, TapEventDetails } from "@vertexvis/viewer";
 import { CameraRenderResult } from "@vertexvis/viewer/dist/types/lib/scenes/cameraRenderResult";
 import { FrameCamera } from "@vertexvis/viewer/dist/types/lib/types";
 
+export const AnimationDurationMs = 500;
+
 export const SelectColor = {
   ...ColorMaterial.create(255, 255, 0),
   glossiness: 4,
   specular: { r: 255, g: 255, b: 255, a: 0 },
 };
-
-export const AnimationDurationMs = 500;
 
 interface Req {
   readonly viewer: Components.VertexViewer | null;
@@ -66,7 +66,7 @@ export async function loadSceneViewState({
   await scene.applySceneViewState(id);
 }
 
-export async function selectByHit({
+export async function handleHit({
   detail,
   hit,
   viewer,

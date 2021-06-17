@@ -21,7 +21,7 @@ interface Props {
   readonly ready: boolean;
 }
 
-const ButtonMargin = 5;
+const BtnMargin = 5;
 
 const Drawer = styled(MuiDrawer)(() => ({
   [`& .${drawerClasses.paper}`]: { height: BottomDrawerHeight },
@@ -42,11 +42,11 @@ export function BottomDrawer({ onSelect, ready }: Props): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeStep, ready]);
 
-  function Prev() {
+  function PrevBtn() {
     return (
       <Fab
         disabled={!ready || activeStep === -1 || activeStep === 0}
-        sx={{ ml: ButtonMargin, mr: "auto" }}
+        sx={{ ml: BtnMargin, mr: "auto" }}
         onClick={() => setActiveStep((prev) => prev - 1)}
       >
         <ChevronLeft />
@@ -54,11 +54,11 @@ export function BottomDrawer({ onSelect, ready }: Props): JSX.Element {
     );
   }
 
-  function Next() {
+  function NextBtn() {
     return (
       <Fab
         disabled={!ready}
-        sx={{ ml: "auto", mr: ButtonMargin }}
+        sx={{ ml: "auto", mr: BtnMargin }}
         onClick={() => setActiveStep((prev) => prev + 1)}
       >
         <ChevronRight />
@@ -66,12 +66,12 @@ export function BottomDrawer({ onSelect, ready }: Props): JSX.Element {
     );
   }
 
-  function Done() {
+  function DoneBtn() {
     return (
       <Fab
         color={"primary"}
         disabled={!ready || activeStep >= stepIds.length}
-        sx={{ ml: "auto", mr: ButtonMargin }}
+        sx={{ ml: "auto", mr: BtnMargin }}
         onClick={() => setActiveStep((prev) => prev + 1)}
         variant="extended"
       >
@@ -81,7 +81,7 @@ export function BottomDrawer({ onSelect, ready }: Props): JSX.Element {
     );
   }
 
-  function Reset() {
+  function ResetBtn() {
     return (
       <Fab
         disabled={!ready}
@@ -93,53 +93,53 @@ export function BottomDrawer({ onSelect, ready }: Props): JSX.Element {
     );
   }
 
-  function getRightButton() {
-    return activeStep >= stepIds.length - 1 ? (
-      <Box sx={{ alignItems: "center", display: "flex" }}>
-        <Reset />
-        <Done />
-      </Box>
-    ) : (
-      <Next />
+  function Steps() {
+    return (
+      <Stepper
+        activeStep={activeStep}
+        alternativeLabel
+        connector={<StepConnector />}
+        sx={{ flexGrow: 1 }}
+      >
+        {Object.keys(InstructionSteps).map((k) => {
+          return (
+            <Step key={k}>
+              <StepLabel sx={{ mr: 0 }}></StepLabel>
+              <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+                <img
+                  height={120}
+                  key={k}
+                  src={`/${k}.png`}
+                  alt={InstructionSteps[k].name}
+                />
+              </Box>
+            </Step>
+          );
+        })}
+      </Stepper>
     );
   }
 
+  function getRightBtn() {
+    return activeStep >= stepIds.length - 1 ? (
+      <Box sx={{ alignItems: "center", display: "flex" }}>
+        <ResetBtn />
+        <DoneBtn />
+      </Box>
+    ) : (
+      <NextBtn />
+    );
+  }
+
+  const minWidth = 215;
   return (
     <Drawer anchor="bottom" variant="permanent">
-      <Box
-        sx={{
-          alignItems: "center",
-          display: "flex",
-          mt: 2,
-        }}
-      >
-        <Box sx={{ minWidth: 215 }}>
-          <Prev />
+      <Box sx={{ alignItems: "center", display: "flex", mt: 2 }}>
+        <Box sx={{ minWidth }}>
+          <PrevBtn />
         </Box>
-
-        <Stepper
-          activeStep={activeStep}
-          alternativeLabel
-          connector={<StepConnector />}
-          sx={{ flexGrow: 1 }}
-        >
-          {Object.keys(InstructionSteps).map((k) => {
-            return (
-              <Step key={k}>
-                <StepLabel sx={{ mr: 0 }}></StepLabel>
-                <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-                  <img
-                    height={120}
-                    key={k}
-                    src={`/${k}.png`}
-                    alt={InstructionSteps[k].name}
-                  />
-                </Box>
-              </Step>
-            );
-          })}
-        </Stepper>
-        <Box sx={{ display: "flex", minWidth: 215 }}>{getRightButton()}</Box>
+        <Steps />
+        <Box sx={{ display: "flex", minWidth }}>{getRightBtn()}</Box>
       </Box>
     </Drawer>
   );

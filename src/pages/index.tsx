@@ -14,7 +14,7 @@ import {
   renderPartRevision,
 } from "../lib/authoring";
 import { Config, Configuration, Credentials } from "../lib/env";
-import { flyTo, selectByHit as onSelect } from "../lib/scene-items";
+import { flyTo, handleHit as onSelect } from "../lib/scene-items";
 import { useViewer } from "../lib/viewer";
 import { InstructionStep } from "../lib/work-instructions";
 
@@ -42,9 +42,9 @@ export default function Home({
   const [ghosted, setGhosted] = React.useState(true);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [snackOpen, setSnackOpen] = React.useState(false);
-  const [selected, setSelected] = React.useState<{ partRevisionId?: string }>(
-    {}
-  );
+  const [selected, setSelected] = React.useState<{
+    readonly partRevisionId?: string;
+  }>({});
   const [instructionStep, setInstructionStep] = React.useState<
     InstructionStep | undefined
   >();

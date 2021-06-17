@@ -1,12 +1,5 @@
 /* @jsx jsx */ /** @jsxRuntime classic */ import { jsx } from "@emotion/react";
-import { Box, Link, SpeedDial, SpeedDialAction } from "@material-ui/core";
-import {
-  ReportProblemOutlined,
-  Settings,
-  TextSnippetOutlined,
-  WidgetsOutlined,
-  ZoomOutMap,
-} from "@material-ui/icons";
+import { Box, Link } from "@material-ui/core";
 import { vertexvis } from "@vertexvis/frame-streaming-protos";
 import { TapEventDetails } from "@vertexvis/viewer";
 import {
@@ -21,7 +14,10 @@ import React from "react";
 import { StreamCredentials } from "../lib/env";
 import { loadSceneViewState } from "../lib/scene-items";
 import { InstructionStep } from "../lib/work-instructions";
+import { Arrow } from "./Arrow";
+import { InstructionSpeedDial } from "./InstructionSpeedDial";
 import { Stations } from "./Stations";
+import { ViewerSpeedDial } from "./ViewerSpeedDial";
 
 interface ViewerProps extends ViewerJSX.VertexViewer {
   readonly credentials: StreamCredentials;
@@ -30,11 +26,20 @@ interface ViewerProps extends ViewerJSX.VertexViewer {
   readonly viewer: React.MutableRefObject<HTMLVertexViewerElement | null>;
 }
 
-interface Action {
+interface OnSelectProps extends HOCViewerProps {
+  readonly onSelect: (
+    detail: TapEventDetails,
+    hit?: vertexvis.protobuf.stream.IHit
+  ) => Promise<void>;
+}
+
+export interface Action {
   readonly icon: React.ReactNode;
   readonly name: string;
   readonly onClick: () => void;
 }
+
+export type ToolButtons = "settings" | "instructions" | "parts" | "issue";
 
 type ViewerComponentType = React.ComponentType<
   ViewerProps & React.RefAttributes<HTMLVertexViewerElement>
@@ -44,8 +49,6 @@ type HOCViewerProps = React.RefAttributes<HTMLVertexViewerElement>;
 
 export const Viewer = onTap(UnwrappedViewer);
 
-export type ToolButtons = "settings" | "instructions" | "parts" | "issue";
-
 function UnwrappedViewer({
   credentials,
   onClick,
@@ -53,39 +56,6 @@ function UnwrappedViewer({
   viewer,
   ...props
 }: ViewerProps): JSX.Element {
-  const AnimationDurationMs = 1500;
-  const src = `urn:vertexvis:stream-key:${credentials.streamKey}`;
-  const instructionActions: Action[] = [
-    {
-      icon: <Settings />,
-      name: "Settings",
-      onClick: () => onClick("settings"),
-    },
-    {
-      icon: <TextSnippetOutlined />,
-      name: "Instructions",
-      onClick: () => onClick("instructions"),
-    },
-    {
-      icon: <WidgetsOutlined />,
-      name: "Parts List",
-      onClick: () => onClick("parts"),
-    },
-    {
-      icon: <ReportProblemOutlined />,
-      name: "Report issue",
-      onClick: () => onClick("issue"),
-    },
-  ];
-
-  const viewActions: Action[] = [
-    {
-      icon: <ZoomOutMap />,
-      name: "Fit all",
-      onClick: () => fitAll(),
-    },
-  ];
-
   React.useEffect(() => {
     loadSceneViewState({
       id: instructionStep?.sceneViewStateId,
@@ -93,19 +63,12 @@ function UnwrappedViewer({
     });
   }, [instructionStep, viewer]);
 
-  async function fitAll(): Promise<void> {
-    (await viewer.current?.scene())
-      ?.camera()
-      .viewAll()
-      .render({ animation: { milliseconds: AnimationDurationMs } });
-  }
-
   return (
     <VertexViewer
       css={{ height: "100%", width: "100%" }}
       clientId={credentials.clientId}
       ref={viewer}
-      src={src}
+      src={`urn:vertexvis:stream-key:${credentials.streamKey}`}
       {...props}
     >
       <VertexViewerToolbar placement="top-left">
@@ -122,39 +85,10 @@ function UnwrappedViewer({
         </Box>
       </VertexViewerToolbar>
       <VertexViewerToolbar placement="top-right">
-        <SpeedDial
-          ariaLabel="Work instruction toolbar"
-          direction="down"
-          hidden={true}
-          open={true}
-          sx={{ mr: 3 }}
-        >
-          {instructionActions.map((action) => (
-            <SpeedDialAction
-              key={action.name}
-              icon={action.icon}
-              tooltipTitle={action.name}
-              onClick={() => action.onClick()}
-            />
-          ))}
-        </SpeedDial>
+        <InstructionSpeedDial onClick={onClick} />
       </VertexViewerToolbar>
       <VertexViewerToolbar placement="bottom-right">
-        <SpeedDial
-          ariaLabel="Viewer toolbar"
-          hidden={true}
-          open={true}
-          sx={{ mr: 3, mb: 2 }}
-        >
-          {viewActions.map((action) => (
-            <SpeedDialAction
-              key={action.name}
-              icon={action.icon}
-              tooltipTitle={action.name}
-              onClick={() => action.onClick()}
-            />
-          ))}
-        </SpeedDial>
+        <ViewerSpeedDial viewer={viewer} />
       </VertexViewerToolbar>
       <VertexViewerDomRenderer>
         {instructionStep?.arrows?.map((a, i) => (
@@ -164,30 +98,12 @@ function UnwrappedViewer({
             rotation={a.rotation}
             billboardOff={true}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="#60A5FA"
-              css={{ width: 144, height: 144 }}
-            >
-              <path
-                fillRule="evenodd"
-                d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z"
-                clipRule="evenodd"
-              />
-            </svg>
+            <Arrow />
           </VertexViewerDomElement>
         ))}
       </VertexViewerDomRenderer>
     </VertexViewer>
   );
-}
-
-interface OnSelectProps extends HOCViewerProps {
-  readonly onSelect: (
-    detail: TapEventDetails,
-    hit?: vertexvis.protobuf.stream.IHit
-  ) => Promise<void>;
 }
 
 function onTap<P extends ViewerProps>(

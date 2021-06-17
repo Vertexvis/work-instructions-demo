@@ -57,7 +57,7 @@ export const LugNutCam: FrameCamera.FrameCamera = {
   },
 };
 
-export const SuppliedIdToTransform: { [k: string]: number[] } = {
+export const SuppliedIdToTransform: { readonly [k: string]: number[] } = {
   109640: toMatrix(-35.4580993652344, -48.80400085449219),
   109650: toMatrix(-57.372501373291016, 18.64150047302246),
   109660: toMatrix(0, 60.32500076293945),
