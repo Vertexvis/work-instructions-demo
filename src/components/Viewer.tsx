@@ -14,7 +14,7 @@ import React from "react";
 import { StreamCredentials } from "../lib/config";
 import { loadSceneViewState } from "../lib/scene-items";
 import { InstructionStep } from "../lib/work-instructions";
-import { ArrowNarrowUp } from "./Arrow";
+import { ArrowDown, ArrowUp } from "./Arrow";
 import { InstructionSpeedDial } from "./InstructionSpeedDial";
 import { Stations } from "./Stations";
 import { ViewerSpeedDial } from "./ViewerSpeedDial";
@@ -99,7 +99,7 @@ function UnwrappedViewer({
             rotation={a.rotation}
             billboardOff={true}
           >
-            <ArrowNarrowUp />
+            {a.type === "down" ? <ArrowDown /> : <ArrowUp />}
           </VertexViewerDomElement>
         ))}
       </VertexViewerDomRenderer>

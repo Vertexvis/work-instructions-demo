@@ -1,6 +1,6 @@
 /* @jsx jsx */ /** @jsxRuntime classic */ import { jsx } from "@emotion/react";
 
-export function ArrowNarrowDown(): JSX.Element {
+export function ArrowDown(): JSX.Element {
   const dimensions = 50;
 
   return (
@@ -19,7 +19,7 @@ export function ArrowNarrowDown(): JSX.Element {
   );
 }
 
-export function ArrowNarrowUp(): JSX.Element {
+export function ArrowUp(): JSX.Element {
   const dimensions = 50;
 
   return (

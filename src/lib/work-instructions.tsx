@@ -4,6 +4,7 @@ import { FrameCamera } from "@vertexvis/viewer/dist/types/lib/types";
 interface Arrow {
   readonly position: Vector3.Vector3;
   readonly rotation: Quaternion.Quaternion;
+  readonly type: "up" | "down";
 }
 
 interface Part {
@@ -109,8 +110,14 @@ export const InstructionSteps: Record<string, InstructionStep> = {
   "eb77c1b4-76f3-4b3b-9f6a-f63408ebe6a7": {
     arrows: [
       {
-        position: { x: -1350, y: 1075, z: 200 },
-        rotation: { w: 0.7071, x: 0, y: 0.7071, z: 0 },
+        position: { x: -1360, y: 685, z: 390 },
+        rotation: { w: 0.7071, x: 0, y: 0.7071, z: 0.05 },
+        type: "up",
+      },
+      {
+        position: { x: -1334, y: 730, z: 130 },
+        rotation: { w: 0.7071, x: 0, y: 0.8, z: 0 },
+        type: "up",
       },
     ],
     camera: step1Cam,
@@ -135,8 +142,9 @@ export const InstructionSteps: Record<string, InstructionStep> = {
   "25d1a893-3879-4ced-8844-ec57348219ef": {
     arrows: [
       {
-        position: { x: -1350, y: 1075, z: 200 },
+        position: { x: -1490, y: 860, z: 185 },
         rotation: { w: 0.7071, x: 0, y: 0.7071, z: 0 },
+        type: "down",
       },
     ],
     camera: step3Cam,
@@ -156,6 +164,7 @@ export const InstructionSteps: Record<string, InstructionStep> = {
           y: -0.9998411536216736,
           z: -0.01782582886517048,
         },
+        type: "up",
       },
     ],
     camera: step4Cam,

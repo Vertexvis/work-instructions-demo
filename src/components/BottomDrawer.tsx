@@ -3,12 +3,10 @@ import {
   Drawer as MuiDrawer,
   Fab,
   Step,
-  StepConnector as MuiStepConnector,
   StepLabel,
   Stepper,
 } from "@material-ui/core";
 import { drawerClasses } from "@material-ui/core/Drawer";
-import { stepConnectorClasses } from "@material-ui/core/StepConnector";
 import { styled } from "@material-ui/core/styles";
 import { Check, ChevronLeft, ChevronRight, Refresh } from "@material-ui/icons";
 import React from "react";
@@ -25,12 +23,6 @@ const BtnMargin = 5;
 
 const Drawer = styled(MuiDrawer)(() => ({
   [`& .${drawerClasses.paper}`]: { height: BottomDrawerHeight },
-}));
-
-const StepConnector = styled(MuiStepConnector)(() => ({
-  [`& .${stepConnectorClasses.line}`]: {
-    marginLeft: 20,
-  },
 }));
 
 export function BottomDrawer({ onSelect, ready }: Props): JSX.Element {
@@ -95,12 +87,7 @@ export function BottomDrawer({ onSelect, ready }: Props): JSX.Element {
 
   function Steps() {
     return (
-      <Stepper
-        activeStep={activeStep}
-        alternativeLabel
-        connector={<StepConnector />}
-        sx={{ flexGrow: 1 }}
-      >
+      <Stepper activeStep={activeStep} alternativeLabel sx={{ flexGrow: 1 }}>
         {Object.keys(InstructionSteps).map((k) => {
           return (
             <Step key={k}>
