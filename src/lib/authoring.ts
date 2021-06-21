@@ -18,10 +18,10 @@ export interface RenderPartRevisionReq {
   readonly sceneItemSuppliedId?: string;
 }
 
-const ActivePartColor = {
-  ...SelectColor,
-  ...ColorMaterial.fromHex("F59E0B"),
-};
+// const ActivePartColor = {
+//   ...SelectColor,
+//   ...ColorMaterial.fromHex("F59E0B"),
+// };
 
 const BaseUrl = "http://localhost:3000";
 
