@@ -1,8 +1,11 @@
-import { readFileSync } from "fs";
-import { join } from "path";
+import { readdirSync, readFileSync } from "fs";
+import { dirname, extname, join } from "path";
 import sharp from "sharp";
+import { fileURLToPath } from "url";
 
-const offset = 205;
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const offset = 30;
 
 async function resize(path) {
   const image = sharp(readFileSync(join("scripts", path)));
@@ -18,9 +21,7 @@ async function resize(path) {
 }
 
 Promise.all(
-  [
-    "e57ad094-0103-487e-b377-eced7619991e-orig.png",
-    "dbf5540f-56e3-4434-95cb-ae51d8725f06-orig.png",
-    "58b7c10d-49c6-4baa-8b5e-f2f3d738597b-orig.png",
-  ].map((fn) => resize(fn))
+  readdirSync(__dirname)
+    .filter((f) => extname(f) === ".png")
+    .map(resize)
 );

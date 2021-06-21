@@ -12,6 +12,7 @@ import {
   createSceneViewState,
   initializeScene,
   renderPartRevision,
+  RenderPartRevisionReq,
 } from "../lib/authoring";
 import { Config, Configuration, Credentials } from "../lib/config";
 import { flyTo, handleHit as onSelect } from "../lib/scene-items";
@@ -42,9 +43,7 @@ export default function Home({
   const [ghosted, setGhosted] = React.useState(true);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [snackOpen, setSnackOpen] = React.useState(false);
-  const [selected, setSelected] = React.useState<{
-    readonly partRevisionId?: string;
-  }>({});
+  const [selected, setSelected] = React.useState<RenderPartRevisionReq>({});
   const [instructionStep, setInstructionStep] = React.useState<
     InstructionStep | undefined
   >();
@@ -92,9 +91,7 @@ export default function Home({
             onCreateSceneViewState={(name) =>
               createSceneViewState({ name, sceneViewId })
             }
-            onRenderPartRevision={() =>
-              renderPartRevision({ partRevisionId: selected.partRevisionId })
-            }
+            onRenderPartRevision={() => renderPartRevision(selected)}
           />
         )
       }
@@ -123,6 +120,7 @@ export default function Home({
               );
               setSelected({
                 partRevisionId: hit?.partRevisionId?.hex ?? undefined,
+                sceneItemSuppliedId: hit?.itemSuppliedId?.value ?? undefined,
               });
               await onSelect({ detail, hit, viewer: viewer.ref.current });
             }}

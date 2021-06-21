@@ -11,14 +11,12 @@
     "@material-ui/icons": "^5.0.0-alpha.37",
     "@vertexvis/api-client-node": "^0.13",
     "@vertexvis/viewer-react": "^0.9.28-canary.7",
-    "math3d": "^0.2",
     "next": "^11.0",
     "react": "^17.0",
     "react-dom": "^17.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14",
-    "@types/math3d": "^0.2.3",
     "@types/node": "^15",
     "@types/react": "^17.0",
     "@types/react-dom": "^17.0",

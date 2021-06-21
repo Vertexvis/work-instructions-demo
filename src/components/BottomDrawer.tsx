@@ -106,11 +106,12 @@ export function BottomDrawer({ onSelect, ready }: Props): JSX.Element {
             <Step key={k}>
               <StepLabel sx={{ mr: 0 }}></StepLabel>
               <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   height={120}
                   key={k}
                   src={`/${k}.png`}
-                  alt={InstructionSteps[k].name}
+                  alt={`Step ${InstructionSteps[k].step}`}
                 />
               </Box>
             </Step>
