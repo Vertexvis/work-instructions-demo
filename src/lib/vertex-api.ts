@@ -3,7 +3,7 @@ import { AxiosResponse } from "axios";
 import { createWriteStream } from "fs";
 import type { NextApiResponse } from "next";
 
-import { Config } from "./env";
+import { Config } from "./config";
 
 export async function makeCall<T>(
   apiCall: (client: VertexClient) => Promise<AxiosResponse<T>>

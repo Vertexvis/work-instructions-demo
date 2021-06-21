@@ -13,7 +13,7 @@ import {
   initializeScene,
   renderPartRevision,
 } from "../lib/authoring";
-import { Config, Configuration, Credentials } from "../lib/env";
+import { Config, Configuration, Credentials } from "../lib/config";
 import { flyTo, handleHit as onSelect } from "../lib/scene-items";
 import { useViewer } from "../lib/viewer";
 import { InstructionStep } from "../lib/work-instructions";
@@ -116,6 +116,11 @@ export default function Home({
             }}
             onSceneReady={onSceneReady}
             onSelect={async (detail, hit) => {
+              console.debug(
+                `${hit?.itemSuppliedId?.value ?? hit?.itemId?.hex},${
+                  hit?.metadata?.partName
+                }`
+              );
               setSelected({
                 partRevisionId: hit?.partRevisionId?.hex ?? undefined,
               });

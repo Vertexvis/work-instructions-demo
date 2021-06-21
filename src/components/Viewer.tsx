@@ -11,7 +11,7 @@ import {
 } from "@vertexvis/viewer-react";
 import React from "react";
 
-import { StreamCredentials } from "../lib/env";
+import { StreamCredentials } from "../lib/config";
 import { loadSceneViewState } from "../lib/scene-items";
 import { InstructionStep } from "../lib/work-instructions";
 import { Arrow } from "./Arrow";
@@ -47,6 +47,7 @@ type ViewerComponentType = React.ComponentType<
 
 type HOCViewerProps = React.RefAttributes<HTMLVertexViewerElement>;
 
+export const AnimationDurationMs = 1500;
 export const Viewer = onTap(UnwrappedViewer);
 
 function UnwrappedViewer({

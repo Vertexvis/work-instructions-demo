@@ -15,8 +15,6 @@ export function Header({
   return (
     <Box display="flex" width="100%">
       <TextField
-        id="svs-name"
-        label="Name"
         onChange={(e) => setName(e.target.value)}
         size="small"
         sx={{ mr: 2 }}

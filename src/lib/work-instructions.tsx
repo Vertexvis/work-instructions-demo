@@ -12,8 +12,8 @@ interface Arrow {
 }
 
 interface Part {
-  readonly id: string;
   readonly quantity: number;
+  readonly sceneItemSuppliedId: string;
 }
 
 export interface InstructionStep {
@@ -57,6 +57,24 @@ export const LugNutCam: FrameCamera.FrameCamera = {
   },
 };
 
+export const Step1Cam: FrameCamera.FrameCamera = {
+  position: {
+    x: -901.5206298828125,
+    y: 660.30810546875,
+    z: 396.15740966796875,
+  },
+  lookAt: {
+    x: -1377.415771484375,
+    y: 794.2061767578125,
+    z: 236.43722534179688,
+  },
+  up: {
+    x: -0.31933844089508057,
+    y: -0.0046013714745640755,
+    z: 0.9476295113563538,
+  },
+};
+
 export const SuppliedIdToTransform: { readonly [k: string]: number[] } = {
   109640: toMatrix(-35.4580993652344, -48.80400085449219),
   109650: toMatrix(-57.372501373291016, 18.64150047302246),
@@ -68,29 +86,9 @@ export const SuppliedIdToTransform: { readonly [k: string]: number[] } = {
 export const InstructionSteps: Record<string, InstructionStep> = {
   "dbf5540f-56e3-4434-95cb-ae51d8725f06": {
     camera: RimCam,
-    instructions: [
-      <>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Utvitae erat ac
-        massa mattis blandit id a mi. Morbi nibh lacus,pellentesque tincidunt
-        malesuada ac, cursus ornare urna. <strong>Suspendisse vel</strong>{" "}
-        volutpat sapien, nec porta diam. In imperdiet velmagna sed varius.
-      </>,
-      <>
-        Cras semper volutpat tortor eget euismod. Nam in leo in arcudignissim
-        tempus. Suspendisse maximus euismod metus, tempusconsectetur dolor
-        vestibulum quis. Nulla et lacinia metus. Nam velmauris at est ultricies
-        vestibulum. Proin rhoncus nulla ut elitpretium vehicula.
-      </>,
-      <>
-        Ut orci nunc, <strong>semper et ultricies ut</strong>, iaculis mattis
-        nulla. Donec tincidunt est ac erat efficitur, nec cursus velit
-        pellentesque. Duis hendrerit blandit porta. In faucibus arcuipsum, quis
-        pharetra tortor iaculis at. Vivamus rhoncus mi egetlibero egestas
-        tincidunt. Sed ultrices nulla sit amet tortorrhoncus volutpat.
-      </>,
-    ],
+    instructions: [],
     name: "Rim",
-    parts: [{ id: "2e3893ff-3698-423d-a558-9580081f1068", quantity: 1 }],
+    parts: [{ quantity: 1, sceneItemSuppliedId: "108940" }],
     sceneViewStateId: "dbf5540f-56e3-4434-95cb-ae51d8725f06",
     step: 1,
   },
@@ -98,7 +96,7 @@ export const InstructionSteps: Record<string, InstructionStep> = {
     camera: RimCam,
     instructions: [],
     name: "Tire onto rim",
-    parts: [{ id: "ebeb9f9e-5f23-4541-86b1-e7318aed3350", quantity: 1 }],
+    parts: [{ quantity: 1, sceneItemSuppliedId: "108950" }],
     sceneViewStateId: "e57ad094-0103-487e-b377-eced7619991e",
     step: 2,
   },
@@ -110,17 +108,9 @@ export const InstructionSteps: Record<string, InstructionStep> = {
       },
     ],
     camera: LugNutCam,
-    instructions: [
-      <>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam cursus
-        aliquam odio ut accumsan. Sed vestibulum convallis risus vel mollis.
-        Mauris bibendum leo sed orci imperdiet dapibus non in metus. Vivamus a
-        nisl faucibus, dignissim mauris eget, ultrices quam. Class aptent taciti
-        sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-      </>,
-    ],
+    instructions: [],
     name: "Lug nuts into rim",
-    parts: [{ id: "23fb3b5e-a8e6-4a94-b03d-da84fbcba3fb", quantity: 5 }],
+    parts: [{ quantity: 5, sceneItemSuppliedId: "109640" }],
     sceneViewStateId: "58b7c10d-49c6-4baa-8b5e-f2f3d738597b",
     step: 3,
   },

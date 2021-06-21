@@ -33,10 +33,11 @@ export function Parts({ onClose, step }: Props): JSX.Element {
               display: "flex",
             }}
           >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               height={120}
-              src={`/${p.id}.png`}
-              alt={`Part revision ${p.id}`}
+              src={`/${p.sceneItemSuppliedId}.png`}
+              alt={`Part revision thumbnail for scene item ${p.sceneItemSuppliedId}`}
             />
             <TypographyGutter>{`x ${p.quantity}`}</TypographyGutter>
           </Box>

@@ -6,7 +6,7 @@ import {
 import { createWriteStream } from "fs";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { SceneId } from "../../lib/env";
+import { SceneId } from "../../lib/config";
 import {
   createFile,
   errorRes,

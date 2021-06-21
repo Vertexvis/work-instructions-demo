@@ -1,14 +1,13 @@
 import { SpeedDial, SpeedDialAction } from "@material-ui/core";
 import { ZoomOutMap } from "@material-ui/icons";
 
-import { Action } from "./Viewer";
+import { Action, AnimationDurationMs } from "./Viewer";
 
 interface Props {
   readonly viewer: React.MutableRefObject<HTMLVertexViewerElement | null>;
 }
 
 export function ViewerSpeedDial({ viewer }: Props): JSX.Element {
-  const AnimationDurationMs = 1500;
   const actions: Action[] = [
     {
       icon: <ZoomOutMap />,

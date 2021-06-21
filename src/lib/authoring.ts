@@ -1,7 +1,7 @@
 import { ColorMaterial, Components } from "@vertexvis/viewer";
 
 import { AnimationDurationMs, SelectColor } from "./scene-items";
-import { LugNutCam, SuppliedIdToTransform } from "./work-instructions";
+import { Step1Cam } from "./work-instructions";
 
 interface InitializeReq {
   readonly viewer: Components.VertexViewer | null;
@@ -32,8 +32,8 @@ export async function createSceneViewState({
   console.debug(
     await (
       await fetch(`${BaseUrl}/api/scene-view-states`, {
-        method: "POST",
         body: JSON.stringify({ name, sceneViewId }),
+        method: "POST",
       })
     ).json()
   );
@@ -49,25 +49,25 @@ export async function initializeScene({
 
   await scene
     .camera()
-    .flyTo({ camera: LugNutCam })
+    .flyTo({ camera: Step1Cam })
     .render({ animation: { milliseconds: AnimationDurationMs } });
 
   await scene
     .items((op) => {
       const idsQuery = op.where((q) =>
         q.withSuppliedIds([
-          "108940", // 12x20 OZ HLT ET 3 SPOKE
-          "108950", // michelin sport cup 2 345-30zr20 on rim_(Default)
+          "109570", // Z06 inner hub(Default)
+          "109720", // SS Spindle Kyle Mirror(Default)
         ])
       );
       return [
-        ...Object.keys(SuppliedIdToTransform).map((k) =>
-          op
-            .where((q) => q.withSuppliedId(k))
-            .show()
-            .transform(SuppliedIdToTransform[k])
-            .materialOverride(ActivePartColor)
-        ),
+        // ...Object.keys(SuppliedIdToTransform).map((k) =>
+        //   op
+        //     .where((q) => q.withSuppliedId(k))
+        //     .show()
+        //     .transform(SuppliedIdToTransform[k])
+        //     .materialOverride(ActivePartColor)
+        // ),
         op.where((q) => q.all()).hide(),
         idsQuery.show(),
         // op
@@ -86,8 +86,8 @@ export async function renderPartRevision({
   console.debug(
     await (
       await fetch(`${BaseUrl}/api/part-revisions`, {
-        method: "POST",
         body: JSON.stringify({ partRevisionId }),
+        method: "POST",
       })
     ).json()
   );
