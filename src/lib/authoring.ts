@@ -1,7 +1,7 @@
 import { head } from "@vertexvis/api-client-node";
-import { ColorMaterial, Components } from "@vertexvis/viewer";
+import { Components } from "@vertexvis/viewer";
 
-import { AnimationDurationMs, SelectColor } from "./scene-items";
+import { AnimationDurationMs } from "./scene-items";
 import { InstructionSteps } from "./work-instructions";
 
 interface InitializeReq {
@@ -17,11 +17,6 @@ export interface RenderPartRevisionReq {
   readonly partRevisionId?: string;
   readonly sceneItemSuppliedId?: string;
 }
-
-// const ActivePartColor = {
-//   ...SelectColor,
-//   ...ColorMaterial.fromHex("F59E0B"),
-// };
 
 const BaseUrl = "http://localhost:3000";
 

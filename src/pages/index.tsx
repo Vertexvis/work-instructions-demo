@@ -116,7 +116,9 @@ export default function Home({
               console.debug(
                 `${hit?.itemSuppliedId?.value ?? hit?.itemId?.hex},${
                   hit?.metadata?.partName
-                }`
+                } at ${JSON.stringify(hit?.hitNormal)} ${JSON.stringify(
+                  hit?.hitPoint
+                )}`
               );
               setSelected({
                 partRevisionId: hit?.partRevisionId?.hex ?? undefined,
