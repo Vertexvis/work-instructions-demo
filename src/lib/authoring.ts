@@ -44,7 +44,7 @@ export async function initializeScene({
   const scene = await viewer.scene();
   if (scene == null) return;
 
-  const { camera, parts } = head(
+  const { camera, sceneItemsVisible } = head(
     Object.values(InstructionSteps).filter((v) => v.step === 3)
   );
 
@@ -57,20 +57,7 @@ export async function initializeScene({
     .items((op) => {
       return [
         op.where((q) => q.all()).hide(),
-        op
-          .where((q) =>
-            q.withSuppliedIds(
-              parts.flatMap((p) =>
-                p.other
-                  ? p.other.concat(p.sceneItemSuppliedId)
-                  : p.sceneItemSuppliedId
-              )
-            )
-          )
-          .show(),
-        // op
-        //   .where((q) => q.withSuppliedId("108940"))
-        //   .materialOverride(ActivePartColor),
+        op.where((q) => q.withSuppliedIds(sceneItemsVisible)).show(),
       ];
     })
     .execute();

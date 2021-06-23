@@ -10,7 +10,6 @@ interface Arrow {
 interface Part {
   readonly quantity: number;
   readonly sceneItemSuppliedId: string;
-  readonly other?: string[];
 }
 
 export interface InstructionStep {
@@ -18,6 +17,7 @@ export interface InstructionStep {
   readonly camera: FrameCamera.FrameCamera;
   readonly instructions: React.ReactNode[];
   readonly parts: Part[];
+  readonly sceneItemsVisible: string[];
   readonly sceneViewStateId: string;
   readonly step: number;
   readonly title: string;
@@ -77,16 +77,17 @@ const step4Cam: FrameCamera.FrameCamera = {
   },
 };
 
-const step2Parts = [
-  { quantity: 1, sceneItemSuppliedId: "100820" }, // M12 heim MHMR12T
-  { quantity: 1, sceneItemSuppliedId: "109570" }, // Z06 inner hub(Default)
-  { quantity: 2, sceneItemSuppliedId: "109690", other: ["109700"] }, // Howe ball joint ball 917-22320(Default)
-  { quantity: 1, sceneItemSuppliedId: "109720" }, // SS Spindle Kyle Mirror(Default)
-  { quantity: 1, sceneItemSuppliedId: "109740" }, // Outboard stub shaft
-  { quantity: 1, sceneItemSuppliedId: "110850" }, // wheel mech housing
-  { quantity: 1, sceneItemSuppliedId: "111490" }, // wheel axle(Default)
-  { quantity: 1, sceneItemSuppliedId: "111700" }, // Control Arm RLLS
-  { quantity: 1, sceneItemSuppliedId: "111740" }, // Toe Link
+const step2SceneItemsVisible = [
+  "100820", // M12 heim MHMR12T
+  "109570", // Z06 inner hub(Default)
+  "109690", // Howe ball joint ball 917-22320(Default)
+  "109700", // Howe ball joint ball 917-22320(Default)
+  "109720", // SS Spindle Kyle Mirror(Default)
+  "109740", // Outboard stub shaft
+  "110850", // wheel mech housing
+  "111490", // wheel axle(Default)
+  "111700", // Control Arm RLLS
+  "111740", // Toe Link
 ];
 
 export const InstructionSteps: Record<string, InstructionStep> = {
@@ -100,9 +101,10 @@ export const InstructionSteps: Record<string, InstructionStep> = {
       <>Using a T55 socket torque the bolts to 75 ft./lbs.</>,
     ],
     parts: [
-      { quantity: 1, sceneItemSuppliedId: "109570" }, // Z06 inner hub(Default)
-      { quantity: 1, sceneItemSuppliedId: "109720" }, // SS Spindle Kyle Mirror(Default)
+      { quantity: 1, sceneItemSuppliedId: "109570" },
+      { quantity: 1, sceneItemSuppliedId: "109720" },
     ],
+    sceneItemsVisible: ["109570", "109720"],
     sceneViewStateId: "1f4f69e2-196e-49dd-9455-2b0730e8a102",
     step: 1,
     title: "Install the inner hub on the spindle",
@@ -134,7 +136,12 @@ export const InstructionSteps: Record<string, InstructionStep> = {
         install a cotter pin.
       </>,
     ],
-    parts: step2Parts,
+    parts: [
+      { quantity: 1, sceneItemSuppliedId: "109570" },
+      { quantity: 2, sceneItemSuppliedId: "109690" },
+      { quantity: 1, sceneItemSuppliedId: "109720" },
+    ],
+    sceneItemsVisible: step2SceneItemsVisible,
     sceneViewStateId: "eb77c1b4-76f3-4b3b-9f6a-f63408ebe6a7",
     step: 2,
     title: "Install the spindle on the ball joints",
@@ -149,7 +156,11 @@ export const InstructionSteps: Record<string, InstructionStep> = {
     ],
     camera: step3Cam,
     instructions: [],
-    parts: step2Parts,
+    parts: [
+      { quantity: 1, sceneItemSuppliedId: "100820" },
+      { quantity: 1, sceneItemSuppliedId: "111740" },
+    ],
+    sceneItemsVisible: step2SceneItemsVisible,
     sceneViewStateId: "25d1a893-3879-4ced-8844-ec57348219ef",
     step: 3,
     title: "Install the stabilizer arm",
@@ -170,14 +181,19 @@ export const InstructionSteps: Record<string, InstructionStep> = {
     camera: step4Cam,
     instructions: [<>Torque the bolts to 45 ft./lbs</>],
     parts: [
-      ...step2Parts,
-      {
-        quantity: 5,
-        sceneItemSuppliedId: "109590", // M10x35 90128A289(90128A289)
-        other: ["109600", "109610", "109620", "109630"],
-      },
-      { quantity: 1, sceneItemSuppliedId: "109710" }, // fender frame(Default)
-      { quantity: 1, sceneItemSuppliedId: "109730" }, // fender rear street(Default)
+      { quantity: 5, sceneItemSuppliedId: "109590" },
+      { quantity: 1, sceneItemSuppliedId: "109710" },
+      { quantity: 1, sceneItemSuppliedId: "109730" },
+    ],
+    sceneItemsVisible: [
+      ...step2SceneItemsVisible,
+      "109590", // M10x35 90128A289(90128A289)
+      "109600", // M10x35 90128A289(90128A289)
+      "109610", // M10x35 90128A289(90128A289)
+      "109620", // M10x35 90128A289(90128A289)
+      "109630", // M10x35 90128A289(90128A289)
+      "109710", // fender frame(Default)
+      "109730", // fender rear street(Default)
     ],
     sceneViewStateId: "4e445630-cbe5-4e57-92a2-cfca5ee13317",
     step: 4,
