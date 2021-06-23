@@ -98,7 +98,7 @@ export const InstructionSteps: Record<string, InstructionStep> = {
         Install (3) M12 x 1.25 mm torx head bolts with Loctite® Threadlocker
         271™.
       </>,
-      <>Using a T55 socket torque the bolts to 75 ft./lbs.</>,
+      <>Using a T55 socket, torque the bolts to 75 ft/lbs.</>,
     ],
     parts: [
       { quantity: 1, sceneItemSuppliedId: "109570" },
@@ -125,10 +125,10 @@ export const InstructionSteps: Record<string, InstructionStep> = {
     camera: step1Cam,
     instructions: [
       <>
-        Clean the ID of the Spindle and the OD of the ball joints with brake
+        Clean the ID of the spindle and the OD of the ball joints with brake
         cleaner and degreaser.
       </>,
-      <>Wipe clean with lint free shop towel.</>,
+      <>Wipe clean with a lint free shop towel.</>,
       <>Install the washers and castle nuts on the ball joints.</>,
       <>Torque the castle nuts to 30 ft/lbs and turn it an additional 140°.</>,
       <>
@@ -179,7 +179,7 @@ export const InstructionSteps: Record<string, InstructionStep> = {
       },
     ],
     camera: step4Cam,
-    instructions: [<>Torque the bolts to 45 ft./lbs</>],
+    instructions: [<>Torque the bolts to 45 ft/lbs.</>],
     parts: [
       { quantity: 5, sceneItemSuppliedId: "109590" },
       { quantity: 1, sceneItemSuppliedId: "109710" },
