@@ -58,7 +58,7 @@ export function Instructions({
     <>
       <ContentHeader onClose={onClose} title={`${stepNum}Instructions`} />
       {step.title && (
-        <Typography gutterBottom variant="h6">
+        <Typography sx={{ fontWeight: "fontWeightBold", mb: 3 }}>
           {step?.title}
         </Typography>
       )}
