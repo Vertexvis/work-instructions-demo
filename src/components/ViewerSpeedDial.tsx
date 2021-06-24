@@ -2,7 +2,7 @@ import { SpeedDial, SpeedDialAction } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
 import { ReportProblemOutlined, ZoomOutMap } from "@material-ui/icons";
 
-import { Action, AnimationDurationMs } from "./Viewer";
+import { Action, AnimationDurationMs, ToolButtons } from "./Viewer";
 
 interface Props {
   readonly onClick: (button: ToolButtons) => void;
