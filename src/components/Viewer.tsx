@@ -74,7 +74,7 @@ function UnwrappedViewer({
     >
       <VertexViewerToolbar placement="top-left">
         <Box sx={{ alignItems: "center", display: "flex", ml: 3, mt: 3 }}>
-          <Stations sx={{ mr: 2 }} />
+          <Stations sx={{ backgroundColor: "white", mr: 2 }} />
           <Link
             href="https://github.com/Vertexvis/work-instructions-demo"
             rel="noreferrer"
@@ -89,7 +89,7 @@ function UnwrappedViewer({
         <InstructionSpeedDial onClick={onClick} />
       </VertexViewerToolbar>
       <VertexViewerToolbar placement="bottom-right">
-        <ViewerSpeedDial viewer={viewer} />
+        <ViewerSpeedDial onClick={onClick} viewer={viewer} />
       </VertexViewerToolbar>
       <VertexViewerDomRenderer>
         {instructionStep?.arrows?.map((a, i) => (

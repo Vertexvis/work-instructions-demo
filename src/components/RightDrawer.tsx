@@ -14,6 +14,7 @@ export type Content = "settings" | "instructions" | "parts";
 interface Props {
   readonly content?: Content;
   readonly instructionStep?: InstructionStep;
+  readonly onBeginAssembly: () => void;
   readonly onClose: () => void;
   readonly settings: SettingsProps;
 }
@@ -29,6 +30,7 @@ const Drawer = styled(MuiDrawer)(() => ({
 export function RightDrawer({
   content,
   instructionStep,
+  onBeginAssembly,
   onClose,
   settings,
 }: Props): JSX.Element {
@@ -38,7 +40,13 @@ export function RightDrawer({
     if (content === "settings")
       return <Settings onClose={onClose} settings={settings} />;
     if (content === "instructions")
-      return <Instructions onClose={onClose} step={instructionStep} />;
+      return (
+        <Instructions
+          onBeginAssembly={onBeginAssembly}
+          onClose={onClose}
+          step={instructionStep}
+        />
+      );
     return <Parts onClose={onClose} step={instructionStep} />;
   }
 
@@ -49,7 +57,7 @@ export function RightDrawer({
       sx={{ flexShrink: 0 }}
       variant="persistent"
     >
-      <Box sx={{ p: 1 }}>
+      <Box sx={{ p: 2 }}>
         <Content />
       </Box>
     </Drawer>

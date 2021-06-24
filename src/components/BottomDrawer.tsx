@@ -11,12 +11,14 @@ import { styled } from "@material-ui/core/styles";
 import { Check, ChevronLeft, ChevronRight, Refresh } from "@material-ui/icons";
 import React from "react";
 
-import { InstructionStep, InstructionSteps } from "../lib/work-instructions";
+import { InstructionSteps } from "../lib/work-instructions";
 import { BottomDrawerHeight } from "./Layout";
 
 interface Props {
-  readonly onSelect: (is?: InstructionStep) => void;
+  readonly activeStep: number;
+  readonly onSelect: (activeStep: number) => void;
   readonly ready: boolean;
+  readonly stepIds: string[];
 }
 
 const BtnMargin = 5;
@@ -25,21 +27,18 @@ const Drawer = styled(MuiDrawer)(() => ({
   [`& .${drawerClasses.paper}`]: { height: BottomDrawerHeight },
 }));
 
-export function BottomDrawer({ onSelect, ready }: Props): JSX.Element {
-  const stepIds = Object.keys(InstructionSteps);
-  const [activeStep, setActiveStep] = React.useState(-1);
-
-  React.useEffect(() => {
-    onSelect(InstructionSteps[stepIds[activeStep]]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeStep, ready]);
-
+export function BottomDrawer({
+  activeStep,
+  onSelect,
+  ready,
+  stepIds,
+}: Props): JSX.Element {
   function PrevBtn() {
     return (
       <Fab
         disabled={!ready || activeStep === -1 || activeStep === 0}
         sx={{ ml: BtnMargin, mr: "auto" }}
-        onClick={() => setActiveStep((prev) => prev - 1)}
+        onClick={() => onSelect(activeStep - 1)}
       >
         <ChevronLeft />
       </Fab>
@@ -51,7 +50,7 @@ export function BottomDrawer({ onSelect, ready }: Props): JSX.Element {
       <Fab
         disabled={!ready}
         sx={{ ml: "auto", mr: BtnMargin }}
-        onClick={() => setActiveStep((prev) => prev + 1)}
+        onClick={() => onSelect(activeStep + 1)}
       >
         <ChevronRight />
       </Fab>
@@ -64,7 +63,7 @@ export function BottomDrawer({ onSelect, ready }: Props): JSX.Element {
         color={"primary"}
         disabled={!ready || activeStep >= stepIds.length}
         sx={{ ml: "auto", mr: BtnMargin }}
-        onClick={() => setActiveStep((prev) => prev + 1)}
+        onClick={() => onSelect(activeStep + 1)}
         variant="extended"
       >
         <Check sx={{ mr: 1 }} />
@@ -78,7 +77,7 @@ export function BottomDrawer({ onSelect, ready }: Props): JSX.Element {
       <Fab
         disabled={!ready}
         sx={{ ml: "auto", mr: 2 }}
-        onClick={() => setActiveStep(-1)}
+        onClick={() => onSelect(-1)}
       >
         <Refresh />
       </Fab>

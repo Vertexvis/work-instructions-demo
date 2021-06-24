@@ -17,7 +17,7 @@ import {
 import { Config, Configuration, Credentials } from "../lib/config";
 import { flyTo, handleHit as onSelect } from "../lib/scene-items";
 import { useViewer } from "../lib/viewer";
-import { InstructionStep } from "../lib/work-instructions";
+import { InstructionStep, InstructionSteps } from "../lib/work-instructions";
 
 export const getServerSideProps = (): Record<string, Configuration> => {
   return {
@@ -33,20 +33,24 @@ export default function Home({
   vertexEnv,
 }: Configuration): JSX.Element {
   const viewer = useViewer();
+
+  const [activeStep, setActiveStep] = React.useState<{
+    num: number;
+    step: InstructionStep | undefined;
+  }>({ num: -1, step: undefined });
   const [sceneViewId, setSceneViewId] = React.useState<string | undefined>(
     undefined
   );
   const [ready, setReady] = React.useState(false);
   const [rightDrawerContent, setRightDrawerContent] = React.useState<
     Content | undefined
-  >();
+  >("instructions");
   const [ghosted, setGhosted] = React.useState(true);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [snackOpen, setSnackOpen] = React.useState(false);
   const [selected, setSelected] = React.useState<RenderPartRevisionReq>({});
-  const [instructionStep, setInstructionStep] = React.useState<
-    InstructionStep | undefined
-  >();
+
+  const stepIds = Object.keys(InstructionSteps);
 
   async function onSceneReady() {
     const v = viewer.ref.current;
@@ -61,29 +65,39 @@ export default function Home({
     if (authoring) await initializeScene({ viewer: v });
   }
 
-  async function onInstructionStepSelected(
-    is?: InstructionStep
-  ): Promise<void> {
-    if (!ready || is?.sceneViewStateId === instructionStep?.sceneViewStateId) {
-      return;
-    }
+  async function onInstructionStepSelected(num: number): Promise<void> {
+    if (!ready) return;
 
+    const step = InstructionSteps[stepIds[num]];
     setReady(false);
     function onComplete() {
       delay(500).then(() => {
-        setInstructionStep(is);
+        setActiveStep({ num, step });
         setReady(true);
       });
     }
 
-    const res = await flyTo({ camera: is?.camera, viewer: viewer.ref.current });
+    const res = await flyTo({
+      camera: step?.camera,
+      viewer: viewer.ref.current,
+    });
     res ? res.onAnimationCompleted.on(onComplete) : onComplete();
+  }
+
+  function handleBeginAssembly() {
+    const num = 0;
+    setActiveStep({ num, step: InstructionSteps[stepIds[num]] });
   }
 
   return (
     <Layout
       bottomDrawer={
-        <BottomDrawer onSelect={onInstructionStepSelected} ready={ready} />
+        <BottomDrawer
+          activeStep={activeStep.num}
+          onSelect={onInstructionStepSelected}
+          ready={ready}
+          stepIds={stepIds}
+        />
       }
       header={
         authoring && (
@@ -116,17 +130,18 @@ export default function Home({
               console.debug(
                 `${hit?.itemSuppliedId?.value ?? hit?.itemId?.hex},${
                   hit?.metadata?.partName
-                } at ${JSON.stringify(hit?.hitNormal)} ${JSON.stringify(
-                  hit?.hitPoint
-                )}`
+                }`
               );
               setSelected({
-                partRevisionId: hit?.partRevisionId?.hex ?? undefined,
+                part: {
+                  name: hit?.metadata?.partName ?? undefined,
+                  revisionId: hit?.partRevisionId?.hex ?? undefined,
+                },
                 sceneItemSuppliedId: hit?.itemSuppliedId?.value ?? undefined,
               });
               await onSelect({ detail, hit, viewer: viewer.ref.current });
             }}
-            instructionStep={instructionStep}
+            instructionStep={activeStep.step}
             streamAttributes={{
               experimentalGhosting: {
                 enabled: { value: ghosted },
@@ -140,7 +155,8 @@ export default function Home({
       rightDrawer={
         <RightDrawer
           content={rightDrawerContent}
-          instructionStep={instructionStep}
+          instructionStep={activeStep.step}
+          onBeginAssembly={handleBeginAssembly}
           onClose={() => setRightDrawerContent(undefined)}
           settings={{ ghosted, onGhostToggle: setGhosted }}
         />
@@ -154,7 +170,7 @@ export default function Home({
             setDialogOpen(false);
           }}
           open={dialogOpen}
-          partRevisionId={selected.partRevisionId}
+          part={selected.part}
         />
       )}
       <Snackbar

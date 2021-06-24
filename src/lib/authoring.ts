@@ -13,8 +13,13 @@ export interface CreateSceneViewStateReq {
   readonly sceneViewId?: string;
 }
 
+export interface Part {
+  readonly name?: string;
+  readonly revisionId?: string;
+}
+
 export interface RenderPartRevisionReq {
-  readonly partRevisionId?: string;
+  readonly part?: Part;
   readonly sceneItemSuppliedId?: string;
 }
 
@@ -64,15 +69,18 @@ export async function initializeScene({
 }
 
 export async function renderPartRevision({
-  partRevisionId,
+  part,
   sceneItemSuppliedId,
 }: RenderPartRevisionReq): Promise<void> {
-  if (!partRevisionId || !sceneItemSuppliedId) return;
+  if (!part || !part.revisionId || !sceneItemSuppliedId) return;
 
   console.debug(
     await (
       await fetch(`${BaseUrl}/api/part-revisions`, {
-        body: JSON.stringify({ partRevisionId, sceneItemSuppliedId }),
+        body: JSON.stringify({
+          partRevisionId: part.revisionId,
+          sceneItemSuppliedId,
+        }),
         method: "POST",
       })
     ).json()

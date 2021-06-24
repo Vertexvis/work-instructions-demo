@@ -1,18 +1,25 @@
 import { SpeedDial, SpeedDialAction } from "@material-ui/core";
-import { ZoomOutMap } from "@material-ui/icons";
+import { red } from "@material-ui/core/colors";
+import { ReportProblemOutlined, ZoomOutMap } from "@material-ui/icons";
 
 import { Action, AnimationDurationMs } from "./Viewer";
 
 interface Props {
+  readonly onClick: (button: ToolButtons) => void;
   readonly viewer: React.MutableRefObject<HTMLVertexViewerElement | null>;
 }
 
-export function ViewerSpeedDial({ viewer }: Props): JSX.Element {
+export function ViewerSpeedDial({ onClick, viewer }: Props): JSX.Element {
   const actions: Action[] = [
     {
       icon: <ZoomOutMap />,
       name: "Fit all",
       onClick: () => fitAll(),
+    },
+    {
+      icon: <ReportProblemOutlined style={{ color: red[500] }} />,
+      name: "Report issue",
+      onClick: () => onClick("issue"),
     },
   ];
 

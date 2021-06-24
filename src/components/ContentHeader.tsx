@@ -14,7 +14,7 @@ export function ContentHeader({ onClose, title }: Props): JSX.Element {
         alignItems: "center",
         display: "flex",
         justifyContent: "space-between",
-        mb: 1,
+        mb: 2,
       }}
     >
       <Typography variant="h5">{title}</Typography>

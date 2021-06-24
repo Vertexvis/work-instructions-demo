@@ -410,17 +410,15 @@
   integrity sha512-zMM9Ds+SawiUkakS7y94Ymqx+S0ORzpG3frZirN3l+UlXUmSUR7hF4wxCVqW+ei94JzV5kt0uXBcoOEAuiydrw==
 
 "@material-ui/core@^5.0.0-alpha.37":
-  version "5.0.0-alpha.37"
-  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-5.0.0-alpha.37.tgz#f2b526056ecceaa1c95083838c3c66cc3f00a106"
-  integrity sha512-6jE8WbEM9EIzSBzQqcEeoU+Y15setZW7fNvoIn44tqvQy75ATwIziPIKThCOtMtc1X7D8SpG4EXEwsFzMlGgcw==
+  version "5.0.0-alpha.38"
+  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-5.0.0-alpha.38.tgz#a74eb5ac3979417dc77ac1b300d31a9d7c6fe49a"
+  integrity sha512-ny/SnP4CxIeCMxiQNedo7dr3XVr07EroIA33p8AnbBhPCGWC8QRRsUNceiUjKZTWx2VumPcmWTlCzLtN14KpIw==
   dependencies:
     "@babel/runtime" "^7.4.4"
-    "@material-ui/private-theming" "5.0.0-alpha.35"
-    "@material-ui/styled-engine" "5.0.0-alpha.34"
-    "@material-ui/system" "5.0.0-alpha.37"
+    "@material-ui/system" "5.0.0-alpha.38"
     "@material-ui/types" "6.0.1"
-    "@material-ui/unstyled" "5.0.0-alpha.37"
-    "@material-ui/utils" "5.0.0-alpha.35"
+    "@material-ui/unstyled" "5.0.0-alpha.38"
+    "@material-ui/utils" "5.0.0-alpha.36"
     "@popperjs/core" "^2.4.4"
     "@types/react-transition-group" "^4.2.0"
     clsx "^1.0.4"
@@ -437,13 +435,13 @@
   dependencies:
     "@babel/runtime" "^7.4.4"
 
-"@material-ui/private-theming@5.0.0-alpha.35":
-  version "5.0.0-alpha.35"
-  resolved "https://registry.yarnpkg.com/@material-ui/private-theming/-/private-theming-5.0.0-alpha.35.tgz#6efb33abff0cdee5890b0ddf67564244b35630f2"
-  integrity sha512-D02L9kYjnMd8PtJUSXpiBk13+FnjQIDWINzBtRJXpwDooA7M3ejtTGPp+YJnP/wYs4nKdh852/+WiRk3VI5q4Q==
+"@material-ui/private-theming@5.0.0-alpha.36":
+  version "5.0.0-alpha.36"
+  resolved "https://registry.yarnpkg.com/@material-ui/private-theming/-/private-theming-5.0.0-alpha.36.tgz#bf184273665fc18c9ced168a3c031af8bdb02d79"
+  integrity sha512-YpHL0Z9fnk2ARdsPBFiTVTyRc94w4xVZuS+ncw/JRw1x4dtV2h10fdXoN2CxSnu+dxDw0BerDk0dDIAIaEc7OQ==
   dependencies:
     "@babel/runtime" "^7.4.4"
-    "@material-ui/utils" "5.0.0-alpha.35"
+    "@material-ui/utils" "5.0.0-alpha.36"
     prop-types "^15.7.2"
 
 "@material-ui/styled-engine@5.0.0-alpha.34":
@@ -455,16 +453,16 @@
     "@emotion/cache" "^11.0.0"
     prop-types "^15.7.2"
 
-"@material-ui/system@5.0.0-alpha.37":
-  version "5.0.0-alpha.37"
-  resolved "https://registry.yarnpkg.com/@material-ui/system/-/system-5.0.0-alpha.37.tgz#0bac409badb8e9fcbd3c3da05ec071db2edf2630"
-  integrity sha512-4eu05aXLWMzth6nsgRT6bvr88jDlPEsum0s9JZ4SO6MR/vqoVSpWk8Vesv2YifwPlvr6k+dv5XXb+DCdsYhIrQ==
+"@material-ui/system@5.0.0-alpha.38":
+  version "5.0.0-alpha.38"
+  resolved "https://registry.yarnpkg.com/@material-ui/system/-/system-5.0.0-alpha.38.tgz#a4f4938ca1c059acb1ba31e849cc613344b21fe9"
+  integrity sha512-W0F6qkopixj7NRsxFeYJ3HE/AxWe9TswY043WYUYBON21X0VCczRNMknWWj9TXqkm0X9OMQnT8qFQOiu3vCXYw==
   dependencies:
     "@babel/runtime" "^7.4.4"
-    "@material-ui/private-theming" "5.0.0-alpha.35"
+    "@material-ui/private-theming" "5.0.0-alpha.36"
     "@material-ui/styled-engine" "5.0.0-alpha.34"
     "@material-ui/types" "6.0.1"
-    "@material-ui/utils" "5.0.0-alpha.35"
+    "@material-ui/utils" "5.0.0-alpha.36"
     clsx "^1.0.4"
     csstype "^3.0.2"
     prop-types "^15.7.2"
@@ -474,21 +472,21 @@
   resolved "https://registry.yarnpkg.com/@material-ui/types/-/types-6.0.1.tgz#bfcdcd3bb5091e5feac2b191db516543d84e26af"
   integrity sha512-t53C2BZE59e8ao38EDIZdM2smPDSEo5Xx9XxQ/MNM9Ph63Mu4vj5pmECiXkYp0y2OrvFiiZhcqRWV34SBOA18g==
 
-"@material-ui/unstyled@5.0.0-alpha.37":
-  version "5.0.0-alpha.37"
-  resolved "https://registry.yarnpkg.com/@material-ui/unstyled/-/unstyled-5.0.0-alpha.37.tgz#984e250f17fb7bff391ba58abfabd41bccd1d097"
-  integrity sha512-otny+k5PqaoT2nK/4DqeO1yguZByDKx9zC+RjVnI47Q3gm/iuxILy5URulXar3Sg+Zbnn48MddoWOKSFKFz6ew==
+"@material-ui/unstyled@5.0.0-alpha.38":
+  version "5.0.0-alpha.38"
+  resolved "https://registry.yarnpkg.com/@material-ui/unstyled/-/unstyled-5.0.0-alpha.38.tgz#9ba4986a149bb74b85720c6532fea302889351f8"
+  integrity sha512-eQvK72gndxJoQVpc4PorZ+6f1vxkRPgeGFlmuLDP8LZiP1YTn+zh3Z/s+jNQSpi/Kw2kdbOtf7a1jDe2rmuDZg==
   dependencies:
     "@babel/runtime" "^7.4.4"
-    "@material-ui/utils" "5.0.0-alpha.35"
+    "@material-ui/utils" "5.0.0-alpha.36"
     clsx "^1.0.4"
     prop-types "^15.7.2"
     react-is "^17.0.0"
 
-"@material-ui/utils@5.0.0-alpha.35":
-  version "5.0.0-alpha.35"
-  resolved "https://registry.yarnpkg.com/@material-ui/utils/-/utils-5.0.0-alpha.35.tgz#89078592c42bca5db712e82e12d56cd4be737c01"
-  integrity sha512-Msu+zIXd7Y2JrTU9JIf0xjjjAMdWEIdlj2Tmj9bSYFF6bgStrQ1WXXZxxFz5GmdzT7FcLi5U3PqBynSNX/QDGA==
+"@material-ui/utils@5.0.0-alpha.36":
+  version "5.0.0-alpha.36"
+  resolved "https://registry.yarnpkg.com/@material-ui/utils/-/utils-5.0.0-alpha.36.tgz#ce8109f863bea3e66f20c22832c8fa678182f160"
+  integrity sha512-HnDeA1C4u4DwPGXJrCaqhgOGV2lezrmodTUkKB7gd5l2Cjd1V/RmsOEB37e/k15oPA8PwDeWlQzhsppMcr1jlw==
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@types/prop-types" "^15.7.3"
@@ -769,9 +767,9 @@
     eslint-visitor-keys "^2.0.0"
 
 "@vertexvis/api-client-node@^0.13":
-  version "0.13.2"
-  resolved "https://registry.yarnpkg.com/@vertexvis/api-client-node/-/api-client-node-0.13.2.tgz#6aafd63820f3ce92c47f6f0915e8349cb1434295"
-  integrity sha512-UsGFyMqxxgoyzXgT1L3o7xvqLeWqobRTTbwtdvbsXEQy205SsV+PzWWBBY9b3Umd6+Tc+wdmIMoDUv+pB5GDeQ==
+  version "0.13.3"
+  resolved "https://registry.yarnpkg.com/@vertexvis/api-client-node/-/api-client-node-0.13.3.tgz#94ed0cb1727812c24e5f29e28f2fbce5bdc58769"
+  integrity sha512-OG9i/ttTuVQvomZuM6AC8tzvSvtkYemCvqn42FQCjPJLrNCucFah1v86/RYY17pf4jx2PB7eE06zTKQhMfNpUw==
   dependencies:
     axios "^0.21"
     p-limit "^3.1"
@@ -1660,9 +1658,9 @@ duplexer2@^0.1.2:
     readable-stream "^2.0.2"
 
 electron-to-chromium@^1.3.723:
-  version "1.3.755"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.755.tgz#4b6101f13de910cf3f0a1789ddc57328133b9332"
-  integrity sha512-BJ1s/kuUuOeo1bF/EM2E4yqW9te0Hpof3wgwBx40AWJE18zsD1Tqo0kr7ijnOc+lRsrlrqKPauJAHqaxOItoUA==
+  version "1.3.756"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.756.tgz#942cee59cd64d19f576d8d5804eef09cb423740c"
+  integrity sha512-WsmJym1TMeHVndjPjczTFbnRR/c4sbzg8fBFtuhlb2Sru3i/S1VGpzDSrv/It8ctMU2bj8G7g7/O3FzYMGw6eA==
 
 elliptic@^6.5.3:
   version "6.5.4"

@@ -1,6 +1,5 @@
 import { SpeedDial, SpeedDialAction } from "@material-ui/core";
 import {
-  ReportProblemOutlined,
   Settings,
   TextSnippetOutlined,
   WidgetsOutlined,
@@ -29,11 +28,6 @@ export function InstructionSpeedDial({ onClick }: Props): JSX.Element {
       name: "Parts List",
       onClick: () => onClick("parts"),
     },
-    {
-      icon: <ReportProblemOutlined />,
-      name: "Report issue",
-      onClick: () => onClick("issue"),
-    },
   ];
 
   return (
@@ -48,8 +42,8 @@ export function InstructionSpeedDial({ onClick }: Props): JSX.Element {
         <SpeedDialAction
           key={action.name}
           icon={action.icon}
-          tooltipTitle={action.name}
           onClick={() => action.onClick()}
+          tooltipTitle={action.name}
         />
       ))}
     </SpeedDial>

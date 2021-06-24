@@ -1,33 +1,71 @@
-import { List, ListItem, Typography } from "@material-ui/core";
+import { Box, Button, List, ListItem, Typography } from "@material-ui/core";
+import {
+  MapOutlined,
+  TimerOutlined,
+  WidgetsOutlined,
+} from "@material-ui/icons";
 import React from "react";
 
 import { InstructionStep } from "../lib/work-instructions";
 import { ContentHeader } from "./ContentHeader";
-import { NoStepActive } from "./NoStepActive";
 
 interface Props {
+  readonly onBeginAssembly: () => void;
   readonly onClose: () => void;
   readonly step?: InstructionStep;
 }
 
-export function Instructions({ onClose, step }: Props): JSX.Element {
+export function Instructions({
+  onBeginAssembly,
+  onClose,
+  step,
+}: Props): JSX.Element {
   function NoContent(): JSX.Element {
-    return step == null ? <NoStepActive /> : <></>;
+    return step == null ? (
+      <>
+        <ContentHeader onClose={onClose} title="Spindle Install" />
+        <Typography sx={{ mb: 6 }}>
+          At this station, the assembly technician assembles the spindle and
+          installs it on the vehicle.
+        </Typography>
+        <Box sx={{ display: "flex", mb: 2 }}>
+          <MapOutlined sx={{ mr: 1 }} />
+          <Typography>4 steps</Typography>
+        </Box>
+        <Box sx={{ display: "flex", mb: 2 }}>
+          <WidgetsOutlined sx={{ mr: 1 }} />
+          <Typography>15 parts</Typography>
+        </Box>
+        <Box sx={{ display: "flex", mb: 6 }}>
+          <TimerOutlined sx={{ mr: 1 }} />
+          <Typography>5 minutes to complete</Typography>
+        </Box>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Button onClick={() => onBeginAssembly()} variant="contained">
+            Begin Assembly
+          </Button>
+        </Box>
+      </>
+    ) : (
+      <></>
+    );
   }
 
   const stepNum = step?.step ? `Step ${step.step} ` : "";
-  return (
+  return step == null ? (
+    <NoContent />
+  ) : (
     <>
       <ContentHeader onClose={onClose} title={`${stepNum}Instructions`} />
-      {step?.title && (
-        <Typography gutterBottom sx={{ ml: 1 }} variant="h6">
+      {step.title && (
+        <Typography gutterBottom variant="h6">
           {step?.title}
         </Typography>
       )}
-      {step?.instructions != null && step.instructions.length > 0 ? (
+      {step.instructions != null && step.instructions.length > 0 ? (
         <List>
-          {step?.instructions.map((t, i) => (
-            <ListItem key={i}>
+          {step.instructions.map((t, i) => (
+            <ListItem disableGutters key={i}>
               {`${i + 1}. `}
               {t}
             </ListItem>

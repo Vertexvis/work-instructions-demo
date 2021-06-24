@@ -11,20 +11,21 @@ import {
 } from "@material-ui/core";
 import React from "react";
 
+import { Part } from "../lib/authoring";
 import { Stations } from "./Stations";
 
 interface Props {
   readonly open: boolean;
   readonly onClose: VoidFunction;
   readonly onConfirm: () => void;
-  readonly partRevisionId?: string;
+  readonly part?: Part;
 }
 
 export function ReportIssueDialog({
   open,
   onClose,
   onConfirm,
-  partRevisionId: partId,
+  part,
 }: Props): JSX.Element {
   const [issueType, setIssueType] = React.useState(1);
   const [severity, setSeverity] = React.useState(2);
@@ -68,9 +69,9 @@ export function ReportIssueDialog({
           </Grid>
           <Grid item xs={12} sm={12}>
             <TextField
-              defaultValue={partId}
+              defaultValue={part?.name ?? part?.revisionId}
               fullWidth
-              label="Part Revision ID"
+              label="Part Identifier"
               required
               size="small"
             />
