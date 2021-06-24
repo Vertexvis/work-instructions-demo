@@ -20,6 +20,8 @@ export function Instructions({
   onClose,
   step,
 }: Props): JSX.Element {
+  const numSteps = 4;
+
   function NoContent(): JSX.Element {
     return step == null ? (
       <>
@@ -30,7 +32,7 @@ export function Instructions({
         </Typography>
         <Box sx={{ display: "flex", mb: 2 }}>
           <MapOutlined sx={{ mr: 1 }} />
-          <Typography>4 steps</Typography>
+          <Typography>{`${numSteps} steps`}</Typography>
         </Box>
         <Box sx={{ display: "flex", mb: 2 }}>
           <WidgetsOutlined sx={{ mr: 1 }} />
@@ -56,7 +58,7 @@ export function Instructions({
     <NoContent />
   ) : (
     <>
-      <ContentHeader onClose={onClose} title={`${stepNum}Instructions`} />
+      <ContentHeader onClose={onClose} title={`${stepNum} of ${numSteps}`} />
       {step.title && (
         <Typography sx={{ fontWeight: "fontWeightBold", mb: 3 }}>
           {step?.title}

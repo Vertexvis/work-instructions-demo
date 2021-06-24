@@ -23,7 +23,7 @@ export function Parts({ onClose, step }: Props): JSX.Element {
   const stepNum = step?.step ? `Step ${step.step} ` : "";
   return (
     <>
-      <ContentHeader onClose={onClose} title={`${stepNum}Parts`} />
+      <ContentHeader onClose={onClose} title={`${stepNum} Parts`} />
       {step?.parts != null && step.parts.length > 0 ? (
         step?.parts.map((p, i) => (
           <Box
