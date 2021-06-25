@@ -767,9 +767,9 @@
     eslint-visitor-keys "^2.0.0"
 
 "@vertexvis/api-client-node@^0.13":
-  version "0.13.3"
-  resolved "https://registry.yarnpkg.com/@vertexvis/api-client-node/-/api-client-node-0.13.3.tgz#94ed0cb1727812c24e5f29e28f2fbce5bdc58769"
-  integrity sha512-OG9i/ttTuVQvomZuM6AC8tzvSvtkYemCvqn42FQCjPJLrNCucFah1v86/RYY17pf4jx2PB7eE06zTKQhMfNpUw==
+  version "0.13.4"
+  resolved "https://registry.yarnpkg.com/@vertexvis/api-client-node/-/api-client-node-0.13.4.tgz#90a3fceb35dd33fd72741bad8803613f81c7d4db"
+  integrity sha512-gAEHaawSbqj/vpY2Kntad9mKdJWJqbreklu8EYT8RxGpVMx1U1wKSmp+5eCc7+mkrfJImmo5UXYIckGC+cPpdg==
   dependencies:
     axios "^0.21"
     p-limit "^3.1"
@@ -1658,9 +1658,9 @@ duplexer2@^0.1.2:
     readable-stream "^2.0.2"
 
 electron-to-chromium@^1.3.723:
-  version "1.3.756"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.756.tgz#942cee59cd64d19f576d8d5804eef09cb423740c"
-  integrity sha512-WsmJym1TMeHVndjPjczTFbnRR/c4sbzg8fBFtuhlb2Sru3i/S1VGpzDSrv/It8ctMU2bj8G7g7/O3FzYMGw6eA==
+  version "1.3.758"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.758.tgz#0baeb8f0a89d1850cc65f92da5f669343e4f6241"
+  integrity sha512-StYtiDbgZdjcck3OLwsVVVif7QDuD5m5v2gF+XpETp5lHa7X0y3129YBlYaHRPyj1fep1oAaC6i//gAdp+rhbw==
 
 elliptic@^6.5.3:
   version "6.5.4"

@@ -21,10 +21,7 @@ import { InstructionStep, InstructionSteps } from "../lib/work-instructions";
 
 export const getServerSideProps = (): Record<string, Configuration> => {
   return {
-    props: {
-      authoring: Config.authoring,
-      vertexEnv: Config.vertexEnv,
-    },
+    props: { authoring: Config.authoring, vertexEnv: Config.vertexEnv },
   };
 };
 

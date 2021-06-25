@@ -27,6 +27,7 @@ export default async function create(
       renderReq: {
         id: b.partRevisionId,
         height: 1080,
+        type: "png",
         width: 1080,
       },
       verbose: true,
