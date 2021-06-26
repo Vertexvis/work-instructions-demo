@@ -32,7 +32,6 @@
     "eslint-plugin-react-hooks": "^4",
     "eslint-plugin-simple-import-sort": "^7.0",
     "prettier": "^2.3",
-    "sharp": "^0.28.3",
     "tslib": "^2.3",
     "typescript": "^4"
   },

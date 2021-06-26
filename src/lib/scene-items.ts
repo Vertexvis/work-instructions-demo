@@ -23,9 +23,13 @@ interface LoadSceneViewStateReq extends Req {
   readonly id?: string;
 }
 
-interface SelectByHitReq extends Req {
+interface HandleHitReq extends Req {
   readonly detail: TapEventDetails;
   readonly hit?: vertexvis.protobuf.stream.IHit;
+}
+
+interface SelectBySuppliedIdsReq extends Req {
+  ids: string[];
 }
 
 export async function flyTo({
@@ -54,23 +58,11 @@ export async function flyTo({
     .render({ animation: { milliseconds: AnimationDurationMs } });
 }
 
-export async function loadSceneViewState({
-  id,
-  viewer,
-}: LoadSceneViewStateReq): Promise<void> {
-  if (viewer == null || !id) return;
-
-  const scene = await viewer.scene();
-  if (scene == null) return;
-
-  await scene.applySceneViewState(id);
-}
-
 export async function handleHit({
   detail,
   hit,
   viewer,
-}: SelectByHitReq): Promise<void> {
+}: HandleHitReq): Promise<void> {
   if (viewer == null) return;
 
   const scene = await viewer.scene();
@@ -91,4 +83,35 @@ export async function handleHit({
   } else {
     await scene.items((op) => op.where((q) => q.all()).deselect()).execute();
   }
+}
+
+export async function loadSceneViewState({
+  id,
+  viewer,
+}: LoadSceneViewStateReq): Promise<void> {
+  if (viewer == null || !id) return;
+
+  const scene = await viewer.scene();
+  if (scene == null) return;
+
+  await scene.applySceneViewState(id);
+}
+
+export async function selectBySuppliedIds({
+  ids,
+  viewer,
+}: SelectBySuppliedIdsReq): Promise<void> {
+  if (viewer == null || !ids || ids.length === 0) return;
+
+  const scene = await viewer.scene();
+  if (scene == null) return;
+
+  await scene
+    .items((op) => {
+      return [
+        op.where((q) => q.all()).deselect(),
+        op.where((q) => q.withSuppliedIds(ids)).select(SelectColor),
+      ];
+    })
+    .execute();
 }

@@ -11,7 +11,11 @@ import {
   RenderPartRevisionReq,
 } from "@lib/authoring";
 import { Config, Configuration, Credentials } from "@lib/config";
-import { flyTo, handleHit as onSelect } from "@lib/scene-items";
+import {
+  flyTo,
+  handleHit as onSelect,
+  selectBySuppliedIds,
+} from "@lib/scene-items";
 import { useViewer } from "@lib/viewer";
 import { InstructionStep, InstructionSteps } from "@lib/work-instructions";
 import { Snackbar } from "@material-ui/core";
@@ -58,7 +62,7 @@ export default function Home({
     console.debug("sceneViewId", scene.sceneViewId);
     setReady(true);
     setSceneViewId(scene.sceneViewId);
-    if (authoring) await initializeScene({ viewer: v });
+    // if (authoring) await initializeScene({ viewer: v });
   }
 
   async function onInstructionStepSelected(num: number): Promise<void> {
@@ -124,9 +128,11 @@ export default function Home({
             onSceneReady={onSceneReady}
             onSelect={async (detail, hit) => {
               console.debug(
-                `${hit?.itemSuppliedId?.value ?? hit?.itemId?.hex},${
+                `${hit?.itemId?.hex},${hit?.itemSuppliedId?.value},${
                   hit?.metadata?.partName
-                }`
+                },${JSON.stringify(hit?.hitNormal)} ${JSON.stringify(
+                  hit?.hitPoint
+                )}`
               );
               setSelected({
                 part: {
@@ -154,6 +160,9 @@ export default function Home({
           instructionStep={activeStep.step}
           onBeginAssembly={handleBeginAssembly}
           onClose={() => setRightDrawerContent(undefined)}
+          onShow={(ids) =>
+            selectBySuppliedIds({ ids, viewer: viewer.ref.current })
+          }
           settings={{ ghosted, onGhostToggle: setGhosted }}
         />
       }

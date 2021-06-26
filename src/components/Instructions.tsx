@@ -1,6 +1,6 @@
 import { ContentHeader } from "@components/ContentHeader";
 import { InstructionStep } from "@lib/work-instructions";
-import { Box, Button, List, ListItem, Typography } from "@material-ui/core";
+import { Box, Button, List, Typography } from "@material-ui/core";
 import {
   MapOutlined,
   TimerOutlined,
@@ -11,12 +11,14 @@ import React from "react";
 interface Props {
   readonly onBeginAssembly: () => void;
   readonly onClose: () => void;
+  readonly onShow: (ids: string[]) => void;
   readonly step?: InstructionStep;
 }
 
 export function Instructions({
   onBeginAssembly,
   onClose,
+  onShow,
   step,
 }: Props): JSX.Element {
   const numSteps = 4;
@@ -63,13 +65,13 @@ export function Instructions({
           {step?.title}
         </Typography>
       )}
-      {step.instructions != null && step.instructions.length > 0 ? (
+      {step.instructions != null ? (
         <List>
-          {step.instructions.map((t, i) => (
-            <ListItem disableGutters key={i}>
+          {step.instructions(onShow).map((t, i) => (
+            <Typography key={i} sx={{ mb: 2 }}>
               {`${i + 1}. `}
               {t}
-            </ListItem>
+            </Typography>
           ))}
         </List>
       ) : (

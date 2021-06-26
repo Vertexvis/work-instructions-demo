@@ -15,6 +15,7 @@ interface Props {
   readonly instructionStep?: InstructionStep;
   readonly onBeginAssembly: () => void;
   readonly onClose: () => void;
+  readonly onShow: (ids: string[]) => void;
   readonly settings: SettingsProps;
 }
 
@@ -31,6 +32,7 @@ export function RightDrawer({
   instructionStep,
   onBeginAssembly,
   onClose,
+  onShow,
   settings,
 }: Props): JSX.Element {
   if (content == null) return <></>;
@@ -43,10 +45,11 @@ export function RightDrawer({
         <Instructions
           onBeginAssembly={onBeginAssembly}
           onClose={onClose}
+          onShow={onShow}
           step={instructionStep}
         />
       );
-    return <Parts onClose={onClose} step={instructionStep} />;
+    return <Parts onClose={onClose} onShow={onShow} step={instructionStep} />;
   }
 
   return (

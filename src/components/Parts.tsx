@@ -2,14 +2,16 @@ import { ContentHeader } from "@components/ContentHeader";
 import { NoStepActive } from "@components/NoStepActive";
 import { InstructionStep } from "@lib/work-instructions";
 import { Box, Typography } from "@material-ui/core";
+import { head } from "@vertexvis/api-client-node";
 import React from "react";
 
 interface Props {
   readonly onClose: () => void;
+  readonly onShow: (ids: string[]) => void;
   readonly step?: InstructionStep;
 }
 
-export function Parts({ onClose, step }: Props): JSX.Element {
+export function Parts({ onClose, onShow, step }: Props): JSX.Element {
   function NoContent(): JSX.Element {
     return step == null ? (
       <NoStepActive />
@@ -26,18 +28,20 @@ export function Parts({ onClose, step }: Props): JSX.Element {
         step?.parts.map((p, i) => (
           <Box
             key={i}
-            sx={{
-              alignItems: "center",
-              display: "flex",
-            }}
+            onClick={() => onShow(p.sceneItemSuppliedIds)}
+            sx={{ alignItems: "center", display: "flex" }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              alt={`Part revision thumbnail for scene item ${p.sceneItemSuppliedId}`}
+              alt={`Part revision thumbnail for scene item ${head(
+                p.sceneItemSuppliedIds
+              )}`}
               height={120}
-              src={`/${p.sceneItemSuppliedId}.png`}
+              src={`/${head(p.sceneItemSuppliedIds)}.png`}
             />
-            <Typography sx={{ mb: 2 }}>{`x ${p.quantity}`}</Typography>
+            <Typography
+              sx={{ mb: 2 }}
+            >{`${p.name} x ${p.quantity}`}</Typography>
           </Box>
         ))
       ) : (

@@ -49,7 +49,7 @@ export async function initializeScene({
   if (scene == null) return;
 
   const { camera, sceneItemsVisible } = head(
-    Object.values(InstructionSteps).filter((v) => v.step === 3)
+    Object.values(InstructionSteps).filter((v) => v.step === 4)
   );
 
   await scene
