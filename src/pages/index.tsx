@@ -62,7 +62,7 @@ export default function Home({
     console.debug("sceneViewId", scene.sceneViewId);
     setReady(true);
     setSceneViewId(scene.sceneViewId);
-    // if (authoring) await initializeScene({ viewer: v });
+    if (authoring) await initializeScene({ viewer: v });
   }
 
   async function onInstructionStepSelected(num: number): Promise<void> {
