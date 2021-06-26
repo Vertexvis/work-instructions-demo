@@ -1,8 +1,7 @@
+import { createFile, errorRes, getClient } from "@lib/vertex-api";
 import { renderPartRevision } from "@vertexvis/api-client-node";
 import { createWriteStream } from "fs";
 import type { NextApiRequest, NextApiResponse } from "next";
-
-import { createFile, errorRes, getClient } from "../../lib/vertex-api";
 
 interface Body {
   readonly partRevisionId: string;

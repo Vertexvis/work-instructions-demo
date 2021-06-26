@@ -1,23 +1,22 @@
-import { Snackbar } from "@material-ui/core";
-import { delay } from "@vertexvis/api-client-node";
-import React from "react";
-
-import { BottomDrawer } from "../components/BottomDrawer";
-import { Header } from "../components/Header";
-import { Layout } from "../components/Layout";
-import { ReportIssueDialog } from "../components/ReportIssueDialog";
-import { Content, RightDrawer } from "../components/RightDrawer";
-import { Viewer } from "../components/Viewer";
+import { BottomDrawer } from "@components/BottomDrawer";
+import { Header } from "@components/Header";
+import { Layout } from "@components/Layout";
+import { ReportIssueDialog } from "@components/ReportIssueDialog";
+import { Content, RightDrawer } from "@components/RightDrawer";
+import { Viewer } from "@components/Viewer";
 import {
   createSceneViewState,
   initializeScene,
   renderPartRevision,
   RenderPartRevisionReq,
-} from "../lib/authoring";
-import { Config, Configuration, Credentials } from "../lib/config";
-import { flyTo, handleHit as onSelect } from "../lib/scene-items";
-import { useViewer } from "../lib/viewer";
-import { InstructionStep, InstructionSteps } from "../lib/work-instructions";
+} from "@lib/authoring";
+import { Config, Configuration, Credentials } from "@lib/config";
+import { flyTo, handleHit as onSelect } from "@lib/scene-items";
+import { useViewer } from "@lib/viewer";
+import { InstructionStep, InstructionSteps } from "@lib/work-instructions";
+import { Snackbar } from "@material-ui/core";
+import { delay } from "@vertexvis/api-client-node";
+import React from "react";
 
 export const getServerSideProps = (): Record<string, Configuration> => {
   return {

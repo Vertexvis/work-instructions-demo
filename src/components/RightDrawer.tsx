@@ -1,13 +1,12 @@
+import { Instructions } from "@components/Instructions";
+import { BottomDrawerHeight, RightDrawerWidth } from "@components/Layout";
+import { Parts } from "@components/Parts";
+import { Settings, SettingsProps } from "@components/Settings";
+import { InstructionStep } from "@lib/work-instructions";
 import { Box, Drawer as MuiDrawer } from "@material-ui/core";
 import { drawerClasses } from "@material-ui/core/Drawer";
 import { styled } from "@material-ui/core/styles";
 import React from "react";
-
-import { InstructionStep } from "../lib/work-instructions";
-import { Instructions } from "./Instructions";
-import { BottomDrawerHeight, RightDrawerWidth } from "./Layout";
-import { Parts } from "./Parts";
-import { Settings, SettingsProps } from "./Settings";
 
 export type Content = "settings" | "instructions" | "parts";
 

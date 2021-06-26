@@ -13,7 +13,8 @@
     "@vertexvis/viewer-react": "^0.9.28-canary.7",
     "next": "^11.0",
     "react": "^17.0",
-    "react-dom": "^17.0"
+    "react-dom": "^17.0",
+    "react-hook-form": "^7.9.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14",

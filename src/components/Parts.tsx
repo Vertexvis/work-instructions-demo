@@ -1,10 +1,8 @@
-import { Box } from "@material-ui/core";
+import { ContentHeader } from "@components/ContentHeader";
+import { NoStepActive } from "@components/NoStepActive";
+import { InstructionStep } from "@lib/work-instructions";
+import { Box, Typography } from "@material-ui/core";
 import React from "react";
-
-import { InstructionStep } from "../lib/work-instructions";
-import { ContentHeader } from "./ContentHeader";
-import { NoStepActive } from "./NoStepActive";
-import { TypographyGutter } from "./TypographyGutter";
 
 interface Props {
   readonly onClose: () => void;
@@ -16,7 +14,7 @@ export function Parts({ onClose, step }: Props): JSX.Element {
     return step == null ? (
       <NoStepActive />
     ) : (
-      <TypographyGutter>No parts provided.</TypographyGutter>
+      <Typography sx={{ mb: 2 }}>No parts provided.</Typography>
     );
   }
 
@@ -39,7 +37,7 @@ export function Parts({ onClose, step }: Props): JSX.Element {
               height={120}
               src={`/${p.sceneItemSuppliedId}.png`}
             />
-            <TypographyGutter>{`x ${p.quantity}`}</TypographyGutter>
+            <Typography sx={{ mb: 2 }}>{`x ${p.quantity}`}</Typography>
           </Box>
         ))
       ) : (

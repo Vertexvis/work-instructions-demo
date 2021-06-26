@@ -1,7 +1,6 @@
+import { ContentHeader } from "@components/ContentHeader";
 import { FormControlLabel, FormGroup, Switch } from "@material-ui/core";
 import React from "react";
-
-import { ContentHeader } from "./ContentHeader";
 
 export interface SettingsProps {
   ghosted: boolean;

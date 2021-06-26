@@ -1,3 +1,5 @@
+import { Stations } from "@components/Stations";
+import { Part } from "@lib/authoring";
 import {
   Button,
   Dialog,
@@ -10,9 +12,6 @@ import {
   TextField,
 } from "@material-ui/core";
 import React from "react";
-
-import { Part } from "../lib/authoring";
-import { Stations } from "./Stations";
 
 interface Props {
   readonly open: boolean;

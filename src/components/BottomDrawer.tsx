@@ -1,3 +1,5 @@
+import { BottomDrawerHeight } from "@components/Layout";
+import { InstructionSteps } from "@lib/work-instructions";
 import {
   Box,
   Drawer as MuiDrawer,
@@ -10,9 +12,6 @@ import { drawerClasses } from "@material-ui/core/Drawer";
 import { styled } from "@material-ui/core/styles";
 import { Check, ChevronLeft, ChevronRight, Refresh } from "@material-ui/icons";
 import React from "react";
-
-import { InstructionSteps } from "../lib/work-instructions";
-import { BottomDrawerHeight } from "./Layout";
 
 interface Props {
   readonly activeStep: number;

@@ -1,3 +1,5 @@
+import { ContentHeader } from "@components/ContentHeader";
+import { InstructionStep } from "@lib/work-instructions";
 import { Box, Button, List, ListItem, Typography } from "@material-ui/core";
 import {
   MapOutlined,
@@ -5,9 +7,6 @@ import {
   WidgetsOutlined,
 } from "@material-ui/icons";
 import React from "react";
-
-import { InstructionStep } from "../lib/work-instructions";
-import { ContentHeader } from "./ContentHeader";
 
 interface Props {
   readonly onBeginAssembly: () => void;

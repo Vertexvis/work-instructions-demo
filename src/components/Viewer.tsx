@@ -1,4 +1,14 @@
-/* @jsx jsx */ /** @jsxRuntime classic */ import { jsx } from "@emotion/react";
+/* @jsx jsx */ /** @jsxRuntime classic */ import {
+  ArrowDown,
+  ArrowUp,
+} from "@components/Arrow";
+import { InstructionSpeedDial } from "@components/InstructionSpeedDial";
+import { Stations } from "@components/Stations";
+import { ViewerSpeedDial } from "@components/ViewerSpeedDial";
+import { jsx } from "@emotion/react";
+import { StreamCredentials } from "@lib/config";
+import { loadSceneViewState } from "@lib/scene-items";
+import { InstructionStep } from "@lib/work-instructions";
 import { Box, Link } from "@material-ui/core";
 import { vertexvis } from "@vertexvis/frame-streaming-protos";
 import { TapEventDetails } from "@vertexvis/viewer";
@@ -10,14 +20,6 @@ import {
   VertexViewerToolbar,
 } from "@vertexvis/viewer-react";
 import React from "react";
-
-import { StreamCredentials } from "../lib/config";
-import { loadSceneViewState } from "../lib/scene-items";
-import { InstructionStep } from "../lib/work-instructions";
-import { ArrowDown, ArrowUp } from "./Arrow";
-import { InstructionSpeedDial } from "./InstructionSpeedDial";
-import { Stations } from "./Stations";
-import { ViewerSpeedDial } from "./ViewerSpeedDial";
 
 interface ViewerProps extends ViewerJSX.VertexViewer {
   readonly credentials: StreamCredentials;

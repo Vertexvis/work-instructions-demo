@@ -1,9 +1,8 @@
+import { Config } from "@lib/config";
 import { Failure, VertexClient } from "@vertexvis/api-client-node";
 import { AxiosResponse } from "axios";
 import { createWriteStream } from "fs";
 import type { NextApiResponse } from "next";
-
-import { Config } from "./config";
 
 export async function makeCall<T>(
   apiCall: (client: VertexClient) => Promise<AxiosResponse<T>>

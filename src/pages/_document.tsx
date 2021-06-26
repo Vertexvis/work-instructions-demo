@@ -1,10 +1,9 @@
 import createCache, { EmotionCache } from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
 import createEmotionServer from "@emotion/server/create-instance";
+import theme from "@lib/theme";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
-
-import theme from "../lib/theme";
 
 export default class MyDocument extends Document {
   render(): JSX.Element {

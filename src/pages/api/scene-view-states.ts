@@ -1,3 +1,5 @@
+import { SceneId } from "@lib/config";
+import { createFile, errorRes, getClient, makeCall } from "@lib/vertex-api";
 import {
   isFailure,
   renderSceneView,
@@ -5,14 +7,6 @@ import {
 } from "@vertexvis/api-client-node";
 import { createWriteStream } from "fs";
 import type { NextApiRequest, NextApiResponse } from "next";
-
-import { SceneId } from "../../lib/config";
-import {
-  createFile,
-  errorRes,
-  getClient,
-  makeCall,
-} from "../../lib/vertex-api";
 
 interface Body {
   readonly name: string;
@@ -62,7 +56,7 @@ export default async function create(
       verbose: true,
     });
 
-    const out = `./scripts/${svsRes.data.id}-orig.png`;
+    const out = `./public/${b.name}.png`;
     renderRes.data.pipe(createWriteStream(out));
     await createFile(renderRes.data, out);
     return res.status(200).json({ message: "OK" });
