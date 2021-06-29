@@ -52,14 +52,13 @@ export default function Home({
 
   const stepIds = Object.keys(InstructionSteps);
 
-  async function onSceneReady() {
+  async function handleSceneReady() {
     const v = viewer.ref.current;
     if (v == null) return;
 
     const scene = await v.scene();
     if (scene == null) return;
 
-    console.debug("sceneViewId", scene.sceneViewId);
     setReady(true);
     setSceneViewId(scene.sceneViewId);
     if (authoring) await initializeScene({ viewer: v });
@@ -125,15 +124,15 @@ export default function Home({
                 setDialogOpen(true);
               }
             }}
-            onSceneReady={onSceneReady}
+            onSceneReady={handleSceneReady}
             onSelect={async (detail, hit) => {
-              console.debug(
-                `${hit?.itemId?.hex},${hit?.itemSuppliedId?.value},${
-                  hit?.metadata?.partName
-                },${JSON.stringify(hit?.hitNormal)} ${JSON.stringify(
-                  hit?.hitPoint
-                )}`
-              );
+              console.debug({
+                hitNormal: hit?.hitNormal,
+                hitPoint: hit?.hitPoint,
+                partName: hit?.metadata?.partName,
+                sceneItemId: hit?.itemId?.hex,
+                sceneItemSuppliedId: hit?.itemSuppliedId?.value,
+              });
               setSelected({
                 part: {
                   name: hit?.metadata?.partName ?? undefined,

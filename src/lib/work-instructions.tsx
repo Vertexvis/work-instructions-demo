@@ -97,16 +97,27 @@ const step4Cam: FrameCamera.FrameCamera = {
   },
 };
 
+const ControlArmRlls = "308600";
+const FenderFrame = "312220";
+const FenderRearStreet = "312240";
+const HoweBallJoints = ["312200", "312210"];
+const M10x35Bolts = ["312100", "312110", "312120", "312130", "312140"];
+const M12HeimMhmr12T = "300820";
+const SSSpindle = "312230";
+const ToeLink = "308640";
+const WheelAxle = "308390";
+const WheelMechHousing = "307750";
+const Z06InnerHub = "312080";
+
 const step2SceneItemsVisible = [
-  "100820",
-  "109570",
-  "109690",
-  "109700",
-  "109720",
-  "110850", // Wheel mech housing
-  "111490", // Wheel axle
-  "111700", // Control Arm RLLS
-  "111740",
+  M12HeimMhmr12T,
+  Z06InnerHub,
+  ...HoweBallJoints,
+  SSSpindle,
+  WheelMechHousing,
+  WheelAxle,
+  ControlArmRlls,
+  ToeLink,
 ];
 
 export const InstructionSteps: Record<string, InstructionStep> = {
@@ -132,21 +143,25 @@ export const InstructionSteps: Record<string, InstructionStep> = {
     instructions: (onShow: (ids: string[]) => void) => [
       <>
         Install three (3) M12x1.25 mm torx head bolts in the{" "}
-        <Link onClick={() => onShow(["109570"])}>Z06 inner hub</Link> with
+        <Link onClick={() => onShow([Z06InnerHub])}>Z06 inner hub</Link> with
         Loctite® Threadlocker 271™.
       </>,
       <>Using a T55 socket, torque the bolts to 75 ft/lbs.</>,
     ],
     parts: [
-      { name: "Z06 inner hub", quantity: 1, sceneItemSuppliedIds: ["109570"] },
+      {
+        name: "Z06 inner hub",
+        quantity: 1,
+        sceneItemSuppliedIds: [Z06InnerHub],
+      },
       {
         name: "SS Spindle",
         quantity: 1,
-        sceneItemSuppliedIds: ["109720"],
+        sceneItemSuppliedIds: [SSSpindle],
       },
     ],
-    sceneItemsVisible: ["109570", "109720"],
-    sceneViewStateId: "557f926a-4f46-4de6-a027-08a2bf789162",
+    sceneItemsVisible: [Z06InnerHub, SSSpindle],
+    sceneViewStateId: "f4ec5c6e-ed3a-4806-8d67-240f93378cda",
     step: 1,
     title: "Install the inner hub on the spindle",
   },
@@ -167,34 +182,37 @@ export const InstructionSteps: Record<string, InstructionStep> = {
     instructions: (onShow: (ids: string[]) => void) => [
       <>
         Clean the ID of the{" "}
-        <Link onClick={() => onShow(["109720"])}>spindle</Link> and the OD of
-        the{" "}
-        <Link onClick={() => onShow(["109690", "109700"])}>ball joints</Link>{" "}
-        with brake cleaner and degreaser.
+        <Link onClick={() => onShow([SSSpindle])}>spindle</Link> and the OD of
+        the <Link onClick={() => onShow(HoweBallJoints)}>ball joints</Link> with
+        brake cleaner and degreaser.
       </>,
       <>Wipe clean with a lint free shop towel.</>,
       <>
         Install the washers and castle nuts on the{" "}
-        <Link onClick={() => onShow(["109690", "109700"])}>ball joints</Link>.
+        <Link onClick={() => onShow(HoweBallJoints)}>ball joints</Link>.
       </>,
       <>Torque the castle nuts to 30 ft/lbs and turn it an additional 140°.</>,
       <>
         Ensure the castle nut notch lines up with the hole in the{" "}
-        <Link onClick={() => onShow(["109690", "109700"])}>ball joints</Link>{" "}
-        and install a cotter pin.
+        <Link onClick={() => onShow(HoweBallJoints)}>ball joints</Link> and
+        install a cotter pin.
       </>,
     ],
     parts: [
-      { name: "Z06 inner hub", quantity: 1, sceneItemSuppliedIds: ["109570"] },
+      {
+        name: "Z06 inner hub",
+        quantity: 1,
+        sceneItemSuppliedIds: [Z06InnerHub],
+      },
       {
         name: "Howe ball joint",
         quantity: 2,
-        sceneItemSuppliedIds: ["109690", "109700"],
+        sceneItemSuppliedIds: HoweBallJoints,
       },
-      { name: "SS Spindle", quantity: 1, sceneItemSuppliedIds: ["109720"] },
+      { name: "SS Spindle", quantity: 1, sceneItemSuppliedIds: [SSSpindle] },
     ],
     sceneItemsVisible: step2SceneItemsVisible,
-    sceneViewStateId: "79dca8ec-c839-4764-bfb9-1de1d6629e70",
+    sceneViewStateId: "cc79089a-f354-4074-9296-91bbad0aa696",
     step: 2,
     title: "Install the spindle on the ball joints",
   },
@@ -212,12 +230,12 @@ export const InstructionSteps: Record<string, InstructionStep> = {
       {
         name: "M12 heim MHMR12T",
         quantity: 1,
-        sceneItemSuppliedIds: ["100820"],
+        sceneItemSuppliedIds: [M12HeimMhmr12T],
       },
-      { name: "Toe Link", quantity: 1, sceneItemSuppliedIds: ["111740"] },
+      { name: "Toe Link", quantity: 1, sceneItemSuppliedIds: [ToeLink] },
     ],
     sceneItemsVisible: step2SceneItemsVisible,
-    sceneViewStateId: "09196930-ca37-4ddf-8adf-f695060bb8d4",
+    sceneViewStateId: "62b1fde2-a78b-49aa-82cb-e833c4af9347",
     step: 3,
     title: "Install the stabilizer arm",
   },
@@ -237,14 +255,7 @@ export const InstructionSteps: Record<string, InstructionStep> = {
     camera: step4Cam,
     instructions: (onShow: (ids: string[]) => void) => [
       <>
-        Torque the{" "}
-        <Link
-          onClick={() =>
-            onShow(["109590", "109600", "109610", "109620", "109630"])
-          }
-        >
-          M10x35 bolts
-        </Link>{" "}
+        Torque the <Link onClick={() => onShow(M10x35Bolts)}>M10x35 bolts</Link>{" "}
         to 45 ft/lbs.
       </>,
     ],
@@ -252,45 +263,27 @@ export const InstructionSteps: Record<string, InstructionStep> = {
       {
         name: "M10x35",
         quantity: 5,
-        sceneItemSuppliedIds: [
-          "109590",
-          "109600",
-          "109610",
-          "109620",
-          "109630",
-        ],
+        sceneItemSuppliedIds: M10x35Bolts,
       },
-      { name: "Fender frame", quantity: 1, sceneItemSuppliedIds: ["109710"] },
-      { name: "Fender rear", quantity: 1, sceneItemSuppliedIds: ["109730"] },
+      {
+        name: "Fender frame",
+        quantity: 1,
+        sceneItemSuppliedIds: [FenderFrame],
+      },
+      {
+        name: "Fender rear",
+        quantity: 1,
+        sceneItemSuppliedIds: [FenderRearStreet],
+      },
     ],
     sceneItemsVisible: [
       ...step2SceneItemsVisible,
-      "109590",
-      "109600",
-      "109610",
-      "109620",
-      "109630",
-      "109710",
-      "109730",
+      ...M10x35Bolts,
+      FenderFrame,
+      FenderRearStreet,
     ],
-    sceneViewStateId: "3bebb15b-1245-4dd6-8e3c-e25de4c9e6ab",
+    sceneViewStateId: "ebfd9db7-0e40-4efb-b71e-025311bd3fc1",
     step: 4,
     title: "Install the fender frame",
   },
 };
-
-// Base scene items:
-// 07680144-ffc7-4c67-aa09-d0a9fecf0a3a, tire
-// 2462b043-be9b-48c7-b359-b7b3e5a55370, rim
-
-/*
-Color mods
-
-f4136f80-a6e8-4339-a98a-b18d04c3abe1/109720, { "b": 191, "g": 127, "r": 84 }
-9efb3d22-4377-4dfb-8359-6179829b47fe/109570, { "b": 174, "g": 174, "r": 174 }
-
-c1db36ca-66f0-4918-9a93-c2bf209478be/109690 and a1e22d5a-ed29-4c63-8ed0-449b2cf6a173/109700, { "b": 80, "g": 160, "r": 250 }
-9b497fe1-8032-4513-916c-ed20fad4a0db,111490 and f8751889-235f-455e-aff3-5c50a2095490,100820, { "b": 255, "g": 255, "r": 255 }
-466997ea-8f24-4f4e-86cc-8b52a508dc7b/111700, and 2f9ba315-cf2f-466b-b6b1-f89392540a57/111740 { "b": 100, "g": 100, "r": 100 }
-62a0d676-dc72-4bcc-b57b-23608d7b5215,109590, 73b24246-1648-4f89-af89-5bd39fcf1d1b,109620, f8cab8bd-7755-47c7-b39d-70f82ba8af55,109630, e3c28c65-a92d-4fee-b0de-49f1abe893ed,109610, 441ea531-36c6-4015-bf2e-d1dab388a58c,109600 { "b": 215, "g": 215, "r": 215 }
-*/
