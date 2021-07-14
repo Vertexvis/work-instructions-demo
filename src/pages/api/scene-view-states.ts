@@ -31,7 +31,7 @@ export default async function create(
             type: "scene-view-state",
             attributes: { name: b.name },
             relationships: {
-              sceneView: {
+              source: {
                 data: {
                   type: SceneViewRelationshipDataTypeEnum.SceneView,
                   id: b.sceneViewId,
