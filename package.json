@@ -10,18 +10,17 @@
     "@material-ui/core": "v5.0.0-beta.0",
     "@material-ui/icons": "v5.0.0-beta.0",
     "@vertexvis/api-client-node": "^0.13",
-    "@vertexvis/viewer-react": "^0.10.0-canary.7",
+    "@vertexvis/viewer-react": "^0.10.0-canary.20",
     "next": "^11.0",
     "react": "^17.0",
     "react-dom": "^17.0",
-    "react-hook-form": "^7.9.0"
+    "react-hook-form": "^7.11"
   },
   "devDependencies": {
     "@babel/core": "^7.14",
-    "@types/node": "^15",
+    "@types/node": "^16",
     "@types/react": "^17.0",
     "@types/react-dom": "^17.0",
-    "@types/sharp": "^0.28.3",
     "@typescript-eslint/eslint-plugin": "^4",
     "@typescript-eslint/parser": "^4",
     "babel-plugin-import": "^1.13",

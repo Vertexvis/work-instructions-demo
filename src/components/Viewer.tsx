@@ -7,11 +7,10 @@ import { Stations } from "@components/Stations";
 import { ViewerSpeedDial } from "@components/ViewerSpeedDial";
 import { jsx } from "@emotion/react";
 import { StreamCredentials } from "@lib/config";
-import { loadSceneViewState } from "@lib/scene-items";
 import { InstructionStep } from "@lib/work-instructions";
 import { Box, Link } from "@material-ui/core";
 import { vertexvis } from "@vertexvis/frame-streaming-protos";
-import { TapEventDetails } from "@vertexvis/viewer";
+import type { TapEventDetails } from "@vertexvis/viewer";
 import {
   JSX as ViewerJSX,
   VertexViewer,
@@ -59,19 +58,17 @@ function UnwrappedViewer({
   viewer,
   ...props
 }: ViewerProps): JSX.Element {
-  React.useEffect(() => {
-    loadSceneViewState({
-      id: instructionStep?.sceneViewStateId,
-      viewer: viewer.current,
-    });
-  }, [instructionStep, viewer]);
+  const svId = instructionStep?.sceneViewStateId;
+  const src = `urn:vertexvis:stream-key:${credentials.streamKey}${
+    svId ? `?scene-view-state=${svId}` : ""
+  }`;
 
   return (
     <VertexViewer
       css={{ height: "100%", width: "100%" }}
       clientId={credentials.clientId}
       ref={viewer}
-      src={`urn:vertexvis:stream-key:${credentials.streamKey}`}
+      src={src}
       {...props}
     >
       <VertexViewerToolbar placement="top-left">

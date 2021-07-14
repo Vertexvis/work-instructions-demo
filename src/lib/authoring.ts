@@ -1,7 +1,7 @@
 import { AnimationDurationMs } from "@lib/scene-items";
 import { InstructionSteps } from "@lib/work-instructions";
 import { head } from "@vertexvis/api-client-node";
-import { Components } from "@vertexvis/viewer";
+import type { Components } from "@vertexvis/viewer";
 
 interface InitializeReq {
   readonly viewer: Components.VertexViewer | null;

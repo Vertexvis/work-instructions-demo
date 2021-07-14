@@ -19,7 +19,6 @@ import {
 import { useViewer } from "@lib/viewer";
 import { InstructionStep, InstructionSteps } from "@lib/work-instructions";
 import { Snackbar } from "@material-ui/core";
-import { delay } from "@vertexvis/api-client-node";
 import React from "react";
 
 export default function Home({
@@ -64,10 +63,8 @@ export default function Home({
     const step = InstructionSteps[stepIds[num]];
     setReady(false);
     function onComplete() {
-      delay(500).then(() => {
-        setActiveStep({ num, step });
-        setReady(true);
-      });
+      setActiveStep({ num, step });
+      setReady(true);
     }
 
     const res = await flyTo({

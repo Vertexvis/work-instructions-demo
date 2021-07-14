@@ -1,6 +1,6 @@
 import { Link } from "@material-ui/core";
 import { Quaternion, Vector3 } from "@vertexvis/geometry";
-import { FrameCamera } from "@vertexvis/viewer/dist/types/lib/types";
+import type { FrameCamera } from "@vertexvis/viewer/dist/types/lib/types";
 
 interface Arrow {
   readonly position: Vector3.Vector3;

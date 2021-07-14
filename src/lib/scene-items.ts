@@ -1,14 +1,18 @@
 import { vertexvis } from "@vertexvis/frame-streaming-protos";
-import { ColorMaterial, Components, TapEventDetails } from "@vertexvis/viewer";
-import { CameraRenderResult } from "@vertexvis/viewer/dist/types/lib/scenes/cameraRenderResult";
-import { FrameCamera } from "@vertexvis/viewer/dist/types/lib/types";
+import type { Components, TapEventDetails } from "@vertexvis/viewer";
+import type { CameraRenderResult } from "@vertexvis/viewer/dist/types/lib/scenes/cameraRenderResult";
+import type { ColorMaterial } from "@vertexvis/viewer/dist/types/lib/scenes/colorMaterial";
+import type { FrameCamera } from "@vertexvis/viewer/dist/types/lib/types";
 
 export const AnimationDurationMs = 500;
 
-export const SelectColor = {
-  ...ColorMaterial.create(255, 255, 0),
+const SelectColor: ColorMaterial = {
+  opacity: 100,
   glossiness: 4,
+  diffuse: { r: 255, g: 255, b: 0, a: 0 },
+  ambient: { r: 0, g: 0, b: 0, a: 0 },
   specular: { r: 255, g: 255, b: 255, a: 0 },
+  emissive: { r: 0, g: 0, b: 0, a: 0 },
 };
 
 interface Req {
@@ -83,18 +87,6 @@ export async function handleHit({
   } else {
     await scene.items((op) => op.where((q) => q.all()).deselect()).execute();
   }
-}
-
-export async function loadSceneViewState({
-  id,
-  viewer,
-}: LoadSceneViewStateReq): Promise<void> {
-  if (viewer == null || !id) return;
-
-  const scene = await viewer.scene();
-  if (scene == null) return;
-
-  await scene.applySceneViewState(id);
 }
 
 export async function selectBySuppliedIds({
