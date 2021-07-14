@@ -1,18 +1,14 @@
 import { vertexvis } from "@vertexvis/frame-streaming-protos";
-import type { Components, TapEventDetails } from "@vertexvis/viewer";
+import { ColorMaterial, Components, TapEventDetails } from "@vertexvis/viewer";
 import type { CameraRenderResult } from "@vertexvis/viewer/dist/types/lib/scenes/cameraRenderResult";
-import type { ColorMaterial } from "@vertexvis/viewer/dist/types/lib/scenes/colorMaterial";
 import type { FrameCamera } from "@vertexvis/viewer/dist/types/lib/types";
 
 export const AnimationDurationMs = 500;
 
-const SelectColor: ColorMaterial = {
-  opacity: 100,
+const SelectColor = {
+  ...ColorMaterial.create(255, 255, 0),
   glossiness: 4,
-  diffuse: { r: 255, g: 255, b: 0, a: 0 },
-  ambient: { r: 0, g: 0, b: 0, a: 0 },
   specular: { r: 255, g: 255, b: 255, a: 0 },
-  emissive: { r: 0, g: 0, b: 0, a: 0 },
 };
 
 interface Req {
@@ -21,10 +17,6 @@ interface Req {
 
 interface FlyToReq extends Req {
   readonly camera?: FrameCamera.FrameCamera;
-}
-
-interface LoadSceneViewStateReq extends Req {
-  readonly id?: string;
 }
 
 interface HandleHitReq extends Req {
