@@ -7,7 +7,7 @@ import React from "react";
 
 interface Props {
   readonly onClose: () => void;
-  readonly onShow: (ids: string[]) => void;
+  readonly onShow: (name: string, ids: string[]) => void;
   readonly step?: InstructionStep;
 }
 
@@ -28,7 +28,7 @@ export function Parts({ onClose, onShow, step }: Props): JSX.Element {
         step?.parts.map((p, i) => (
           <Box
             key={i}
-            onClick={() => onShow(p.sceneItemSuppliedIds)}
+            onClick={() => onShow(p.name, p.sceneItemSuppliedIds)}
             sx={{ alignItems: "center", display: "flex" }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}

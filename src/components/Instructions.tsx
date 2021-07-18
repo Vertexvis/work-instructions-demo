@@ -11,7 +11,7 @@ import React from "react";
 interface Props {
   readonly onBeginAssembly: () => void;
   readonly onClose: () => void;
-  readonly onShow: (ids: string[]) => void;
+  readonly onShow: (name: string, ids: string[]) => void;
   readonly step?: InstructionStep;
 }
 

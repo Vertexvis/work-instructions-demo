@@ -15,7 +15,7 @@ interface Props {
   readonly onBeginAssembly: () => void;
   readonly onClose: () => void;
   readonly open: boolean;
-  readonly onShow: (ids: string[]) => void;
+  readonly onShow: (name: string, ids: string[]) => void;
   readonly settings: SettingsProps;
 }
 

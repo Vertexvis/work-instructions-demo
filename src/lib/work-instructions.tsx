@@ -17,7 +17,9 @@ interface Part {
 export interface InstructionStep {
   readonly arrows?: Arrow[];
   readonly camera: FrameCamera.FrameCamera;
-  readonly instructions: (onShow: (ids: string[]) => void) => React.ReactNode[];
+  readonly instructions: (
+    onShow: (name: string, ids: string[]) => void
+  ) => React.ReactNode[];
   readonly parts: Part[];
   readonly sceneItemsVisible: string[];
   readonly sceneViewStateId: string;
@@ -97,6 +99,11 @@ const step4Cam: FrameCamera.FrameCamera = {
   },
 };
 
+const HoweBallJointsName = "Howe ball joint";
+const M10x35BoltsName = "M10x35";
+const SSSpindleName = "SS Spindle";
+const Z06InnerHubName = "Z06 inner hub";
+
 const ControlArmRlls = "308600";
 const FenderFrame = "312220";
 const FenderRearStreet = "312240";
@@ -140,22 +147,24 @@ export const InstructionSteps: Record<string, InstructionStep> = {
       },
     ],
     camera: step1Cam,
-    instructions: (onShow: (ids: string[]) => void) => [
+    instructions: (onShow: (name: string, ids: string[]) => void) => [
       <>
         Install three (3) M12x1.25 mm torx head bolts in the{" "}
-        <Link onClick={() => onShow([Z06InnerHub])}>Z06 inner hub</Link> with
-        Loctite® Threadlocker 271™.
+        <Link onClick={() => onShow(Z06InnerHubName, [Z06InnerHub])}>
+          {Z06InnerHubName}
+        </Link>{" "}
+        with Loctite® Threadlocker 271™.
       </>,
       <>Using a T55 socket, torque the bolts to 75 ft/lbs.</>,
     ],
     parts: [
       {
-        name: "Z06 inner hub",
+        name: Z06InnerHubName,
         quantity: 1,
         sceneItemSuppliedIds: [Z06InnerHub],
       },
       {
-        name: "SS Spindle",
+        name: SSSpindleName,
         quantity: 1,
         sceneItemSuppliedIds: [SSSpindle],
       },
@@ -179,37 +188,45 @@ export const InstructionSteps: Record<string, InstructionStep> = {
       },
     ],
     camera: step2Cam,
-    instructions: (onShow: (ids: string[]) => void) => [
+    instructions: (onShow: (name: string, ids: string[]) => void) => [
       <>
         Clean the ID of the{" "}
-        <Link onClick={() => onShow([SSSpindle])}>spindle</Link> and the OD of
-        the <Link onClick={() => onShow(HoweBallJoints)}>ball joints</Link> with
-        brake cleaner and degreaser.
+        <Link onClick={() => onShow(SSSpindleName, [SSSpindle])}>spindle</Link>{" "}
+        and the OD of the{" "}
+        <Link onClick={() => onShow(HoweBallJointsName, HoweBallJoints)}>
+          ball joints
+        </Link>{" "}
+        with brake cleaner and degreaser.
       </>,
       <>Wipe clean with a lint free shop towel.</>,
       <>
         Install the washers and castle nuts on the{" "}
-        <Link onClick={() => onShow(HoweBallJoints)}>ball joints</Link>.
+        <Link onClick={() => onShow(HoweBallJointsName, HoweBallJoints)}>
+          ball joints
+        </Link>
+        .
       </>,
       <>Torque the castle nuts to 30 ft/lbs and turn it an additional 140°.</>,
       <>
         Ensure the castle nut notch lines up with the hole in the{" "}
-        <Link onClick={() => onShow(HoweBallJoints)}>ball joints</Link> and
-        install a cotter pin.
+        <Link onClick={() => onShow(HoweBallJointsName, HoweBallJoints)}>
+          ball joints
+        </Link>{" "}
+        and install a cotter pin.
       </>,
     ],
     parts: [
       {
-        name: "Z06 inner hub",
+        name: Z06InnerHubName,
         quantity: 1,
         sceneItemSuppliedIds: [Z06InnerHub],
       },
       {
-        name: "Howe ball joint",
+        name: HoweBallJointsName,
         quantity: 2,
         sceneItemSuppliedIds: HoweBallJoints,
       },
-      { name: "SS Spindle", quantity: 1, sceneItemSuppliedIds: [SSSpindle] },
+      { name: SSSpindleName, quantity: 1, sceneItemSuppliedIds: [SSSpindle] },
     ],
     sceneItemsVisible: step2SceneItemsVisible,
     sceneViewStateId: "cc79089a-f354-4074-9296-91bbad0aa696",
@@ -253,15 +270,18 @@ export const InstructionSteps: Record<string, InstructionStep> = {
       },
     ],
     camera: step4Cam,
-    instructions: (onShow: (ids: string[]) => void) => [
+    instructions: (onShow: (name: string, ids: string[]) => void) => [
       <>
-        Torque the <Link onClick={() => onShow(M10x35Bolts)}>M10x35 bolts</Link>{" "}
+        Torque the{" "}
+        <Link onClick={() => onShow(M10x35BoltsName, M10x35Bolts)}>
+          {M10x35BoltsName} bolts
+        </Link>{" "}
         to 45 ft/lbs.
       </>,
     ],
     parts: [
       {
-        name: "M10x35",
+        name: M10x35BoltsName,
         quantity: 5,
         sceneItemSuppliedIds: M10x35Bolts,
       },

@@ -43,8 +43,13 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [snackOpen, setSnackOpen] = React.useState(false);
   const [selected, setSelected] = React.useState<RenderPartRevisionReq>({});
+  const [partName, setPartName] = React.useState<string | undefined>();
 
   const stepIds = Object.keys(InstructionSteps);
+
+  React.useEffect(() => {
+    setPartName(selected?.part?.name);
+  }, [selected]);
 
   async function handleSceneReady() {
     const v = viewer.ref.current;
@@ -152,9 +157,10 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
           onBeginAssembly={handleBeginAssembly}
           onClose={() => setRightDrawerContent(undefined)}
           open={rightDrawerContent != null}
-          onShow={(ids) =>
-            selectBySuppliedIds({ ids, viewer: viewer.ref.current })
-          }
+          onShow={(name, ids) => {
+            setPartName(name);
+            selectBySuppliedIds({ ids, viewer: viewer.ref.current });
+          }}
           settings={{ ghosted, onGhostToggle: setGhosted }}
         />
       }
@@ -168,7 +174,7 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
             setDialogOpen(false);
           }}
           open={dialogOpen}
-          part={selected.part}
+          partName={partName}
         />
       )}
       <Snackbar

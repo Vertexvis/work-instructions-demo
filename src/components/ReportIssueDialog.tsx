@@ -1,5 +1,4 @@
 import { Stations } from "@components/Stations";
-import { Part } from "@lib/authoring";
 import {
   Button,
   Dialog,
@@ -18,14 +17,14 @@ interface Props {
   readonly open: boolean;
   readonly onClose: VoidFunction;
   readonly onConfirm: () => void;
-  readonly part?: Part;
+  readonly partName?: string;
 }
 
 export function ReportIssueDialog({
   open,
   onClose,
   onConfirm,
-  part,
+  partName,
 }: Props): JSX.Element {
   const [issueType, setIssueType] = React.useState(1);
   const [severity, setSeverity] = React.useState(2);
@@ -77,7 +76,7 @@ export function ReportIssueDialog({
             </Grid>
             <Grid item xs={12} sm={12}>
               <TextField
-                defaultValue={part?.name ?? part?.revisionId}
+                defaultValue={partName}
                 fullWidth
                 label="Part Identifier"
                 required
