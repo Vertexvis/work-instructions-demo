@@ -1,7 +1,6 @@
 import { Config, Configuration } from "@lib/config";
-import dynamic from "next/dynamic";
 
-const Home = dynamic(() => import("../components/Home"), { ssr: false });
+import { Home } from "../components/Home";
 
 export default function Index(props: Configuration): JSX.Element {
   return <Home {...props} />;

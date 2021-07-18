@@ -72,7 +72,7 @@ function UnwrappedViewer({
       {...props}
     >
       <VertexViewerToolbar placement="top-left">
-        <Box sx={{ alignItems: "center", display: "flex", ml: 3, mt: 3 }}>
+        <Box sx={{ alignItems: "center", display: "flex", ml: 2, mt: 3 }}>
           <Stations sx={{ backgroundColor: "white", mr: 2 }} />
           <Link
             href="https://github.com/Vertexvis/work-instructions-demo"

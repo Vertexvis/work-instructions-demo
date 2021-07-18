@@ -5,7 +5,7 @@ import {
   Drawer as MuiDrawer,
   Fab,
   Step,
-  StepLabel,
+  StepButton,
   Stepper,
 } from "@material-ui/core";
 import { drawerClasses } from "@material-ui/core/Drawer";
@@ -36,7 +36,7 @@ export function BottomDrawer({
     return (
       <Fab
         disabled={!ready || activeStep === -1 || activeStep === 0}
-        sx={{ ml: BtnMargin, mr: "auto" }}
+        sx={{ mx: BtnMargin }}
         onClick={() => onSelect(activeStep - 1)}
       >
         <ChevronLeft />
@@ -48,7 +48,7 @@ export function BottomDrawer({
     return (
       <Fab
         disabled={!ready}
-        sx={{ ml: "auto", mr: BtnMargin }}
+        sx={{ mx: BtnMargin }}
         onClick={() => onSelect(activeStep + 1)}
       >
         <ChevronRight />
@@ -61,12 +61,10 @@ export function BottomDrawer({
       <Fab
         color={"primary"}
         disabled={!ready || activeStep >= stepIds.length}
-        sx={{ ml: "auto", mr: BtnMargin }}
+        sx={{ mr: BtnMargin }}
         onClick={() => onSelect(activeStep + 1)}
-        variant="extended"
       >
-        <Check sx={{ mr: 1 }} />
-        Done
+        <Check />
       </Fab>
     );
   }
@@ -75,7 +73,7 @@ export function BottomDrawer({
     return (
       <Fab
         disabled={!ready}
-        sx={{ ml: "auto", mr: 2 }}
+        sx={{ mx: BtnMargin }}
         onClick={() => onSelect(-1)}
       >
         <Refresh />
@@ -89,16 +87,20 @@ export function BottomDrawer({
         {Object.keys(InstructionSteps).map((k) => {
           return (
             <Step key={k}>
-              <StepLabel sx={{ mr: 0 }}></StepLabel>
-              <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  height={120}
-                  key={k}
-                  src={`/${k}.png`}
-                  alt={`Step ${InstructionSteps[k].step}`}
-                />
-              </Box>
+              <StepButton
+                disabled={false}
+                onClick={() => onSelect(InstructionSteps[k].step - 1)}
+              >
+                <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    height={120}
+                    key={k}
+                    src={`/${k}.png`}
+                    alt={`Step ${InstructionSteps[k].step}`}
+                  />
+                </Box>
+              </StepButton>
             </Step>
           );
         })}
@@ -117,11 +119,11 @@ export function BottomDrawer({
     );
   }
 
-  const minWidth = 215;
+  const minWidth = 232;
   return (
     <Drawer anchor="bottom" variant="permanent">
       <Box sx={{ alignItems: "center", display: "flex", mt: 2 }}>
-        <Box sx={{ minWidth }}>
+        <Box sx={{ minWidth: minWidth / 2 }}>
           <PrevBtn />
         </Box>
         <Steps />

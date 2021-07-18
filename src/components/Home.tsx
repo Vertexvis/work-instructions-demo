@@ -1,6 +1,10 @@
 import { BottomDrawer } from "@components/BottomDrawer";
 import { Header } from "@components/Header";
-import { Layout } from "@components/Layout";
+import {
+  BottomDrawerHeight,
+  Layout,
+  RightDrawerWidth,
+} from "@components/Layout";
 import { ReportIssueDialog } from "@components/ReportIssueDialog";
 import { Content, RightDrawer } from "@components/RightDrawer";
 import { Viewer } from "@components/Viewer";
@@ -21,10 +25,7 @@ import { InstructionStep, InstructionSteps } from "@lib/work-instructions";
 import { Snackbar } from "@material-ui/core";
 import React from "react";
 
-export default function Home({
-  authoring,
-  vertexEnv,
-}: Configuration): JSX.Element {
+export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
   const viewer = useViewer();
 
   const [activeStep, setActiveStep] = React.useState<{
@@ -88,6 +89,7 @@ export default function Home({
           stepIds={stepIds}
         />
       }
+      bottomDrawerHeight={BottomDrawerHeight}
       header={
         authoring && (
           <Header
@@ -149,12 +151,14 @@ export default function Home({
           instructionStep={activeStep.step}
           onBeginAssembly={handleBeginAssembly}
           onClose={() => setRightDrawerContent(undefined)}
+          open={rightDrawerContent != null}
           onShow={(ids) =>
             selectBySuppliedIds({ ids, viewer: viewer.ref.current })
           }
           settings={{ ghosted, onGhostToggle: setGhosted }}
         />
       }
+      rightDrawerWidth={rightDrawerContent != null ? RightDrawerWidth : 0}
     >
       {dialogOpen && (
         <ReportIssueDialog

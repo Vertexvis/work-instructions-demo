@@ -3,9 +3,8 @@ import { BottomDrawerHeight, RightDrawerWidth } from "@components/Layout";
 import { Parts } from "@components/Parts";
 import { Settings, SettingsProps } from "@components/Settings";
 import { InstructionStep } from "@lib/work-instructions";
-import { Box, Drawer as MuiDrawer } from "@material-ui/core";
+import { Box, Drawer } from "@material-ui/core";
 import { drawerClasses } from "@material-ui/core/Drawer";
-import { styled } from "@material-ui/core/styles";
 import React from "react";
 
 export type Content = "settings" | "instructions" | "parts";
@@ -15,23 +14,17 @@ interface Props {
   readonly instructionStep?: InstructionStep;
   readonly onBeginAssembly: () => void;
   readonly onClose: () => void;
+  readonly open: boolean;
   readonly onShow: (ids: string[]) => void;
   readonly settings: SettingsProps;
 }
-
-const Drawer = styled(MuiDrawer)(() => ({
-  width: RightDrawerWidth,
-  [`& .${drawerClasses.paper}`]: {
-    height: `calc(100% - ${BottomDrawerHeight}px)`,
-    width: RightDrawerWidth,
-  },
-}));
 
 export function RightDrawer({
   content,
   instructionStep,
   onBeginAssembly,
   onClose,
+  open,
   onShow,
   settings,
 }: Props): JSX.Element {
@@ -55,8 +48,15 @@ export function RightDrawer({
   return (
     <Drawer
       anchor="right"
-      open={content != null}
-      sx={{ flexShrink: 0 }}
+      open={open}
+      sx={{
+        flexShrink: 0,
+        width: RightDrawerWidth,
+        [`& .${drawerClasses.paper}`]: {
+          height: `calc(100% - ${BottomDrawerHeight}px)`,
+          width: RightDrawerWidth,
+        },
+      }}
       variant="persistent"
     >
       <Box sx={{ p: 2 }}>

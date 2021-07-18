@@ -35,7 +35,7 @@ export function InstructionSpeedDial({ onClick }: Props): JSX.Element {
       direction="down"
       hidden={true}
       open={true}
-      sx={{ mr: 3 }}
+      sx={{ mr: 2 }}
     >
       {actions.map((action) => (
         <SpeedDialAction

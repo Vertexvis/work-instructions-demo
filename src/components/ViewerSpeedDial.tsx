@@ -34,7 +34,7 @@ export function ViewerSpeedDial({ onClick, viewer }: Props): JSX.Element {
       ariaLabel="Viewer toolbar"
       hidden={true}
       open={true}
-      sx={{ mr: 3, mb: 2 }}
+      sx={{ mr: 2, mb: 0 }}
     >
       {actions.map((action) => (
         <SpeedDialAction
