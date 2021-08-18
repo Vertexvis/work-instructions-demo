@@ -47,7 +47,7 @@ export function ReportIssueDialog({
             </Grid>
             <Grid item xs={12} sm={4}>
               <Select
-                onChange={(e) => setIssueType(e.target.value)}
+                onChange={(e) => setIssueType(e.target.value as number)}
                 size="small"
                 sx={{ width: "100%" }}
                 value={issueType}
@@ -64,7 +64,7 @@ export function ReportIssueDialog({
             </Grid>
             <Grid item xs={12} sm={4}>
               <Select
-                onChange={(e) => setSeverity(e.target.value)}
+                onChange={(e) => setSeverity(e.target.value as number)}
                 size="small"
                 sx={{ width: "100%" }}
                 value={severity}

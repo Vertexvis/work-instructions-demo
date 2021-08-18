@@ -94,8 +94,8 @@ function UnwrappedViewer({
         {instructionStep?.arrows?.map((a, i) => (
           <VertexViewerDomElement
             key={i}
-            position={a.position}
-            rotation={a.rotation}
+            positionJson={JSON.stringify(a.position)}
+            rotationJson={JSON.stringify(a.rotation)}
             billboardOff={true}
           >
             {a.type === "down" ? <ArrowDown /> : <ArrowUp />}

@@ -1,10 +1,10 @@
 import { Link } from "@material-ui/core";
-import { Quaternion, Vector3 } from "@vertexvis/geometry";
+import { Euler, Vector3 } from "@vertexvis/geometry";
 import type { FrameCamera } from "@vertexvis/viewer/dist/types/lib/types";
 
 interface Arrow {
   readonly position: Vector3.Vector3;
-  readonly rotation: Quaternion.Quaternion;
+  readonly rotation: Euler.Euler;
   readonly type: "up" | "down";
 }
 
@@ -131,18 +131,18 @@ export const InstructionSteps: Record<string, InstructionStep> = {
   "step-1": {
     arrows: [
       {
-        position: { x: -1400, y: 740, z: 221 },
-        rotation: { w: 0.7071, x: 0, y: 0.7071, z: 0 },
+        position: { x: -1400, y: 740, z: 225 },
+        rotation: { order: "xyz", x: 0, y: 2, z: 0 },
         type: "up",
       },
       {
-        position: { x: -1298, y: 740, z: 229 },
-        rotation: { w: 0.7071, x: 0, y: 0.7071, z: 0 },
+        position: { x: -1298, y: 740, z: 235 },
+        rotation: { order: "xyz", x: 0, y: 2, z: 0 },
         type: "up",
       },
       {
-        position: { x: -1340, y: 740, z: 138 },
-        rotation: { w: 0.7071, x: 0, y: 0.7071, z: 0 },
+        position: { x: -1340, y: 740, z: 145 },
+        rotation: { order: "xyz", x: 0, y: 2, z: 0 },
         type: "up",
       },
     ],
@@ -178,12 +178,12 @@ export const InstructionSteps: Record<string, InstructionStep> = {
     arrows: [
       {
         position: { x: -1360, y: 685, z: 390 },
-        rotation: { w: 0.7071, x: 0, y: 0.7071, z: 0.05 },
+        rotation: { order: "xyz", x: 0, y: 2, z: 0.05 },
         type: "up",
       },
       {
         position: { x: -1334, y: 730, z: 130 },
-        rotation: { w: 0.7071, x: 0, y: 0.8, z: 0 },
+        rotation: { order: "xyz", x: 0, y: 2, z: 0 },
         type: "up",
       },
     ],
@@ -237,7 +237,7 @@ export const InstructionSteps: Record<string, InstructionStep> = {
     arrows: [
       {
         position: { x: -1490, y: 860, z: 185 },
-        rotation: { w: 0.7071, x: 0, y: 0.7071, z: 0 },
+        rotation: { order: "xyz", x: -0.2, y: 1, z: 0.2 },
         type: "down",
       },
     ],
@@ -260,12 +260,7 @@ export const InstructionSteps: Record<string, InstructionStep> = {
     arrows: [
       {
         position: { x: -1459, y: 650, z: 320 },
-        rotation: {
-          w: 0,
-          x: -0.000016310950741171837,
-          y: -0.9998411536216736,
-          z: -0.01782582886517048,
-        },
+        rotation: { order: "xyz", x: 0, y: -1, z: 0 },
         type: "up",
       },
     ],
