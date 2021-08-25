@@ -1,7 +1,7 @@
 import { ContentHeader } from "@components/ContentHeader";
 import { NoStepActive } from "@components/NoStepActive";
 import { InstructionStep } from "@lib/work-instructions";
-import { Box, Typography } from "@material-ui/core";
+import { Link, Typography } from "@material-ui/core";
 import { head } from "@vertexvis/api-client-node";
 import React from "react";
 
@@ -26,10 +26,16 @@ export function Parts({ onClose, onShow, step }: Props): JSX.Element {
       <ContentHeader onClose={onClose} title={`${stepNum} Parts`} />
       {step?.parts != null && step.parts.length > 0 ? (
         step?.parts.map((p, i) => (
-          <Box
+          <Link
+            color="inherit"
             key={i}
             onClick={() => onShow(p.name, p.sceneItemSuppliedIds)}
-            sx={{ alignItems: "center", display: "flex" }}
+            sx={{
+              alignItems: "center",
+              cursor: "pointer",
+              display: "flex",
+            }}
+            underline="none"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -42,7 +48,7 @@ export function Parts({ onClose, onShow, step }: Props): JSX.Element {
             <Typography
               sx={{ mb: 2 }}
             >{`${p.name} x ${p.quantity}`}</Typography>
-          </Box>
+          </Link>
         ))
       ) : (
         <NoContent />

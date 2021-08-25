@@ -150,7 +150,10 @@ export const InstructionSteps: Record<string, InstructionStep> = {
     instructions: (onShow: (name: string, ids: string[]) => void) => [
       <>
         Install three (3) M12x1.25 mm torx head bolts in the{" "}
-        <Link onClick={() => onShow(Z06InnerHubName, [Z06InnerHub])}>
+        <Link
+          onClick={() => onShow(Z06InnerHubName, [Z06InnerHub])}
+          sx={{ cursor: "pointer" }}
+        >
           {Z06InnerHubName}
         </Link>{" "}
         with Loctite® Threadlocker 271™.
@@ -191,9 +194,17 @@ export const InstructionSteps: Record<string, InstructionStep> = {
     instructions: (onShow: (name: string, ids: string[]) => void) => [
       <>
         Clean the ID of the{" "}
-        <Link onClick={() => onShow(SSSpindleName, [SSSpindle])}>spindle</Link>{" "}
+        <Link
+          onClick={() => onShow(SSSpindleName, [SSSpindle])}
+          sx={{ cursor: "pointer" }}
+        >
+          spindle
+        </Link>{" "}
         and the OD of the{" "}
-        <Link onClick={() => onShow(HoweBallJointsName, HoweBallJoints)}>
+        <Link
+          onClick={() => onShow(HoweBallJointsName, HoweBallJoints)}
+          sx={{ cursor: "pointer" }}
+        >
           ball joints
         </Link>{" "}
         with brake cleaner and degreaser.
@@ -201,7 +212,10 @@ export const InstructionSteps: Record<string, InstructionStep> = {
       <>Wipe clean with a lint free shop towel.</>,
       <>
         Install the washers and castle nuts on the{" "}
-        <Link onClick={() => onShow(HoweBallJointsName, HoweBallJoints)}>
+        <Link
+          onClick={() => onShow(HoweBallJointsName, HoweBallJoints)}
+          sx={{ cursor: "pointer" }}
+        >
           ball joints
         </Link>
         .
@@ -209,7 +223,10 @@ export const InstructionSteps: Record<string, InstructionStep> = {
       <>Torque the castle nuts to 30 ft/lbs and turn it an additional 140°.</>,
       <>
         Ensure the castle nut notch lines up with the hole in the{" "}
-        <Link onClick={() => onShow(HoweBallJointsName, HoweBallJoints)}>
+        <Link
+          onClick={() => onShow(HoweBallJointsName, HoweBallJoints)}
+          sx={{ cursor: "pointer" }}
+        >
           ball joints
         </Link>{" "}
         and install a cotter pin.
@@ -268,7 +285,10 @@ export const InstructionSteps: Record<string, InstructionStep> = {
     instructions: (onShow: (name: string, ids: string[]) => void) => [
       <>
         Torque the{" "}
-        <Link onClick={() => onShow(M10x35BoltsName, M10x35Bolts)}>
+        <Link
+          onClick={() => onShow(M10x35BoltsName, M10x35Bolts)}
+          sx={{ cursor: "pointer" }}
+        >
           {M10x35BoltsName} bolts
         </Link>{" "}
         to 45 ft/lbs.
