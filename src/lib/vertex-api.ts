@@ -1,5 +1,5 @@
 import { Config } from "@lib/config";
-import { Failure, VertexClient } from "@vertexvis/api-client-node";
+import { Failure, VertexClient, VertexError } from "@vertexvis/api-client-node";
 import { AxiosResponse } from "axios";
 import { createWriteStream } from "fs";
 import type { NextApiResponse } from "next";
@@ -11,11 +11,9 @@ export async function makeCall<T>(
     const c = await getClient();
     return (await apiCall(c)).data;
   } catch (error) {
-    return (
-      error.vertexError?.res ?? {
-        errors: [{ status: "500", title: "Unknown error from Vertex API." }],
-      }
-    );
+    const ve = error as VertexError;
+    const errors = [{ status: "500", title: "Unknown error from Vertex API." }];
+    return ve.vertexError?.res ?? { errors: new Set(errors) };
   }
 }
 
