@@ -13,7 +13,7 @@ interface Body {
   readonly sceneViewId: string;
 }
 
-export default async function create(
+export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse<{ readonly message: string }>
 ): Promise<void> {
