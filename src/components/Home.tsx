@@ -22,7 +22,7 @@ import {
 } from "@lib/scene-items";
 import { useViewer } from "@lib/viewer";
 import { InstructionStep, InstructionSteps } from "@lib/work-instructions";
-import { Snackbar } from "@material-ui/core";
+import { Snackbar } from "@mui/material";
 import React from "react";
 
 export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {

@@ -1,5 +1,5 @@
 import { ContentHeader } from "@components/ContentHeader";
-import { FormControlLabel, FormGroup, Switch } from "@material-ui/core";
+import { FormControlLabel, FormGroup, Switch } from "@mui/material";
 import React from "react";
 
 export interface SettingsProps {

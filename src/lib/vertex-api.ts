@@ -12,8 +12,13 @@ export async function makeCall<T>(
     return (await apiCall(c)).data;
   } catch (error) {
     const ve = error as VertexError;
-    const errors = [{ status: "500", title: "Unknown error from Vertex API." }];
-    return ve.vertexError?.res ?? { errors: new Set(errors) };
+    return (
+      ve.vertexError?.res ?? {
+        errors: new Set([
+          { status: "500", title: "Unknown error from Vertex API." },
+        ]),
+      }
+    );
   }
 }
 

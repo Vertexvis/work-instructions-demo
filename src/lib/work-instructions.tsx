@@ -1,4 +1,4 @@
-import { Link } from "@material-ui/core";
+import { Link } from "@mui/material";
 import { Euler, Vector3 } from "@vertexvis/geometry";
 import type { FrameCamera } from "@vertexvis/viewer/dist/types/lib/types";
 

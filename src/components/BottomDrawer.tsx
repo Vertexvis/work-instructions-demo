@@ -1,5 +1,6 @@
 import { BottomDrawerHeight } from "@components/Layout";
 import { InstructionSteps } from "@lib/work-instructions";
+import { Check, ChevronLeft, ChevronRight, Refresh } from "@mui/icons-material";
 import {
   Box,
   Drawer as MuiDrawer,
@@ -7,10 +8,9 @@ import {
   Step,
   StepButton,
   Stepper,
-} from "@material-ui/core";
-import { drawerClasses } from "@material-ui/core/Drawer";
-import { styled } from "@material-ui/core/styles";
-import { Check, ChevronLeft, ChevronRight, Refresh } from "@material-ui/icons";
+} from "@mui/material";
+import { drawerClasses } from "@mui/material/Drawer";
+import { styled } from "@mui/material/styles";
 import React from "react";
 
 interface Props {

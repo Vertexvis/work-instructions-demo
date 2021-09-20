@@ -1,5 +1,5 @@
-import { Box, IconButton, Typography } from "@material-ui/core";
-import { Close } from "@material-ui/icons";
+import { Close } from "@mui/icons-material";
+import { Box, IconButton, Typography } from "@mui/material";
 import React from "react";
 
 interface Props {

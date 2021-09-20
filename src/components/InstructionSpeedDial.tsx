@@ -1,10 +1,10 @@
 import { Action, ToolButtons } from "@components/Viewer";
-import { SpeedDial, SpeedDialAction } from "@material-ui/core";
 import {
   Settings,
   TextSnippetOutlined,
   WidgetsOutlined,
-} from "@material-ui/icons";
+} from "@mui/icons-material";
+import { SpeedDial, SpeedDialAction } from "@mui/material";
 
 interface Props {
   readonly onClick: (button: ToolButtons) => void;

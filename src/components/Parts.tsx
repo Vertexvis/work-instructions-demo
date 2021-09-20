@@ -1,7 +1,7 @@
 import { ContentHeader } from "@components/ContentHeader";
 import { NoStepActive } from "@components/NoStepActive";
 import { InstructionStep } from "@lib/work-instructions";
-import { Link, Typography } from "@material-ui/core";
+import { Link, Typography } from "@mui/material";
 import { head } from "@vertexvis/api-client-node";
 import React from "react";
 

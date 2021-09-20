@@ -1,11 +1,11 @@
 import { ContentHeader } from "@components/ContentHeader";
 import { InstructionStep } from "@lib/work-instructions";
-import { Box, Button, List, Typography } from "@material-ui/core";
 import {
   MapOutlined,
   TimerOutlined,
   WidgetsOutlined,
-} from "@material-ui/icons";
+} from "@mui/icons-material";
+import { Box, Button, List, Typography } from "@mui/material";
 import React from "react";
 
 interface Props {
