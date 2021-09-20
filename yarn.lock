@@ -741,72 +741,72 @@
   integrity sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==
 
 "@typescript-eslint/eslint-plugin@^4":
-  version "4.31.1"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-4.31.1.tgz#e938603a136f01dcabeece069da5fb2e331d4498"
-  integrity sha512-UDqhWmd5i0TvPLmbK5xY3UZB0zEGseF+DHPghZ37Sb83Qd3p8ujhvAtkU4OF46Ka5Pm5kWvFIx0cCTBFKo0alA==
+  version "4.31.2"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-4.31.2.tgz#9f41efaee32cdab7ace94b15bd19b756dd099b0a"
+  integrity sha512-w63SCQ4bIwWN/+3FxzpnWrDjQRXVEGiTt9tJTRptRXeFvdZc/wLiz3FQUwNQ2CVoRGI6KUWMNUj/pk63noUfcA==
   dependencies:
-    "@typescript-eslint/experimental-utils" "4.31.1"
-    "@typescript-eslint/scope-manager" "4.31.1"
+    "@typescript-eslint/experimental-utils" "4.31.2"
+    "@typescript-eslint/scope-manager" "4.31.2"
     debug "^4.3.1"
     functional-red-black-tree "^1.0.1"
     regexpp "^3.1.0"
     semver "^7.3.5"
     tsutils "^3.21.0"
 
-"@typescript-eslint/experimental-utils@4.31.1":
-  version "4.31.1"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/experimental-utils/-/experimental-utils-4.31.1.tgz#0c900f832f270b88e13e51753647b02d08371ce5"
-  integrity sha512-NtoPsqmcSsWty0mcL5nTZXMf7Ei0Xr2MT8jWjXMVgRK0/1qeQ2jZzLFUh4QtyJ4+/lPUyMw5cSfeeME+Zrtp9Q==
+"@typescript-eslint/experimental-utils@4.31.2":
+  version "4.31.2"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/experimental-utils/-/experimental-utils-4.31.2.tgz#98727a9c1e977dd5d20c8705e69cd3c2a86553fa"
+  integrity sha512-3tm2T4nyA970yQ6R3JZV9l0yilE2FedYg8dcXrTar34zC9r6JB7WyBQbpIVongKPlhEMjhQ01qkwrzWy38Bk1Q==
   dependencies:
     "@types/json-schema" "^7.0.7"
-    "@typescript-eslint/scope-manager" "4.31.1"
-    "@typescript-eslint/types" "4.31.1"
-    "@typescript-eslint/typescript-estree" "4.31.1"
+    "@typescript-eslint/scope-manager" "4.31.2"
+    "@typescript-eslint/types" "4.31.2"
+    "@typescript-eslint/typescript-estree" "4.31.2"
     eslint-scope "^5.1.1"
     eslint-utils "^3.0.0"
 
 "@typescript-eslint/parser@^4", "@typescript-eslint/parser@^4.20.0":
-  version "4.31.1"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-4.31.1.tgz#8f9a2672033e6f6d33b1c0260eebdc0ddf539064"
-  integrity sha512-dnVZDB6FhpIby6yVbHkwTKkn2ypjVIfAR9nh+kYsA/ZL0JlTsd22BiDjouotisY3Irmd3OW1qlk9EI5R8GrvRQ==
+  version "4.31.2"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-4.31.2.tgz#54aa75986e3302d91eff2bbbaa6ecfa8084e9c34"
+  integrity sha512-EcdO0E7M/sv23S/rLvenHkb58l3XhuSZzKf6DBvLgHqOYdL6YFMYVtreGFWirxaU2mS1GYDby3Lyxco7X5+Vjw==
   dependencies:
-    "@typescript-eslint/scope-manager" "4.31.1"
-    "@typescript-eslint/types" "4.31.1"
-    "@typescript-eslint/typescript-estree" "4.31.1"
+    "@typescript-eslint/scope-manager" "4.31.2"
+    "@typescript-eslint/types" "4.31.2"
+    "@typescript-eslint/typescript-estree" "4.31.2"
     debug "^4.3.1"
 
-"@typescript-eslint/scope-manager@4.31.1":
-  version "4.31.1"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/scope-manager/-/scope-manager-4.31.1.tgz#0c21e8501f608d6a25c842fcf59541ef4f1ab561"
-  integrity sha512-N1Uhn6SqNtU2XpFSkD4oA+F0PfKdWHyr4bTX0xTj8NRx1314gBDRL1LUuZd5+L3oP+wo6hCbZpaa1in6SwMcVQ==
+"@typescript-eslint/scope-manager@4.31.2":
+  version "4.31.2"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/scope-manager/-/scope-manager-4.31.2.tgz#1d528cb3ed3bcd88019c20a57c18b897b073923a"
+  integrity sha512-2JGwudpFoR/3Czq6mPpE8zBPYdHWFGL6lUNIGolbKQeSNv4EAiHaR5GVDQaLA0FwgcdcMtRk+SBJbFGL7+La5w==
   dependencies:
-    "@typescript-eslint/types" "4.31.1"
-    "@typescript-eslint/visitor-keys" "4.31.1"
+    "@typescript-eslint/types" "4.31.2"
+    "@typescript-eslint/visitor-keys" "4.31.2"
 
-"@typescript-eslint/types@4.31.1":
-  version "4.31.1"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/types/-/types-4.31.1.tgz#5f255b695627a13401d2fdba5f7138bc79450d66"
-  integrity sha512-kixltt51ZJGKENNW88IY5MYqTBA8FR0Md8QdGbJD2pKZ+D5IvxjTYDNtJPDxFBiXmka2aJsITdB1BtO1fsgmsQ==
+"@typescript-eslint/types@4.31.2":
+  version "4.31.2"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/types/-/types-4.31.2.tgz#2aea7177d6d744521a168ed4668eddbd912dfadf"
+  integrity sha512-kWiTTBCTKEdBGrZKwFvOlGNcAsKGJSBc8xLvSjSppFO88AqGxGNYtF36EuEYG6XZ9vT0xX8RNiHbQUKglbSi1w==
 
-"@typescript-eslint/typescript-estree@4.31.1":
-  version "4.31.1"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/typescript-estree/-/typescript-estree-4.31.1.tgz#4a04d5232cf1031232b7124a9c0310b577a62d17"
-  integrity sha512-EGHkbsUvjFrvRnusk6yFGqrqMBTue5E5ROnS5puj3laGQPasVUgwhrxfcgkdHNFECHAewpvELE1Gjv0XO3mdWg==
+"@typescript-eslint/typescript-estree@4.31.2":
+  version "4.31.2"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/typescript-estree/-/typescript-estree-4.31.2.tgz#abfd50594d8056b37e7428df3b2d185ef2d0060c"
+  integrity sha512-ieBq8U9at6PvaC7/Z6oe8D3czeW5d//Fo1xkF/s9394VR0bg/UaMYPdARiWyKX+lLEjY3w/FNZJxitMsiWv+wA==
   dependencies:
-    "@typescript-eslint/types" "4.31.1"
-    "@typescript-eslint/visitor-keys" "4.31.1"
+    "@typescript-eslint/types" "4.31.2"
+    "@typescript-eslint/visitor-keys" "4.31.2"
     debug "^4.3.1"
     globby "^11.0.3"
     is-glob "^4.0.1"
     semver "^7.3.5"
     tsutils "^3.21.0"
 
-"@typescript-eslint/visitor-keys@4.31.1":
-  version "4.31.1"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/visitor-keys/-/visitor-keys-4.31.1.tgz#f2e7a14c7f20c4ae07d7fc3c5878c4441a1da9cc"
-  integrity sha512-PCncP8hEqKw6SOJY+3St4LVtoZpPPn+Zlpm7KW5xnviMhdqcsBty4Lsg4J/VECpJjw1CkROaZhH4B8M1OfnXTQ==
+"@typescript-eslint/visitor-keys@4.31.2":
+  version "4.31.2"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/visitor-keys/-/visitor-keys-4.31.2.tgz#7d5b4a4705db7fe59ecffb273c1d082760f635cc"
+  integrity sha512-PrBId7EQq2Nibns7dd/ch6S6/M4/iwLM9McbgeEbCXfxdwRUNxJ4UNreJ6Gh3fI2GNKNrWnQxKL7oCPmngKBug==
   dependencies:
-    "@typescript-eslint/types" "4.31.1"
+    "@typescript-eslint/types" "4.31.2"
     eslint-visitor-keys "^2.0.0"
 
 "@vertexvis/api-client-node@^0.14":
@@ -817,58 +817,58 @@
     axios "^0.21"
     p-limit "^3.1"
 
-"@vertexvis/frame-streaming-protos@^0.5.12":
+"@vertexvis/frame-streaming-protos@^0.5.14":
   version "0.5.14"
   resolved "https://registry.yarnpkg.com/@vertexvis/frame-streaming-protos/-/frame-streaming-protos-0.5.14.tgz#97c23acb48ea440ccf162d33c57cbd8d4990463b"
   integrity sha512-zy9YENOT0yaSPfxAKStWU84PSU1a7P/7aTTjMfpBd9mnYIuLlV7/z0T/iCt9OBzGLw/FLEhtUIlx0+cNXuMd7Q==
 
-"@vertexvis/geometry@0.10.1":
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/@vertexvis/geometry/-/geometry-0.10.1.tgz#04ea36db62db250cdb3f92f412a11f9e72933e46"
-  integrity sha512-wi5SfIB2tOWbNrwDb8GG2hW8eiCUHXwHA/G3BKunUgPooH0Gm7GozLYLBM4Gnv5mIpPz0f6TjlUqfPG8MYIrWw==
+"@vertexvis/geometry@^0.10.2-canary.8":
+  version "0.10.2-canary.8"
+  resolved "https://registry.yarnpkg.com/@vertexvis/geometry/-/geometry-0.10.2-canary.8.tgz#2fa394c4b65be0e6b6a46bd24dfa052199179a33"
+  integrity sha512-dqT1mTtzSm9V5Q1nfM+ZhzpJHzHp/9gnQnwxbaqmTn3OOS5zNT/4pu8vzXOzQH3uPKoXrUkTY2+7F9aq6UTX9A==
 
 "@vertexvis/scene-tree-protos@^0.1.0":
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/@vertexvis/scene-tree-protos/-/scene-tree-protos-0.1.3.tgz#7c8ef097ccfff6282e3bdfb33ec3028f4badaa57"
   integrity sha512-+I6v4sv0jDZpJPmTvcYMp0s6VXkFZab1EAowMm2Hk+jrqKhaWiZv8jHwklYCzpo/onAz3+E0pLCHW0v7ka2ZlQ==
 
-"@vertexvis/stream-api@0.10.1":
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/@vertexvis/stream-api/-/stream-api-0.10.1.tgz#cb9044c1474a6a2980b547dc0933c85c68212590"
-  integrity sha512-GFS1k9mIw2T3KwgcG8wt6KALUggLJ1SY094X2Bb9UjJDayAT+tmWA9I9Fsbm+/GRRiG5tDz48ijkKXLC7W4Ghg==
+"@vertexvis/stream-api@^0.10.2-canary.8":
+  version "0.10.2-canary.8"
+  resolved "https://registry.yarnpkg.com/@vertexvis/stream-api/-/stream-api-0.10.2-canary.8.tgz#6e64e15bb41af9df6a2ea354a7f2167724b34e4b"
+  integrity sha512-umS5XAKkoo7A2BkfqD4OCm+j+KGjTKdjHLoQeqcZe7pQFS1ityXIqHHHqaGrkMhbwtoJP59dD7wD7GUQH2pm3w==
   dependencies:
-    "@vertexvis/frame-streaming-protos" "^0.5.12"
-    "@vertexvis/utils" "0.10.1"
+    "@vertexvis/frame-streaming-protos" "^0.5.14"
+    "@vertexvis/utils" "^0.10.2-canary.8"
 
-"@vertexvis/utils@0.10.1":
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/@vertexvis/utils/-/utils-0.10.1.tgz#b1816c6fc619fe3c12fb7baa4d23a7b590015e41"
-  integrity sha512-TLdsUSEMDWNOjdi3fXxvPapOTMz84SbGBFyopGbL/ocg5DX0g+hjIFJTBSjK8WrTWUybVABrh1fSG2Veicxw1Q==
+"@vertexvis/utils@^0.10.2-canary.8":
+  version "0.10.2-canary.8"
+  resolved "https://registry.yarnpkg.com/@vertexvis/utils/-/utils-0.10.2-canary.8.tgz#97e32020fc2093af2c510211ef655424f23d9bc4"
+  integrity sha512-8LpKHWEfekRg16kfsG1OT6kHkUJrFLbUwvco5nSvloDcuTVnlu3Nv4LrWkG7sDOQu6fVdKrQcxGcKAqWWrg1zA==
   dependencies:
     is-plain-object "^3.0.0"
     lodash.isequal "^4.5.0"
     uuid "^8.3.2"
 
-"@vertexvis/viewer-react@^0.10":
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/@vertexvis/viewer-react/-/viewer-react-0.10.1.tgz#fd9ff9f1921580bf1e8ab68e0dd7b9ada775c54f"
-  integrity sha512-mq38u1vxp6GX33Djtr60vbgLTj8mn8uKZpgIJ6UQvH5tLDf7Vi5p1JL4LnGuo5k279kUsa5MBIfxwetJ+hk+VA==
+"@vertexvis/viewer-react@^0.10.2-canary.7":
+  version "0.10.2-canary.8"
+  resolved "https://registry.yarnpkg.com/@vertexvis/viewer-react/-/viewer-react-0.10.2-canary.8.tgz#5fcf509343a0998194662a192d1e7167b5a539c8"
+  integrity sha512-NG74YWgn6GfZNb7mNOZZTHwRy8Aerxxq5Mpqw8F3ik1HruQ7cJTAZ6+nvtaKVnNXHl0euCywk86G6GCzmiJeLA==
   dependencies:
-    "@vertexvis/viewer" "0.10.1"
+    "@vertexvis/viewer" "^0.10.2-canary.8"
 
-"@vertexvis/viewer@0.10.1":
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/@vertexvis/viewer/-/viewer-0.10.1.tgz#befb63451f5c476eedd66cf76d0f34c77b1df17b"
-  integrity sha512-LO5ky7nJdADVGPKYSJei/ise3Tw1ZYlcGx3Y/bMnoUHf2qNOetj6nzE7+GRwmNUcIu/8K7kluxKpL64Q7zgGtQ==
+"@vertexvis/viewer@^0.10.2-canary.8":
+  version "0.10.2-canary.8"
+  resolved "https://registry.yarnpkg.com/@vertexvis/viewer/-/viewer-0.10.2-canary.8.tgz#b62b8398f8733f78a3ed48ac6e262a95e6009adf"
+  integrity sha512-mZMSc0iqqmvuly1uRpILnCRFUAjHBlAOh4Va0ar+j35g74XrbYEzYDpJHI0r250jbi+NCCBLnuZZbtw6PX5DAA==
   dependencies:
     "@improbable-eng/grpc-web" "^0.14.0"
     "@juggle/resize-observer" "^3.3.0"
     "@types/classnames" "^2.3.1"
-    "@vertexvis/frame-streaming-protos" "^0.5.12"
-    "@vertexvis/geometry" "0.10.1"
+    "@vertexvis/frame-streaming-protos" "^0.5.14"
+    "@vertexvis/geometry" "^0.10.2-canary.8"
     "@vertexvis/scene-tree-protos" "^0.1.0"
-    "@vertexvis/stream-api" "0.10.1"
-    "@vertexvis/utils" "0.10.1"
+    "@vertexvis/stream-api" "^0.10.2-canary.8"
+    "@vertexvis/utils" "^0.10.2-canary.8"
     "@vertexvis/web-workers" "^0.1.0"
     camel-case "^4.1.2"
     classnames "^2.3.1"
