@@ -126,13 +126,19 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
               console.debug({
                 hitNormal: hit?.hitNormal,
                 hitPoint: hit?.hitPoint,
-                partName: hit?.metadataProperties?.find(p => p.key && p.key === "Name")?.asString ?? undefined,
+                partName:
+                  hit?.metadataProperties?.find(
+                    (p) => p.key && p.key === "Name"
+                  )?.asString ?? undefined,
                 sceneItemId: hit?.itemId?.hex,
                 sceneItemSuppliedId: hit?.itemSuppliedId?.value,
               });
               setSelected({
                 part: {
-                  name: hit?.metadataProperties?.find(p => p.key && p.key === "Name")?.asString ?? undefined,
+                  name:
+                    hit?.metadataProperties?.find(
+                      (p) => p.key && p.key === "Name"
+                    )?.asString ?? undefined,
                   revisionId: hit?.partRevisionId?.hex ?? undefined,
                 },
                 sceneItemSuppliedId: hit?.itemSuppliedId?.value ?? undefined,
