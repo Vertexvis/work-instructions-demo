@@ -30,7 +30,7 @@ export async function createSceneViewState({
 }: CreateSceneViewStateReq): Promise<void> {
   if (!sceneViewId) return;
 
-  console.debug(
+  console.log(
     await (
       await fetch(`${BaseUrl}/api/scene-view-states`, {
         body: JSON.stringify({ name, sceneViewId }),
@@ -57,14 +57,16 @@ export async function initializeScene({
     .flyTo({ camera })
     .render({ animation: { milliseconds: AnimationDurationMs } });
 
-  await scene
-    .items((op) => {
-      return [
-        op.where((q) => q.all()).hide(),
-        op.where((q) => q.withSuppliedIds(sceneItemsVisible)).show(),
-      ];
-    })
-    .execute();
+  if (sceneItemsVisible.length > 0) {
+    await scene
+      .items((op) => {
+        return [
+          op.where((q) => q.all()).hide(),
+          op.where((q) => q.withSuppliedIds(sceneItemsVisible)).show(),
+        ];
+      })
+      .execute();
+  }
 }
 
 export async function renderPartRevision({

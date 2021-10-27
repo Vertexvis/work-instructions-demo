@@ -17,10 +17,10 @@ export const Config: Configuration = {
 
 // Super Car
 export const Credentials: StreamCredentials = {
-  clientId: "08F675C4AACE8C0214362DB5EFD4FACAFA556D463ECA00877CB225157EF58BFA",
-  streamKey: "cEGp505foa8t6Y-1jIcClhkgstTpNoRYlMsg",
+  clientId: "CEC52A15AF345F18D02AA4972D4D3CA12D10323E52572689204256E9A1024C40",
+  streamKey: "C14_yYbrVyn3BWxEuhkOVgVBWSW151Z-_vHP",
 };
-export const SceneId = "421a79ac-9b12-49b1-b517-4d6760b3c9f8";
+export const SceneId = "a2a5f9c5-738e-4241-af1b-d87c67e09faa";
 
 function envVar(name: string, fallback: string): string {
   const ev = process.env[name];

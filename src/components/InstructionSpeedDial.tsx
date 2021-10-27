@@ -22,11 +22,6 @@ export function InstructionSpeedDial({ onClick }: Props): JSX.Element {
       name: "Instructions",
       onClick: () => onClick("instructions"),
     },
-    {
-      icon: <WidgetsOutlined />,
-      name: "Parts List",
-      onClick: () => onClick("parts"),
-    },
   ];
 
   return (

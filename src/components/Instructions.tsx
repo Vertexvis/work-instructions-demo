@@ -26,18 +26,13 @@ export function Instructions({
   function NoContent(): JSX.Element {
     return step == null ? (
       <>
-        <ContentHeader onClose={onClose} title="Spindle Install" />
+        <ContentHeader onClose={onClose} title="Belt Replacement" />
         <Typography sx={{ mb: 6 }}>
-          At this station, the assembly technician assembles the spindle and
-          installs it on the vehicle.
+          At this station, the assembly technician replaces the belt.
         </Typography>
         <Box sx={{ display: "flex", mb: 2 }}>
           <MapOutlined sx={{ mr: 1 }} />
           <Typography>{`${numSteps} steps`}</Typography>
-        </Box>
-        <Box sx={{ display: "flex", mb: 2 }}>
-          <WidgetsOutlined sx={{ mr: 1 }} />
-          <Typography>15 parts</Typography>
         </Box>
         <Box sx={{ display: "flex", mb: 6 }}>
           <TimerOutlined sx={{ mr: 1 }} />

@@ -74,14 +74,6 @@ function UnwrappedViewer({
       <VertexViewerToolbar placement="top-left">
         <Box sx={{ alignItems: "center", display: "flex", ml: 2, mt: 3 }}>
           <Stations sx={{ backgroundColor: "white", mr: 2 }} />
-          <Link
-            href="https://github.com/Vertexvis/work-instructions-demo"
-            rel="noreferrer"
-            style={{ alignSelf: "center" }}
-            target="_blank"
-          >
-            View on GitHub
-          </Link>
         </Box>
       </VertexViewerToolbar>
       <VertexViewerToolbar placement="top-right">
@@ -115,6 +107,7 @@ function onTap<P extends ViewerProps>(
         viewer={viewer}
         {...props}
         onTap={async (e) => {
+          console.log(e);
           if (props.onTap) props.onTap(e);
 
           if (!e.defaultPrevented) {

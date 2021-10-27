@@ -2,6 +2,8 @@ import { Link } from "@mui/material";
 import { Euler, Vector3 } from "@vertexvis/geometry";
 import type { FrameCamera } from "@vertexvis/viewer/dist/types/lib/types";
 
+import { getCamera, getThumbnails } from "./camera";
+
 interface Arrow {
   readonly position: Vector3.Vector3;
   readonly rotation: Euler.Euler;
@@ -27,298 +29,176 @@ export interface InstructionStep {
   readonly title: string;
 }
 
-const step1Cam: FrameCamera.FrameCamera = {
-  position: {
-    x: -955.7966918945312,
-    y: 520.9080200195312,
-    z: 368.5772399902344,
-  },
-  lookAt: {
-    x: -1377.415771484375,
-    y: 794.2061767578125,
-    z: 236.43722534179688,
-  },
-  up: {
-    x: -0.2708650827407837,
-    y: 0.0470057874917984,
-    z: 0.9614689350128174,
-  },
-};
 
-const step2Cam: FrameCamera.FrameCamera = {
-  position: {
-    x: -901.5206298828125,
-    y: 660.30810546875,
-    z: 396.15740966796875,
-  },
-  lookAt: {
-    x: -1377.415771484375,
-    y: 794.2061767578125,
-    z: 236.43722534179688,
-  },
-  up: {
-    x: -0.31933844089508057,
-    y: -0.0046013714745640755,
-    z: 0.9476295113563538,
-  },
-};
+const sceneViewStateId1 = "723234df-4b68-4600-9625-81b4db434dbc";
+const sceneViewStateId2 = "38a18afb-6f22-4264-82f5-5bd11ab53e6d";
+const sceneViewStateId3 = "a74c042b-3670-491d-97cd-06c6b2c1e890";
+const sceneViewStateId4 = "59f295dc-8e1f-4ddf-8718-cfaefa32facf";
 
-const step3Cam: FrameCamera.FrameCamera = {
-  position: {
-    x: -1723.2679443359375,
-    y: 1058.5960693359375,
-    z: 279.37823486328125,
-  },
-  lookAt: {
-    x: -1388.18310546875,
-    y: 770.7772827148438,
-    z: 223.43975830078125,
-  },
-  up: {
-    x: 0.12238356471061707,
-    y: -0.05016382411122322,
-    z: 0.9912142753601074,
-  },
-};
-
-const step4Cam: FrameCamera.FrameCamera = {
-  position: {
-    x: -1329.5069580078125,
-    y: 561.3935546875,
-    z: 451.5056457519531,
-  },
-  lookAt: {
-    x: -1398.9622802734375,
-    y: 714.4110717773438,
-    z: 303.1302795410156,
-  },
-  up: {
-    x: -0.7405996918678284,
-    y: 0.2632957994937897,
-    z: 0.6182129979133606,
-  },
-};
-
-const HoweBallJointsName = "Howe ball joint";
-const M10x35BoltsName = "M10x35";
-const SSSpindleName = "SS Spindle";
-const Z06InnerHubName = "Z06 inner hub";
-
-const ControlArmRlls = "308600";
-const FenderFrame = "312220";
-const FenderRearStreet = "312240";
-const HoweBallJoints = ["312200", "312210"];
-const M10x35Bolts = ["312100", "312110", "312120", "312130", "312140"];
-const M12HeimMhmr12T = "300820";
-const SSSpindle = "312230";
-const ToeLink = "308640";
-const WheelAxle = "308390";
-const WheelMechHousing = "307750";
-const Z06InnerHub = "312080";
-
-const step2SceneItemsVisible = [
-  M12HeimMhmr12T,
-  Z06InnerHub,
-  ...HoweBallJoints,
-  SSSpindle,
-  WheelMechHousing,
-  WheelAxle,
-  ControlArmRlls,
-  ToeLink,
-];
 
 export const InstructionSteps: Record<string, InstructionStep> = {
   "step-1": {
     arrows: [
       {
-        position: { x: -1400, y: 740, z: 225 },
-        rotation: { order: "xyz", x: 0, y: 2, z: 0 },
-        type: "up",
-      },
-      {
-        position: { x: -1298, y: 740, z: 235 },
-        rotation: { order: "xyz", x: 0, y: 2, z: 0 },
-        type: "up",
-      },
-      {
-        position: { x: -1340, y: 740, z: 145 },
-        rotation: { order: "xyz", x: 0, y: 2, z: 0 },
+        position: { x: -74.71805572509766,
+          y: 289.2084045410156,
+          z: -513.8933715820312 },
+        rotation: { order: "xyz", x: 0, y: 0, z: 0 },
         type: "up",
       },
     ],
-    camera: step1Cam,
+    camera: {
+      position: {
+        x: 24.922887802124023,
+        y: 252.69744873046875,
+        z: -723.9141845703125
+      },
+      lookAt: {
+        x: -194.14573669433594,
+        y: 302.7480773925781,
+        z: -91.16386413574219
+      },
+      up: {
+        x: 0.11671561747789383,
+        y: 0.992434561252594,
+        z: -0.038092728704214096
+      }
+    },
     instructions: (onShow: (name: string, ids: string[]) => void) => [
       <>
-        Install three (3) M12x1.25 mm torx head bolts in the{" "}
-        <Link
-          onClick={() => onShow(Z06InnerHubName, [Z06InnerHub])}
-          sx={{ cursor: "pointer" }}
-        >
-          {Z06InnerHubName}
-        </Link>{" "}
-        with Loctite® Threadlocker 271™.
+        Remove fasteners
       </>,
-      <>Using a T55 socket, torque the bolts to 75 ft/lbs.</>,
+      <>Carefully remove the cover and set off to the side</>,
     ],
     parts: [
-      {
-        name: Z06InnerHubName,
-        quantity: 1,
-        sceneItemSuppliedIds: [Z06InnerHub],
-      },
-      {
-        name: SSSpindleName,
-        quantity: 1,
-        sceneItemSuppliedIds: [SSSpindle],
-      },
+
     ],
-    sceneItemsVisible: [Z06InnerHub, SSSpindle],
-    sceneViewStateId: "49679fc2-2b98-4c39-ac21-cf8102dd39cc",
+    sceneItemsVisible: [],
+    sceneViewStateId: sceneViewStateId1,
     step: 1,
-    title: "Install the inner hub on the spindle",
+    title: "Removed Rear Cover",
   },
   "step-2": {
     arrows: [
       {
-        position: { x: -1360, y: 685, z: 390 },
-        rotation: { order: "xyz", x: 0, y: 2, z: 0.05 },
-        type: "up",
-      },
-      {
-        position: { x: -1334, y: 730, z: 130 },
-        rotation: { order: "xyz", x: 0, y: 2, z: 0 },
+        position: { x: 274.0100402832031,
+          y: 11.12000560760498,
+          z: -222.43959045410156 },
+        rotation: { order: "xyz", x: 0, y: 0, z: 0 },
         type: "up",
       },
     ],
-    camera: step2Cam,
+    camera: {
+      position: {
+        x: -439.7635192871094,
+        y: 557.271240234375,
+        z: -1216.6805419921875
+      },
+      lookAt: {
+        x: 41.65736770629883,
+        y: 361.56524658203125,
+        z: -519.7561645507812
+      },
+      up: {
+        x: 0.05460376292467117,
+        y: 0.9705057740211487,
+        z: 0.23481236398220062
+      }
+    },
     instructions: (onShow: (name: string, ids: string[]) => void) => [
       <>
-        Clean the ID of the{" "}
-        <Link
-          onClick={() => onShow(SSSpindleName, [SSSpindle])}
-          sx={{ cursor: "pointer" }}
-        >
-          spindle
-        </Link>{" "}
-        and the OD of the{" "}
-        <Link
-          onClick={() => onShow(HoweBallJointsName, HoweBallJoints)}
-          sx={{ cursor: "pointer" }}
-        >
-          ball joints
-        </Link>{" "}
-        with brake cleaner and degreaser.
-      </>,
-      <>Wipe clean with a lint free shop towel.</>,
-      <>
-        Install the washers and castle nuts on the{" "}
-        <Link
-          onClick={() => onShow(HoweBallJointsName, HoweBallJoints)}
-          sx={{ cursor: "pointer" }}
-        >
-          ball joints
-        </Link>
-        .
-      </>,
-      <>Torque the castle nuts to 30 ft/lbs and turn it an additional 140°.</>,
-      <>
-        Ensure the castle nut notch lines up with the hole in the{" "}
-        <Link
-          onClick={() => onShow(HoweBallJointsName, HoweBallJoints)}
-          sx={{ cursor: "pointer" }}
-        >
-          ball joints
-        </Link>{" "}
-        and install a cotter pin.
+        If the belt is no longer attached to the Drum Pulley or Motor Spindle it needs to be replaced. If this is the case move on to step 3 if not...
       </>,
     ],
     parts: [
-      {
-        name: Z06InnerHubName,
-        quantity: 1,
-        sceneItemSuppliedIds: [Z06InnerHub],
-      },
-      {
-        name: HoweBallJointsName,
-        quantity: 2,
-        sceneItemSuppliedIds: HoweBallJoints,
-      },
-      { name: SSSpindleName, quantity: 1, sceneItemSuppliedIds: [SSSpindle] },
     ],
-    sceneItemsVisible: step2SceneItemsVisible,
-    sceneViewStateId: "e146181e-2809-42b9-87f1-24d2bd25bef2",
+    sceneItemsVisible: [],
+    sceneViewStateId: sceneViewStateId2,
     step: 2,
-    title: "Install the spindle on the ball joints",
+    title: "Inspect the belt",
   },
   "step-3": {
     arrows: [
       {
-        position: { x: -1490, y: 860, z: 185 },
-        rotation: { order: "xyz", x: -0.2, y: 1, z: 0.2 },
+        position: { x: -87.63182067871094,
+          y: 268.0404052734375,
+          z: -524.8290405273438 },
+        rotation: { order: "xyz", x: 0, y: 0, z: 0 },
         type: "down",
       },
     ],
-    camera: step3Cam,
-    instructions: () => [],
-    parts: [
-      {
-        name: "M12 heim MHMR12T",
-        quantity: 1,
-        sceneItemSuppliedIds: [M12HeimMhmr12T],
+    camera: {
+      position: {
+        x: 24.922887802124023,
+        y: 252.69744873046875,
+        z: -723.9141845703125
       },
-      { name: "Toe Link", quantity: 1, sceneItemSuppliedIds: [ToeLink] },
+      lookAt: {
+        x: -194.14573669433594,
+        y: 302.7480773925781,
+        z: -91.16386413574219
+      },
+      up: {
+        x: 0.11671561747789383,
+        y: 0.992434561252594,
+        z: -0.038092728704214096
+      }
+    },
+    instructions: () => [
+      
+      <>To install the new belt the lower hose needs to be removed to allow the belt to slip over both pulleys.</>,
+<>Pinch the clamp together with pliers and slide it towards the back of the unit.</>,
+<>Slide the hose back off the fitting</>
+
     ],
-    sceneItemsVisible: step2SceneItemsVisible,
-    sceneViewStateId: "7006b7ba-1ec7-49aa-aefe-fe77698da65b",
+    parts: [
+
+    ],
+    sceneItemsVisible: [],
+    sceneViewStateId: sceneViewStateId3,
     step: 3,
-    title: "Install the stabilizer arm",
+    title: "Removing the lower hose",
   },
   "step-4": {
     arrows: [
       {
-        position: { x: -1459, y: 650, z: 320 },
+        position: { x: 60.8879508972168,
+          y: 213.54518127441406,
+          z: -477.5937805175781 },
         rotation: { order: "xyz", x: 0, y: -1, z: 0 },
         type: "up",
       },
     ],
-    camera: step4Cam,
+    camera: {
+      position: {
+        x: -602.8243408203125,
+        y: 486.87628173828125,
+        z: -1242.0726318359375
+      },
+      lookAt: { x: 11.56212329864502, y: 407.2480163574219, z: -595.4032592773438 },
+      up: {
+        x: -0.3562106192111969,
+        y: 0.8874346017837524,
+        z: -0.292530357837677
+      }
+    },
     instructions: (onShow: (name: string, ids: string[]) => void) => [
-      <>
-        Torque the{" "}
-        <Link
-          onClick={() => onShow(M10x35BoltsName, M10x35Bolts)}
-          sx={{ cursor: "pointer" }}
-        >
-          {M10x35BoltsName} bolts
-        </Link>{" "}
-        to 45 ft/lbs.
-      </>,
+      
+
+
+<>To install the belt first place it on the lower motor spindle. Then roll it onto the drum pulley.</>,
+<>After the belt has been installed put the hose and clamp back in place</>,
+<>Attach the rear cover</>,
+
     ],
     parts: [
-      {
-        name: M10x35BoltsName,
-        quantity: 5,
-        sceneItemSuppliedIds: M10x35Bolts,
-      },
-      {
-        name: "Fender frame",
-        quantity: 1,
-        sceneItemSuppliedIds: [FenderFrame],
-      },
-      {
-        name: "Fender rear",
-        quantity: 1,
-        sceneItemSuppliedIds: [FenderRearStreet],
-      },
+
     ],
     sceneItemsVisible: [
-      ...step2SceneItemsVisible,
-      ...M10x35Bolts,
-      FenderFrame,
-      FenderRearStreet,
+
     ],
-    sceneViewStateId: "6420d920-9166-4355-91d0-23139298472b",
+    sceneViewStateId: sceneViewStateId4,
     step: 4,
-    title: "Install the fender frame",
+    title: "Install the new belt",
   },
 };
