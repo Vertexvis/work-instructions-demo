@@ -27,7 +27,7 @@ export function Instructions({
       <>
         <ContentHeader onClose={onClose} title="Belt Replacement" />
         <Typography sx={{ mb: 6 }}>
-          At this station, the assembly technician replaces the belt.
+          For this repair, the technician checks and replaces the belt.
         </Typography>
         <Box sx={{ display: "flex", mb: 2 }}>
           <MapOutlined sx={{ mr: 1 }} />
@@ -39,7 +39,7 @@ export function Instructions({
         </Box>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Button onClick={() => onBeginAssembly()} variant="contained">
-            Begin Assembly
+            Begin Disassembly
           </Button>
         </Box>
       </>

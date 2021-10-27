@@ -30,19 +30,89 @@ export interface InstructionStep {
 
 
 const sceneViewStateId1 = "723234df-4b68-4600-9625-81b4db434dbc";
-const sceneViewStateId2 = "38a18afb-6f22-4264-82f5-5bd11ab53e6d";
+const sceneViewStateId2 = "59f295dc-8e1f-4ddf-8718-cfaefa32facf";
 const sceneViewStateId3 = "a74c042b-3670-491d-97cd-06c6b2c1e890";
-const sceneViewStateId4 = "59f295dc-8e1f-4ddf-8718-cfaefa32facf";
+const sceneViewStateId4 = "38a18afb-6f22-4264-82f5-5bd11ab53e6d";
 
+const back_screws_left_x = 350;
+const  back_screws_right_x = -305;
+const back_screws_z = -610;
+const rotation_left = { order: "xyz", x: 3, y: 4, z: 2 } as Euler.Euler;
+const rotation_right= { order: "xyz", x: 3, y: -10, z: 2 } as Euler.Euler;
 
 export const InstructionSteps: Record<string, InstructionStep> = {
   "step-1": {
     arrows: [
+      //left
       {
-        position: { x: -74.71805572509766,
-          y: 289.2084045410156,
-          z: -513.8933715820312 },
-        rotation: { order: "xyz", x: 0, y: 0, z: 0 },
+        position: { x: back_screws_left_x, y: 760, z: back_screws_z },
+        rotation: rotation_left,
+        type: "up",
+      },
+      {
+        position: { x: back_screws_left_x, y: 690, z: back_screws_z },
+        rotation: rotation_left,
+        type: "up",
+      },
+      {
+        position: { x: back_screws_left_x, y: 590, z: back_screws_z },
+        rotation: rotation_left,
+        type: "up",
+      },
+      {
+        position: { x: back_screws_left_x, y: 425, z: back_screws_z },
+        rotation: rotation_left,
+        type: "up",
+      },      
+      {
+        position: { x: back_screws_left_x, y: 300, z: back_screws_z },
+        rotation: rotation_left,
+        type: "up",
+      },   
+      {
+        position: { x: back_screws_left_x, y: 210, z: back_screws_z },
+        rotation: rotation_left,
+        type: "up",
+      },     
+       {
+        position: { x: back_screws_left_x, y: 5, z: back_screws_z },
+        rotation: rotation_left,
+        type: "up",
+      },
+      //right
+      {
+        position: { x: back_screws_right_x, y: 760, z: back_screws_z },
+        rotation: rotation_right,
+        type: "up",
+      },
+      {
+        position: { x: back_screws_right_x, y: 690, z: back_screws_z },
+        rotation: rotation_right,
+        type: "up",
+      },
+      {
+        position: { x: back_screws_right_x, y: 590, z: back_screws_z },
+        rotation: rotation_right,
+        type: "up",
+      },
+      {
+        position: { x: back_screws_right_x, y: 425, z: back_screws_z },
+        rotation: rotation_right,
+        type: "up",
+      },      
+      {
+        position: { x: back_screws_right_x, y: 300, z: back_screws_z },
+        rotation: rotation_right,
+        type: "up",
+      },   
+      {
+        position: { x: back_screws_right_x, y: 210, z: back_screws_z },
+        rotation: rotation_right,
+        type: "up",
+      },     
+       {
+        position: { x: back_screws_right_x, y: 5, z: back_screws_z },
+        rotation: rotation_right,
         type: "up",
       },
     ],
@@ -75,7 +145,7 @@ export const InstructionSteps: Record<string, InstructionStep> = {
     sceneItemsVisible: [],
     sceneViewStateId: sceneViewStateId1,
     step: 1,
-    title: "Removed Rear Cover",
+    title: "Remove Rear Cover",
   },
   "step-2": {
     arrows: [
@@ -120,7 +190,7 @@ export const InstructionSteps: Record<string, InstructionStep> = {
     arrows: [
       {
         position: { x: -87.63182067871094,
-          y: 268.0404052734375,
+          y: 290,
           z: -524.8290405273438 },
         rotation: { order: "xyz", x: 0, y: 0, z: 0 },
         type: "down",
