@@ -1,8 +1,7 @@
-import { Link } from "@mui/material";
 import { Euler, Vector3 } from "@vertexvis/geometry";
 import type { FrameCamera } from "@vertexvis/viewer/dist/types/lib/types";
 
-import { getCamera, getThumbnails } from "./camera";
+// import { getCamera, getThumbnails } from "./camera";
 
 interface Arrow {
   readonly position: Vector3.Vector3;
@@ -64,7 +63,7 @@ export const InstructionSteps: Record<string, InstructionStep> = {
         z: -0.038092728704214096
       }
     },
-    instructions: (onShow: (name: string, ids: string[]) => void) => [
+    instructions: () => [
       <>
         Remove fasteners
       </>,
@@ -105,7 +104,7 @@ export const InstructionSteps: Record<string, InstructionStep> = {
         z: 0.23481236398220062
       }
     },
-    instructions: (onShow: (name: string, ids: string[]) => void) => [
+    instructions: () => [
       <>
         If the belt is no longer attached to the Drum Pulley or Motor Spindle it needs to be replaced. If this is the case move on to step 3 if not...
       </>,
@@ -182,7 +181,7 @@ export const InstructionSteps: Record<string, InstructionStep> = {
         z: -0.292530357837677
       }
     },
-    instructions: (onShow: (name: string, ids: string[]) => void) => [
+    instructions: () => [
       
 
 

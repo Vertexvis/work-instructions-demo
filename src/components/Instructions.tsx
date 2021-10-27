@@ -3,7 +3,6 @@ import { InstructionStep } from "@lib/work-instructions";
 import {
   MapOutlined,
   TimerOutlined,
-  WidgetsOutlined,
 } from "@mui/icons-material";
 import { Box, Button, List, Typography } from "@mui/material";
 import React from "react";

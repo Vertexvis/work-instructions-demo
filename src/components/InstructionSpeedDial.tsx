@@ -2,7 +2,6 @@ import { Action, ToolButtons } from "@components/Viewer";
 import {
   Settings,
   TextSnippetOutlined,
-  WidgetsOutlined,
 } from "@mui/icons-material";
 import { SpeedDial, SpeedDialAction } from "@mui/material";
 
