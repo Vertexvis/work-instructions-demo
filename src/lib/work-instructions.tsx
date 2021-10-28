@@ -150,9 +150,11 @@ export const InstructionSteps: Record<string, InstructionStep> = {
   "step-2": {
     arrows: [
       {
-        position: { x: 274.0100402832031,
-          y: 11.12000560760498,
-          z: -222.43959045410156 },
+        position: {
+          x: 0,
+          y: 200,
+          z: -550
+        },
         rotation: { order: "xyz", x: 0, y: 0, z: 0 },
         type: "up",
       },
@@ -189,9 +191,11 @@ export const InstructionSteps: Record<string, InstructionStep> = {
   "step-3": {
     arrows: [
       {
-        position: { x: -87.63182067871094,
+        position: {
+          x: -87.63182067871094,
           y: 290,
-          z: -524.8290405273438 },
+          z: -524.8290405273438
+        },
         rotation: { order: "xyz", x: 0, y: 0, z: 0 },
         type: "down",
       },
@@ -231,9 +235,11 @@ export const InstructionSteps: Record<string, InstructionStep> = {
   "step-4": {
     arrows: [
       {
-        position: { x: 60.8879508972168,
-          y: 213.54518127441406,
-          z: -477.5937805175781 },
+        position: {
+          x: 0,
+          y: 200,
+          z: -550
+        },
         rotation: { order: "xyz", x: 0, y: -1, z: 0 },
         type: "up",
       },
