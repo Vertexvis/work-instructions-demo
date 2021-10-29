@@ -18,7 +18,7 @@ export const Config: Configuration = {
 // Super Car
 export const Credentials: StreamCredentials = {
   clientId: "CEC52A15AF345F18D02AA4972D4D3CA12D10323E52572689204256E9A1024C40",
-  streamKey: "P1aWYN3rBPfXe3enO--Ig3zCuWEWpBHo1uXy",
+  streamKey: "1i6L0KGih4vR50E-XEcwINzft7qfvGhhUmCe",
 };
 export const SceneId = "a2a5f9c5-738e-4241-af1b-d87c67e09faa";
 
