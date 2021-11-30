@@ -3,7 +3,7 @@ const { resolve } = require("path");
 
 // See https://nextjs.org/docs/api-reference/next.config.js/custom-webpack-config
 module.exports = {
-  experimental: { esmExternals: true },
+  swcMinify: true,
   webpack: (config) => {
     return {
       ...config,

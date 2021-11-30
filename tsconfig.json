@@ -7,7 +7,10 @@
     "forceConsistentCasingInFileNames": true,
     "jsx": "preserve",
     "isolatedModules": true,
-    "lib": ["DOM", "ES2020"],
+    "lib": [
+      "DOM",
+      "ES2020"
+    ],
     "module": "ESNext",
     "moduleResolution": "node",
     "noEmit": true,
@@ -16,15 +19,26 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "paths": {
-      "@components/*": ["./src/components/*"],
-      "@lib/*": ["./src/lib/*"]
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@lib/*": [
+        "./src/lib/*"
+      ]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "target": "ES2018"
+    "target": "ES2018",
+    "incremental": true
   },
-  "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }

@@ -1,4 +1,4 @@
-import { Link } from "@mui/material";
+import Link from "@mui/material/Link";
 import { Euler, Vector3 } from "@vertexvis/geometry";
 import type { FrameCamera } from "@vertexvis/viewer/dist/types/lib/types";
 
@@ -29,8 +29,8 @@ export interface InstructionStep {
 
 const step1Cam: FrameCamera.FrameCamera = {
   position: {
-    x: -955.7966918945312,
-    y: 520.9080200195312,
+    x: -955.79669189453,
+    y: 520.90802001953,
     z: 368.5772399902344,
   },
   lookAt: {

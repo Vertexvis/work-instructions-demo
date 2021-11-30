@@ -1,15 +1,15 @@
 import { BottomDrawerHeight } from "@components/Layout";
 import { InstructionSteps } from "@lib/work-instructions";
-import { Check, ChevronLeft, ChevronRight, Refresh } from "@mui/icons-material";
-import {
-  Box,
-  Drawer as MuiDrawer,
-  Fab,
-  Step,
-  StepButton,
-  Stepper,
-} from "@mui/material";
-import { drawerClasses } from "@mui/material/Drawer";
+import Check from "@mui/icons-material/Check";
+import ChevronLeft from "@mui/icons-material/ChevronLeft";
+import ChevronRight from "@mui/icons-material/ChevronRight";
+import Refresh from "@mui/icons-material/Refresh";
+import Box from "@mui/material/Box";
+import MuiDrawer, { drawerClasses } from "@mui/material/Drawer";
+import Fab from "@mui/material/Fab";
+import Step from "@mui/material/Step";
+import StepButton from "@mui/material/StepButton";
+import Stepper from "@mui/material/Stepper";
 import { styled } from "@mui/material/styles";
 import React from "react";
 

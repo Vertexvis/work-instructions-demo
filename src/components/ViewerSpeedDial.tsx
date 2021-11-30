@@ -1,7 +1,9 @@
 import { Action, AnimationDurationMs, ToolButtons } from "@components/Viewer";
-import { ReportProblemOutlined, ZoomOutMap } from "@mui/icons-material";
-import { SpeedDial, SpeedDialAction } from "@mui/material";
+import ReportProblemOutlined from "@mui/icons-material/ReportProblemOutlined";
+import ZoomOutMapOutlined from "@mui/icons-material/ZoomOutMapOutlined";
 import { red } from "@mui/material/colors";
+import SpeedDial from "@mui/material/SpeedDial";
+import SpeedDialAction from "@mui/material/SpeedDialAction";
 
 interface Props {
   readonly onClick: (button: ToolButtons) => void;
@@ -11,7 +13,7 @@ interface Props {
 export function ViewerSpeedDial({ onClick, viewer }: Props): JSX.Element {
   const actions: Action[] = [
     {
-      icon: <ZoomOutMap />,
+      icon: <ZoomOutMapOutlined />,
       name: "Fit all",
       onClick: () => fitAll(),
     },

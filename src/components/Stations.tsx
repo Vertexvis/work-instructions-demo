@@ -1,4 +1,5 @@
-import { MenuItem, Select } from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 import { Theme } from "@mui/material/styles";
 import { SxProps } from "@mui/system";
 import React from "react";

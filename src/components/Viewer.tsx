@@ -8,11 +8,11 @@ import { ViewerSpeedDial } from "@components/ViewerSpeedDial";
 import { jsx } from "@emotion/react";
 import { StreamCredentials } from "@lib/config";
 import { InstructionStep } from "@lib/work-instructions";
-import { Box, Link } from "@mui/material";
+import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
 import { vertexvis } from "@vertexvis/frame-streaming-protos";
-import type { TapEventDetails } from "@vertexvis/viewer";
+import type { JSX as ViewerJSX, TapEventDetails } from "@vertexvis/viewer";
 import {
-  JSX as ViewerJSX,
   VertexViewer,
   VertexViewerDomElement,
   VertexViewerDomRenderer,

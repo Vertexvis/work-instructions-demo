@@ -1,5 +1,7 @@
 import { ContentHeader } from "@components/ContentHeader";
-import { FormControlLabel, FormGroup, Switch } from "@mui/material";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
+import Switch from "@mui/material/Switch";
 import React from "react";
 
 export interface SettingsProps {

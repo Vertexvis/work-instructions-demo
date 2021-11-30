@@ -22,7 +22,7 @@ import {
 } from "@lib/scene-items";
 import { useViewer } from "@lib/viewer";
 import { InstructionStep, InstructionSteps } from "@lib/work-instructions";
-import { Snackbar } from "@mui/material";
+import Snackbar from "@mui/material/Snackbar";
 import React from "react";
 
 export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
@@ -110,6 +110,7 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
           <Viewer
             configEnv={vertexEnv}
             credentials={Credentials}
+            experimentalGhostingOpacity={ghosted ? 0.7 : 0}
             onClick={(button) => {
               if (
                 button === "settings" ||
@@ -146,12 +147,6 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
               await onSelect({ detail, hit, viewer: viewer.ref.current });
             }}
             instructionStep={activeStep.step}
-            streamAttributes={{
-              experimentalGhosting: {
-                enabled: { value: ghosted },
-                opacity: { value: 0.7 },
-              },
-            }}
             viewer={viewer.ref}
           />
         )
@@ -186,7 +181,7 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
       <Snackbar
         open={snackOpen}
         autoHideDuration={6000}
-        onClose={(_e: React.SyntheticEvent, reason?: string) => {
+        onClose={(_e, reason) => {
           if (reason === "clickaway") return;
 
           setSnackOpen(false);
