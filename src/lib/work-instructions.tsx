@@ -5,6 +5,11 @@ import type { FrameCamera } from "@vertexvis/viewer/dist/types/lib/types";
 import { Credentials } from "./config";
 
 interface Arrow {
+  readonly end: Vector3.Vector3;
+  readonly start: Vector3.Vector3;
+}
+
+interface Dom {
   readonly position: Vector3.Vector3;
   readonly rotation: Euler.Euler;
   readonly type: "up" | "down";
@@ -28,6 +33,7 @@ export interface WorkInstructions {
 
 export interface InstructionStep {
   readonly arrows?: Arrow[];
+  readonly doms?: Dom[];
   readonly camera: FrameCamera.FrameCamera;
   readonly instructions:
     | string[]
@@ -76,7 +82,7 @@ export const DefaultInstructions: WorkInstructions = {
   partCount: 15,
   steps: {
     "step-1": {
-      arrows: [
+      doms: [
         {
           position: { x: -1400, y: 740, z: 225 },
           rotation: { order: "xyz", x: 0, y: 2, z: 0 },
@@ -142,7 +148,7 @@ export const DefaultInstructions: WorkInstructions = {
       thumbnailUri: "/step-1.png",
     },
     "step-2": {
-      arrows: [
+      doms: [
         {
           position: { x: -1360, y: 685, z: 390 },
           rotation: { order: "xyz", x: 0, y: 2, z: 0.05 },
@@ -234,7 +240,7 @@ export const DefaultInstructions: WorkInstructions = {
       thumbnailUri: "/step-2.png",
     },
     "step-3": {
-      arrows: [
+      doms: [
         {
           position: { x: -1490, y: 860, z: 185 },
           rotation: { order: "xyz", x: -0.2, y: 1, z: 0.2 },
@@ -274,7 +280,7 @@ export const DefaultInstructions: WorkInstructions = {
       thumbnailUri: "/step-3.png",
     },
     "step-4": {
-      arrows: [
+      doms: [
         {
           position: { x: -1459, y: 650, z: 320 },
           rotation: { order: "xyz", x: 0, y: -1, z: 0 },

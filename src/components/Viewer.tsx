@@ -15,6 +15,7 @@ import {
   VertexViewer,
   VertexViewerDomElement,
   VertexViewerDomRenderer,
+  VertexViewerMarkupArrow,
   VertexViewerToolbar,
 } from "@vertexvis/viewer-react";
 import React from "react";
@@ -88,8 +89,15 @@ function UnwrappedViewer({
       <VertexViewerToolbar placement="bottom-right">
         <ViewerSpeedDial onClick={onClick} viewer={viewer} />
       </VertexViewerToolbar>
+      {instructionStep?.arrows?.map((a, i) => (
+        <VertexViewerMarkupArrow
+          key={i}
+          startJson={JSON.stringify(a.start)}
+          endJson={JSON.stringify(a.end)}
+        />
+      ))}
       <VertexViewerDomRenderer>
-        {instructionStep?.arrows?.map((a, i) => (
+        {instructionStep?.doms?.map((a, i) => (
           <VertexViewerDomElement
             key={i}
             positionJson={JSON.stringify(a.position)}
