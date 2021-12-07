@@ -3,8 +3,8 @@ import { BottomDrawerHeight, RightDrawerWidth } from "@components/Layout";
 import { Parts } from "@components/Parts";
 import { Settings, SettingsProps } from "@components/Settings";
 import {
-  Instructions as InstructionsType,
   InstructionStep,
+  WorkInstructions as InstructionsType,
 } from "@lib/work-instructions";
 import Box from "@mui/material/Box";
 import Drawer, { drawerClasses } from "@mui/material/Drawer";

@@ -23,8 +23,8 @@ import {
 import { useViewer } from "@lib/viewer";
 import {
   DefaultInstructions,
-  Instructions,
   InstructionStep,
+  WorkInstructions,
 } from "@lib/work-instructions";
 import Snackbar from "@mui/material/Snackbar";
 import { useRouter } from "next/router";
@@ -51,7 +51,7 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
   const [selected, setSelected] = React.useState<RenderPartRevisionReq>({});
   const [partName, setPartName] = React.useState<string | undefined>();
   const [instructions, setInstructions] =
-    React.useState<Instructions>(DefaultInstructions);
+    React.useState<WorkInstructions>(DefaultInstructions);
 
   React.useEffect(() => {
     if (!router.isReady) return;
@@ -60,7 +60,7 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
     if (inst == null) return;
 
     try {
-      const parsed: Instructions = JSON.parse(
+      const parsed: WorkInstructions = JSON.parse(
         Buffer.from(inst, "base64").toString("utf8")
       );
 

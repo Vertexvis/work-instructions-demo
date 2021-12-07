@@ -1,7 +1,7 @@
 import { ContentHeader } from "@components/ContentHeader";
 import {
-  Instructions as InstructionsType,
   InstructionStep,
+  WorkInstructions as InstructionsType,
 } from "@lib/work-instructions";
 import MapOutlined from "@mui/icons-material/MapOutlined";
 import TimerOutlined from "@mui/icons-material/TimerOutlined";
@@ -32,21 +32,30 @@ export function Instructions({
   function NoContent(): JSX.Element {
     return step == null ? (
       <>
-        <ContentHeader onClose={onClose} title={instructions.title} />
-        <Typography sx={{ mb: 6 }}>{instructions.description}</Typography>
-        <Box sx={{ display: "flex", mb: 2 }}>
+        <ContentHeader
+          onClose={onClose}
+          title={instructions.title ?? "Work Instructions"}
+        />
+        {instructions.description && (
+          <Typography sx={{ mb: 6 }}>{instructions.description}</Typography>
+        )}
+        {instructions.partCount != null && (
+          <Box sx={{ display: "flex", mb: 2 }}>
+            <WidgetsOutlined sx={{ mr: 1 }} />
+            <Typography>{instructions.partCount} parts</Typography>
+          </Box>
+        )}
+        {instructions.completionMins != null && (
+          <Box sx={{ display: "flex", mb: 2 }}>
+            <TimerOutlined sx={{ mr: 1 }} />
+            <Typography>
+              {instructions.completionMins} minutes to complete
+            </Typography>
+          </Box>
+        )}
+        <Box sx={{ display: "flex", mb: 6 }}>
           <MapOutlined sx={{ mr: 1 }} />
           <Typography>{`${numSteps} steps`}</Typography>
-        </Box>
-        <Box sx={{ display: "flex", mb: 2 }}>
-          <WidgetsOutlined sx={{ mr: 1 }} />
-          <Typography>{instructions.partCount} parts</Typography>
-        </Box>
-        <Box sx={{ display: "flex", mb: 6 }}>
-          <TimerOutlined sx={{ mr: 1 }} />
-          <Typography>
-            {instructions.completionMins} minutes to complete
-          </Typography>
         </Box>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Button onClick={() => onBeginAssembly()} variant="contained">

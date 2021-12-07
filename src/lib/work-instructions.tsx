@@ -16,14 +16,14 @@ interface Part {
   readonly sceneItemSuppliedIds: string[];
 }
 
-export interface Instructions {
+export interface WorkInstructions {
   readonly clientId: string;
-  readonly completionMins: number;
-  readonly description: string;
-  readonly partCount: number;
+  readonly completionMins?: number;
+  readonly description?: string;
+  readonly partCount?: number;
   readonly steps: Record<string, InstructionStep>;
   readonly streamKey: string;
-  readonly title: string;
+  readonly title?: string;
 }
 
 export interface InstructionStep {
@@ -37,6 +37,7 @@ export interface InstructionStep {
   readonly sceneViewStateId: string;
   readonly step: number;
   readonly title: string;
+  readonly thumbnailUri: string;
 }
 
 const HoweBallJointsName = "Howe ball joint";
@@ -67,7 +68,7 @@ const step2SceneItemsVisible = [
   ToeLink,
 ];
 
-export const DefaultInstructions: Instructions = {
+export const DefaultInstructions: WorkInstructions = {
   ...Credentials,
   completionMins: 5,
   description:
@@ -138,6 +139,7 @@ export const DefaultInstructions: Instructions = {
       sceneViewStateId: "49679fc2-2b98-4c39-ac21-cf8102dd39cc",
       step: 1,
       title: "Install the inner hub on the spindle",
+      thumbnailUri: "/step-1.png",
     },
     "step-2": {
       arrows: [
@@ -229,6 +231,7 @@ export const DefaultInstructions: Instructions = {
       sceneViewStateId: "e146181e-2809-42b9-87f1-24d2bd25bef2",
       step: 2,
       title: "Install the spindle on the ball joints",
+      thumbnailUri: "/step-2.png",
     },
     "step-3": {
       arrows: [
@@ -268,6 +271,7 @@ export const DefaultInstructions: Instructions = {
       sceneViewStateId: "7006b7ba-1ec7-49aa-aefe-fe77698da65b",
       step: 3,
       title: "Install the stabilizer arm",
+      thumbnailUri: "/step-3.png",
     },
     "step-4": {
       arrows: [
@@ -332,6 +336,7 @@ export const DefaultInstructions: Instructions = {
       sceneViewStateId: "6420d920-9166-4355-91d0-23139298472b",
       step: 4,
       title: "Install the fender frame",
+      thumbnailUri: "/step-4.png",
     },
   },
   title: "Spindle Install",

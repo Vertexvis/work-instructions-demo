@@ -1,5 +1,5 @@
 import { BottomDrawerHeight } from "@components/Layout";
-import { Instructions } from "@lib/work-instructions";
+import { WorkInstructions } from "@lib/work-instructions";
 import Check from "@mui/icons-material/Check";
 import ChevronLeft from "@mui/icons-material/ChevronLeft";
 import ChevronRight from "@mui/icons-material/ChevronRight";
@@ -15,7 +15,7 @@ import React from "react";
 
 interface Props {
   readonly activeStep: number;
-  readonly instructions?: Instructions;
+  readonly instructions?: WorkInstructions;
   readonly onSelect: (activeStep: number) => void;
   readonly ready: boolean;
 }
@@ -103,7 +103,7 @@ export function BottomDrawer({
                   <img
                     height={120}
                     key={k}
-                    src={`/${k}.png`}
+                    src={instructions.steps[k].thumbnailUri}
                     alt={`Step ${instructions.steps[k].step}`}
                   />
                 </Box>
