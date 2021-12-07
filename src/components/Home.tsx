@@ -14,18 +14,24 @@ import {
   renderPartRevision,
   RenderPartRevisionReq,
 } from "@lib/authoring";
-import { Configuration, Credentials } from "@lib/config";
+import { Configuration, head } from "@lib/config";
 import {
   flyTo,
   handleHit as onSelect,
   selectBySuppliedIds,
 } from "@lib/scene-items";
 import { useViewer } from "@lib/viewer";
-import { InstructionStep, InstructionSteps } from "@lib/work-instructions";
+import {
+  DefaultInstructions,
+  Instructions,
+  InstructionStep,
+} from "@lib/work-instructions";
 import Snackbar from "@mui/material/Snackbar";
+import { useRouter } from "next/router";
 import React from "react";
 
 export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
+  const router = useRouter();
   const viewer = useViewer();
 
   const [activeStep, setActiveStep] = React.useState<{
@@ -44,8 +50,36 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
   const [snackOpen, setSnackOpen] = React.useState(false);
   const [selected, setSelected] = React.useState<RenderPartRevisionReq>({});
   const [partName, setPartName] = React.useState<string | undefined>();
+  const [instructions, setInstructions] =
+    React.useState<Instructions>(DefaultInstructions);
 
-  const stepIds = Object.keys(InstructionSteps);
+  React.useEffect(() => {
+    if (!router.isReady) return;
+
+    const inst = head(router.query.instructions);
+    if (inst == null) return;
+
+    try {
+      const parsed: Instructions = JSON.parse(
+        Buffer.from(inst, "base64").toString("utf8")
+      );
+
+      if (
+        parsed.clientId == null ||
+        parsed.streamKey == null ||
+        parsed.steps == null ||
+        Object.keys(parsed.steps).length === 0
+      ) {
+        return;
+      }
+
+      console.debug("Parsed stream key", parsed.streamKey);
+      setInstructions(parsed);
+    } catch (e) {
+      console.error("Invalid instructions.");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.isReady]);
 
   React.useEffect(() => {
     setPartName(selected?.part?.name);
@@ -60,13 +94,12 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
 
     setReady(true);
     setSceneViewId(scene.sceneViewId);
-    if (authoring) await initializeScene({ viewer: v });
+    if (authoring) await initializeScene({ instructions, viewer: v });
   }
 
   async function onInstructionStepSelected(num: number): Promise<void> {
     if (!ready) return;
-
-    const step = InstructionSteps[stepIds[num]];
+    const step = instructions.steps[Object.keys(instructions.steps)[num]];
     setReady(false);
     function onComplete() {
       setActiveStep({ num, step });
@@ -84,14 +117,14 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
     await onInstructionStepSelected(0);
   }
 
-  return (
+  return router.isReady ? (
     <Layout
       bottomDrawer={
         <BottomDrawer
           activeStep={activeStep.num}
+          instructions={instructions}
           onSelect={onInstructionStepSelected}
           ready={ready}
-          stepIds={stepIds}
         />
       }
       bottomDrawerHeight={BottomDrawerHeight}
@@ -109,8 +142,8 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
         viewer.isReady && (
           <Viewer
             configEnv={vertexEnv}
-            credentials={Credentials}
             experimentalGhostingOpacity={ghosted ? 0.7 : 0}
+            instructionStep={activeStep.step}
             onClick={(button) => {
               if (
                 button === "settings" ||
@@ -146,7 +179,7 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
               });
               await onSelect({ detail, hit, viewer: viewer.ref.current });
             }}
-            instructionStep={activeStep.step}
+            streamKey={instructions.streamKey}
             viewer={viewer.ref}
           />
         )
@@ -154,6 +187,7 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
       rightDrawer={
         <RightDrawer
           content={rightDrawerContent}
+          instructions={instructions}
           instructionStep={activeStep.step}
           onBeginAssembly={handleBeginAssembly}
           onClose={() => setRightDrawerContent(undefined)}
@@ -189,5 +223,7 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
         message="Issue reported successfully."
       />
     </Layout>
+  ) : (
+    <></>
   );
 }

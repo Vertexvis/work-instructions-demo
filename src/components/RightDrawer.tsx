@@ -2,7 +2,10 @@ import { Instructions } from "@components/Instructions";
 import { BottomDrawerHeight, RightDrawerWidth } from "@components/Layout";
 import { Parts } from "@components/Parts";
 import { Settings, SettingsProps } from "@components/Settings";
-import { InstructionStep } from "@lib/work-instructions";
+import {
+  Instructions as InstructionsType,
+  InstructionStep,
+} from "@lib/work-instructions";
 import Box from "@mui/material/Box";
 import Drawer, { drawerClasses } from "@mui/material/Drawer";
 import React from "react";
@@ -11,6 +14,7 @@ export type Content = "settings" | "instructions" | "parts";
 
 interface Props {
   readonly content?: Content;
+  readonly instructions: InstructionsType;
   readonly instructionStep?: InstructionStep;
   readonly onBeginAssembly: () => void;
   readonly onClose: () => void;
@@ -21,6 +25,7 @@ interface Props {
 
 export function RightDrawer({
   content,
+  instructions,
   instructionStep,
   onBeginAssembly,
   onClose,
@@ -36,6 +41,7 @@ export function RightDrawer({
     if (content === "instructions")
       return (
         <Instructions
+          instructions={instructions}
           onBeginAssembly={onBeginAssembly}
           onClose={onClose}
           onShow={onShow}

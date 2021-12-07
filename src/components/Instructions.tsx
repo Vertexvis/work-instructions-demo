@@ -1,5 +1,8 @@
 import { ContentHeader } from "@components/ContentHeader";
-import { InstructionStep } from "@lib/work-instructions";
+import {
+  Instructions as InstructionsType,
+  InstructionStep,
+} from "@lib/work-instructions";
 import MapOutlined from "@mui/icons-material/MapOutlined";
 import TimerOutlined from "@mui/icons-material/TimerOutlined";
 import WidgetsOutlined from "@mui/icons-material/WidgetsOutlined";
@@ -10,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import React from "react";
 
 interface Props {
+  readonly instructions: InstructionsType;
   readonly onBeginAssembly: () => void;
   readonly onClose: () => void;
   readonly onShow: (name: string, ids: string[]) => void;
@@ -17,32 +21,32 @@ interface Props {
 }
 
 export function Instructions({
+  instructions,
   onBeginAssembly,
   onClose,
   onShow,
   step,
 }: Props): JSX.Element {
-  const numSteps = 4;
+  const numSteps = Object.keys(instructions.steps).length;
 
   function NoContent(): JSX.Element {
     return step == null ? (
       <>
-        <ContentHeader onClose={onClose} title="Spindle Install" />
-        <Typography sx={{ mb: 6 }}>
-          At this station, the assembly technician assembles the spindle and
-          installs it on the vehicle.
-        </Typography>
+        <ContentHeader onClose={onClose} title={instructions.title} />
+        <Typography sx={{ mb: 6 }}>{instructions.description}</Typography>
         <Box sx={{ display: "flex", mb: 2 }}>
           <MapOutlined sx={{ mr: 1 }} />
           <Typography>{`${numSteps} steps`}</Typography>
         </Box>
         <Box sx={{ display: "flex", mb: 2 }}>
           <WidgetsOutlined sx={{ mr: 1 }} />
-          <Typography>15 parts</Typography>
+          <Typography>{instructions.partCount} parts</Typography>
         </Box>
         <Box sx={{ display: "flex", mb: 6 }}>
           <TimerOutlined sx={{ mr: 1 }} />
-          <Typography>5 minutes to complete</Typography>
+          <Typography>
+            {instructions.completionMins} minutes to complete
+          </Typography>
         </Box>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Button onClick={() => onBeginAssembly()} variant="contained">
@@ -56,6 +60,7 @@ export function Instructions({
   }
 
   const stepNum = step?.step ? `Step ${step.step} ` : "";
+
   return step == null ? (
     <NoContent />
   ) : (
@@ -67,17 +72,39 @@ export function Instructions({
         </Typography>
       )}
       {step.instructions != null ? (
-        <List>
-          {step.instructions(onShow).map((t, i) => (
-            <Typography key={i} sx={{ mb: 2 }}>
-              {`${i + 1}. `}
-              {t}
-            </Typography>
-          ))}
-        </List>
+        typeof step.instructions === "function" ? (
+          <List>
+            {step.instructions(onShow).map((t, i) => (
+              <InstructionContent content={t} key={i} index={i} />
+            ))}
+          </List>
+        ) : (
+          <List>
+            {step.instructions.map((t, i) => (
+              <InstructionContent content={t} key={i} index={i} />
+            ))}
+          </List>
+        )
       ) : (
         <NoContent />
       )}
     </>
+  );
+}
+
+interface InstructionContentProps {
+  content: string | React.ReactNode;
+  index: number;
+}
+
+function InstructionContent({
+  content,
+  index,
+}: InstructionContentProps): JSX.Element {
+  return (
+    <Typography key={index} sx={{ mb: 2 }}>
+      {`${index + 1}. `}
+      {content}
+    </Typography>
   );
 }
