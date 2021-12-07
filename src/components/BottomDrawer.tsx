@@ -1,5 +1,5 @@
 import { BottomDrawerHeight } from "@components/Layout";
-import { InstructionSteps } from "@lib/work-instructions";
+import { WorkInstructions } from "@lib/work-instructions";
 import Check from "@mui/icons-material/Check";
 import ChevronLeft from "@mui/icons-material/ChevronLeft";
 import ChevronRight from "@mui/icons-material/ChevronRight";
@@ -15,9 +15,9 @@ import React from "react";
 
 interface Props {
   readonly activeStep: number;
+  readonly instructions?: WorkInstructions;
   readonly onSelect: (activeStep: number) => void;
   readonly ready: boolean;
-  readonly stepIds: string[];
 }
 
 const BtnMargin = 5;
@@ -28,10 +28,15 @@ const Drawer = styled(MuiDrawer)(() => ({
 
 export function BottomDrawer({
   activeStep,
+  instructions,
   onSelect,
   ready,
-  stepIds,
 }: Props): JSX.Element {
+  if (instructions == null) return <></>;
+
+  const stepIds =
+    instructions.steps != null ? Object.keys(instructions.steps) : [];
+
   function PrevBtn() {
     return (
       <Fab
@@ -82,22 +87,22 @@ export function BottomDrawer({
   }
 
   function Steps() {
+    if (instructions == null) return <></>;
+
     return (
       <Stepper activeStep={activeStep} alternativeLabel sx={{ flexGrow: 1 }}>
-        {Object.keys(InstructionSteps).map((k) => {
+        {Object.keys(instructions.steps).map((k) => {
+          const s = instructions.steps[k];
           return (
             <Step key={k}>
-              <StepButton
-                disabled={false}
-                onClick={() => onSelect(InstructionSteps[k].step - 1)}
-              >
+              <StepButton disabled={false} onClick={() => onSelect(s.step - 1)}>
                 <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     height={120}
                     key={k}
-                    src={`/${k}.png`}
-                    alt={`Step ${InstructionSteps[k].step}`}
+                    src={s.thumbnailUri}
+                    alt={`Step ${s.step}`}
                   />
                 </Box>
               </StepButton>

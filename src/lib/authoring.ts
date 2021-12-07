@@ -1,9 +1,10 @@
 import { AnimationDurationMs } from "@lib/scene-items";
-import { InstructionSteps } from "@lib/work-instructions";
+import { WorkInstructions } from "@lib/work-instructions";
 import { head } from "@vertexvis/api-client-node";
 import type { Components } from "@vertexvis/viewer";
 
 interface InitializeReq {
+  readonly instructions: WorkInstructions;
   readonly viewer: Components.VertexViewer | null;
 }
 
@@ -42,6 +43,7 @@ export async function createSceneViewState({
 
 export async function initializeScene({
   viewer,
+  instructions,
 }: InitializeReq): Promise<void> {
   if (viewer == null) return;
 
@@ -49,7 +51,7 @@ export async function initializeScene({
   if (scene == null) return;
 
   const { camera, sceneItemsVisible } = head(
-    Object.values(InstructionSteps).filter((v) => v.step === 4)
+    Object.values(instructions.steps).filter((v) => v.step === 4)
   );
 
   await scene
