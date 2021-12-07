@@ -12,7 +12,7 @@ export interface StreamCredentials {
 
 export const Config: Configuration = {
   authoring: envVar("AUTHORING", "false") === "true",
-  vertexEnv: "platdev", //: envVar("VERTEX_ENV", "platprod") as Environment,
+  vertexEnv: envVar("VERTEX_ENV", "platprod") as Environment,
 };
 
 // Super Car

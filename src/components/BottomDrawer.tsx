@@ -92,19 +92,17 @@ export function BottomDrawer({
     return (
       <Stepper activeStep={activeStep} alternativeLabel sx={{ flexGrow: 1 }}>
         {Object.keys(instructions.steps).map((k) => {
+          const s = instructions.steps[k];
           return (
             <Step key={k}>
-              <StepButton
-                disabled={false}
-                onClick={() => onSelect(instructions.steps[k].step - 1)}
-              >
+              <StepButton disabled={false} onClick={() => onSelect(s.step - 1)}>
                 <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     height={120}
                     key={k}
-                    src={instructions.steps[k].thumbnailUri}
-                    alt={`Step ${instructions.steps[k].step}`}
+                    src={s.thumbnailUri}
+                    alt={`Step ${s.step}`}
                   />
                 </Box>
               </StepButton>

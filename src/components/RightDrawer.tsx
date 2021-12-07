@@ -2,10 +2,7 @@ import { Instructions } from "@components/Instructions";
 import { BottomDrawerHeight, RightDrawerWidth } from "@components/Layout";
 import { Parts } from "@components/Parts";
 import { Settings, SettingsProps } from "@components/Settings";
-import {
-  InstructionStep,
-  WorkInstructions as InstructionsType,
-} from "@lib/work-instructions";
+import { InstructionStep, WorkInstructions } from "@lib/work-instructions";
 import Box from "@mui/material/Box";
 import Drawer, { drawerClasses } from "@mui/material/Drawer";
 import React from "react";
@@ -14,7 +11,7 @@ export type Content = "settings" | "instructions" | "parts";
 
 interface Props {
   readonly content?: Content;
-  readonly instructions: InstructionsType;
+  readonly instructions: WorkInstructions;
   readonly instructionStep?: InstructionStep;
   readonly onBeginAssembly: () => void;
   readonly onClose: () => void;

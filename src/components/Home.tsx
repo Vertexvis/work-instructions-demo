@@ -73,7 +73,6 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
         return;
       }
 
-      console.debug("Parsed stream key", parsed.streamKey);
       setInstructions(parsed);
     } catch (e) {
       console.error("Invalid instructions.");

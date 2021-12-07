@@ -1,8 +1,5 @@
 import { ContentHeader } from "@components/ContentHeader";
-import {
-  InstructionStep,
-  WorkInstructions as InstructionsType,
-} from "@lib/work-instructions";
+import { InstructionStep, WorkInstructions } from "@lib/work-instructions";
 import MapOutlined from "@mui/icons-material/MapOutlined";
 import TimerOutlined from "@mui/icons-material/TimerOutlined";
 import WidgetsOutlined from "@mui/icons-material/WidgetsOutlined";
@@ -13,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import React from "react";
 
 interface Props {
-  readonly instructions: InstructionsType;
+  readonly instructions: WorkInstructions;
   readonly onBeginAssembly: () => void;
   readonly onClose: () => void;
   readonly onShow: (name: string, ids: string[]) => void;
