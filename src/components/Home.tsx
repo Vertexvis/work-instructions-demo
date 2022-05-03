@@ -45,7 +45,7 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
   const [rightDrawerContent, setRightDrawerContent] = React.useState<
     Content | undefined
   >("instructions");
-  const [ghosted, setGhosted] = React.useState(true);
+  const [ghosted, setGhosted] = React.useState(false);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [snackOpen, setSnackOpen] = React.useState(false);
   const [selected, setSelected] = React.useState<RenderPartRevisionReq>({});
@@ -113,6 +113,7 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
   }
 
   async function handleBeginAssembly() {
+    setGhosted(true);
     await onInstructionStepSelected(0);
   }
 
