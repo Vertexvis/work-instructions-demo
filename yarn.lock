@@ -839,17 +839,17 @@
   resolved "https://registry.yarnpkg.com/@vertexvis/frame-streaming-protos/-/frame-streaming-protos-0.6.19.tgz#eb343e2f94f1ced5d197d93e03da5d94d428dca1"
   integrity sha512-yIBfozidyN3CZFE/HvwU1anHGk+2YHSijDKF72MskSUolG2ymbVfDfcRnjXbvUyiCKX8ll1UnAWLODXmswkj6w==
 
-"@vertexvis/geometry@0.13.0":
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/@vertexvis/geometry/-/geometry-0.13.0.tgz#2b11b7ad582cfcec754abfcd3f87b732339650b0"
-  integrity sha512-LcR5bEVHALWTF7mvEQzURj54bTYaRqgTFrPOafhHFn47aCRajknbtAMUrETjqqFwHo2KsU9/prvrKpxUTllprA==
+"@vertexvis/geometry@0.13.1":
+  version "0.13.1"
+  resolved "https://registry.yarnpkg.com/@vertexvis/geometry/-/geometry-0.13.1.tgz#4297ad9940e1b95344b284e4dcab871cb89c0813"
+  integrity sha512-w+IG01BswQ8y1oB3tx23ZLO7N3CO10yqeE98zaZKt28fGxq32Ymqqk4o6SGqG9je+kxHbhd0dYrMQEyzhVJzsg==
 
-"@vertexvis/html-templates@0.13.0":
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/@vertexvis/html-templates/-/html-templates-0.13.0.tgz#38070d48d5251e1556e6d81f0228a57a24ea1f09"
-  integrity sha512-LOYt9ZM34pb+9HDUNzKwJwR3kykjmy9CmGVQT2Mi+3Ts5dvSrl07WPbp0jC5vo+KhPwOIKnDgS07yID+eDz0dw==
+"@vertexvis/html-templates@0.13.1":
+  version "0.13.1"
+  resolved "https://registry.yarnpkg.com/@vertexvis/html-templates/-/html-templates-0.13.1.tgz#2b324587580981ae09d3492ac11c64dc9c437610"
+  integrity sha512-VLEoFZqQtRbyITscsLU20WSJ/gbuUetv3dxL+uRX86cnv91F4dfaY3cpaAzSiFf+jfzdJu1Yd4s44NMfxGS06Q==
   dependencies:
-    "@vertexvis/utils" "0.13.0"
+    "@vertexvis/utils" "0.13.1"
 
 "@vertexvis/scene-tree-protos@^0.1.12":
   version "0.1.12"
@@ -861,44 +861,44 @@
   resolved "https://registry.yarnpkg.com/@vertexvis/scene-view-protos/-/scene-view-protos-0.1.8.tgz#eb676022c3323b8bbb1198a27cc7ad6849d1ac28"
   integrity sha512-R3HOVRYWTthiwxrndrbSlvqfmqobSvTsmMvohjihqv9toXWAdjRw/uFcL6ei2zQAq18NPenKqxU3hI1sa0MrjQ==
 
-"@vertexvis/stream-api@0.13.0":
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/@vertexvis/stream-api/-/stream-api-0.13.0.tgz#2c76f964270d83c1c0e5f3655f41c37e47138e8c"
-  integrity sha512-fQmOzO5nhEAiOJWgaGxZ3ltxfWK4jaReTd8/9MfpZgHlLB/uRn/UI1OuM4bIQaKNNPTSYFBjAF4zbNGF0Y981A==
+"@vertexvis/stream-api@0.13.1":
+  version "0.13.1"
+  resolved "https://registry.yarnpkg.com/@vertexvis/stream-api/-/stream-api-0.13.1.tgz#ab54f572b9f6f4dcf50e338fd7f344c4c19cec53"
+  integrity sha512-lBai0pSmAZoXTyWMsrzBEWKPgOkRxyIvBX1kl4JhJ1PKt+XeK8bz5iHiQD515hiXvRsZu8ttK/KQK40aALTcmg==
   dependencies:
     "@vertexvis/frame-streaming-protos" "^0.6.18"
 
-"@vertexvis/utils@0.13.0":
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/@vertexvis/utils/-/utils-0.13.0.tgz#0af219258f2d0cf50c8960d69a25826e90cbaa5c"
-  integrity sha512-3Jb9RITUnV3pZjKBEvN747Je8iNMiE8UN8P21C9JVCMupuPg/D71F7jtXDiccvhUU7SByWXHTlpHnCZLl0IN8A==
+"@vertexvis/utils@0.13.1":
+  version "0.13.1"
+  resolved "https://registry.yarnpkg.com/@vertexvis/utils/-/utils-0.13.1.tgz#8ff286664f61d0cb9e798a57b818f01f5691a2e7"
+  integrity sha512-x80YWea3xTzJQclaZft70r/aF9boSe3nCBjcpb91OlLdYgG26ca26y5fuP1EOA3lNb3L1tumGMUXu35kg+dx+w==
   dependencies:
     is-plain-object "^3.0.0"
     lodash.isequal "^4.5.0"
     uuid "^8.3.2"
 
-"@vertexvis/viewer-react@0.13.0":
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/@vertexvis/viewer-react/-/viewer-react-0.13.0.tgz#267d48057617d31a8954a61315baa38e23659076"
-  integrity sha512-xIY46Q+657JC0DMKtuCA71H6666THeK+Q1hxHxWMvhdT6DP+vUJLEJcBOpi+z4DlkeWVvuElyDwPpts5yOnpgA==
+"@vertexvis/viewer-react@0.13.1":
+  version "0.13.1"
+  resolved "https://registry.yarnpkg.com/@vertexvis/viewer-react/-/viewer-react-0.13.1.tgz#773a3cb2848608083894ee78154c5234bf29f529"
+  integrity sha512-X8icgbYwb7vUa3sRIN0LBjeeHKRFjeVefcqWT3dfgRlh4DCJP4NNd6WZR2YFfcGp+dE6i2yYYJUhs35CrPSHDw==
   dependencies:
-    "@vertexvis/viewer" "0.13.0"
+    "@vertexvis/viewer" "0.13.1"
 
-"@vertexvis/viewer@0.13.0":
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/@vertexvis/viewer/-/viewer-0.13.0.tgz#1bf8aa8b8b8b85caa0770a716434d970ed226c84"
-  integrity sha512-99dpHL8E4jbhDCjp7OeivW+WOZb5dzl/ZWwb+weiOPcFqEDaDTNidhYVg5MWTCFPRKFQ88KlHgm05sIzxo5Img==
+"@vertexvis/viewer@0.13.1":
+  version "0.13.1"
+  resolved "https://registry.yarnpkg.com/@vertexvis/viewer/-/viewer-0.13.1.tgz#c3b986560eaf21d317c2ab99a09fa805142342af"
+  integrity sha512-NnzlbytVEPgWPUr8r8WjvaG8oW7sKNQgCP4WJjuA3M/DRlAoD0/L2FUNMnd0VDBwCRaCv3VxR9O/fvOP2ilM9g==
   dependencies:
     "@improbable-eng/grpc-web" "^0.15.0"
     "@stencil/core" "^2.12.1"
     "@types/classnames" "^2.3.1"
     "@vertexvis/frame-streaming-protos" "^0.6.18"
-    "@vertexvis/geometry" "0.13.0"
-    "@vertexvis/html-templates" "0.13.0"
+    "@vertexvis/geometry" "0.13.1"
+    "@vertexvis/html-templates" "0.13.1"
     "@vertexvis/scene-tree-protos" "^0.1.12"
     "@vertexvis/scene-view-protos" "^0.1.8"
-    "@vertexvis/stream-api" "0.13.0"
-    "@vertexvis/utils" "0.13.0"
+    "@vertexvis/stream-api" "0.13.1"
+    "@vertexvis/utils" "0.13.1"
     "@vertexvis/web-workers" "^0.1.0"
     camel-case "^4.1.2"
     classnames "^2.3.1"
