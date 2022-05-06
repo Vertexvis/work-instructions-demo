@@ -45,14 +45,14 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
   const [rightDrawerContent, setRightDrawerContent] = React.useState<
     Content | undefined
   >("instructions");
-  const [ghosted, setGhosted] = React.useState(true);
+  const [ghosted, setGhosted] = React.useState(false);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [snackOpen, setSnackOpen] = React.useState(false);
   const [selected, setSelected] = React.useState<RenderPartRevisionReq>({});
   const [partName, setPartName] = React.useState<string | undefined>();
   const [instructions, setInstructions] =
     React.useState<WorkInstructions>(DefaultInstructions);
-
+  const [isInitialView, setIsInitialView] = React.useState(true);
   React.useEffect(() => {
     if (!router.isReady) return;
 
@@ -101,6 +101,7 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
     const step = instructions.steps[Object.keys(instructions.steps)[num]];
     setReady(false);
     function onComplete() {
+      handleInitialView();
       setActiveStep({ num, step });
       setReady(true);
     }
@@ -113,9 +114,16 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
   }
 
   async function handleBeginAssembly() {
+    handleInitialView();
     await onInstructionStepSelected(0);
   }
 
+  function handleInitialView(){
+    if(isInitialView){
+      setGhosted(true)
+      setIsInitialView(false)
+    } 
+  }
   return router.isReady ? (
     <Layout
       bottomDrawer={
@@ -195,7 +203,7 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
             setPartName(name);
             selectBySuppliedIds({ ids, viewer: viewer.ref.current });
           }}
-          settings={{ ghosted, onGhostToggle: setGhosted }}
+          settings={{ ghosted, onGhostToggle: setGhosted, onIsInitialView: setIsInitialView }}
         />
       }
       rightDrawerWidth={rightDrawerContent != null ? RightDrawerWidth : 0}

@@ -6,15 +6,15 @@
     "@emotion/cache": "^11.7.1",
     "@emotion/react": "^11.7",
     "@emotion/server": "^11.4",
-    "@emotion/styled": "^11.6",
-    "@mui/icons-material": "5.2.5",
-    "@mui/material": "5.2.5",
-    "@vertexvis/api-client-node": "^0.15",
-    "@vertexvis/viewer-react": "0.13.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "5.6.1",
+    "@mui/material": "5.6.1",
+    "@vertexvis/api-client-node": "^0.17.0",
+    "@vertexvis/viewer-react": "0.13.1",
     "next": "^12.1.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-hook-form": "^7.22.3"
+    "react-hook-form": "^7.29.0"
   },
   "devDependencies": {
     "@babel/core": "^7.16",

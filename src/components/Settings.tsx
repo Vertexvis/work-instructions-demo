@@ -7,6 +7,7 @@ import React from "react";
 export interface SettingsProps {
   ghosted: boolean;
   onGhostToggle: (checked: boolean) => void;
+  onIsInitialView: (initialView: boolean) => void;
 }
 
 interface Props {
@@ -23,7 +24,11 @@ export function Settings({ onClose, settings }: Props): JSX.Element {
           control={
             <Switch
               checked={settings.ghosted}
-              onChange={(e) => settings.onGhostToggle(e.target.checked)}
+              onChange={(e) => {
+                   settings.onGhostToggle(e.target.checked);
+                   settings.onIsInitialView(false)
+                } 
+              }
             />
           }
           label="Ghosted geometry"
