@@ -1,0 +1,11 @@
+generates:
+  src/lib/graphql/generated/apollo-react-work-instructions.ts:
+    schema: https://5z08ulsxxb.execute-api.us-west-2.amazonaws.com
+    documents:
+      - 'src/lib/graphql/**/!(*.d).{ts,tsx}'
+    plugins:
+      - add:
+          content: '/* eslint-disable */'
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo

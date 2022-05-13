@@ -24,7 +24,9 @@ interface ViewerProps extends ViewerJSX.VertexViewer {
   readonly instructionStep?: InstructionStep;
   readonly onClick: (button: ToolButtons) => void;
   readonly streamKey: string;
+  readonly sceneViewState?: string;
   readonly viewer: React.MutableRefObject<HTMLVertexViewerElement | null>;
+  readonly children: React.ReactNode;
 }
 
 interface OnSelectProps extends HOCViewerProps {
@@ -55,10 +57,12 @@ function UnwrappedViewer({
   onClick,
   instructionStep,
   streamKey,
+  sceneViewState,
   viewer,
+  children,
   ...props
 }: ViewerProps): JSX.Element {
-  const svId = instructionStep?.sceneViewStateId;
+  const svId = sceneViewState || instructionStep?.sceneViewStateId;
   const src = `urn:vertexvis:stream-key:${streamKey}${
     svId ? `?scene-view-state=${svId}` : ""
   }`;
@@ -108,6 +112,7 @@ function UnwrappedViewer({
           </VertexViewerDomElement>
         ))}
       </VertexViewerDomRenderer>
+      {children}
     </VertexViewer>
   );
 }
