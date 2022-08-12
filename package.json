@@ -11,7 +11,7 @@
     "@mui/material": "5.9.1",
     "@vertexvis/api-client-node": "^0.20.0",
     "@vertexvis/viewer-react": "0.14.0",
-    "next": "^12.2.0",
+    "next": "^12.2.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.32.0"
