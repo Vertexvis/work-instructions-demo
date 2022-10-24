@@ -440,10 +440,10 @@
   dependencies:
     browser-headers "^0.4.1"
 
-"@mui/base@5.0.0-alpha.99":
-  version "5.0.0-alpha.99"
-  resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-alpha.99.tgz#52589c72b6bf69e016e5811292529d60f81537ad"
-  integrity sha512-D04H6O1c0Jv561yI0SVbpa8MpqpW3G43CwJxV2o6ALfI0DMJ45w07dGafmDchb6aCWTRTdggd3rjgmuzyNwPiQ==
+"@mui/base@5.0.0-alpha.100":
+  version "5.0.0-alpha.100"
+  resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-alpha.100.tgz#5587c98fb8c6fdf9138b92c519fe3fd79682f7ac"
+  integrity sha512-bSoJEKCENtmJrJDECHUe9PiqztIUACuSskyqw9ypqE7Dz3WxL3e8puFsWBkUsz+WOCjXh4B4Xljn88Ucxxv5HA==
   dependencies:
     "@babel/runtime" "^7.19.0"
     "@emotion/is-prop-valid" "^1.2.0"
@@ -454,7 +454,7 @@
     prop-types "^15.8.1"
     react-is "^18.2.0"
 
-"@mui/core-downloads-tracker@^5.10.7":
+"@mui/core-downloads-tracker@^5.10.8":
   version "5.10.10"
   resolved "https://registry.yarnpkg.com/@mui/core-downloads-tracker/-/core-downloads-tracker-5.10.10.tgz#a3e5d2f6e5146e9a85d48824c386a31be1746ba3"
   integrity sha512-aDuE2PNEh+hAndxEWlZgq7uiFPZKJtnkPDX7v6kSCrMXA32ZaQ6rZi5olmC7DUHt/BaOSxb7N/im/ss0XBkDhA==
@@ -466,15 +466,15 @@
   dependencies:
     "@babel/runtime" "^7.19.0"
 
-"@mui/material@5.10.7":
-  version "5.10.7"
-  resolved "https://registry.yarnpkg.com/@mui/material/-/material-5.10.7.tgz#08e72c554bd528f9f5fef604eea542551f9e5986"
-  integrity sha512-o1jcQGii+q7ORrXhBiMmGzFDaboc1qTgOOC3zDW+NR9ryVzWzL7qEeqoORbgDB5zk9OBsXCjB91fUH/ls5xMwg==
+"@mui/material@5.10.8":
+  version "5.10.8"
+  resolved "https://registry.yarnpkg.com/@mui/material/-/material-5.10.8.tgz#a223ec5f1128515107381e875f8d6257a00c3cd3"
+  integrity sha512-sF/Ka0IJjGXV52zoT4xAWEqXVRjNYbIjATo9L4Q5oQC5iJpGrKJFY16uNtWWB0+vp/nayAuPGZHrxtV+t3ecdQ==
   dependencies:
     "@babel/runtime" "^7.19.0"
-    "@mui/base" "5.0.0-alpha.99"
-    "@mui/core-downloads-tracker" "^5.10.7"
-    "@mui/system" "^5.10.7"
+    "@mui/base" "5.0.0-alpha.100"
+    "@mui/core-downloads-tracker" "^5.10.8"
+    "@mui/system" "^5.10.8"
     "@mui/types" "^7.2.0"
     "@mui/utils" "^5.10.6"
     "@types/react-transition-group" "^4.4.5"
@@ -503,7 +503,7 @@
     csstype "^3.1.1"
     prop-types "^15.8.1"
 
-"@mui/system@^5.10.7":
+"@mui/system@^5.10.8":
   version "5.10.10"
   resolved "https://registry.yarnpkg.com/@mui/system/-/system-5.10.10.tgz#fbc34f29a3b62268c3d2b2be92819a35fc52de90"
   integrity sha512-TXwtKN0adKpBrZmO+eilQWoPf2veh050HLYrN78Kps9OhlvO70v/2Kya0+mORFhu9yhpAwjHXO8JII/R4a5ZLA==
