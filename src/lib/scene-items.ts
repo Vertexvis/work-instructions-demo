@@ -1,15 +1,9 @@
-import { vertexvis } from "@vertexvis/frame-streaming-protos";
-import { ColorMaterial, Components, TapEventDetails } from "@vertexvis/viewer";
-import type { CameraRenderResult } from "@vertexvis/viewer/dist/types/lib/scenes/cameraRenderResult";
-import type { FrameCamera } from "@vertexvis/viewer/dist/types/lib/types";
+import { vertexvis } from '@vertexvis/frame-streaming-protos';
+import { Components, TapEventDetails } from '@vertexvis/viewer';
+import type { CameraRenderResult } from '@vertexvis/viewer/dist/types/lib/scenes/cameraRenderResult';
+import type { FrameCamera } from '@vertexvis/viewer/dist/types/lib/types';
 
 export const AnimationDurationMs = 500;
-
-const SelectColor = {
-  ...ColorMaterial.create(255, 255, 0),
-  glossiness: 4,
-  specular: { r: 255, g: 255, b: 255, a: 0 },
-};
 
 interface Req {
   readonly viewer: Components.VertexViewer | null;
@@ -72,7 +66,7 @@ export async function handleHit({
         return [
           op.where((q) => q.all()).deselect(),
           // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons#return_value
-          detail.buttons === 2 ? idQuery.hide() : idQuery.select(SelectColor),
+          detail.buttons === 2 ? idQuery.hide() : idQuery.select(),
         ];
       })
       .execute();
@@ -94,7 +88,7 @@ export async function selectBySuppliedIds({
     .items((op) => {
       return [
         op.where((q) => q.all()).deselect(),
-        op.where((q) => q.withSuppliedIds(ids)).select(SelectColor),
+        op.where((q) => q.withSuppliedIds(ids)).select(),
       ];
     })
     .execute();
