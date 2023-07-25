@@ -59,7 +59,7 @@ function UnwrappedViewer({
   ...props
 }: ViewerProps): JSX.Element {
   const svId = instructionStep?.sceneViewStateId;
-  const src = `urn:vertexvis:stream-key:${streamKey}${
+  const src = `urn:vertex:stream-key:${streamKey}${
     svId ? `?scene-view-state=${svId}` : ""
   }`;
 
