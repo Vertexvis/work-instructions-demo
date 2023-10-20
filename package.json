@@ -10,7 +10,7 @@
     "@mui/icons-material": "5.14.11",
     "@mui/material": "5.14.11",
     "@vertexvis/api-client-node": "^0.22.0",
-    "@vertexvis/viewer-react": "^0.17.5",
+    "@vertexvis/viewer-react": "^0.19.2",
     "next": "^12.3.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
