@@ -5,10 +5,9 @@ module.exports = {
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended-type-checked',
 		'plugin:@typescript-eslint/stylistic-type-checked',
-		'plugin:prettier/recommended',
 		'next/core-web-vitals',
 		'next/typescript',
-		'prettier',
+		'plugin:prettier/recommended',
 
 		// "eslint-plugin-simple-import-sort": "^12.1.1",
 	],
