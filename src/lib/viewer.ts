@@ -16,7 +16,7 @@ export function useViewer(): Viewer {
 			setIsReady(true);
 		}
 
-		void loadComponents();
+		loadComponents();
 	}, []);
 
 	return { ref: React.useRef<HTMLVertexViewerElement>(null), isReady };

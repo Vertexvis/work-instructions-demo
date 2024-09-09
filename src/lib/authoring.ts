@@ -73,7 +73,7 @@ export async function renderPartRevision({
 	part,
 	sceneItemSuppliedId,
 }: RenderPartRevisionReq): Promise<void> {
-	if (!part?.revisionId || !sceneItemSuppliedId) return;
+	if (!part || !part.revisionId || !sceneItemSuppliedId) return;
 
 	console.debug(
 		await (

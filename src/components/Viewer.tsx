@@ -10,11 +10,7 @@ import { InstructionStep } from '@lib/work-instructions';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import { vertexvis } from '@vertexvis/frame-streaming-protos';
-import type {
-	JSX as ViewerJSX,
-	TapEventDetails,
-	VertexViewerCustomEvent,
-} from '@vertexvis/viewer';
+import type { JSX as ViewerJSX, TapEventDetails } from '@vertexvis/viewer';
 import {
 	VertexViewer,
 	VertexViewerDomElement,
@@ -124,25 +120,21 @@ function onTap<P extends ViewerProps>(
 			<WrappedViewer
 				viewer={viewer}
 				{...props}
-				onTap={(e) => {
-					async function tapEvent(e: VertexViewerCustomEvent<TapEventDetails>) {
-						if (props.onTap) props.onTap(e);
+				onTap={async (e) => {
+					if (props.onTap) props.onTap(e);
 
-						if (!e.defaultPrevented) {
-							const scene = await viewer.current?.scene();
-							const raycaster = scene?.raycaster();
+					if (!e.defaultPrevented) {
+						const scene = await viewer.current?.scene();
+						const raycaster = scene?.raycaster();
 
-							if (raycaster != null) {
-								const res = await raycaster.hitItems(e.detail.position, {
-									includeMetadata: true,
-								});
-								const hit = (res?.hits ?? [])[0];
-								await onSelect(e.detail, hit);
-							}
+						if (raycaster != null) {
+							const res = await raycaster.hitItems(e.detail.position, {
+								includeMetadata: true,
+							});
+							const hit = (res?.hits ?? [])[0];
+							await onSelect(e.detail, hit);
 						}
 					}
-
-					void tapEvent(e);
 				}}
 			/>
 		);

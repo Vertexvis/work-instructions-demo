@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import '@vertexvis/viewer/dist/viewer/viewer.css';
 
 import createCache from '@emotion/cache';

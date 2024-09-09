@@ -15,7 +15,7 @@ export function ViewerSpeedDial({ onClick, viewer }: Props): JSX.Element {
 		{
 			icon: <ZoomOutMapOutlined />,
 			name: 'Fit all',
-			onClick: () => void fitAll,
+			onClick: () => fitAll(),
 		},
 		{
 			icon: <ReportProblemOutlined style={{ color: red[500] }} />,
@@ -24,10 +24,8 @@ export function ViewerSpeedDial({ onClick, viewer }: Props): JSX.Element {
 		},
 	];
 
-	async function fitAll() {
-		await (
-			await viewer.current?.scene()
-		)
+	async function fitAll(): Promise<void> {
+		(await viewer.current?.scene())
 			?.camera()
 			.viewAll()
 			.render({ animation: { milliseconds: AnimationDurationMs } });

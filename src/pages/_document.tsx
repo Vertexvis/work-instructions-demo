@@ -46,7 +46,7 @@ MyDocument.getInitialProps = async (ctx) => {
 	const originalRenderPage = ctx.renderPage;
 
 	const cache = getCache();
-	const emotionServer = createEmotionServer(cache);
+	const { extractCriticalToChunks } = createEmotionServer(cache);
 
 	ctx.renderPage = () =>
 		originalRenderPage({
@@ -59,9 +59,7 @@ MyDocument.getInitialProps = async (ctx) => {
 		});
 
 	const initialProps = await Document.getInitialProps(ctx);
-	const emotionStyles = emotionServer.extractCriticalToChunks(
-		initialProps.html,
-	);
+	const emotionStyles = extractCriticalToChunks(initialProps.html);
 	const emotionStyleTags = emotionStyles.styles.map((style) => (
 		<style
 			data-emotion={`${style.key} ${style.ids.join(' ')}`}

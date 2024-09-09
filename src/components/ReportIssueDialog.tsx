@@ -31,7 +31,7 @@ export function ReportIssueDialog({
 	return (
 		<Dialog fullWidth maxWidth="md" onClose={onClose} open={open}>
 			<DialogTitle>Report an Issue</DialogTitle>
-			<form onSubmit={() => void handleSubmit(onConfirm)}>
+			<form onSubmit={handleSubmit(onConfirm)}>
 				<DialogContent sx={{ pt: 0 }}>
 					<Grid container spacing={3} sx={{ mt: 0 }}>
 						<Grid item xs={12} sm={8}>
