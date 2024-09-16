@@ -1,7 +1,6 @@
-/* @jsx jsx */ /** @jsxRuntime classic */ import {
-	ArrowDown,
-	ArrowUp,
-} from '@components/Arrow';
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* @jsx jsx */ /** @jsxRuntime classic */
+import { ArrowDown, ArrowUp } from '@components/Arrow';
 import { InstructionSpeedDial } from '@components/InstructionSpeedDial';
 import { Stations } from '@components/Stations';
 import { ViewerSpeedDial } from '@components/ViewerSpeedDial';
@@ -14,8 +13,8 @@ import type { JSX as ViewerJSX, TapEventDetails } from '@vertexvis/viewer';
 import {
 	VertexViewer,
 	VertexViewerDomElement,
+	VertexViewerDomGroup,
 	VertexViewerDomRenderer,
-	VertexViewerMarkupArrow,
 	VertexViewerToolbar,
 } from '@vertexvis/viewer-react';
 import React from 'react';
@@ -89,24 +88,19 @@ function UnwrappedViewer({
 			<VertexViewerToolbar placement="bottom-right">
 				<ViewerSpeedDial onClick={onClick} viewer={viewer} />
 			</VertexViewerToolbar>
-			{instructionStep?.arrows?.map((a, i) => (
-				<VertexViewerMarkupArrow
-					key={i}
-					startJson={JSON.stringify(a.start)}
-					endJson={JSON.stringify(a.end)}
-				/>
-			))}
 			<VertexViewerDomRenderer>
-				{instructionStep?.doms?.map((a, i) => (
-					<VertexViewerDomElement
-						key={i}
-						positionJson={JSON.stringify(a.position)}
-						rotationJson={JSON.stringify(a.rotation)}
-						billboardOff={true}
-					>
-						{a.type === 'down' ? <ArrowDown /> : <ArrowUp />}
-					</VertexViewerDomElement>
-				))}
+				<VertexViewerDomGroup>
+					{instructionStep?.doms?.map((a, i) => (
+						<VertexViewerDomElement
+							key={i}
+							positionJson={JSON.stringify(a.position)}
+							rotationJson={JSON.stringify(a.rotation)}
+							billboardOff={true}
+						>
+							{a.type === 'down' ? <ArrowDown /> : <ArrowUp />}
+						</VertexViewerDomElement>
+					))}
+				</VertexViewerDomGroup>
 			</VertexViewerDomRenderer>
 		</VertexViewer>
 	);
@@ -121,19 +115,21 @@ function onTap<P extends ViewerProps>(
 				viewer={viewer}
 				{...props}
 				onTap={async (e) => {
+					if (e.defaultPrevented) {
+						return;
+					}
+
 					if (props.onTap) props.onTap(e);
 
-					if (!e.defaultPrevented) {
-						const scene = await viewer.current?.scene();
-						const raycaster = scene?.raycaster();
+					const scene = await viewer.current?.scene();
+					const raycaster = scene?.raycaster();
 
-						if (raycaster != null) {
-							const res = await raycaster.hitItems(e.detail.position, {
-								includeMetadata: true,
-							});
-							const hit = (res?.hits ?? [])[0];
-							await onSelect(e.detail, hit);
-						}
+					if (raycaster != null) {
+						const res = await raycaster.hitItems(e.detail.position, {
+							includeMetadata: true,
+						});
+						const hit = (res?.hits ?? [])[0];
+						await onSelect(e.detail, hit);
 					}
 				}}
 			/>
