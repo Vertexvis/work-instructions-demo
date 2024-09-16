@@ -668,10 +668,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/env@npm:14.2.8":
-  version: 14.2.8
-  resolution: "@next/env@npm:14.2.8"
-  checksum: 10c0/8fd09c932ff472c9fd6c58c532f85972b7b0c72ef40bd937034ae34f3ff2692d6c829ef31b30eda761d467b1cd2c7ab7ad31aed829547546483e8beaf6d753f9
+"@next/env@npm:14.2.9":
+  version: 14.2.9
+  resolution: "@next/env@npm:14.2.9"
+  checksum: 10c0/be572488e44df6ce5dc099b49d0e6d140e2cbd45c2d1851f35e3ad8fc1d04536b8a411fe8ee96ed4fa5cef7fdc2c7da491734450253b22bbe96160f35871b01f
   languageName: node
   linkType: hard
 
@@ -684,65 +684,65 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-darwin-arm64@npm:14.2.8":
-  version: 14.2.8
-  resolution: "@next/swc-darwin-arm64@npm:14.2.8"
+"@next/swc-darwin-arm64@npm:14.2.9":
+  version: 14.2.9
+  resolution: "@next/swc-darwin-arm64@npm:14.2.9"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@next/swc-darwin-x64@npm:14.2.8":
-  version: 14.2.8
-  resolution: "@next/swc-darwin-x64@npm:14.2.8"
+"@next/swc-darwin-x64@npm:14.2.9":
+  version: 14.2.9
+  resolution: "@next/swc-darwin-x64@npm:14.2.9"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@next/swc-linux-arm64-gnu@npm:14.2.8":
-  version: 14.2.8
-  resolution: "@next/swc-linux-arm64-gnu@npm:14.2.8"
+"@next/swc-linux-arm64-gnu@npm:14.2.9":
+  version: 14.2.9
+  resolution: "@next/swc-linux-arm64-gnu@npm:14.2.9"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@next/swc-linux-arm64-musl@npm:14.2.8":
-  version: 14.2.8
-  resolution: "@next/swc-linux-arm64-musl@npm:14.2.8"
+"@next/swc-linux-arm64-musl@npm:14.2.9":
+  version: 14.2.9
+  resolution: "@next/swc-linux-arm64-musl@npm:14.2.9"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@next/swc-linux-x64-gnu@npm:14.2.8":
-  version: 14.2.8
-  resolution: "@next/swc-linux-x64-gnu@npm:14.2.8"
+"@next/swc-linux-x64-gnu@npm:14.2.9":
+  version: 14.2.9
+  resolution: "@next/swc-linux-x64-gnu@npm:14.2.9"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@next/swc-linux-x64-musl@npm:14.2.8":
-  version: 14.2.8
-  resolution: "@next/swc-linux-x64-musl@npm:14.2.8"
+"@next/swc-linux-x64-musl@npm:14.2.9":
+  version: 14.2.9
+  resolution: "@next/swc-linux-x64-musl@npm:14.2.9"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@next/swc-win32-arm64-msvc@npm:14.2.8":
-  version: 14.2.8
-  resolution: "@next/swc-win32-arm64-msvc@npm:14.2.8"
+"@next/swc-win32-arm64-msvc@npm:14.2.9":
+  version: 14.2.9
+  resolution: "@next/swc-win32-arm64-msvc@npm:14.2.9"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@next/swc-win32-ia32-msvc@npm:14.2.8":
-  version: 14.2.8
-  resolution: "@next/swc-win32-ia32-msvc@npm:14.2.8"
+"@next/swc-win32-ia32-msvc@npm:14.2.9":
+  version: 14.2.9
+  resolution: "@next/swc-win32-ia32-msvc@npm:14.2.9"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@next/swc-win32-x64-msvc@npm:14.2.8":
-  version: 14.2.8
-  resolution: "@next/swc-win32-x64-msvc@npm:14.2.8"
+"@next/swc-win32-x64-msvc@npm:14.2.9":
+  version: 14.2.9
+  resolution: "@next/swc-win32-x64-msvc@npm:14.2.9"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -1258,44 +1258,44 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vertexvis/api-client-node@npm:^0.22.1":
-  version: 0.22.6
-  resolution: "@vertexvis/api-client-node@npm:0.22.6"
+"@vertexvis/api-client-node@npm:^0.23.0":
+  version: 0.23.0
+  resolution: "@vertexvis/api-client-node@npm:0.23.0"
   dependencies:
     axios: "npm:^1.6.4"
     p-limit: "npm:^3"
-  checksum: 10c0/632af98aec362d52f9496fc87b617c5c7d302cbd5a4550e47d742f04d22335e434b423a90708d181ab4ec43517e58a1e647769fef8f28ce0a86e4ee942d83dd7
+  checksum: 10c0/b93cfb064a537c719197dac006a45764d9553c5cbc57808fa14a16add7083af1995798de1f772d400152997e3007c2287e656bd2fe3f8f6f7a980a6e141c6bc3
   languageName: node
   linkType: hard
 
-"@vertexvis/frame-streaming-protos@npm:^0.10.4":
-  version: 0.10.8
-  resolution: "@vertexvis/frame-streaming-protos@npm:0.10.8"
-  checksum: 10c0/14e62e4b1490858a1497633b7837989a203c29529c8ab754a91f7dab4466dc1fe5953cc4e9e83ba59b647654cc2bb6ebc14a0f48dc97b0bd3993a48d985475b5
+"@vertexvis/frame-streaming-protos@npm:^0.13.2":
+  version: 0.13.13
+  resolution: "@vertexvis/frame-streaming-protos@npm:0.13.13"
+  checksum: 10c0/bf1f6e97644ca22af58132a38b2997208b00c59423a57e48b145e931c7c93b3fe2d8b92ca85b2dcfce6db0b0cf50ff16805c9fe4dada5f317aed7710020a8630
   languageName: node
   linkType: hard
 
-"@vertexvis/geometry@npm:0.17.5":
-  version: 0.17.5
-  resolution: "@vertexvis/geometry@npm:0.17.5"
+"@vertexvis/geometry@npm:0.22.0":
+  version: 0.22.0
+  resolution: "@vertexvis/geometry@npm:0.22.0"
   peerDependencies:
     tslib: ">=2.1.0"
-  checksum: 10c0/4bddc9a349e26ddf590692ce898c295ff617a300e5ec0eeb93c7b1477183b4c27ff088dff8be7d7baf2a115e218fdd130d38cf5e6306cbb7474149e7775874eb
+  checksum: 10c0/4ca1cbe96cbfadbd4a2765053f911db4fb80be52f5dc4193f0d24b78b1f2be56c726ffbacb087a55eeb6dfef9c71f64573e79a371c690121b723f3e898bbc539
   languageName: node
   linkType: hard
 
-"@vertexvis/html-templates@npm:0.17.5":
-  version: 0.17.5
-  resolution: "@vertexvis/html-templates@npm:0.17.5"
+"@vertexvis/html-templates@npm:0.22.0":
+  version: 0.22.0
+  resolution: "@vertexvis/html-templates@npm:0.22.0"
   dependencies:
-    "@vertexvis/utils": "npm:0.17.5"
+    "@vertexvis/utils": "npm:0.22.0"
   peerDependencies:
     tslib: ">=2.1.0"
-  checksum: 10c0/05a4d91260e6de8ccfd92fcd33b852d4d7540a0a491e9760498d08d095fc88af3c5e07fb566ed024377a82c9872a1e4c57d17f950180f11dbb4615ddef8dfb80
+  checksum: 10c0/9b06338bbc31e6a31c616d002bd0677910fc4060755e2f3235fa047fd46f35df7578c0b100600dea278e91994ddb949dce823e8f35b9228b36bab867e8ccd4cc
   languageName: node
   linkType: hard
 
-"@vertexvis/scene-tree-protos@npm:^0.1.18":
+"@vertexvis/scene-tree-protos@npm:^0.1.21":
   version: 0.1.25
   resolution: "@vertexvis/scene-tree-protos@npm:0.1.25"
   peerDependencies:
@@ -1305,73 +1305,74 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vertexvis/scene-view-protos@npm:^0.1.8":
-  version: 0.1.10
-  resolution: "@vertexvis/scene-view-protos@npm:0.1.10"
+"@vertexvis/scene-view-protos@npm:^0.4.3":
+  version: 0.4.8
+  resolution: "@vertexvis/scene-view-protos@npm:0.4.8"
   peerDependencies:
     "@improbable-eng/grpc-web": ">=0.14.0"
     google-protobuf: ">=3.15.7"
-  checksum: 10c0/38b5802f22e587c7e6f3557489a8afdae316ccc68955f410feba1e4755ef4b216cd42d3dd3c427365be749e8c16876801d5cac8b59c824fe6c1505d393c264f9
+  checksum: 10c0/f4f645361e25bbca94454a9ef937932389bc84cbaf06f5c13c8c4bc87812887de7d992022c29c113d0c10c4da744f1a8dbd24bd475fa7573e7828d6d7c4b991a
   languageName: node
   linkType: hard
 
-"@vertexvis/stream-api@npm:0.17.5":
-  version: 0.17.5
-  resolution: "@vertexvis/stream-api@npm:0.17.5"
+"@vertexvis/stream-api@npm:0.22.0":
+  version: 0.22.0
+  resolution: "@vertexvis/stream-api@npm:0.22.0"
   dependencies:
-    "@vertexvis/frame-streaming-protos": "npm:^0.10.4"
+    "@vertexvis/frame-streaming-protos": "npm:^0.13.2"
   peerDependencies:
-    "@vertexvis/utils": ^0.10.1
+    "@vertexvis/utils": ^0.20.3
     protobufjs: ">=6.9.0 <7.0.0"
     tslib: ">=2.1.0"
-  checksum: 10c0/8ddeadeb012b18b58929851b866a26c50c440fc0404a5b442a45f71b2f858bbea91859f90edbab8d816b900ec372fcf748d5ed961b90d93df3e9a9a6b388b3f3
+  checksum: 10c0/8b24f5a5e1a442c3b527750f36b3c8d47fb340b33734eb4d10a1d74d9928c9d3ff63720c7c770337398865fa02237cc98c35485c67be826efb3342896aa0f76f
   languageName: node
   linkType: hard
 
-"@vertexvis/utils@npm:0.17.5":
-  version: 0.17.5
-  resolution: "@vertexvis/utils@npm:0.17.5"
+"@vertexvis/utils@npm:0.22.0":
+  version: 0.22.0
+  resolution: "@vertexvis/utils@npm:0.22.0"
   dependencies:
     is-plain-object: "npm:^3.0.0"
     lodash.isequal: "npm:^4.5.0"
     uuid: "npm:^8.3.2"
   peerDependencies:
     tslib: ">=2.1.0"
-  checksum: 10c0/555e8a98b4ee54d8967116664a9adbd3c06c06f54d80e892426aacdba0eb10dede87205e1caeb76a7ad99d9a59323cd46ca3c18baf0f50c5e841060cac7a0910
+  checksum: 10c0/0d56f2631462ce467b20d843c04e23bd63703094a5ea26dae07ccbeb0ddd690f6f25bb5af6307e3cea793f100befcffc5c5d4adcd6db0e04b79dc1e41b46acea
   languageName: node
   linkType: hard
 
-"@vertexvis/viewer-react@npm:^0.17.5":
-  version: 0.17.5
-  resolution: "@vertexvis/viewer-react@npm:0.17.5"
+"@vertexvis/viewer-react@npm:^0.22.0":
+  version: 0.22.0
+  resolution: "@vertexvis/viewer-react@npm:0.22.0"
   dependencies:
-    "@vertexvis/viewer": "npm:0.17.5"
+    "@vertexvis/viewer": "npm:0.22.0"
   peerDependencies:
-    react: ">=16.0.0 <18.0.0"
-    react-dom: ">=16.0.0 <18.0.0"
+    react: ">=16.3.0 <19.0.0"
+    react-dom: ">=16.3.0 <19.0.0"
     tslib: ">=2.1.0"
-  checksum: 10c0/16c3445e04d8398a628b28e596a62a9aacf1931b13394824c9dd654c3f9f43f130778ae6dc292484a5510a94808a60f9b9ca1e1b1b643bfb030850150298c817
+  checksum: 10c0/915d7fd77adf778be27a687c99f97c60cda470cd4288cbf80fed491685e056968148c5183210f9da81471deca63a98046223befaedc859f4788267cc8810814a
   languageName: node
   linkType: hard
 
-"@vertexvis/viewer@npm:0.17.5":
-  version: 0.17.5
-  resolution: "@vertexvis/viewer@npm:0.17.5"
+"@vertexvis/viewer@npm:0.22.0":
+  version: 0.22.0
+  resolution: "@vertexvis/viewer@npm:0.22.0"
   dependencies:
     "@improbable-eng/grpc-web": "npm:^0.15.0"
     "@stencil/core": "npm:^2.16.1"
     "@types/classnames": "npm:^2.3.1"
-    "@vertexvis/frame-streaming-protos": "npm:^0.10.4"
-    "@vertexvis/geometry": "npm:0.17.5"
-    "@vertexvis/html-templates": "npm:0.17.5"
-    "@vertexvis/scene-tree-protos": "npm:^0.1.18"
-    "@vertexvis/scene-view-protos": "npm:^0.1.8"
-    "@vertexvis/stream-api": "npm:0.17.5"
-    "@vertexvis/utils": "npm:0.17.5"
+    "@vertexvis/frame-streaming-protos": "npm:^0.13.2"
+    "@vertexvis/geometry": "npm:0.22.0"
+    "@vertexvis/html-templates": "npm:0.22.0"
+    "@vertexvis/scene-tree-protos": "npm:^0.1.21"
+    "@vertexvis/scene-view-protos": "npm:^0.4.3"
+    "@vertexvis/stream-api": "npm:0.22.0"
+    "@vertexvis/utils": "npm:0.22.0"
     "@vertexvis/web-workers": "npm:^0.1.0"
     camel-case: "npm:^4.1.2"
     classnames: "npm:^2.3.1"
     date-fns: "npm:^2.28.0"
+    fast-deep-equal: "npm:^3.1.3"
     fast-png: "npm:^6.1.0"
     google-protobuf: "npm:3.19.4"
     jwt-decode: "npm:^3.1.2"
@@ -1383,7 +1384,7 @@ __metadata:
     resize-observer: "npm:^1.0.4"
     threads: "npm:^1.7.0"
     tslib: "npm:^2.1.0"
-  checksum: 10c0/a1e24f5d48c8896fbb86f3bcce02e5bfefa2493ed19e34d35246d5216e365bbfd4a415560ebe7123ccea5c28d53e31ab97650a3c3a22943390256c0b957e7801
+  checksum: 10c0/ee612e0370ea486055bcfa5ea27802554b3fc1fd92afb46cf8903209e4fa1392cd8f0f15591613b7f2e8abacb63b36af6b1b5275b90fb8a754c515c469cf2bee
   languageName: node
   linkType: hard
 
@@ -3823,20 +3824,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:^14.2.8":
-  version: 14.2.8
-  resolution: "next@npm:14.2.8"
+"next@npm:^14.2.9":
+  version: 14.2.9
+  resolution: "next@npm:14.2.9"
   dependencies:
-    "@next/env": "npm:14.2.8"
-    "@next/swc-darwin-arm64": "npm:14.2.8"
-    "@next/swc-darwin-x64": "npm:14.2.8"
-    "@next/swc-linux-arm64-gnu": "npm:14.2.8"
-    "@next/swc-linux-arm64-musl": "npm:14.2.8"
-    "@next/swc-linux-x64-gnu": "npm:14.2.8"
-    "@next/swc-linux-x64-musl": "npm:14.2.8"
-    "@next/swc-win32-arm64-msvc": "npm:14.2.8"
-    "@next/swc-win32-ia32-msvc": "npm:14.2.8"
-    "@next/swc-win32-x64-msvc": "npm:14.2.8"
+    "@next/env": "npm:14.2.9"
+    "@next/swc-darwin-arm64": "npm:14.2.9"
+    "@next/swc-darwin-x64": "npm:14.2.9"
+    "@next/swc-linux-arm64-gnu": "npm:14.2.9"
+    "@next/swc-linux-arm64-musl": "npm:14.2.9"
+    "@next/swc-linux-x64-gnu": "npm:14.2.9"
+    "@next/swc-linux-x64-musl": "npm:14.2.9"
+    "@next/swc-win32-arm64-msvc": "npm:14.2.9"
+    "@next/swc-win32-ia32-msvc": "npm:14.2.9"
+    "@next/swc-win32-x64-msvc": "npm:14.2.9"
     "@swc/helpers": "npm:0.5.5"
     busboy: "npm:1.6.0"
     caniuse-lite: "npm:^1.0.30001579"
@@ -3877,7 +3878,7 @@ __metadata:
       optional: true
   bin:
     next: dist/bin/next
-  checksum: 10c0/ceead5258f80dc2a4e911cb3e8c224ce5487c726587a79ea0a510192305f2e66a17a002841c3c0b195fd568c9a35160f563042417d3807eb5f6538c7630615de
+  checksum: 10c0/e50872b4bc22d1e5b3d9b1a4ecf841c2f0fcc933339c3cb63329489346ce0cb852b98f9e317a7d26978db6b0a8174c1312a6dfdbc3907fd7498538c51e0a0e2f
   languageName: node
   linkType: hard
 
@@ -5191,15 +5192,15 @@ __metadata:
     "@types/react-dom": "npm:^18.3.0"
     "@typescript-eslint/eslint-plugin": "npm:^8.5.0"
     "@typescript-eslint/parser": "npm:^8.5.0"
-    "@vertexvis/api-client-node": "npm:^0.22.1"
-    "@vertexvis/viewer-react": "npm:^0.17.5"
+    "@vertexvis/api-client-node": "npm:^0.23.0"
+    "@vertexvis/viewer-react": "npm:^0.22.0"
     babel-plugin-import: "npm:^1.13.8"
     eslint: "npm:^8.57.0"
     eslint-config-next: "npm:^14.2.8"
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-prettier: "npm:^5.2.1"
     eslint-plugin-simple-import-sort: "npm:^12.1.1"
-    next: "npm:^14.2.8"
+    next: "npm:^14.2.9"
     prettier: "npm:^3.3.3"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
