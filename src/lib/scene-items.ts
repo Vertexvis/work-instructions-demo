@@ -66,10 +66,14 @@ export async function handleHit({
 				return [
 					op.where((q) => q.all()).deselect(),
 					// https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons#return_value
-					detail.buttons === 2 ? idQuery.hide() : idQuery.select(),
+					detail.buttons === 2 ? idQuery.setPhantom(true) : idQuery.select(),
 				];
 			})
 			.execute();
+		// this works for phantom
+		// await scene
+		// 	.items((op) => [op.where((q) => q.withItemId(id)).setPhantom(true)])
+		// 	.execute();
 	} else {
 		await scene.items((op) => op.where((q) => q.all()).deselect()).execute();
 	}
