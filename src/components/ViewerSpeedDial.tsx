@@ -1,5 +1,6 @@
 import { Action, AnimationDurationMs, ToolButtons } from '@components/Viewer';
 import ReportProblemOutlined from '@mui/icons-material/ReportProblemOutlined';
+import RestoreIcon from '@mui/icons-material/Restore';
 import ZoomOutMapOutlined from '@mui/icons-material/ZoomOutMapOutlined';
 import { red } from '@mui/material/colors';
 import SpeedDial from '@mui/material/SpeedDial';
@@ -13,22 +14,37 @@ interface Props {
 export function ViewerSpeedDial({ onClick, viewer }: Props): JSX.Element {
 	const actions: Action[] = [
 		{
-			icon: <ZoomOutMapOutlined />,
-			name: 'Fit all',
-			onClick: () => fitAll(),
-		},
-		{
 			icon: <ReportProblemOutlined style={{ color: red[500] }} />,
 			name: 'Report issue',
 			onClick: () => onClick('issue'),
 		},
+		{
+			icon: <RestoreIcon />,
+			name: 'Reset Scene',
+			onClick: () => {
+				void resetScene();
+			},
+		},
+		{
+			icon: <ZoomOutMapOutlined />,
+			name: 'Fit all',
+			onClick: () => {
+				void fitAll();
+			},
+		},
 	];
 
 	async function fitAll(): Promise<void> {
-		(await viewer.current?.scene())
+		await (
+			await viewer.current?.scene()
+		)
 			?.camera()
 			.viewAll()
 			.render({ animation: { milliseconds: AnimationDurationMs } });
+	}
+
+	async function resetScene(): Promise<void> {
+		await (await viewer.current?.scene())?.reset({ includeCamera: true });
 	}
 
 	return (
