@@ -33,7 +33,7 @@ export function ReportIssueDialog({
 			<DialogTitle>Report an Issue</DialogTitle>
 			<form
 				onSubmit={() => {
-					void handleSubmit(onConfirm);
+					handleSubmit(onConfirm);
 				}}
 			>
 				<DialogContent sx={{ pt: 0 }}>
