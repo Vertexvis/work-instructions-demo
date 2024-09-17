@@ -174,7 +174,7 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
 							}
 						}}
 						onSceneReady={() => {
-							void handleSceneReady;
+							void handleSceneReady();
 						}}
 						onSelect={async (detail, hit) => {
 							console.debug({
@@ -210,7 +210,7 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
 					instructions={instructions}
 					instructionStep={activeStep.step}
 					onBeginAssembly={() => {
-						void handleBeginAssembly;
+						void handleBeginAssembly();
 					}}
 					onClose={() => setRightDrawerContent(undefined)}
 					open={rightDrawerContent != null}
