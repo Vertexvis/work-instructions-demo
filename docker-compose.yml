@@ -1,5 +1,14 @@
 services:
   app:
+    container_name: work-instructions-demo
     build: .
     env_file: [.env.local]
-    ports: [3000:3000]
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - work-instructions-demo
+
+networks:
+  work-instructions-demo:
+    external: false
