@@ -1,89 +1,89 @@
-import { AnimationDurationMs } from "@lib/scene-items";
-import { WorkInstructions } from "@lib/work-instructions";
-import { head } from "@vertexvis/api-client-node";
-import type { Components } from "@vertexvis/viewer";
+import { AnimationDurationMs } from '@lib/scene-items';
+import { WorkInstructions } from '@lib/work-instructions';
+import { head } from '@vertexvis/api-client-node';
+import type { Components } from '@vertexvis/viewer';
 
 interface InitializeReq {
-  readonly instructions: WorkInstructions;
-  readonly viewer: Components.VertexViewer | null;
+	readonly instructions: WorkInstructions;
+	readonly viewer: Components.VertexViewer | null;
 }
 
 export interface CreateSceneViewStateReq {
-  readonly name: string;
-  readonly sceneViewId?: string;
+	readonly name: string;
+	readonly sceneViewId?: string;
 }
 
 export interface Part {
-  readonly name?: string;
-  readonly revisionId?: string;
+	readonly name?: string;
+	readonly revisionId?: string;
 }
 
 export interface RenderPartRevisionReq {
-  readonly part?: Part;
-  readonly sceneItemSuppliedId?: string;
+	readonly part?: Part;
+	readonly sceneItemSuppliedId?: string;
 }
 
-const BaseUrl = "http://localhost:3000";
+const BaseUrl = 'http://localhost:3000';
 
 export async function createSceneViewState({
-  name,
-  sceneViewId,
+	name,
+	sceneViewId,
 }: CreateSceneViewStateReq): Promise<void> {
-  if (!sceneViewId) return;
+	if (!sceneViewId) return;
 
-  console.debug(
-    await (
-      await fetch(`${BaseUrl}/api/scene-view-states`, {
-        body: JSON.stringify({ name, sceneViewId }),
-        method: "POST",
-      })
-    ).json()
-  );
+	console.debug(
+		await (
+			await fetch(`${BaseUrl}/api/scene-view-states`, {
+				body: JSON.stringify({ name, sceneViewId }),
+				method: 'POST',
+			})
+		).json(),
+	);
 }
 
 export async function initializeScene({
-  viewer,
-  instructions,
+	viewer,
+	instructions,
 }: InitializeReq): Promise<void> {
-  if (viewer == null) return;
+	if (viewer == null) return;
 
-  const scene = await viewer.scene();
-  if (scene == null) return;
+	const scene = await viewer.scene();
+	if (scene == null) return;
 
-  const { camera, sceneItemsVisible } = head(
-    Object.values(instructions.steps).filter((v) => v.step === 4)
-  );
+	const { camera, sceneItemsVisible } = head(
+		Object.values(instructions.steps).filter((v) => v.step === 4),
+	);
 
-  await scene
-    .camera()
-    .flyTo({ camera })
-    .render({ animation: { milliseconds: AnimationDurationMs } });
+	await scene
+		.camera()
+		.flyTo({ camera })
+		.render({ animation: { milliseconds: AnimationDurationMs } });
 
-  await scene
-    .items((op) => {
-      return [
-        op.where((q) => q.all()).hide(),
-        op.where((q) => q.withSuppliedIds(sceneItemsVisible)).show(),
-      ];
-    })
-    .execute();
+	await scene
+		.items((op) => {
+			return [
+				op.where((q) => q.all()).hide(),
+				op.where((q) => q.withSuppliedIds(sceneItemsVisible)).show(),
+			];
+		})
+		.execute();
 }
 
 export async function renderPartRevision({
-  part,
-  sceneItemSuppliedId,
+	part,
+	sceneItemSuppliedId,
 }: RenderPartRevisionReq): Promise<void> {
-  if (!part || !part.revisionId || !sceneItemSuppliedId) return;
+	if (!part || !part.revisionId || !sceneItemSuppliedId) return;
 
-  console.debug(
-    await (
-      await fetch(`${BaseUrl}/api/part-revisions`, {
-        body: JSON.stringify({
-          partRevisionId: part.revisionId,
-          sceneItemSuppliedId,
-        }),
-        method: "POST",
-      })
-    ).json()
-  );
+	console.debug(
+		await (
+			await fetch(`${BaseUrl}/api/part-revisions`, {
+				body: JSON.stringify({
+					partRevisionId: part.revisionId,
+					sceneItemSuppliedId,
+				}),
+				method: 'POST',
+			})
+		).json(),
+	);
 }
