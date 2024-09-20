@@ -7,3 +7,5 @@ yarn-error.log*
 
 /.next
 /node_modules
+.yarn
+tsconfig.tsbuildinfo

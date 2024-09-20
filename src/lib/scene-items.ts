@@ -6,90 +6,90 @@ import type { FrameCamera } from '@vertexvis/viewer/dist/types/lib/types';
 export const AnimationDurationMs = 500;
 
 interface Req {
-  readonly viewer: Components.VertexViewer | null;
+	readonly viewer: Components.VertexViewer | null;
 }
 
 interface FlyToReq extends Req {
-  readonly camera?: FrameCamera.FrameCamera;
+	readonly camera?: FrameCamera.FrameCamera;
 }
 
 interface HandleHitReq extends Req {
-  readonly detail: TapEventDetails;
-  readonly hit?: vertexvis.protobuf.stream.IHit;
+	readonly detail: TapEventDetails;
+	readonly hit?: vertexvis.protobuf.stream.IHit;
 }
 
 interface SelectBySuppliedIdsReq extends Req {
-  ids: string[];
+	ids: string[];
 }
 
 export async function flyTo({
-  camera,
-  viewer,
+	camera,
+	viewer,
 }: FlyToReq): Promise<CameraRenderResult | undefined> {
-  if (viewer == null || camera == null) return;
+	if (viewer == null || camera == null) return;
 
-  const scene = await viewer.scene();
-  if (scene == null) return;
+	const scene = await viewer.scene();
+	if (scene == null) return;
 
-  const sc = scene.camera();
-  if (
-    JSON.stringify({
-      position: sc.position,
-      lookAt: sc.lookAt,
-      up: sc.up,
-    }) === JSON.stringify(camera)
-  ) {
-    return;
-  }
+	const sc = scene.camera();
+	if (
+		JSON.stringify({
+			position: sc.position,
+			lookAt: sc.lookAt,
+			up: sc.up,
+		}) === JSON.stringify(camera)
+	) {
+		return;
+	}
 
-  return scene
-    .camera()
-    .flyTo({ camera })
-    .render({ animation: { milliseconds: AnimationDurationMs } });
+	return scene
+		.camera()
+		.flyTo({ camera })
+		.render({ animation: { milliseconds: AnimationDurationMs } });
 }
 
 export async function handleHit({
-  detail,
-  hit,
-  viewer,
+	detail,
+	hit,
+	viewer,
 }: HandleHitReq): Promise<void> {
-  if (viewer == null) return;
+	if (viewer == null) return;
 
-  const scene = await viewer.scene();
-  if (scene == null) return;
+	const scene = await viewer.scene();
+	if (scene == null) return;
 
-  const id = hit?.itemId?.hex;
-  if (id) {
-    await scene
-      .items((op) => {
-        const idQuery = op.where((q) => q.withItemId(id));
-        return [
-          op.where((q) => q.all()).deselect(),
-          // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons#return_value
-          detail.buttons === 2 ? idQuery.hide() : idQuery.select(),
-        ];
-      })
-      .execute();
-  } else {
-    await scene.items((op) => op.where((q) => q.all()).deselect()).execute();
-  }
+	const id = hit?.itemId?.hex;
+	if (id) {
+		await scene
+			.items((op) => {
+				const idQuery = op.where((q) => q.withItemId(id));
+				return [
+					op.where((q) => q.all()).deselect(),
+					// https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons#return_value
+					detail.buttons === 2 ? idQuery.hide() : idQuery.select(),
+				];
+			})
+			.execute();
+	} else {
+		await scene.items((op) => op.where((q) => q.all()).deselect()).execute();
+	}
 }
 
 export async function selectBySuppliedIds({
-  ids,
-  viewer,
+	ids,
+	viewer,
 }: SelectBySuppliedIdsReq): Promise<void> {
-  if (viewer == null || !ids || ids.length === 0) return;
+	if (viewer == null || !ids || ids.length === 0) return;
 
-  const scene = await viewer.scene();
-  if (scene == null) return;
+	const scene = await viewer.scene();
+	if (scene == null) return;
 
-  await scene
-    .items((op) => {
-      return [
-        op.where((q) => q.all()).deselect(),
-        op.where((q) => q.withSuppliedIds(ids)).select(),
-      ];
-    })
-    .execute();
+	await scene
+		.items((op) => {
+			return [
+				op.where((q) => q.all()).deselect(),
+				op.where((q) => q.withSuppliedIds(ids)).select(),
+			];
+		})
+		.execute();
 }
