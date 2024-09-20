@@ -8,7 +8,5 @@ yarn-error.log*
 
 /.next
 /node_modules
-
-*.tsbuildinfo
-
 .yarn
+tsconfig.tsbuildinfo
