@@ -1,5 +1,7 @@
 import type { Environment } from '@vertexvis/viewer';
 
+import { envVar } from './utils';
+
 export interface Configuration {
 	readonly authoring: boolean;
 	readonly vertexEnv: Environment;
@@ -15,18 +17,9 @@ export const Config: Configuration = {
 	vertexEnv: envVar('VERTEX_ENV', 'platprod') as Environment,
 };
 
-// Super Car
 export const Credentials: StreamCredentials = {
-	clientId: '08F675C4AACE8C0214362DB5EFD4FACAFA556D463ECA00877CB225157EF58BFA',
-	streamKey: 'wzTRPxHgI8ylWKevQIDPA-GhL_8PhWwqLj4w',
+	clientId: envVar('VERTEX_CLIENT_ID', ''),
+	streamKey: envVar('VERTEX_STREAM_KEY', ''),
 };
-export const SceneId = '421a79ac-9b12-49b1-b517-4d6760b3c9f8';
 
-function envVar(name: string, fallback: string): string {
-	const ev = process.env[name];
-	return ev ? ev : fallback;
-}
-
-export function head<T>(items?: T | T[]): T | undefined {
-	return Array.isArray(items) ? items[0] : (items ?? undefined);
-}
+export const SceneId = envVar('VERTEX_SCENE_ID', '');
