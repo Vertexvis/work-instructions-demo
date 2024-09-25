@@ -4,7 +4,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
@@ -38,7 +38,7 @@ export function ReportIssueDialog({
 			>
 				<DialogContent sx={{ pt: 0 }}>
 					<Grid container spacing={3} sx={{ mt: 0 }}>
-						<Grid item xs={12} sm={8}>
+						<Grid size={{ xs: 12, sm: 8 }}>
 							<TextField
 								fullWidth
 								label="Title"
@@ -47,7 +47,7 @@ export function ReportIssueDialog({
 								{...register('title', { required: true })}
 							/>
 						</Grid>
-						<Grid item xs={12} sm={4}>
+						<Grid size={{ xs: 12, sm: 4 }}>
 							<Select
 								onChange={(e) => setIssueType(e.target.value as number)}
 								size="small"
@@ -58,13 +58,13 @@ export function ReportIssueDialog({
 								<MenuItem value={2}>Feature</MenuItem>
 							</Select>
 						</Grid>
-						<Grid item xs={12} sm={4}>
+						<Grid size={{ xs: 12, sm: 4 }}>
 							<Stations sx={{ width: '100%' }} />
 						</Grid>
-						<Grid item xs={12} sm={4}>
+						<Grid size={{ xs: 12, sm: 4 }}>
 							<TextField fullWidth label="Location" size="small" />
 						</Grid>
-						<Grid item xs={12} sm={4}>
+						<Grid size={{ xs: 12, sm: 4 }}>
 							<Select
 								onChange={(e) => setSeverity(e.target.value as number)}
 								size="small"
@@ -76,7 +76,7 @@ export function ReportIssueDialog({
 								<MenuItem value={3}>High</MenuItem>
 							</Select>
 						</Grid>
-						<Grid item xs={12} sm={12}>
+						<Grid size={{ xs: 12, sm: 12 }}>
 							<TextField
 								defaultValue={partName}
 								fullWidth
@@ -86,7 +86,7 @@ export function ReportIssueDialog({
 								{...register('part-id', { required: true })}
 							/>
 						</Grid>
-						<Grid item xs={12} sm={12}>
+						<Grid size={{ xs: 12, sm: 12 }}>
 							<TextField
 								fullWidth
 								label="Description"
