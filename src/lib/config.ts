@@ -13,7 +13,7 @@ export interface StreamCredentials {
 }
 
 export const Config: Configuration = {
-	authoring: envVar('AUTHORING', 'false') === 'true',
+	authoring: envVar('VERTEX_AUTHORING', 'false') === 'true',
 	vertexEnv: envVar('VERTEX_ENV', 'platprod') as Environment,
 };
 
