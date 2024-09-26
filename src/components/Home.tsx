@@ -14,12 +14,13 @@ import {
 	renderPartRevision,
 	RenderPartRevisionReq,
 } from '@lib/authoring';
-import { Configuration, head } from '@lib/config';
+import { Configuration } from '@lib/config';
 import {
 	flyTo,
 	handleHit as onSelect,
 	selectBySuppliedIds,
 } from '@lib/scene-items';
+import { head } from '@lib/utils';
 import { useViewer } from '@lib/viewer';
 import {
 	DefaultInstructions,
