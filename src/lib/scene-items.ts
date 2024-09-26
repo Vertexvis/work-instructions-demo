@@ -53,7 +53,9 @@ export async function handleHit({
 	hit,
 	viewer,
 }: HandleHitReq): Promise<void> {
-	if (viewer == null) return;
+	if (!viewer) return;
+
+	if (!hit) return;
 
 	const scene = await viewer.scene();
 	if (scene == null) return;
