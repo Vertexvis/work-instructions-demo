@@ -1,5 +1,5 @@
 import { BottomDrawer } from '@components/BottomDrawer';
-import { Header } from '@components/Header';
+// import { Header } from '@components/Header';
 import {
 	BottomDrawerHeight,
 	Layout,
@@ -9,9 +9,9 @@ import { ReportIssueDialog } from '@components/ReportIssueDialog';
 import { Content, RightDrawer } from '@components/RightDrawer';
 import { Viewer } from '@components/Viewer';
 import {
-	createSceneViewState,
-	initializeScene,
-	renderPartRevision,
+	//createSceneViewState,
+	//initializeScene,
+	//renderPartRevision,
 	RenderPartRevisionReq,
 } from '@lib/authoring';
 import { Configuration } from '@lib/config';
@@ -31,7 +31,7 @@ import Snackbar from '@mui/material/Snackbar';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
+export function Home({ vertexEnv }: Configuration): JSX.Element {
 	const router = useRouter();
 	const viewer = useViewer();
 
@@ -95,13 +95,14 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
 
 		setReady(true);
 		setSceneViewId(scene.sceneViewId);
-		if (authoring) await initializeScene({ instructions, viewer: v });
+		// if (authoring) await initializeScene({ instructions, viewer: v });
 	}
 
 	async function onInstructionStepSelected(num: number): Promise<void> {
 		if (!ready) return;
 		const step = instructions.steps[Object.keys(instructions.steps)[num]];
 		setReady(false);
+
 		function onComplete() {
 			handleInitialView();
 			setActiveStep({ num, step });
@@ -145,18 +146,18 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
 				/>
 			}
 			bottomDrawerHeight={BottomDrawerHeight}
-			header={
-				authoring && (
-					<Header
-						onCreateSceneViewState={(name) => {
-							void createSceneViewState({ name, sceneViewId });
-						}}
-						onRenderPartRevision={() => {
-							void renderPartRevision(selected);
-						}}
-					/>
-				)
-			}
+			// header={
+			// 	authoring && (
+			// 		<Header
+			// 			onCreateSceneViewState={(name) => {
+			// 				void createSceneViewState({ name, sceneViewId });
+			// 			}}
+			// 			onRenderPartRevision={() => {
+			// 				void renderPartRevision(selected);
+			// 			}}
+			// 		/>
+			// 	)
+			// }
 			main={
 				viewer.isReady && (
 					<Viewer
@@ -201,6 +202,7 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
 						}}
 						streamKey={instructions.streamKey}
 						viewer={viewer.ref}
+						phantom={{ opacity: 0.7 }}
 					/>
 				)
 			}
