@@ -110,7 +110,7 @@ export function Layout({
 					<Toolbar variant="dense">{header}</Toolbar>
 				</AppBar>
 			)}
-			{leftDrawer ? leftDrawer : <></>}
+			{leftDrawer ?? <></>}
 			<Main
 				bottomDrawerHeight={bottomDrawerHeight}
 				leftDrawerWidth={leftDrawerWidth}
@@ -119,9 +119,9 @@ export function Layout({
 			>
 				{main}
 			</Main>
-			{rightDrawer ? rightDrawer : <></>}
+			{rightDrawer ?? <></>}
 			{children ?? <></>}
-			{bottomDrawer ? bottomDrawer : <></>}
+			{bottomDrawer ?? <></>}
 		</Box>
 	);
 }
