@@ -2,7 +2,7 @@
 /* @jsx jsx */ /** @jsxRuntime classic */
 import { ArrowDown, ArrowUp } from '@components/Arrow';
 import { InstructionSpeedDial } from '@components/InstructionSpeedDial';
-import { Stations } from '@components/Stations';
+//import { Stations } from '@components/Stations';
 import { ViewerSpeedDial } from '@components/ViewerSpeedDial';
 import { jsx } from '@emotion/react';
 import { InstructionStep } from '@lib/work-instructions';
@@ -74,7 +74,7 @@ function UnwrappedViewer({
 		>
 			<VertexViewerToolbar placement="top-left">
 				<Box sx={{ alignItems: 'center', display: 'flex', ml: 2, mt: 3 }}>
-					<Stations sx={{ backgroundColor: 'white', mr: 2 }} />
+					{/* <Stations sx={{ backgroundColor: 'white', mr: 2 }} /> */}
 					<Link
 						href="https://github.com/Vertexvis/work-instructions-demo"
 						rel="noreferrer"
