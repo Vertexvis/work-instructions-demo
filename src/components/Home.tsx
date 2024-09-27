@@ -141,7 +141,6 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 				<RightDrawer
 					content={rightDrawerContent}
 					instructions={instructions}
-					instructionStep={viewerContext.instructionStep}
 					onBeginAssembly={() => {
 						void handleBeginAssembly();
 					}}

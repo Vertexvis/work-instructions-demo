@@ -1,18 +1,21 @@
 import { ContentHeader } from '@components/ContentHeader';
 import { NoStepActive } from '@components/NoStepActive';
-import { InstructionStep } from '@lib/work-instructions';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { head } from '@vertexvis/api-client-node';
 import React from 'react';
 
+import { useViewerContext } from '../contexts/viewer-context';
+
 interface Props {
 	readonly onClose: () => void;
 	readonly onShow: (name: string, ids: string[]) => void;
-	readonly step: InstructionStep | null;
 }
 
-export function Parts({ onClose, onShow, step }: Props): JSX.Element {
+export function Parts({ onClose, onShow }: Props): JSX.Element {
+	const viewerContext = useViewerContext();
+	const step = viewerContext.instructionStep;
+
 	function NoContent(): JSX.Element {
 		return step == null ? (
 			<NoStepActive />

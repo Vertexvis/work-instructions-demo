@@ -1,5 +1,5 @@
 import { ContentHeader } from '@components/ContentHeader';
-import { InstructionStep, WorkInstructions } from '@lib/work-instructions';
+import { WorkInstructions } from '@lib/work-instructions';
 import MapOutlined from '@mui/icons-material/MapOutlined';
 import TimerOutlined from '@mui/icons-material/TimerOutlined';
 import WidgetsOutlined from '@mui/icons-material/WidgetsOutlined';
@@ -9,12 +9,13 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 
+import { useViewerContext } from '../contexts/viewer-context';
+
 interface Props {
 	readonly instructions: WorkInstructions;
 	readonly onBeginAssembly: () => void;
 	readonly onClose: () => void;
 	readonly onShow: (name: string, ids: string[]) => void;
-	readonly step: InstructionStep | null;
 }
 
 export function Instructions({
@@ -22,9 +23,11 @@ export function Instructions({
 	onBeginAssembly,
 	onClose,
 	onShow,
-	step,
 }: Props): JSX.Element {
 	const numSteps = Object.keys(instructions.steps).length;
+
+	const viewerContext = useViewerContext();
+	const step = viewerContext.instructionStep;
 
 	function NoContent(): JSX.Element {
 		return step == null ? (
