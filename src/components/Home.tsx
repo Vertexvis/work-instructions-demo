@@ -20,30 +20,36 @@ import {
 	WorkInstructions,
 } from '@lib/work-instructions';
 import Snackbar from '@mui/material/Snackbar';
-import React from 'react';
+import React, { useState } from 'react';
+
+import { useViewerContext } from '../contexts/viewer-context';
 
 export function Home({ vertexEnv }: Configuration): JSX.Element {
 	const viewer = useViewer();
 
-	const [activeStep, setActiveStep] = React.useState<{
+	const viewerContext = useViewerContext();
+
+	const [activeStep, setActiveStep] = useState<{
 		num: number;
 		step: InstructionStep | undefined;
 	}>({ num: -1, step: undefined });
 
-	const [isReportIssueDialogOpen, setIsReportIssueDialogOpen] =
-		React.useState(false);
-	const [ghosted, setGhosted] = React.useState(false);
-	const [isInitialView, setIsInitialView] = React.useState(true);
-	const [isSceneReady, setIsSceneReady] = React.useState(false);
+	const [isReportIssueDialogOpen, setIsReportIssueDialogOpen] = useState(false);
+	const [ghosted, setGhosted] = useState(false);
+	const [isInitialView, setIsInitialView] = useState(true);
+	const [isSceneReady, setIsSceneReady] = useState(false);
 	// const [selectedPartName, setSelectedPartName] = React.useState<
 	// 	string | undefined
 	// >();
-	const [rightDrawerContent, setRightDrawerContent] = React.useState<
+	const [rightDrawerContent, setRightDrawerContent] = useState<
 		Content | undefined
 	>('instructions');
-	const [isSnackbarOpen, setIsSnackbarOpen] = React.useState(false);
+	const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
 
 	const instructions: WorkInstructions = DefaultInstructions;
+
+	viewerContext.setStreamKey(instructions.streamKey);
+	if (viewerContext.streamKey == null) return <></>;
 
 	async function handleSceneReady() {
 		const v = viewer.ref.current;
@@ -127,7 +133,6 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 						onSelect={async (detail, hit) => {
 							await onSelect({ detail, hit, viewer: viewer.ref.current });
 						}}
-						streamKey={instructions.streamKey}
 						viewer={viewer.ref}
 						phantom={{ opacity: 0.7 }}
 					/>

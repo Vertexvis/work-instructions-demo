@@ -17,12 +17,12 @@ import {
 	VertexViewerDomRenderer,
 	VertexViewerToolbar,
 } from '@vertexvis/viewer-react';
-import React from 'react';
+
+import { useViewerContext } from '../contexts/viewer-context';
 
 interface ViewerProps extends ViewerJSX.VertexViewer {
 	readonly instructionStep?: InstructionStep;
 	readonly onClick: (button: ToolButtons) => void;
-	readonly streamKey: string;
 	readonly viewer: React.MutableRefObject<HTMLVertexViewerElement | null>;
 }
 
@@ -53,10 +53,13 @@ export const Viewer = onTap(UnwrappedViewer);
 function UnwrappedViewer({
 	onClick,
 	instructionStep,
-	streamKey,
 	viewer,
 	...props
 }: ViewerProps): JSX.Element {
+	const viewerContext = useViewerContext();
+
+	const streamKey = viewerContext?.streamKey;
+
 	const svId = instructionStep?.sceneViewStateId;
 	const src = `urn:vertex:stream-key:${streamKey}${
 		svId ? `?scene-view-state=${svId}` : ''
