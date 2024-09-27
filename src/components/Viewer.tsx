@@ -5,7 +5,6 @@ import { InstructionSpeedDial } from '@components/InstructionSpeedDial';
 //import { Stations } from '@components/Stations';
 import { ViewerSpeedDial } from '@components/ViewerSpeedDial';
 import { jsx } from '@emotion/react';
-import { InstructionStep } from '@lib/work-instructions';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import { vertexvis } from '@vertexvis/frame-streaming-protos';
@@ -21,7 +20,6 @@ import {
 import { useViewerContext } from '../contexts/viewer-context';
 
 interface ViewerProps extends ViewerJSX.VertexViewer {
-	readonly instructionStep?: InstructionStep;
 	readonly onClick: (button: ToolButtons) => void;
 	readonly viewer: React.MutableRefObject<HTMLVertexViewerElement | null>;
 }
@@ -52,13 +50,13 @@ export const Viewer = onTap(UnwrappedViewer);
 
 function UnwrappedViewer({
 	onClick,
-	instructionStep,
 	viewer,
 	...props
 }: ViewerProps): JSX.Element {
 	const viewerContext = useViewerContext();
 
-	const streamKey = viewerContext?.streamKey;
+	const streamKey = viewerContext.streamKey;
+	const instructionStep = viewerContext.instructionStep;
 
 	const svId = instructionStep?.sceneViewStateId;
 	const src = `urn:vertex:stream-key:${streamKey}${

@@ -9,7 +9,7 @@ import React from 'react';
 interface Props {
 	readonly onClose: () => void;
 	readonly onShow: (name: string, ids: string[]) => void;
-	readonly step?: InstructionStep;
+	readonly step: InstructionStep | null;
 }
 
 export function Parts({ onClose, onShow, step }: Props): JSX.Element {

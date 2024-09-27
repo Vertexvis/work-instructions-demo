@@ -12,7 +12,7 @@ export type Content = 'settings' | 'instructions' | 'parts';
 interface Props {
 	readonly content?: Content;
 	readonly instructions: WorkInstructions;
-	readonly instructionStep?: InstructionStep;
+	readonly instructionStep: InstructionStep | null;
 	readonly onBeginAssembly: () => void;
 	readonly onClose: () => void;
 	readonly open: boolean;

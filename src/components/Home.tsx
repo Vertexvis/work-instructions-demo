@@ -31,8 +31,7 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 
 	const [activeStep, setActiveStep] = useState<{
 		num: number;
-		step: InstructionStep | undefined;
-	}>({ num: -1, step: undefined });
+	}>({ num: -1 });
 
 	const [isReportIssueDialogOpen, setIsReportIssueDialogOpen] = useState(false);
 	const [ghosted, setGhosted] = useState(false);
@@ -88,7 +87,8 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 
 	function onComplete(num: number, step: InstructionStep): void {
 		handleInitialView();
-		setActiveStep({ num, step });
+		setActiveStep({ num });
+		viewerContext.setInstructionStep(step);
 		setIsSceneReady(true);
 	}
 
@@ -115,7 +115,6 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 				viewer.isReady && (
 					<Viewer
 						configEnv={vertexEnv}
-						instructionStep={activeStep.step}
 						onClick={(button) => {
 							if (
 								button === 'settings' ||
@@ -142,7 +141,7 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 				<RightDrawer
 					content={rightDrawerContent}
 					instructions={instructions}
-					instructionStep={activeStep.step}
+					instructionStep={viewerContext.instructionStep}
 					onBeginAssembly={() => {
 						void handleBeginAssembly();
 					}}

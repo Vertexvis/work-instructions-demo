@@ -14,7 +14,7 @@ interface Props {
 	readonly onBeginAssembly: () => void;
 	readonly onClose: () => void;
 	readonly onShow: (name: string, ids: string[]) => void;
-	readonly step?: InstructionStep;
+	readonly step: InstructionStep | null;
 }
 
 export function Instructions({
