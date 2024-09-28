@@ -1,5 +1,4 @@
 import { BottomDrawerHeight } from '@components/Layout';
-import { WorkInstructions } from '@lib/work-instructions';
 import Check from '@mui/icons-material/Check';
 import ChevronLeft from '@mui/icons-material/ChevronLeft';
 import ChevronRight from '@mui/icons-material/ChevronRight';
@@ -13,9 +12,10 @@ import Stepper from '@mui/material/Stepper';
 import { styled } from '@mui/material/styles';
 import React from 'react';
 
+import { useViewerContext } from '../contexts/viewer-context';
+
 interface Props {
 	readonly activeStep: number;
-	readonly instructions?: WorkInstructions;
 	readonly onSelect: (activeStep: number) => void;
 	readonly ready: boolean;
 }
@@ -28,14 +28,15 @@ const Drawer = styled(MuiDrawer)(() => ({
 
 export function BottomDrawer({
 	activeStep,
-	instructions,
 	onSelect,
 	ready,
 }: Props): JSX.Element {
-	if (instructions == null) return <></>;
+	const { workInstructions } = useViewerContext();
+
+	if (workInstructions == null) return <></>;
 
 	const stepIds =
-		instructions.steps != null ? Object.keys(instructions.steps) : [];
+		workInstructions.steps != null ? Object.keys(workInstructions.steps) : [];
 
 	function PrevBtn() {
 		return (
@@ -87,12 +88,12 @@ export function BottomDrawer({
 	}
 
 	function Steps() {
-		if (instructions == null) return <></>;
+		if (workInstructions == null) return <></>;
 
 		return (
 			<Stepper activeStep={activeStep} alternativeLabel sx={{ flexGrow: 1 }}>
-				{Object.keys(instructions.steps).map((k) => {
-					const s = instructions.steps[k];
+				{Object.keys(workInstructions.steps).map((k) => {
+					const s = workInstructions.steps[k];
 					return (
 						<Step key={k}>
 							<StepButton disabled={false} onClick={() => onSelect(s.step - 1)}>

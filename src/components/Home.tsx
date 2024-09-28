@@ -110,7 +110,6 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 			bottomDrawer={
 				<BottomDrawer
 					activeStep={activeStep.num}
-					instructions={instructions}
 					onSelect={(num: number) => {
 						void onInstructionStepSelected(num);
 					}}
