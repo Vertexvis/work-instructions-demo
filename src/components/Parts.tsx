@@ -14,7 +14,7 @@ interface Props {
 
 export function Parts({ onClose, onShow }: Props): JSX.Element {
 	const viewerContext = useViewerContext();
-	const step = viewerContext.instructionStep;
+	const step = viewerContext.selectedInstructionStep;
 
 	function NoContent(): JSX.Element {
 		return step == null ? (

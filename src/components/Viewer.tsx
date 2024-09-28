@@ -56,7 +56,7 @@ function UnwrappedViewer({
 	const viewerContext = useViewerContext();
 
 	const streamKey = viewerContext.streamKey;
-	const instructionStep = viewerContext.instructionStep;
+	const instructionStep = viewerContext.selectedInstructionStep;
 
 	const svId = instructionStep?.sceneViewStateId;
 	const src = `urn:vertex:stream-key:${streamKey}${

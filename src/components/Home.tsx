@@ -20,14 +20,19 @@ import {
 	WorkInstructions,
 } from '@lib/work-instructions';
 import Snackbar from '@mui/material/Snackbar';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useViewerContext } from '../contexts/viewer-context';
 
 export function Home({ vertexEnv }: Configuration): JSX.Element {
 	const viewer = useViewer();
 
-	const viewerContext = useViewerContext();
+	const {
+		streamKey,
+		setStreamKey,
+		setSelectedInstructionStep,
+		setWorkInstructions,
+	} = useViewerContext();
 
 	const [activeStep, setActiveStep] = useState<{
 		num: number;
@@ -37,9 +42,7 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 	const [ghosted, setGhosted] = useState(false);
 	const [isInitialView, setIsInitialView] = useState(true);
 	const [isSceneReady, setIsSceneReady] = useState(false);
-	// const [selectedPartName, setSelectedPartName] = React.useState<
-	// 	string | undefined
-	// >();
+
 	const [rightDrawerContent, setRightDrawerContent] = useState<
 		Content | undefined
 	>('instructions');
@@ -47,8 +50,12 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 
 	const instructions: WorkInstructions = DefaultInstructions;
 
-	viewerContext.setStreamKey(instructions.streamKey);
-	if (viewerContext.streamKey == null) return <></>;
+	useEffect(() => {
+		setStreamKey(instructions.streamKey);
+		setWorkInstructions(instructions);
+	});
+
+	if (streamKey == null) return <></>;
 
 	async function handleSceneReady() {
 		const v = viewer.ref.current;
@@ -88,7 +95,7 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 	function onComplete(num: number, step: InstructionStep): void {
 		handleInitialView();
 		setActiveStep({ num });
-		viewerContext.setInstructionStep(step);
+		setSelectedInstructionStep(step);
 		setIsSceneReady(true);
 	}
 
@@ -140,14 +147,12 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 			rightDrawer={
 				<RightDrawer
 					content={rightDrawerContent}
-					instructions={instructions}
 					onBeginAssembly={() => {
 						void handleBeginAssembly();
 					}}
 					onClose={() => setRightDrawerContent(undefined)}
 					open={rightDrawerContent != null}
 					onShow={(name, ids) => {
-						setSelectedPartName(name);
 						void selectBySuppliedIds({ ids, viewer: viewer.ref.current });
 					}}
 					settings={{
