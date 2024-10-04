@@ -35,9 +35,6 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 	const [ghosted, setGhosted] = React.useState(false);
 	const [isInitialView, setIsInitialView] = React.useState(true);
 	const [isSceneReady, setIsSceneReady] = React.useState(false);
-	// const [selectedPartName, setSelectedPartName] = React.useState<
-	// 	string | undefined
-	// >();
 	const [rightDrawerContent, setRightDrawerContent] = React.useState<
 		Content | undefined
 	>('instructions');
@@ -145,7 +142,6 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 					onClose={() => setRightDrawerContent(undefined)}
 					open={rightDrawerContent != null}
 					onShow={(name, ids) => {
-						setSelectedPartName(name);
 						void selectBySuppliedIds({ ids, viewer: viewer.ref.current });
 					}}
 					settings={{
