@@ -115,7 +115,7 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
 		if (res) {
 			res.onAnimationCompleted.on(onComplete);
 			return;
-	}
+		}
 
 		onComplete();
 	}

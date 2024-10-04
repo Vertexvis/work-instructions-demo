@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { Action, AnimationDurationMs, ToolButtons } from '@components/Viewer';
 import ReportProblemOutlined from '@mui/icons-material/ReportProblemOutlined';
 import ZoomOutMapOutlined from '@mui/icons-material/ZoomOutMapOutlined';
