@@ -1,46 +1,50 @@
 {
-	"name": "work-instructions-demo",
-	"version": "0.1.0",
-	"private": true,
-	"dependencies": {
-		"@emotion/cache": "^11.11.0",
-		"@emotion/react": "^11.11.3",
-		"@emotion/server": "^11.11.0",
-		"@emotion/styled": "^11.10.8",
-		"@mui/icons-material": "5.15.1",
-		"@mui/material": "5.15.1",
-		"@vertexvis/api-client-node": "^0.22.1",
-		"@vertexvis/viewer-react": "^0.17.5",
-		"next": "^12.3.4",
-		"react": "^17.0.2",
-		"react-dom": "^17.0.2",
-		"react-hook-form": "^7.48.0"
-	},
-	"devDependencies": {
-		"@babel/core": "^7.16",
-		"@types/node": "^16",
-		"@types/react": "^17.0",
-		"@types/react-dom": "^17.0",
-		"@typescript-eslint/eslint-plugin": "^5",
-		"@typescript-eslint/parser": "^5",
-		"babel-plugin-import": "^1.13",
-		"eslint": "<8.0.0",
-		"eslint-config-next": "^12.0",
-		"eslint-config-prettier": "^8",
-		"eslint-plugin-react": "^7",
-		"eslint-plugin-react-hooks": "^4",
-		"eslint-plugin-simple-import-sort": "^7.0",
-		"prettier": "^2.5",
-		"tslib": "^2.3",
-		"typescript": "^4.5"
-	},
-	"scripts": {
-		"build": "next build",
-		"clean": "rm -rf .next/ node_modules/",
-		"dev": "next",
-		"format": "prettier --write './**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|mdx|html|css)'",
-		"lint": "next lint",
-		"start": "next start"
-	},
-	"packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  "name": "work-instructions-demo",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.3",
+    "@emotion/server": "^11.11.0",
+    "@emotion/styled": "^11.10.8",
+    "@mui/icons-material": "5.15.1",
+    "@mui/material": "5.15.1",
+    "@vertexvis/api-client-node": "^0.22.1",
+    "@vertexvis/viewer-react": "^0.17.5",
+    "next": "^12.3.4",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-hook-form": "^7.48.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16",
+    "@types/node": "^16",
+    "@types/react": "^17.0",
+    "@types/react-dom": "^17.0",
+    "@typescript-eslint/eslint-plugin": "^5",
+    "@typescript-eslint/parser": "^5",
+    "babel-plugin-import": "^1.13",
+    "eslint": "<8.0.0",
+    "eslint-config-next": "^12.0",
+    "eslint-config-prettier": "^8",
+    "eslint-plugin-react": "^7",
+    "eslint-plugin-react-hooks": "^4",
+    "eslint-plugin-simple-import-sort": "^7.0",
+    "prettier": "^2.5",
+    "tslib": "^2.3",
+    "typescript": "^4.5"
+  },
+  "scripts": {
+    "build": "next build",
+    "clean": "rm -rf .next/ node_modules/",
+    "dev": "next",
+    "format": "prettier --write './**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|mdx|html|css)'",
+    "lint": "next lint",
+    "start": "next start"
+  },
+  "engines": {
+    "node": "^20",
+    "yarn": "^1.22"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
