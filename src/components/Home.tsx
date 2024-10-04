@@ -85,6 +85,7 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 
 	function handleInitialView() {
 		if (isInitialView) {
+			setGhosted(true);
 			setIsInitialView(false);
 		}
 	}
