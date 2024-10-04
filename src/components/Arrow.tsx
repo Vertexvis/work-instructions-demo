@@ -1,4 +1,5 @@
-/* @jsx jsx */ /** @jsxRuntime classic */ import { jsx } from '@emotion/react';
+/* eslint-disable react/no-unknown-property */
+/* @jsx jsx */ /** @jsxRuntime classic */ import { jsx } from "@emotion/react";
 
 export function ArrowDown(): JSX.Element {
 	const dimensions = 50;
