@@ -25,7 +25,9 @@ export function ViewerSpeedDial({ onClick, viewer }: Props): JSX.Element {
 	];
 
 	async function fitAll(): Promise<void> {
-		(await viewer.current?.scene())
+		await (
+			await viewer.current?.scene()
+		)
 			?.camera()
 			.viewAll()
 			.render({ animation: { milliseconds: AnimationDurationMs } });
