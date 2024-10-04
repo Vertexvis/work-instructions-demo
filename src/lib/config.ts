@@ -1,7 +1,5 @@
 import type { Environment } from '@vertexvis/viewer';
 
-import { envVar } from './utils';
-
 export interface Configuration {
 	readonly authoring: boolean;
 	readonly vertexEnv: Environment;
@@ -23,3 +21,8 @@ export const Credentials: StreamCredentials = {
 };
 
 export const SceneId = envVar('VERTEX_SCENE_ID', '');
+
+function envVar(name: string, fallback: string): string {
+	const ev = process.env[name];
+	return ev ?? fallback;
+}
