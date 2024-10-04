@@ -1,11 +1,12 @@
 .DS_Store
-.env.development.local
-.env.local
-.env.production.local
-.env.test.local
+
+# env files
+.env*
+!.env.*.template
+
 yarn-error.log*
 
 /.next
 /node_modules
-.yarn
-tsconfig.tsbuildinfo
+
+*.tsbuildinfo
