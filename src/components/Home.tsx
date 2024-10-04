@@ -58,12 +58,13 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
 		if (!router.isReady) return;
 
 		const inst = head(router.query.instructions);
+
 		if (inst == null) return;
 
 		try {
 			const parsed: WorkInstructions = JSON.parse(
 				Buffer.from(inst, 'base64').toString('utf8'),
-			);
+			) as WorkInstructions;
 
 			if (
 				parsed.clientId == null ||
@@ -75,8 +76,8 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
 			}
 
 			setInstructions(parsed);
-		} catch (e) {
-			console.error('Invalid instructions.');
+		} catch (e: unknown) {
+			console.error('Invalid instructions.', { data: e });
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [router.isReady]);
@@ -111,7 +112,13 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
 			camera: step?.camera,
 			viewer: viewer.ref.current,
 		});
-		res ? res.onAnimationCompleted.on(onComplete) : onComplete();
+
+		if (res) {
+			res.onAnimationCompleted.on(onComplete);
+			return;
+		}
+
+		onComplete();
 	}
 
 	async function handleBeginAssembly() {
@@ -131,7 +138,9 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
 				<BottomDrawer
 					activeStep={activeStep.num}
 					instructions={instructions}
-					onSelect={onInstructionStepSelected}
+					onSelect={(num: number) => {
+						void onInstructionStepSelected(num);
+					}}
 					ready={ready}
 				/>
 			}
@@ -139,10 +148,12 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
 			header={
 				authoring && (
 					<Header
-						onCreateSceneViewState={(name) =>
-							createSceneViewState({ name, sceneViewId })
-						}
-						onRenderPartRevision={() => renderPartRevision(selected)}
+						onCreateSceneViewState={(name) => {
+							void createSceneViewState({ name, sceneViewId });
+						}}
+						onRenderPartRevision={() => {
+							void renderPartRevision(selected);
+						}}
 					/>
 				)
 			}
@@ -163,7 +174,9 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
 								setDialogOpen(true);
 							}
 						}}
-						onSceneReady={handleSceneReady}
+						onSceneReady={() => {
+							void handleSceneReady();
+						}}
 						onSelect={async (detail, hit) => {
 							console.debug({
 								hitNormal: hit?.hitNormal,
@@ -197,12 +210,14 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
 					content={rightDrawerContent}
 					instructions={instructions}
 					instructionStep={activeStep.step}
-					onBeginAssembly={handleBeginAssembly}
+					onBeginAssembly={() => {
+						void handleBeginAssembly();
+					}}
 					onClose={() => setRightDrawerContent(undefined)}
 					open={rightDrawerContent != null}
 					onShow={(name, ids) => {
 						setPartName(name);
-						selectBySuppliedIds({ ids, viewer: viewer.ref.current });
+						void selectBySuppliedIds({ ids, viewer: viewer.ref.current });
 					}}
 					settings={{
 						ghosted,
