@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { Action, AnimationDurationMs, ToolButtons } from '@components/Viewer';
 import ReportProblemOutlined from '@mui/icons-material/ReportProblemOutlined';
 import ZoomOutMapOutlined from '@mui/icons-material/ZoomOutMapOutlined';
@@ -25,7 +26,8 @@ export function ViewerSpeedDial({ onClick, viewer }: Props): JSX.Element {
 	];
 
 	async function fitAll(): Promise<void> {
-		(await viewer.current?.scene())
+		const scene = await viewer.current?.scene();
+		await scene
 			?.camera()
 			.viewAll()
 			.render({ animation: { milliseconds: AnimationDurationMs } });

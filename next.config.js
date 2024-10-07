@@ -1,9 +1,9 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { resolve } = require('path');
 
 // See https://nextjs.org/docs/api-reference/next.config.js/custom-webpack-config
 module.exports = {
 	swcMinify: true,
+	output: 'standalone',
 	webpack: (config) => {
 		return {
 			...config,

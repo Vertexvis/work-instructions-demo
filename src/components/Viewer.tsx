@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* @jsx jsx */ /** @jsxRuntime classic */ import {
 	ArrowDown,
 	ArrowUp,

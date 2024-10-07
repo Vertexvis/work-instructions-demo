@@ -14,7 +14,7 @@ export default async function handle(
 ): Promise<void> {
 	if (!req.body) return errorRes('Body required.', res);
 
-	const b: Body = JSON.parse(req.body);
+	const b: Body = JSON.parse(req.body as string) as Body;
 	if (!b.partRevisionId || !b.sceneItemSuppliedId) {
 		return errorRes('Invalid body.', res);
 	}
