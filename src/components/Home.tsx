@@ -112,12 +112,7 @@ export function Home({ authoring, vertexEnv }: Configuration): JSX.Element {
 			viewer: viewer.ref.current,
 		});
 
-		if (res) {
-			res.onAnimationCompleted.on(onComplete);
-			return;
-		}
-
-		onComplete();
+		return res ? res.onAnimationCompleted.on(onComplete) : onComplete();
 	}
 
 	async function handleBeginAssembly() {
