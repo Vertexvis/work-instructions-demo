@@ -53,8 +53,6 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 	}
 
 	async function onInstructionStepSelected(num: number): Promise<void> {
-		console.log('onInstructionStepSelected');
-
 		if (!isSceneReady) return;
 		const step = instructions.steps[Object.keys(instructions.steps)[num]];
 		setIsSceneReady(false);
