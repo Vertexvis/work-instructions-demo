@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { Action, AnimationDurationMs, ToolButtons } from '@components/Viewer';
+import { Action, ToolButtons } from '@components/Viewer';
+import { fitAll, resetScene } from '@lib/viewer-actions';
 import ReportProblemOutlined from '@mui/icons-material/ReportProblemOutlined';
 import RestoreIcon from '@mui/icons-material/Restore';
 import ZoomOutMapOutlined from '@mui/icons-material/ZoomOutMapOutlined';
@@ -23,29 +24,17 @@ export function ViewerSpeedDial({ onClick, viewer }: Props): JSX.Element {
 			icon: <RestoreIcon />,
 			name: 'Reset Scene',
 			onClick: () => {
-				void resetScene();
+				void resetScene(viewer);
 			},
 		},
 		{
 			icon: <ZoomOutMapOutlined />,
 			name: 'Fit all',
 			onClick: () => {
-				void fitAll();
+				void fitAll(viewer);
 			},
 		},
 	];
-
-	async function fitAll(): Promise<void> {
-		const scene = await viewer.current?.scene();
-		await scene
-			?.camera()
-			.viewAll()
-			.render({ animation: { milliseconds: AnimationDurationMs } });
-	}
-
-	async function resetScene(): Promise<void> {
-		await (await viewer.current?.scene())?.reset({ includeCamera: true });
-	}
 
 	return (
 		<SpeedDial

@@ -1,4 +1,5 @@
 import { BottomDrawerHeight } from '@components/Layout';
+import { resetScene } from '@lib/viewer-actions';
 import Check from '@mui/icons-material/Check';
 import ChevronLeft from '@mui/icons-material/ChevronLeft';
 import ChevronRight from '@mui/icons-material/ChevronRight';
@@ -18,6 +19,7 @@ interface Props {
 	readonly activeStep: number;
 	readonly onSelect: (activeStep: number) => void;
 	readonly ready: boolean;
+	readonly viewer: React.MutableRefObject<HTMLVertexViewerElement | null>;
 }
 
 const BtnMargin = 5;
@@ -30,6 +32,7 @@ export function BottomDrawer({
 	activeStep,
 	onSelect,
 	ready,
+	viewer,
 }: Props): JSX.Element {
 	const { workInstructions } = useViewerContext();
 
@@ -80,7 +83,10 @@ export function BottomDrawer({
 			<Fab
 				disabled={!ready}
 				sx={{ mx: BtnMargin }}
-				onClick={() => onSelect(-1)}
+				onClick={() => {
+					onSelect(-1);
+					void resetScene(viewer);
+				}}
 			>
 				<Refresh />
 			</Fab>

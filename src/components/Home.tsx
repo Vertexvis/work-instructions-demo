@@ -109,6 +109,7 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 						void onInstructionStepSelected(num);
 					}}
 					ready={isSceneReady}
+					viewer={viewer.ref}
 				/>
 			}
 			bottomDrawerHeight={BottomDrawerHeight}
