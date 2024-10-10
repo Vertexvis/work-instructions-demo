@@ -68,8 +68,6 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 	}
 
 	async function onInstructionStepSelected(num: number): Promise<void> {
-		console.log('onInstructionStepSelected');
-
 		if (!isSceneReady) return;
 		const step = instructions.steps[Object.keys(instructions.steps)[num]];
 		setIsSceneReady(false);
@@ -79,12 +77,9 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 			viewer: viewer.ref.current,
 		});
 
-		if (res) {
-			res.onAnimationCompleted.on(() => onComplete(num, step));
-			return;
-		}
-
-		onComplete(num, step);
+		return res
+			? res.onAnimationCompleted.on(() => onComplete(num, step))
+			: onComplete(num, step);
 	}
 
 	async function handleBeginAssembly() {
