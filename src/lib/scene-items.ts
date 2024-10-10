@@ -53,7 +53,9 @@ export async function handleHit({
 	hit,
 	viewer,
 }: HandleHitReq): Promise<void> {
-	if (viewer == null) return;
+	if (!viewer) return;
+
+	if (!hit) return;
 
 	const scene = await viewer.scene();
 	if (scene == null) return;
@@ -66,10 +68,14 @@ export async function handleHit({
 				return [
 					op.where((q) => q.all()).deselect(),
 					// https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons#return_value
-					detail.buttons === 2 ? idQuery.hide() : idQuery.select(),
+					detail.buttons === 2 ? idQuery.setPhantom(true) : idQuery.select(),
 				];
 			})
 			.execute();
+		// this works for phantom
+		// await scene
+		// 	.items((op) => [op.where((q) => q.withItemId(id)).setPhantom(true)])
+		// 	.execute();
 	} else {
 		await scene.items((op) => op.where((q) => q.all()).deselect()).execute();
 	}

@@ -20,27 +20,42 @@ import {
 	WorkInstructions,
 } from '@lib/work-instructions';
 import Snackbar from '@mui/material/Snackbar';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { useViewerContext } from '../contexts/viewer-context';
 
 export function Home({ vertexEnv }: Configuration): JSX.Element {
 	const viewer = useViewer();
 
-	const [activeStep, setActiveStep] = React.useState<{
-		num: number;
-		step: InstructionStep | undefined;
-	}>({ num: -1, step: undefined });
+	const {
+		streamKey,
+		setStreamKey,
+		setSelectedInstructionStep,
+		setWorkInstructions,
+	} = useViewerContext();
 
-	const [isReportIssueDialogOpen, setIsReportIssueDialogOpen] =
-		React.useState(false);
-	const [ghosted, setGhosted] = React.useState(false);
-	const [isInitialView, setIsInitialView] = React.useState(true);
-	const [isSceneReady, setIsSceneReady] = React.useState(false);
-	const [rightDrawerContent, setRightDrawerContent] = React.useState<
+	const [activeStep, setActiveStep] = useState<{
+		num: number;
+	}>({ num: -1 });
+
+	const [isReportIssueDialogOpen, setIsReportIssueDialogOpen] = useState(false);
+	const [ghosted, setGhosted] = useState(false);
+	const [isInitialView, setIsInitialView] = useState(true);
+	const [isSceneReady, setIsSceneReady] = useState(false);
+
+	const [rightDrawerContent, setRightDrawerContent] = useState<
 		Content | undefined
 	>('instructions');
-	const [isSnackbarOpen, setIsSnackbarOpen] = React.useState(false);
+	const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
 
 	const instructions: WorkInstructions = DefaultInstructions;
+
+	useEffect(() => {
+		setStreamKey(instructions.streamKey);
+		setWorkInstructions(instructions);
+	});
+
+	if (streamKey == null) return <></>;
 
 	async function handleSceneReady() {
 		const v = viewer.ref.current;
@@ -74,13 +89,13 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 
 	function onComplete(num: number, step: InstructionStep): void {
 		handleInitialView();
-		setActiveStep({ num, step });
+		setActiveStep({ num });
+		setSelectedInstructionStep(step);
 		setIsSceneReady(true);
 	}
 
 	function handleInitialView() {
 		if (isInitialView) {
-			setGhosted(true);
 			setIsInitialView(false);
 		}
 	}
@@ -90,11 +105,11 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 			bottomDrawer={
 				<BottomDrawer
 					activeStep={activeStep.num}
-					instructions={instructions}
 					onSelect={(num: number) => {
 						void onInstructionStepSelected(num);
 					}}
 					ready={isSceneReady}
+					viewer={viewer.ref}
 				/>
 			}
 			bottomDrawerHeight={BottomDrawerHeight}
@@ -102,8 +117,6 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 				viewer.isReady && (
 					<Viewer
 						configEnv={vertexEnv}
-						experimentalGhostingOpacity={ghosted ? 0.7 : 0}
-						instructionStep={activeStep.step}
 						onClick={(button) => {
 							if (
 								button === 'settings' ||
@@ -121,7 +134,6 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 						onSelect={async (detail, hit) => {
 							await onSelect({ detail, hit, viewer: viewer.ref.current });
 						}}
-						streamKey={instructions.streamKey}
 						viewer={viewer.ref}
 						phantom={{ opacity: 0.7 }}
 					/>
@@ -130,8 +142,6 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 			rightDrawer={
 				<RightDrawer
 					content={rightDrawerContent}
-					instructions={instructions}
-					instructionStep={activeStep.step}
 					onBeginAssembly={() => {
 						void handleBeginAssembly();
 					}}

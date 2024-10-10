@@ -2,8 +2,6 @@ import Link from '@mui/material/Link';
 import { Euler, Vector3 } from '@vertexvis/geometry';
 import type { FrameCamera } from '@vertexvis/viewer/dist/types/lib/types';
 
-import { Credentials } from './config';
-
 interface Arrow {
 	readonly end: Vector3.Vector3;
 	readonly start: Vector3.Vector3;
@@ -75,7 +73,8 @@ const step2SceneItemsVisible = [
 ];
 
 export const DefaultInstructions: WorkInstructions = {
-	...Credentials,
+	clientId: '',
+	streamKey: 'wzTRPxHgI8ylWKevQIDPA-GhL_8PhWwqLj4w',
 	completionMins: 5,
 	description:
 		'At this station, the assembly technician assembles the spindle and installs it on the vehicle.',
