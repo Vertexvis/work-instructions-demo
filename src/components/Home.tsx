@@ -146,7 +146,7 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 					}}
 					onClose={() => setRightDrawerContent(undefined)}
 					open={rightDrawerContent != null}
-					onShow={(name, ids) => {
+					onShow={(_name, ids) => {
 						void selectBySuppliedIds({ ids, viewer: viewer.ref.current });
 					}}
 					settings={{
