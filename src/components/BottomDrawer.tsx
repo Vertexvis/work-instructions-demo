@@ -71,7 +71,10 @@ export function BottomDrawer({
 				color={'primary'}
 				disabled={!ready || activeStep >= stepIds.length}
 				sx={{ mr: BtnMargin }}
-				onClick={() => onSelect(activeStep + 1)}
+				onClick={() => {
+					onSelect(-1);
+					void resetScene(viewer);
+				}}
 			>
 				<Check />
 			</Fab>
@@ -84,8 +87,7 @@ export function BottomDrawer({
 				disabled={!ready}
 				sx={{ mx: BtnMargin }}
 				onClick={() => {
-					onSelect(-1);
-					void resetScene(viewer);
+					onSelect(0);
 				}}
 			>
 				<Refresh />

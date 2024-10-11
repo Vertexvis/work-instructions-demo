@@ -14,7 +14,10 @@ import {
 	selectBySuppliedIds,
 } from '@lib/scene-items';
 import { useViewer } from '@lib/viewer';
-import { setPhantomForSceneItems } from '@lib/viewer-actions';
+import {
+	clearPhantomFromAllSceneItems,
+	setPhantomForSceneItems,
+} from '@lib/viewer-actions';
 import {
 	DefaultInstructions,
 	InstructionStep,
@@ -73,6 +76,12 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 		const step = instructions.steps[Object.keys(instructions.steps)[num]];
 		setIsSceneReady(false);
 
+		if (step) {
+			await setPhantomForSceneItems(viewer.ref, step.sceneItemsVisible);
+		} else {
+			await clearPhantomFromAllSceneItems(viewer.ref);
+		}
+
 		const res = await flyTo({
 			camera: step?.camera,
 			viewer: viewer.ref.current,
@@ -92,7 +101,6 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 		handleInitialView();
 		setActiveStep({ num });
 		setSelectedInstructionStep(step);
-		void setPhantomForSceneItems(viewer.ref, step.sceneItemsVisible);
 		setIsSceneReady(true);
 	}
 

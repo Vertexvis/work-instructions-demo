@@ -24,8 +24,6 @@ export function Instructions({
 	const { selectedInstructionStep, workInstructions } = useViewerContext();
 	const numSteps = Object.keys(workInstructions?.steps ?? 0).length;
 
-	console.log({ instructions: JSON.stringify(workInstructions) });
-
 	function NoContent(): JSX.Element {
 		if (!workInstructions) return <></>;
 		return selectedInstructionStep == null ? (
