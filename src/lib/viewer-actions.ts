@@ -17,3 +17,25 @@ export async function resetScene(
 	const scene = await viewer.current?.scene();
 	await scene?.reset({ includeCamera: true });
 }
+
+export async function clearPhantomFromAllSceneItems(
+	viewer: React.MutableRefObject<HTMLVertexViewerElement | null>,
+): Promise<void> {
+	const scene = await viewer.current?.scene();
+
+	await scene?.items((op) => op.where((q) => q.all()).clearPhantom()).execute();
+}
+
+export async function setPhantomForSceneItems(
+	viewer: React.MutableRefObject<HTMLVertexViewerElement | null>,
+	sceneItems: string[],
+): Promise<void> {
+	const scene = await viewer.current?.scene();
+
+	await scene
+		?.items((op) => [
+			op.where((q) => q.all()).setPhantom(),
+			op.where((q) => q.withSuppliedIds(sceneItems)).clearPhantom(),
+		])
+		.execute();
+}

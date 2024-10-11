@@ -14,6 +14,7 @@ import {
 	selectBySuppliedIds,
 } from '@lib/scene-items';
 import { useViewer } from '@lib/viewer';
+import { setPhantomForSceneItems } from '@lib/viewer-actions';
 import {
 	DefaultInstructions,
 	InstructionStep,
@@ -91,6 +92,7 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 		handleInitialView();
 		setActiveStep({ num });
 		setSelectedInstructionStep(step);
+		void setPhantomForSceneItems(viewer.ref, step.sceneItemsVisible);
 		setIsSceneReady(true);
 	}
 
@@ -135,7 +137,7 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 							await onSelect({ detail, hit, viewer: viewer.ref.current });
 						}}
 						viewer={viewer.ref}
-						phantom={{ opacity: 0.7 }}
+						phantom={{ opacity: 0.3 }}
 					/>
 				)
 			}
