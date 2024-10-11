@@ -43,7 +43,6 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 	}>({ num: -1 });
 
 	const [isReportIssueDialogOpen, setIsReportIssueDialogOpen] = useState(false);
-	const [ghosted, setGhosted] = useState(false);
 	const [isInitialView, setIsInitialView] = useState(true);
 	const [isSceneReady, setIsSceneReady] = useState(false);
 
@@ -128,11 +127,7 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 					<Viewer
 						configEnv={vertexEnv}
 						onClick={(button) => {
-							if (
-								button === 'settings' ||
-								button === 'instructions' ||
-								button === 'parts'
-							) {
+							if (button === 'instructions' || button === 'parts') {
 								setRightDrawerContent(button);
 							} else if (button === 'issue') {
 								setIsReportIssueDialogOpen(true);
@@ -159,11 +154,6 @@ export function Home({ vertexEnv }: Configuration): JSX.Element {
 					open={rightDrawerContent != null}
 					onShow={(_name, ids) => {
 						void selectBySuppliedIds({ ids, viewer: viewer.ref.current });
-					}}
-					settings={{
-						ghosted,
-						onGhostToggle: setGhosted,
-						onIsInitialView: setIsInitialView,
 					}}
 				/>
 			}

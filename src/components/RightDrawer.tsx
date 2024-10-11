@@ -1,12 +1,11 @@
 import { Instructions } from '@components/Instructions';
 import { BottomDrawerHeight, RightDrawerWidth } from '@components/Layout';
 import { Parts } from '@components/Parts';
-import { Settings, SettingsProps } from '@components/Settings';
 import Box from '@mui/material/Box';
 import Drawer, { drawerClasses } from '@mui/material/Drawer';
 import React from 'react';
 
-export type Content = 'settings' | 'instructions' | 'parts';
+export type Content = 'instructions' | 'parts';
 
 interface Props {
 	readonly content?: Content;
@@ -14,7 +13,6 @@ interface Props {
 	readonly onClose: () => void;
 	readonly open: boolean;
 	readonly onShow: (name: string, ids: string[]) => void;
-	readonly settings: SettingsProps;
 }
 
 export function RightDrawer({
@@ -23,13 +21,10 @@ export function RightDrawer({
 	onClose,
 	open,
 	onShow,
-	settings,
 }: Props): JSX.Element {
 	if (content == null) return <></>;
 
 	function Content() {
-		if (content === 'settings')
-			return <Settings onClose={onClose} settings={settings} />;
 		if (content === 'instructions')
 			return (
 				<Instructions

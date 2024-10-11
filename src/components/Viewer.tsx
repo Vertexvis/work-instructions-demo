@@ -37,7 +37,7 @@ export interface Action {
 	readonly onClick: () => void;
 }
 
-export type ToolButtons = 'settings' | 'instructions' | 'parts' | 'issue';
+export type ToolButtons = 'instructions' | 'parts' | 'issue';
 
 type ViewerComponentType = React.ComponentType<
 	ViewerProps & React.RefAttributes<HTMLVertexViewerElement>
