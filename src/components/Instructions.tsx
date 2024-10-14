@@ -1,5 +1,4 @@
 import { ContentHeader } from '@components/ContentHeader';
-import { InstructionStep, WorkInstructions } from '@lib/work-instructions';
 import MapOutlined from '@mui/icons-material/MapOutlined';
 import TimerOutlined from '@mui/icons-material/TimerOutlined';
 import WidgetsOutlined from '@mui/icons-material/WidgetsOutlined';
@@ -9,44 +8,44 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 
+import { useViewerContext } from '../contexts/viewer-context';
+
 interface Props {
-	readonly instructions: WorkInstructions;
 	readonly onBeginAssembly: () => void;
 	readonly onClose: () => void;
 	readonly onShow: (name: string, ids: string[]) => void;
-	readonly step?: InstructionStep;
 }
 
 export function Instructions({
-	instructions,
 	onBeginAssembly,
 	onClose,
 	onShow,
-	step,
 }: Props): JSX.Element {
-	const numSteps = Object.keys(instructions.steps).length;
+	const { selectedInstructionStep, workInstructions } = useViewerContext();
+	const numSteps = Object.keys(workInstructions?.steps ?? 0).length;
 
 	function NoContent(): JSX.Element {
-		return step == null ? (
+		if (!workInstructions) return <></>;
+		return selectedInstructionStep == null ? (
 			<>
 				<ContentHeader
 					onClose={onClose}
-					title={instructions.title ?? 'Work Instructions'}
+					title={workInstructions.title ?? 'Work Instructions'}
 				/>
-				{instructions.description && (
-					<Typography sx={{ mb: 6 }}>{instructions.description}</Typography>
+				{workInstructions.description && (
+					<Typography sx={{ mb: 6 }}>{workInstructions.description}</Typography>
 				)}
-				{instructions.partCount != null && (
+				{workInstructions.partCount != null && (
 					<Box sx={{ display: 'flex', mb: 2 }}>
 						<WidgetsOutlined sx={{ mr: 1 }} />
-						<Typography>{instructions.partCount} parts</Typography>
+						<Typography>{workInstructions.partCount} parts</Typography>
 					</Box>
 				)}
-				{instructions.completionMins != null && (
+				{workInstructions.completionMins != null && (
 					<Box sx={{ display: 'flex', mb: 2 }}>
 						<TimerOutlined sx={{ mr: 1 }} />
 						<Typography>
-							{instructions.completionMins} minutes to complete
+							{workInstructions.completionMins} minutes to complete
 						</Typography>
 					</Box>
 				)}
@@ -65,28 +64,30 @@ export function Instructions({
 		);
 	}
 
-	const stepNum = step?.step ? `Step ${step.step} ` : '';
+	const stepNum = selectedInstructionStep?.step
+		? `Step ${selectedInstructionStep.step} `
+		: '';
 
-	return step == null ? (
+	return selectedInstructionStep == null ? (
 		<NoContent />
 	) : (
 		<>
 			<ContentHeader onClose={onClose} title={`${stepNum} of ${numSteps}`} />
-			{step.title && (
+			{selectedInstructionStep.title && (
 				<Typography sx={{ fontWeight: 'fontWeightBold', mb: 3 }}>
-					{step?.title}
+					{selectedInstructionStep?.title}
 				</Typography>
 			)}
-			{step.instructions != null ? (
-				typeof step.instructions === 'function' ? (
+			{selectedInstructionStep.instructions != null ? (
+				typeof selectedInstructionStep.instructions === 'function' ? (
 					<List>
-						{step.instructions(onShow).map((t, i) => (
+						{selectedInstructionStep.instructions(onShow).map((t, i) => (
 							<InstructionContent content={t} key={i} index={i} />
 						))}
 					</List>
 				) : (
 					<List>
-						{step.instructions.map((t, i) => (
+						{selectedInstructionStep.instructions.map((t, i) => (
 							<InstructionContent content={t} key={i} index={i} />
 						))}
 					</List>

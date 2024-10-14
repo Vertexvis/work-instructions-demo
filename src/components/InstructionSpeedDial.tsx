@@ -1,5 +1,4 @@
 import { Action, ToolButtons } from '@components/Viewer';
-import Settings from '@mui/icons-material/Settings';
 import TextSnippetOutlined from '@mui/icons-material/TextSnippetOutlined';
 import WidgetsOutlined from '@mui/icons-material/WidgetsOutlined';
 import SpeedDial from '@mui/material/SpeedDial';
@@ -11,11 +10,6 @@ interface Props {
 
 export function InstructionSpeedDial({ onClick }: Props): JSX.Element {
 	const actions: Action[] = [
-		{
-			icon: <Settings />,
-			name: 'Settings',
-			onClick: () => onClick('settings'),
-		},
 		{
 			icon: <TextSnippetOutlined />,
 			name: 'Instructions',

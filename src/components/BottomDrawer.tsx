@@ -1,5 +1,5 @@
 import { BottomDrawerHeight } from '@components/Layout';
-import { WorkInstructions } from '@lib/work-instructions';
+import { resetScene } from '@lib/viewer-actions';
 import Check from '@mui/icons-material/Check';
 import ChevronLeft from '@mui/icons-material/ChevronLeft';
 import ChevronRight from '@mui/icons-material/ChevronRight';
@@ -13,11 +13,13 @@ import Stepper from '@mui/material/Stepper';
 import { styled } from '@mui/material/styles';
 import React from 'react';
 
+import { useViewerContext } from '../contexts/viewer-context';
+
 interface Props {
 	readonly activeStep: number;
-	readonly instructions?: WorkInstructions;
 	readonly onSelect: (activeStep: number) => void;
 	readonly ready: boolean;
+	readonly viewer: React.MutableRefObject<HTMLVertexViewerElement | null>;
 }
 
 const BtnMargin = 5;
@@ -28,14 +30,16 @@ const Drawer = styled(MuiDrawer)(() => ({
 
 export function BottomDrawer({
 	activeStep,
-	instructions,
 	onSelect,
 	ready,
+	viewer,
 }: Props): JSX.Element {
-	if (instructions == null) return <></>;
+	const { workInstructions } = useViewerContext();
+
+	if (workInstructions == null) return <></>;
 
 	const stepIds =
-		instructions.steps != null ? Object.keys(instructions.steps) : [];
+		workInstructions.steps != null ? Object.keys(workInstructions.steps) : [];
 
 	function PrevBtn() {
 		return (
@@ -67,7 +71,10 @@ export function BottomDrawer({
 				color={'primary'}
 				disabled={!ready || activeStep >= stepIds.length}
 				sx={{ mr: BtnMargin }}
-				onClick={() => onSelect(activeStep + 1)}
+				onClick={() => {
+					onSelect(-1);
+					void resetScene(viewer);
+				}}
 			>
 				<Check />
 			</Fab>
@@ -79,7 +86,9 @@ export function BottomDrawer({
 			<Fab
 				disabled={!ready}
 				sx={{ mx: BtnMargin }}
-				onClick={() => onSelect(-1)}
+				onClick={() => {
+					onSelect(0);
+				}}
 			>
 				<Refresh />
 			</Fab>
@@ -87,12 +96,12 @@ export function BottomDrawer({
 	}
 
 	function Steps() {
-		if (instructions == null) return <></>;
+		if (workInstructions == null) return <></>;
 
 		return (
 			<Stepper activeStep={activeStep} alternativeLabel sx={{ flexGrow: 1 }}>
-				{Object.keys(instructions.steps).map((k) => {
-					const s = instructions.steps[k];
+				{Object.keys(workInstructions.steps).map((k) => {
+					const s = workInstructions.steps[k];
 					return (
 						<Step key={k}>
 							<StepButton disabled={false} onClick={() => onSelect(s.step - 1)}>
