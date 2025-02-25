@@ -74,7 +74,7 @@ const step2SceneItemsVisible = [
 
 export const DefaultInstructions: WorkInstructions = {
 	clientId: '',
-	streamKey: 'wzTRPxHgI8ylWKevQIDPA-GhL_8PhWwqLj4w',
+	streamKey: 'fTHHMa_p9agtpL9MgU3UltLiXvNR0Z7Ogsd2',
 	completionMins: 5,
 	description:
 		'At this station, the assembly technician assembles the spindle and installs it on the vehicle.',
