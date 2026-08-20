@@ -42,7 +42,7 @@
 		"start": "next start"
 	},
 	"engines": {
-		"node": "^20"
+		"node": "^24"
 	},
 	"resolutions": {
 		"ajv": "^8.18.0",
